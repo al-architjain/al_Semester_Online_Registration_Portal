@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>welcome brother</title>
-	<h1>good job</h1>
+	<title>Login Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style type="text/css">
+		h2	{
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
+		<h2>Student's Login Page</h2>
+	<hr>
+	<div class="container">
+		<form action="/home_page/">
+			<button class="btn btn-dark pull-right" >Other User</button>
+		</form>
+		<form class="col-lg-6" action="Student_profile.html">
+		  <div class="form-group">
+		    <label for="exampleInputEmail1">Roll No / Username</label>
+		    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type Here" required>
+		    <small id="emailHelp" class="form-text text-muted">We'll never share this info with anyone else.</small>
+		  </div>
 
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">Password</label>
+		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required="">
+		  </div>
+		  
+		  <button class="btn btn-primary pull-right" >Submit</button>
+
+		</form>	
+	</div>
+		<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 </body>
 </html>
