@@ -5,7 +5,7 @@ from . import views
 
 urlpatterns=[
       url(r'^$',views.user_login_page,name='user_login_page'),
-      url(r'^verify/',views.checking,name='checking')
+      #url(r'^verify/',views.checking,name='checking')
   ]
 
 
