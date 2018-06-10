@@ -19,6 +19,8 @@ from django.contrib import admin
 #imports from SORP
 from SORP import views
 
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/',include('sorp_app.urls')),

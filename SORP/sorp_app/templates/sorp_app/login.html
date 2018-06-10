@@ -13,19 +13,21 @@
 		<h2>Student's Login Page</h2>
 	<hr>
 	<div class="container">
-		<form action="/home_page/">
+		<form action="/login/" method="POST">
+		     {% csrf_token %}
 			<button class="btn btn-dark pull-right" >Other User</button>
 		</form>
-		<form class="col-lg-6" action="Student_profile.html">
+		<form class="col-lg-6" action="/login/verify/" method="POST">
+		  {% csrf_token %}
 		  <div class="form-group">
 		    <label for="exampleInputEmail1">Roll No / Username</label>
-		    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type Here" required>
+		    <input type="text" name="username"class="form-control" id="username" aria-describedby="emailHelp" placeholder="Type Here" required>
 		    <small id="emailHelp" class="form-text text-muted">We'll never share this info with anyone else.</small>
 		  </div>
 
 		  <div class="form-group">
 		    <label for="exampleInputPassword1">Password</label>
-		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required="">
+		    <input type="password" name="password"class="form-control" id="password" placeholder="Password" required="">
 		  </div>
 		  
 		  <button class="btn btn-primary pull-right" >Submit</button>
