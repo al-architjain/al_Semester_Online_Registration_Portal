@@ -57,6 +57,7 @@ def checking(request) :
 	else :
 		return HttpResponse('/login/')
 """
+
 # #rendering pages to different users
 # @login_required(login_url='/login/')
 # def profile(request) :
