@@ -19,7 +19,7 @@
             <button class="btn btn-dark pull-right" >Other User</button>
 		</form>
 
-		<form class="col-lg-6" method="POST"><!--action="/login/verify/"-->
+		<form class="col-lg-6" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
 
