@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Online Registration Portal</title>
+<!-- metatags-->
+<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+<!-- mixed -->
+<link rel="stylesheet" href="select_box.css"/>
+<script src="countries.js"></script>
+<!-- mixed -->
+</head>
+<body>
+	<h1><marquee>Online Registration Portal, NIT Hamirpur</marquee></h1>
+<div class="container">
+	<div class="px-2" style="border: 1px solid black">
+			<div class="form-group text text-center mb-4">
+				<h2 class="text text-primary mb-1">Data Entry Form</h2>
+				<small class="font-weight-bold text-success">(Session 2018-2019)</small>
+			</div>
+			<hr>
+<form>
+
+
+				<div class="row mt-2" >
+					<div class="col-md-12 ">
+			<div><h6 class="ml-1 font-weight-bold  text-primary">PERSONAL DETAILS</h6><hr></div>
+					</div>
+			</div>
+
+
+			<form>
+
+			<div class="form-group row">
+
+
+			<div class="form-group col-md-6">
+			<label for="NameEng">Student name(In English)(as per matriculation Certificate)<span class="text text-danger">*</span></label>
+			<input class="form-control" type="text" id="NameEng" placeholder="" required="">
+		</div>
+		<div class="form-group col-md-6">
+		<label for="NameHin">Student name(In Hindi)<span class="text text-danger">*</span></label>
+		<input class="form-control" type="text" id="NameHin" placeholder="" required="">
+	</div>
+	</div>
+
+
+<div class="form-group row">
+	<div class="form-group col-md-6">
+	<label for="RollNo">JEE(Main) Roll No.<span class="text text-danger">*</span></label>
+	<input class="form-control" type="text" id="RollNo" placeholder="" required="">
+</div>
+					<div class="form-group col-md-6">
+							<label for="email">Email address<span class="text text-danger">*</span></label>
+							<input class="form-control" type="email" id="email" placeholder="">
+					</div>
+
+					</div>
+					<div class="form-group row mb-1">
+					<div class="form-group col-md-6">
+							<label for="gender">Gender</label>
+							<select class="form-control" id="gender">
+							<option value="" hidden>Select Gender<span class="text text-danger">*</span></option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+							<option value="Others">Others</option>
+							</select>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label for="date">Date of Birth<span class="text text-danger">*</span></label>
+					<input class="form-control" id="exampleInputDOB1" placeholder="" type="date">
+					</div>
+					</div>
+
+					<div class="form-group row mb-1">
+						<div class=" form-group col-md-6">
+							<label for="phone">Phone Number<span class="text text-danger">*</span></label>
+											<input class="form-control" type="text" id="PhoneNumber">
+										</div>
+
+										<div class=" form-group col-md-6">
+												<label for="aadhar">Aadhar Number<span class="text text-danger">*</span></label>
+															<input class="form-control" type="text" id="AadharNumber">
+														</div>
+													</div>
+
+
+				<div class="form-group row mb-1">
+							<div class=" form-group col-md-6">
+						<label for="religion">Religion<span class="text text-danger">*</span></label>
+					<select class="form-control" id="Religion" required="">
+						<option value="" hidden=>Religion</option><option value="Hindu">Hindu</option><option value="Muslim">Muslim</option><option value="Sikh">Sikh</option>
+						<option value="Christian">Christian</option><option value="Buddh">Buddh</option><option value="Jain">Jain</option><option value="Others">Others</option>
+					</select>
+					</div>
+				<div class="form-group col-md-6">
+			<label for="area">Belongs to RURAL/URBAN Area<span class="text text-danger">*</span></label>
+				<select class="form-control" id="Area" required="">
+						<option value="" hidden="">Area</option>
+						<option value="RURAL">RURAL</option>
+						<option value="URBAN">URBAN</option>
+					</select>
+				</div>
+		</div>
+
+
+
+
+		<div class="form-group row mb-0">
+					<div class="form-group col-md-6">
+				<label for="maincategory">Main Category<span class="text text-danger">*</span></label>
+				<select class="form-control" required="">
+					<option value="" hidden>Select Category</option>
+					<option value="OP">OP</option><option value="OPPwD">OPPwD</option><option value="OBC">OBC</option><option value="OBCPwD">OBCPwD</option>
+					<option value="SC">SC</option><option value="SCPwD">SCPwD</option><option value="ST">ST</option><option value="STPwD">STPwD</option>
+				</select>
+			</div>
+		<div class="form-group col-md-6">
+	<label for="admittedcategory">Admitted in Category<span class="text text-danger">*</span></label>
+	<select class="form-control" required="">
+		<option value="" hidden>Select Category</option>
+			<option value="OP">OP</option><option value="OPPwD">OPPwD</option><option value="OBC">OBC</option><option value="OBCPwD">OBCPwD</option>
+			<option value="SC">SC</option><option value="SCPwD">SCPwD</option><option value="ST">ST</option><option value="STPwD">STPwD</option>
+		</select>
+		</div>
+</div>
+<div class="form-group">
+<small class="text-danger"> Note:1) 40% Disability for PwD Candidate 2)OBC should be in central list</small>
+</div>
+</form>
+
+
+<div class="row mt-2" >
+	<div class="col-md-12 ">
+<div><h6 class="ml-1 font-weight-bold text-uppercase text-primary">Correspondence Address</h6><hr></div>
+	</div>
+</div>
+<form>
+	<div class="form-group">
+	<label for="address">House No./Street<span class="text text-danger">*</span></label>
+	<input class="form-control" type="text" name="address" placeholder="" required="">
+</div>
+			<div class="form-group row mb-1">
+				<div class=" form-group col-md-6">
+					<label for="city">City<span class="text text-danger">*</span></label>
+					<input class="form-control" type="text"  name="city" placeholder="" required="">
+				</div>
+			<div class=" form-group col-md-6">
+					<label for=state>State<span class="text text-danger">*</span></label>
+					<input class="form-control" type="text" name="state" placeholder="" required="">
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class=" form-group col-md-6">
+					<label for="zip">Postal / Zip Code<span class="text text-danger">*</span></label>
+					<input class="form-control" type="text"  name="zip" placeholder="" required="">
+				</div>
+			<div class="form-group col-md-6">
+				<div class="select">
+			<label>Country<span class="text text-danger">*</span></label>
+			<select class="form-control" required="" id="country" name ="country"></select>
+      <script language="javascript">
+        populateCountries("country", "state4");
+        populateCountries("country2");
+      </script>
+			</div>
+</div>
+</div>
+</form>
+
+
+<div class="row mt-2" >
+	<div class="col-md-12 ">
+<div><h6 class="ml-1 font-weight-bold text-uppercase text-primary">Permanent Address</h6><hr></div>
+	</div>
+</div>
+<form>
+	<div class="form-group">
+	<label for="paddress">House No./Street<span class="text text-danger">*</span></label>
+	<input class="form-control" type="text" name="paddress" placeholder="" required="">
+</div>
+			<div class="form-group row mb-1">
+				<div class=" form-group col-md-6">
+					<label for="pcity">City<span class="text text-danger">*</span></label>
+					<input class="form-control" type="text"  name="pcity" placeholder="" required="">
+				</div>
+			<div class=" form-group col-md-6">
+					<label for=pstate>State<span class="text text-danger">*</span></label>
+					<input class="form-control" type="text" name="pstate" placeholder="" required="">
+				</div>
+			</div>
+			<div class="form-group row mb-1">
+				<div class="form-group col-md-6">
+					<label for="pzip">Postal / Zip Code<span class="text text-danger">*</span></label>
+					<input class="form-control" type="text"  name="pzip" placeholder="" required="">
+				</div>
+			<div class="form-group col-md-6">
+				<div class="select">
+			<label>Country<span class="text text-danger">*</span></label>
+			<select class="form-control" required="" id="pcountry" name ="pcountry"></select>
+      <script language="javascript">
+        populateCountries("pcountry", "state4");
+        populateCountries("country2");
+      </script>
+			</div>
+		</div>
+	</div>
+		<div class="form-group row">
+			<div class="form-group col-md-6">
+				<label for="pphone">Phone Number<span class="text text-danger">*</span></label>
+				<input class="form-control" type="text"  name="pphone" placeholder="" required="">
+			</div>
+			<div class=" form-group col-md-6">
+				<label for="station">Nearest Railway Station<span class="text text-danger">*</span></label>
+				<input class="form-control" type="text"  name="station" placeholder="" required="">
+			</div>
+		</div>
+</form>
+
+
+	<div class="row mt-2" >
+		<div class="col-md-12 ">
+	<div><h6 class="ml-1 font-weight-bold text-uppercase text-primary">Academic Details</h6><hr></div>
+		</div>
+	</div>
+	<form>
+		<div class="form-group row mb-1">
+
+						<div class=" form-group col-md-6">
+					<label for="crlrank">JEE All India Rank (CRL)<span class="text text-danger">*</span></label>
+								<input class="form-control" type="text" id="crlrank">
+							</div>
+						<div class=" form-group col-md-6">
+				<label for="catrank">JEE All India Rank (Category)<span class="text text-danger">*</span></label>
+								<input class="form-control" type="text" id="catrank">
+							</div>
+			</div>
+
+			<div class="form-group row mb-1">
+
+							<div class=" form-group col-md-6">
+						<label for="airscore">All India Percentile Score in JEE 2018<span class="text text-danger">*</span></label>
+									<input class="form-control" type="text" id="airscore">
+								</div>
+							<div class=" form-group col-md-6">
+					<label for="examscore">Percentile Score in Qualifying Examination<span class="text text-danger">*</span></label>
+									<input class="form-control" type="text" id="examscore">
+								</div>
+				</div>
+
+				<div class="form-group row mb-1">
+
+								<div class=" form-group col-md-6">
+							<label for="mainscore">JEE(Main) 2018 Score<span class="text text-danger">*</span></label>
+										<input class="form-control" type="text" id="mainscore">
+									</div>
+								<div class=" form-group col-md-6">
+						<label for="normalscore">Qualifying Examinat. Normalized Score<span class="text text-danger">*</span></label>
+										<input class="form-control" type="text" id="normalscore">
+									</div>
+					</div>
+
+								<div class="form-group">
+									<label for="state">Bonafide State of Candidate<span class="text text-danger">*</span></label>
+								</div>
+								<div class="form-group row">
+									<div class="form-group col-md-6">
+							   <select class="form-control"  id="country3" name ="country3"></select>
+								 </div>
+								 <div  class="form-group col-md-6">
+					      	<select class="form-control" name ="state3" id ="state3"></select>
+								</div>
+					      <script language="javascript">
+					        populateCountries("country3", "state3");
+					        populateCountries("country2");
+					      </script>
+					</div>
+
+					<div class="form-group">
+						<label for="state">State from where +2 Examination passed<span class="text text-danger">*</span></label>
+					</div>
+					<div class="form-group row">
+						<div class="form-group col-md-6">
+					 <select class="form-control"  id="country5" name ="country5"></select>
+					 </div>
+					 <div  class="form-group col-md-6">
+						<select class="form-control" name ="state5" id ="state5"></select>
+					</div>
+					<script language="javascript">
+						populateCountries("country5", "state5");
+						populateCountries("country2");
+					</script>
+					</div>
+
+
+					<div class="form-group row mb-1">
+								<div class=" form-group col-md-6">
+										<label for="sname">Name Of School(from where +2 Examination passed)<span class="text text-danger">*</span></label>
+										<input class="form-control" type="text"  name="sname" placeholder="" required="">
+									</div>
+					<div class="form-group col-md-6">
+				<label for="board">Board<span class="text text-danger">*</span></label>
+					<select class="form-control" id="board" required="">
+						<option value="" hidden>Select Board</option>
+					<option>Andhra Pradesh Board of Secondary Education</option>
+<option>Andhra Pradesh Board of Intermediate Education</option>
+<option>Andhra Pradesh Open School Society</option>
+<option>Assam Board of Secondary Education</option>
+<option>Assam Higher Secondary Education Council</option>
+<option>Assam State Open School</option>
+<option>Bihar Board of Open Schooling & Examination</option>
+<option>Bihar School Examination Board</option>
+<option>Board of Higher Secondary Education Delhi (BHSE)</option>
+<option>Central Board of Secondary Education (CBSE)</option>
+<option>Central Board of Education Ajmer New Delhi</option>
+<option>Chhattisgarh Secondary Board of Education</option>
+<option>Council for the Indian School Certificate Examinations (CISCE)</option>
+<option>Council Of Secondary Education Mohali (CSE Mohali)</option>
+<option>Goa Board of Secondary & Higher Secondary Education</option>
+<option>Gujarat Secondary Education Board</option>
+<option>Gujarat State Open School</option>
+<option>Haryana Board of School Education</option>
+<option>Gujarat State Open School</option>
+<option>Grameen Mukt Vidhyalayi Shiksha Sansthan(GMVSS)Delhi</option>
+<option>Haryana State Open School</option>
+<option>Himachal Pradesh Board of School Education</option>
+<option>Himachal Pradesh State Open School</option>
+<option>Indian Board of School Education</option>
+<option>Jammu and Kashmir State Board of School Education</option>
+<option>Jammu and Kashmir State Open School</option>
+<option>Jharkhand Academic Council</option>
+<option>Karnataka Secondary Education Examination Board</option>
+<option>Kerala Higher Secondary Examination Board</option>
+<option>Kerala State Open School</option>
+<option>Madhya Pradesh Board of Secondary Education</option>
+<option>Madhya Pradesh State Open School</option>
+<option>Maharashtra State Board of Secondary and Higher Secondary Education</option>
+<option>Meghalaya Board of School Education</option>
+<option>Mizoram Board of School Education</option>
+<option>Nagaland Board of School Education</option>
+<option>National Institute of Open Schooling (NIOS)</option>
+<option>Odisha Board of Secondary Education</option>
+<option>Odisha Council of Higher Secondary Education</option>
+<option>Punjab School Education Board</option>
+<option>Rajasthan Board of Secondary Education</option>
+<option>Rajasthan State Open School</option>
+<option>Tamil Nadu Board of Secondary Education</option>
+<option>Telangana Board of Intermediate Education</option>
+<option>Telangana Board of Secondary Education</option>
+<option>Tripura Board of Secondary Education</option>
+<option>Board of High School and Intermediate Education Uttar Pradesh</option>
+<option>Uttarakhand Board of School Education</option>
+<option>West Bengal Board of Madrasah Education</option>
+<option>West Bengal Board of Primary Education</option>
+<option>West Bengal Board of Secondary Education</option>
+<option>West Bengal Council of Higher Secondary Education</option>
+<option>West Bengal Council of Rabindra Open Schooling</option>
+<option>Uttar Pradesh Board of Secondary Education</option>
+<option>Others</option>
+			</select>
+					</div>
+			</div>
+
+			<div class="form-group row mb-1">
+						<div class=" form-group col-md-6">
+								<label for="percent">10+2 %age<span class="text text-danger">*</span></label>
+								<input class="form-control" type="text"  name="percent" placeholder="" required="">
+								<small class="text-danger">Note: 75% [for GEN, OBC-NCL] & 65% [SC, ST, PWD ]</small>
+							</div>
+			<div class="form-group col-md-6">
+		<label for="pyear">Year of passing +2 Exam<span class="text text-danger">*</span></label>
+			<select class="form-control" id="pyear" required="">
+				<option value="" hidden>Select Year</option>
+						<option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option>
+					</select>
+						</div>
+					</div>
+
+
+						<div class="form-group row mb-1">
+									<div class=" form-group col-md-6">
+								<label for="school">Type of School<span class="text text-danger">*</span></label>
+							<select class="form-control" id="school" required="">
+								<option value="" hidden>Govt./Private</option>
+						<option value="Govt. School">Govt. School</option><option value="Private School">Private School</option>
+							</select>
+							</div>
+						<div class="form-group col-md-6">
+					<label for="hostel">Hostel Required or Not<span class="text text-danger">*</span></label>
+						<select class="form-control" id="hostel" required="">
+							<option value="" hidden>Select Accommodatiom</option>
+					<option value="Hostel">Hostel</option><option value="Day Scholor">Day Scholor</option>
+							</select>
+						</div>
+				</div>
+
+
+				<div class="form-group row mb-1">
+							<div class=" form-group col-md-6">
+						<label for="class">Class<span class="text text-danger">*</span></label>
+					<select class="form-control" id="class" required="">
+						<option value="" hidden>Select Class</option>
+							<option value="B.Tech.">B.Tech</option><option value="B.Arch">B.Arch</option><option value="Dual Degree">Dual Degree</option>
+					</select>
+					</div>
+				<div class="form-group col-md-6">
+			<label for="branch">Branch<span class="text text-danger">*</span></label>
+				<select class="form-control" id="branch" required="">
+					<option value="" hidden>Select Branch</option>
+						<option value="ECE">ECE</option><option value="ECE(Dual)">ECE(Dual)</option>
+						<option value="CSE">CSE</option><option value="CSE(Dual)">CSE(Dual)</option>
+						<option value="ME">ME</option><option value="EEE">EEE</option><option value="CE">CE</option><option value="ARCH">ARCH</option>
+						<option value="Chemical">Chemical</option><option value="Material">Material</option>
+					</select>
+				</div>
+		</div>
+</form>
+
+
+<div class="row mt-2" >
+	<div class="col-md-12 ">
+<div><h6 class="ml-1 font-weight-bold text-uppercase text-primary">Parent/Guardian Information</h6><hr></div>
+	</div>
+</div>
+<form>
+<div class="form-group row mb-1">
+	<div class=" form-group col-md-6">
+		<label for="fname">Father's Name<span class="text text-danger">*</span></label>
+						<input class="form-control" type="text" id="fname">
+					</div>
+
+					<div class=" form-group col-md-6">
+							<label for="fnumber">Father's Number<span class="text text-danger">*</span></label>
+										<input class="form-control" type="text" id="fnumber">
+									</div>
+								</div>
+
+
+								<div class="form-group row mb-1">
+									<div class=" form-group col-md-6">
+										<label for="mname">Mother's Name<span class="text text-danger">*</span></label>
+														<input class="form-control" type="text" id="mname">
+													</div>
+
+													<div class=" form-group col-md-6">
+															<label for="mnumber">Mother's Number<span class="text text-danger">*</span></label>
+																		<input class="form-control" type="text" id="mnumber">
+																	</div>
+																</div>
+
+							</form>
+
+
+							<div class="row mt-2" >
+								<div class="col-md-12 ">
+							<div><h6 class="ml-1 font-weight-bold text-uppercase text-primary">Fee Status</h6><hr></div>
+								</div>
+							</div>
+							<form>
+							<div class="form-group row mb-1">
+
+												<div class=" form-group col-md-6">
+														<label for="jamount">JoSAA-2017 Amount<span class="text text-danger">*</span></label>
+																	<input class="form-control" type="text" id="jamount">
+																</div>
+
+																<div class=" form-group col-md-6">
+																		<label for="jdate">Date<span class="text text-danger">*</span></label>
+																					<input class="form-control" id="exampleInputDOB1" placeholder="" type="date">
+																				</div>
+															</div>
+
+
+															<div class="form-group row mb-1">
+																<div class=" form-group col-md-4">
+																	<label for="namount">NIT Hamirpur Amount<span class="text text-danger">*</span></label>
+																					<input class="form-control" type="text" id="namount">
+																				</div>
+
+																				<div class=" form-group col-md-4">
+																						<label for="ndate">Date<span class="text text-danger">*</span></label>
+																									<input class="form-control" id="exampleInputDOB1" placeholder="" type="date">
+																								</div>
+
+																								<div class=" form-group col-md-4">
+																										<label for="nreceipt">Receipt Number<span class="text text-danger">*</span></label>
+																													<input class="form-control" type="text" id="nreceipt">
+																												</div>
+																							</div>
+
+														</form>
+														<br>
+														<button class="btn btn-block btn-outline-success mb-2" type="button">Submit</button>
+
+														</form>
+
+</div>
+</div>
+
+
+
+
+
+
+	<footer class="text-center mt-4">&copy; 2018-2019 Online Registration Form. All Rights Reserved | Design by <a href="http://nith.ac.in/nith/"> NIT Hamirpur</a>
+	</footer>
+	<div style="margin-top:10px;"></div>
+
+
+	<!-- Optional JavaScript -->
+	    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	</body>
+	</html>
