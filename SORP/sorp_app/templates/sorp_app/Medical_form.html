@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+	<title>Medical form</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="text-center">
+      <h1 class="mb-0">Medical Examination Report</h1>
+  		<small class="font-weight-bold">(To be issued by Govt. Civil Hospital or NIT-Hamirpur Dispensary)</small>
+    </div>
+    <br>
+        <div style="border: 1px solid black">
+
+		<div class="row mt-2" >
+
+			<div class="col-md-12 ">
+				<div><h6 class="ml-1 mb-1 font-weight-bold">GENERAL EXPEXCTATIONS</h6> <small class="ml-1">Candidate will have good general physique with</small></div>
+			</div>
+        </div>
+
+        <table class="table table-bordered mt-1">
+          <tbody>
+      <tr>
+        <th>(a)</th>
+        <th>Vision</th>
+        <td>Should be normal. In case of defective vision it should be corrected to 6/9 in both
+eyes or 6/6 in the better eye.</td>
+      </tr>
+
+      <th>(b)</th>
+      <th>Hearing</th>
+      <td>Should be normal. Defective hearing should be corrected</td>
+    </tr>
+
+    <th>(c)</th>
+    <th>Heart and Lungs</th>
+    <td>Should not have any abnormality and no history of mental disease or Epileptic fits.</td>
+  </tr>
+    </tbody>
+  </table>
+  </div>
+  <br /><br />
+
+  <div style="border: 1px solid black">
+
+      <div class="row mt-2" >
+
+        <div class="col-md-12 ">
+  <div><h6 class="ml-1 font-weight-bold">PERSONAL HISTORY</h6><hr></div>
+        </div>
+    </div>
+    <form class="mx-2">
+        <div class="form-group row">
+
+      <div class=" form-group col-md-6">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" id="name" placeholder="Enter Name">
+        </div>
+       
+        <div class="form-group col-md-6">
+            <label for="name">Father/Guardian's Name</label>
+            <input class="form-control" type="text" id="fname" placeholder="Enter Guardian's Name">
+        </div>
+    </div>
+
+         <div class="form-group">
+            <label for="email">Email address</label>
+            <input class="form-control" type="email" id="email" placeholder="Enter email">
+        </div>
+        <div class="form-group row">
+
+      <div class=" form-group col-md-6">
+            <label for="gender">Gender</label>
+            <select class="form-control" id="gender">
+            <option value="" hidden>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="date">Date of Birth</label>
+        <input class="form-control" id="exampleInputDOB1" placeholder="Date of Birth" type="date">
+        </div>
+
+          </div>
+
+        <div class="form-group">
+          <label for="date">Age on 1<span class=" align-text-bottom">st</span> July 2018</label>
+
+        <div class="form-group row">
+
+          <div class="col-md-6">
+            <label for="year" class="text text-muted">Years</label>
+                    <input class="form-control" type="text" name="year">
+                  </div>
+
+                  <div class="col-md-6">
+                      <label for="month" class="text text-muted">Months</label>
+                            <input class="form-control" type="text" name="month">
+                          </div>
+      </div>
+
+        <div class="form-group">
+            <label for="message">Identification Mark on the Body <small class="form-text text-muted">(This can be a mole, scar or birthmark)</small></label>
+            <textarea class="form-control" id="message" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="message">Major illness/operation<small class="form-text text-muted">(specify nature of illness/operation)</small></label>
+            <textarea class="form-control" id="message" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="file">Upload Medical Certificate <small class="form-text text-muted">(To be filled by Medical Officer conducting the Medical examination)</small></label>
+            <input class="form-control-file" type="file" id="file">
+            <small class="form-text text-muted" id="fileHelp">Max 3mb size</small>
+        </div>
+        <label class="form-label text-danger" for="files">Note: Download Medical Certificate format from below given link </label>
+        <div>
+        <button type="button" class="btn  btn-outline-secondary btn-link mb-2"><i class="fa fa-download"></i> Medical Certificate Format</button>
+        </div>
+      </form>
+  </div>
+</div>
+  <br><br>
+  <div style="border: 1px solid black">
+
+<div class="row mt-2 mb-1" >
+
+<div class="col-md-12 ">
+  <div><h6 class="ml-1 mb-0 font-weight-bold">Declaration by student:</h6><small class="form-text ml-1">I am not suffering from any chronic illness like Epilepsy, Bronchial Asthma etc.</small></div>
+  <br /><br />
+
+  <div><h6 class="ml-1 mb-0 font-weight-bold">Declaration by student:</h6></div>
+</div>
+  </div>
+</div>
+<br>
+<button class="btn btn-block btn-outline-success" type="button">Submit</button>
+
+<div style="margin-top:50px;"></div>
+
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+</html>
