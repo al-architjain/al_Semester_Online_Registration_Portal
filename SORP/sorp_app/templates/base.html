@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-    <title>{% block title %} {% endblock %}</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	{% block styles %}
 
-    {% endblock %}
-</head>
+	<head>
+		<title>{% block title %} {% endblock %}</title>
 
-<body>
-{% block body %}
-{% endblock %}
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		{% block meta %}
+		{% endblock %}
 
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		{% block links %}
+		{% endblock %}
+			<!-- Permanent Links -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			<!--------------------->
+		{% block staticfiles %}
+		{% endblock %}
+	</head>
 
-</body>
+	<body>
+		{% block body %}
+		{% endblock %}
+
+		{% block bodyscripts %}
+		{% endblock %}
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	</body>
 </html>

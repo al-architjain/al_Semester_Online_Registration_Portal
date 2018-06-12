@@ -23,7 +23,6 @@ from SORP import views
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^login/',include('sorp_app.urls')),
-    url(r'^$',views.domain_redirect,name='domain_redirect'),
+    url(r'^admin/',   admin.site.urls),
+    url(r'^', include('sorp_app.urls')),
 ]

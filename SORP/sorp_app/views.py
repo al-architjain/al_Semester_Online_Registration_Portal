@@ -2,15 +2,20 @@ from django.shortcuts import render
 from django.http import *
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 from django.contrib.auth.models import User, Group
 
 #imports form sorp_app
 from . import forms
 
+#for domain redirect
+def domain_redirect(request) :
+	return redirect('login/')
+
 #function to find the group of user
 def get_user_group(user):
 	g_name = user.groups.values_list('name',flat=True)
-	return g_name
+	return g_name[0]
 
 
 #render login page
@@ -30,7 +35,7 @@ def user_login(request) :
 
 			if user is not None:
 				login(request, user)
-				return HttpResponseRedirect('profile/')
+				return HttpResponseRedirect('/profile/')
 			else:
 				return HttpResponseRedirect('/login/')
 
@@ -39,27 +44,13 @@ def user_login(request) :
 
 
 #user_profile
+@login_required
 def user_profile(request):
-	return HttpResponse("<h2>You are logged IN!</h2>")
+	grp = get_user_group(request.user)
 
+	if grp == 'g_student':
+		return HttpResponse("<h2>You are logged IN as studetn!</h2>")
+	else:
+		return render(request, 'sorp_app/r_addstudent.html')
 
-
-
-#authenticate and check who the user is!
-"""
-def checking(request) :
-	username = request.POST['username']
-	password = request.POST['password']
-	user = authenticate(request,username=username, password=password)
-	if user is not None :
-		login(request,user)
-		return HttpResponseRedirect('/main/')
-	else :
-		return HttpResponse('/login/')
-"""
-
-# #rendering pages to different users
-# @login_required(login_url='/login/')
-# def profile(request) :
-# 	user_group = request.user.groups.
 

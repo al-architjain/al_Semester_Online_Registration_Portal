@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 
 
 def domain_redirect(request) :
-	return redirect('/login/')
+	return redirect('login/')
 
 
 
