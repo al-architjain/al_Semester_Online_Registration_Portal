@@ -26,3 +26,7 @@ urlpatterns = [
     url(r'^admin/',   admin.site.urls),
     url(r'^', include('sorp_app.urls')),
 ]
+
+admin.site.site_title = "NITH admin"
+admin.site.site_header = "NITH administration"
+admin.site.index_title = 'admin of NITH '
