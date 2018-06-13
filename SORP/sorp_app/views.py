@@ -49,7 +49,7 @@ def user_profile(request):
 	grp = get_user_group(request.user)
 
 	if grp == 'g_student':
-		return HttpResponse("<h2>You are logged IN as studetn!</h2>")
+		return render(request, 'sorp_app/s_profile.html')
 	else:
 		return render(request, 'sorp_app/r_addstudent.html')
 

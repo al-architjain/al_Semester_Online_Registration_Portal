@@ -1,0 +1,486 @@
+{% extends "base.html" %}
+
+	{% block title %}
+        Profile
+    {% endblock %}
+
+	{% block staticfiles %}
+	{% endblock %}
+	{% block styles %}
+		<style type="text/css">
+
+			 hr { border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); }
+
+			img {
+				width: 115%
+			}
+
+			.srno {
+				width: 70px;
+			}
+
+			.center {
+				text-align: center;
+			}
+
+			.mybtn {
+				margin-bottom: 10px;
+			}
+
+			#cno {
+				width: 100px
+			}
+
+		</style>
+	{% endblock %}
+
+	{% block body %}
+		<h2 class="center"><b>Student's Profile</b></h2>
+		<hr>
+		<div class="container">
+			<form class="form-horizontal " action="#">
+			  <div class="row">
+				<div class="col-lg-2 col-sm-2 col-xs-4">
+					{% load static %}
+					<img src="{% static "sorp_app/profile_pic.jpg" %}" alt="YourPic" class="img-rounded">
+				</div>
+
+				<div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
+
+					  <div class="form-group">
+						<label for="sname" class="col-sm-2 control-label">Student Name:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="sname" placeholder="Student Name">
+						</div>
+					  </div>
+
+					  <div class="form-group">
+						<label for="fname" class="col-sm-2 control-label">Father's Name:</label>
+						<div class="col-sm-10">
+						  <input type="email" class="form-control" id="fname" placeholder="Father Name">
+						</div>
+					  </div>
+
+					  <div class="form-group">
+						<label for="rno" class="col-sm-2 control-label">Roll No.</label>
+						<div class="col-sm-10">
+						  <input type="email" class="form-control" id="rno" placeholder="Roll No">
+						</div>
+					  </div>
+
+
+					</form>
+				</div>
+			</div>
+		<br>
+			<div class="row">
+				<div class="col-lg-5">
+					<form class="form-horizontal">
+					  <div class="form-group">
+						<label for="branch" class="col-sm-2 control-label">Branch:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="branch" placeholder="branch">
+						</div>
+					  </div>
+
+					  <div class="form-group">
+						<label for="dob" class="col-sm-2 control-label">Date of Birth:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="dob" placeholder="dd/mm/yyyy">
+						</div>
+					  </div>
+
+					  <div class="form-group">
+						<label for="Category" class="col-sm-2 control-label">Category:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="Category" placeholder="Category">
+						</div>
+					  </div>
+
+					  <div class="form-group">
+						<label for="PermAdd" class="col-sm-2 control-label">Permanent Address:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="PermAdd" placeholder="PermanentAddress">
+						</div>
+					  </div>
+
+					  <div class="form-group">
+						<label for="Adhaar" class="col-sm-2 control-label">Adhaar No. :</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="Adhaar" placeholder="Adhaar">
+						</div>
+					  </div>
+
+						<div class="form-group">
+						<label for="email" class="col-sm-2 control-label">Email ID:</label>
+						<div class="col-sm-10">
+						  <input type="email" class="form-control" id="email" placeholder="email">
+						</div>
+					  </div>
+					</form>
+				</div>
+
+				<div class="col-lg-7">
+					<form class="form-horizontal">
+					   <div class="form-group">
+						<label for="Class" class="col-sm-2 control-label">Class:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="Class" placeholder="Class">
+						</div>
+					  </div>
+
+					  <div class="form-group">
+						<label for="bloodgrp" class="col-sm-2 control-label">Blood Group:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="bloodgrp" placeholder="bloodgrp">
+						</div>
+					  </div>
+
+					  <div class="form-group">
+						<label for="gender" class="col-sm-2 control-label">Gender:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="gender" placeholder="gender(m/f)">
+						</div>
+					  </div>
+
+					  <div class="form-group">
+						<label for="CorrAdd" class="col-sm-2 control-label">Correspondence Address:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="CorrAdd" placeholder="CorrespondenceAddress">
+						</div>
+					  </div>
+
+					   <div class="form-group">
+						<label for="Contact" class="col-sm-2 control-label">Contact:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="Contact" placeholder="Contact">
+						</div>
+					  </div>
+
+					  <div class="form-group">
+						<label for="Section" class="col-sm-2 control-label">Section:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="Section" placeholder="Section">
+						</div>
+					 </div>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<h3 class="center bgclr"><b>Documents Verification</b></h3>
+				<br>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th class="srno">Sr. No.</th>
+							<th>Name of the Document</th>
+							<th>Verified?</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td><strong>Provisional Admission Letter</strong> issued by JoSAA</td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>2</td>
+							<td><strong>Score Card</strong> issued by CBSE indicating rank in JEE-2019</td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>3</td>
+							<td><strong>Admit card</strong> of JEE-2019 (self attested)</td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>4</td>
+							<td><strong>Class 10th (High School) Board Certificate</strong> as a proof of date of birth</td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>5</td>
+							<td><strong>Class 12th Marksheet and Pass Certificate</strong> of qualifying Examination</td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>6</td>
+							<td><strong>Character Certificate</strong></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>7</td>
+							<td><strong>* Migration/Transfer Certificate</strong></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>8</td>
+							<td><strong>Medical Fitness Certificaate</strong> issued by medical officer at NIT Hamirpur</td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>9</td>
+							<td><strong>Certificate of Person with Disability(PwD)</strong><em> (if applicable)</em></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>10</td>
+							<td><strong>Certificate of category</strong> (SC/ST/OBC-NCL) <em>(if applicable)</em></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>11</td>
+							<td><strong><u>Declaration/Undertaking</u></strong> <em>(for OBC Candidates only)</em></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>12</td>
+							<td>An <strong>Undertaking</strong> by the student</td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td></td>
+							<td class="center"><strong>AFFIDAVITS</strong></td>
+						</tr>
+
+						<tr>
+							<td>13</td>
+							<td><strong>Affidavit</strong> for giving reason for study gap (if any)</td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>14</td>
+							<td>An <strong>Affidavit by the Student [Anti-Ragging measures] (Original) (Online generated)</strong></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>15</td>
+							<td><strong>Affidavit by the Parent / Guardian [Anti-Ragging measures] (Original) (Online generated)</strong></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>16</td>
+							<td><strong>The following documents are required if qualifying examination is from outside India or from National Open School</strong></td>
+						</tr>
+
+						<tr>
+							<td></td>
+							<td><strong>Passport</strong> of the candidates</td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td></td>
+							<td><strong>Proof of Place of Examination</strong> from the National Open School</td>
+							<td></td>
+						</tr>
+
+
+					</tbody>
+
+				</table>
+				<p><b>*</b> Failure of these may lead to decline of your registration from institute at time of passing!</p>
+			</div>
+			<hr>
+			<div class="row">
+				<h3 class="center"><b>Subject Details</b></h3>
+				<br>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th class="srno">Sr. No.</th>
+							<th id="cno">Course No.</th>
+							<th class="center">Name of the Subject</th>
+							<th class="srno">L</th>
+							<th class="srno">T</th>
+							<th class="srno">P</th>
+							<th class="srno">D</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td></td>
+							<td>Subject 1</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>2</td>
+							<td></td>
+							<td>Subject 2</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>3</td>
+							<td></td>
+							<td>Subject 3</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>4</td>
+							<td></td>
+							<td>Subject 4</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>5</td>
+							<td></td>
+							<td>Subject 5</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>6</td>
+							<td></td>
+							<td>Subject 6</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+
+						<tr>
+							<td>7</td>
+							<td></td>
+							<td>Subject 7</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>8</td>
+							<td></td>
+							<td>Subject 8</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>9</td>
+							<td></td>
+							<td>Subject 9</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td>10</td>
+							<td></td>
+							<td>Subject 10</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td></td>
+							<td></td>
+							<td style="text-align: right;"><strong>Total</strong></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+			<hr>
+			<div class="row">
+				<h3 class="center"><b>Previous Dues</b></h3>
+				<br>
+				<div class="col-lg-4">
+					<div class="card">
+					  <h4>Academic Due</h4>
+					  <div class="card-body">
+						<p class="card-text">Before proceeding, make sure this is cleared</p>
+						<a href="acad_due.html" class="btn btn-primary">Check Now!</a>
+					  </div>
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="card">
+					  <h4>Hostel Due</h4>
+					  <div class="card-body">
+						<p class="card-text">Before proceeding, make sure this is cleared</p>
+						<a href="host_due.html" class="btn btn-primary">Check Now!</a>
+					  </div>
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="card">
+					  <h4>Library Due</h4>
+					  <div class="card-body">
+						<p class="card-text">Before proceeding, make sure this is cleared</p>
+						<a href="lib_due.html" class="btn btn-primary">Check Now!</a>
+					  </div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="row">
+				<button class="btn btn-dark pull-right mybtn">Register for New Session</button>
+			</div>
+
+			</div>
+		</form>
+	{% endblock %}
