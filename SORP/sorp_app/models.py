@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from decimal import Decimal
 
 
 class StudentBasicInfo(models.Model):
@@ -69,7 +70,7 @@ class StudentBasicInfo(models.Model):
         ('Rural', 'Rural'), 
         ('Urban', 'Urban')
     )
-    region = models.CharField(max_length=25,choices=region_choice)
+    region = models.CharField(max_length=25, choices=region_choice)
     nearest_railway_st = models.CharField(max_length=70)
     correspondence_add = models.CharField(max_length=1000)
     permanent_add = models.CharField(max_length=10)
@@ -171,7 +172,21 @@ class StudentFirstFeeStatus(models.Model):
     fee_nith_date = models.DateField(auto_now=False, auto_now_add=False, default=None)
 
 
+class Result(models.Model):
+    student_id = models.OneToOneField(
+        StudentBasicInfo, on_delete=models.CASCADE
+    )
+    semester = models.IntegerField(),
+    sgpi = models.DecimalField(max_digits=5, decimal_places=3, default=Decimal(0.00))
+    cgpi = models.DecimalField(max_digits=5, decimal_places=3, default=Decimal(0.00))
 
+
+class Subjects(models.Model):
+    branch = models.CharField(max_length=20)
+    semester = models.IntegerField(),
+    subject_name = models.CharField(max_length=200)
+    subject_code =models.CharField(max_length=20)
+    year = models.IntegerField()
 
 
 
