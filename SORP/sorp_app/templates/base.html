@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
-		<title>{% block title %} {% endblock %}</title>
+		<title>{% block title %}{% endblock %}</title>
 
 		{% block meta %}
+			<!-- All the meta files will come here! -->
 		{% endblock %}
 
 		{% block links %}
+			<!-- Online links will come here! -->
 		{% endblock %}
-			<!-- Permanent Links -->
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-			<!--------------------->
+
 		{% block staticfiles %}
+			<!-- Static files come here! -->
 		{% endblock %}
 
 		{% block styles %}
+			<!-- Style part comes here! -->
 		{% endblock %}
+
+		<!-- Permanent metafiles -->
+		<!--------------------->
+		<!-- Permanent Links -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<!--------------------->
+		<!-- Permanent staticfiles -->
+		<!--------------------->
+		<!-- Permanent styles -->
+		<!--------------------->
 	</head>
 
 	<body>
-		{% block body %}
+		<!-- Permanent body_content -->
+		<!--------------------->
+
+		{% block bodycontent %}
 		{% endblock %}
 
 		{% block bodyscripts %}
 		{% endblock %}
 
-		<!-- jQuery library -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+		<!-- Permanent scripts -->
+			<!-- jQuery library -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<!-- Latest compiled JavaScript -->
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!--------------------->
 	</body>
 </html>
