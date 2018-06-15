@@ -1,620 +1,631 @@
+<!Doctype html>
 {% extends "base.html" %}
 
 	{% block title %}
-        Tabs Registrar
-    {% endblock %}
-
-    {% block meta %}
-      <!-- metatags-->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <meta name="keywords" content="Sports Camp Registration Form a Flat Responsive Widget,Login form widgets, Sign up Web   forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
-    {% endblock %}
-
-    {% block staticfiles %}
-      {% load static %}
-      <link rel="stylesheet" type="text/css" href="{% static "sorp_app/r_addstudent.css" %}" />
-      {% load static %}
-      <script type="text/javascript" src="{% static "sorp_app/r_addstudent.js" %}"></script>
-    {% endblock %}
-
-    {% block body %}
-      <br>
-      <div class="container">
-        <div class="tab">
-          <button id="left" class="tablinks active" onclick="openTab(event, 'dataEntry')">Data Entry Form</button>
-          <button id="mid" class="tablinks" onclick="openTab(event, 'docVerify')">Document Verification</button>
-          <button id="right" class="tablinks" onclick="openTab(event, 'medDetails')">Medical Details</button>
-        </div>
-
-
-        <div id="dataEntry" class="tabcontent">
-          <form class="mx-2">
-            <div class="text-center">
-              <h4>Session: 2018-19</h4><hr>
-            </div>
-            <div style="margin-top: 10px;" class="form-group">
-              <div class="row">
-                <div class="col-lg-4 col-md-6">
-                  <label for="jeeMainRollNo"><b>Jee (Main) Roll No</b></label>
-                <input class="form-control" type="text" id="jeeMainRollNo" placeholder="Enter Roll No">
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                  <label for="jeeAdvanceCRL"><b>Jee (Advance) All India Rank (CRL)</b></label>
-                <input class="form-control" type="text" id="jeeAdvanceCRL" placeholder="Enter Rank">
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                  <label for="jeeAdvanceCat"><b>Jee (Advance) Category Rank</b></label>
-                <input class="form-control" type="text" id="jeeAdvanceCat" placeholder="Enter Rank">
-                </div>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <label for="engName"><b>Student's Name (In English)</b></label>
-                <input class="form-control" type="text" id="engName" placeholder="Enter Name">
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                  <label for="hinName"><b>Student's Name (In Hindi)</b></label>
-                <input class="form-control" type="text" id="hinName" placeholder="Enter Name">
-                </div>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="form-group">
-                    <label for="gender"><b>Gender</b></label>
-                    <select class="form-control" id="gender">
-                      <option value="" hidden>Select Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Others">Others</option>
-                    </select>
-                  </div>
-                </div>
-
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="form-group">
-                  <label for="date"><b>Date of Birth</b></label>
-                  <input class="form-control" id="exampleInputDOB1" placeholder="Date of Birth" type="date">
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <label for="fatherName"><b>Father's Name</b></label>
-                  <input class="form-control" type="text" id="fatherName" placeholder="Enter Name">
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                  <label for="motherName"><b>Mother's Name</b></label>
-                  <input class="form-control" type="text" id="motherName" placeholder="Enter Name">
-                </div>
-            </div>
-            <br>
-
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-                <label for="jeeAdvancePercentile"><b>All India Percentile Score in JEE 2018</b></label>
-                <input class="form-control" type="text" id="jeeAdvancePercentile" placeholder="Enter Percentile">
-              </div>
-                <div class="col-lg-6 col-md-6">
-                  <label for="percentileScore"><b>Percentile Score in Qualifying Exam</b></label>
-                <input class="form-control" type="text" id="percentileScore" placeholder="Enter Percentile">
-                </div>
-            </div>
-            <br>
-
-            <div class="row">
-              <div class="col-lg-6">
-                <label for="country"><b>Bonafide Country and State of Candidate</b></label>
-                <select class="form-control" id="country" name ="country"></select>
-              </div>
-              <div class="col-lg-6">
-                <select style="margin-top: 25px" class="form-control" name ="state" id ="state"></select>
-              </div>
-              <script language="javascript">
-                populateCountries("country", "state");
-              </script>
-            </div>
-
-            <br>
-            <div class="row">
-              <div class="col-lg-6">
-                <label for="country1"><b>Country and State from where +2 Examinations Passed</b></label>
-                <select class="form-control" id="country1" name ="country1"></select>
-              </div>
-              <div class="col-lg-6">
-                <select style="margin-top: 25px" class="form-control" name ="state1" id ="state1"></select>
-              </div>
-              <script language="javascript">
-                populateCountries("country1", "state1");
-              </script>
-            </div>
-            <br>
-
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-                <label for="plusTwoPercent"><b>10+2 Percentage</b></label>
-                <input class="form-control" type="text" id="plusTwoPercent" placeholder="Enter Percentile">
-              </div>
-                <div class="col-lg-6 col-md-6">
-                  <label for="plusTwoYear"><b>Year of Passing +2 Exam</b></label>
-                <input class="form-control" type="text" id="plusTwoYear" placeholder="Enter Year">
-                </div>
-            </div>
-             <br>
-
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-                <label for="nameOfSchool"><b>Name of +2 Passing School</b></label>
-                <input class="form-control" type="text" id="nameOfSchool" placeholder="Enter School Name">
-              </div>
-                <div class="col-lg-6 col-md-6">
-                  <label for="typeOfSchool"><b>Type of School ?</b></label>
-                    <select class="form-control" id="typeOfSchool">
-                    <option hidden>Select School Type</option>
-                    <option value="government">Government School</option>
-                    <option value="private">Private School</option>
-                    </select>
-                </div>
-            </div>
-            <br><br>
-
-            <div class="row">
-              <div class="col-lg-4 col-md-6">
-                <label for="schoolBoard"><b>Board </b>(CBSE / HPBSE / ICSE / any other)</label>
-                <input class="form-control" type="text" id="schoolBoard" placeholder="Enter Board">
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                  <label for="jeeMainScore"><b>Jee (Main) 2018 Score</b></label>
-                  <input class="form-control" type="text" id="jeeMainScore" placeholder="Enter Score">
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <label for="normalizedScore"><b>Qualifying Examination Normalized Score</b></label>
-                <input class="form-control" type="text" id="normalizedScore" placeholder="Enter Rank">
-              </div>
-            </div>
-            <br><br>
-
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-                <label for="mainCategory"><b>Main Category</b></label>
-                <select class="form-control" id="mainCategory">
-                  <option value="" hidden>Select Category</option>
-                  <option value="OP">OP</option><option value="OPPwD">OPPwD</option><option value="OBC">OBC</option><option value="OBCPwD">OBCPwD</option>
-                  <option value="SC">SC</option><option value="SCPwD">SCPwD</option><option value="ST">ST</option><option value="STPwD">STPwD</option>
-                </select>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <label for="selectedCategory"><b>Admitted in Category</b></label>
-                <select class="form-control" id="selectedCategory">
-                  <option value="" hidden>Select Category</option>
-                  <option value="OP">OP</option><option value="OPPwD">OPPwD</option><option value="OBC">OBC</option><option value="OBCPwD">OBCPwD</option>
-                  <option value="SC">SC</option><option value="SCPwD">SCPwD</option><option value="ST">ST</option><option value="STPwD">STPwD</option>
-                </select>
-              </div>
-            </div>
-            <br>
-
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-                <label for="class"><b>Class </b>(B.Tech / B.Arch / Dual Degree</label>
-                <input class="form-control" type="text" id="jeeAdvancePercentile" placeholder="Enter Class">
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <label for="branch"><b>Branch</b></label>
-                <select class="form-control" id="branch">
-                  <option value="" hidden>Select Branch</option>
-                  <option value="ECE">ECE</option><option value="ECE(Dual)">ECE(Dual)</option>
-                  <option value="CSE">CSE</option><option value="CSE(Dual)">CSE(Dual)</option>
-                  <option value="ME">ME</option><option value="EEE">EEE</option><option value="CE">CE</option><option value="ARCH">ARCH</option>
-                  <option value="Chemical">Chemical</option><option value="Material">Material</option>
-                </select>
-              </div>
-            </div>
-            <br><br>
-
-            <div class="row">
-              <div class="col-lg-4 col-md-6">
-                <label for="religion"><b>Religion</b></label>
-                <input class="form-control" type="text" id="religion" placeholder="Enter Religion">
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <label for="accomodation"><b>Hostel Accomodation ?</b></label>
-                <select class="form-control" id="accomodation">
-                  <option value="" hidden>Select Accomodation</option>
-                  <option value="hostel">Hostel</option><option value="dayScholar">Day Scholar</option>
-                </select>
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <label for="area"><b> Belongs to Urban / Rural Area ?</b></label>
-                <select class="form-control" id="area">
-                  <option value="" hidden>Select Area</option>
-                  <option value="urban">Urban</option><option value="rural">Rural</option>
-                </select>
-              </div>
-            </div>
-            <br><br>
-
-              <div class="form-group">
-                <label for="railwayStation"><b>Nearest Railway Station</b></label>
-                <input class="form-control" type="text" id="railwayStation" placeholder="Enter Station">
-              </div>
-            <br>
-
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-                <div class="form-group">
-                  <label for="correspondenceAddress"><b>Correspondence Address</b></label>
-                  <textarea class="form-control" id="correspondenceAddress" rows="3"></textarea>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="form-group">
-                  <label for="permanentAddress"><b>Permanent Address</b></label>
-                  <textarea class="form-control" id="permanentAddress" rows="3"></textarea>
-                </div>
-              </div>
-            </div>
-            <br><br>
-
-            <div class="row">
-              <div class="col-lg-12">
-              <label><b>Contact Details </b></label> <br>
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <label for="fatherNumber"><b>Father's Number</b></label>
-                <input class="form-control" type="text" id="fatherNumber" placeholder="Enter Number">
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <label for="motherNumber"><b>Mother's Number</b></label>
-                <input class="form-control" type="text" id="motherNumber" placeholder="Enter Number">
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <label for="candidateNumber"><b>Candidate's Number</b></label>
-                <input class="form-control" type="text" id="candidateNumber" placeholder="Enter Number">
-              </div>
-              <br>
-
-              <div style="margin-top: 10px" class="col-lg-6 col-md-6">
-                <label for="email"><b>Email</b></label>
-                <input class="form-control" type="email" id="email" placeholder="Enter Email">
-              </div>
-
-              <div style="margin-top: 10px" class="col-lg-6 col-md-6">
-                <label for="aadharNumber"><b>Aadhar Number</b></label>
-                <input class="form-control" type="text" id="aadharNumber" placeholder="Enter Number">
-              </div>
-            </div>
-            <br><br>
-
-            <div class="row">
-              <div class="col-lg-12">
-              <label><b>Fees Status</b></label> <br>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <label for="jossaAmount"><b>JoSAA 2018 Amount</b></label>
-                <input class="form-control" type="text" id="jossaAmount" placeholder="Enter Amount">
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                 <div class="form-group">
-                  <label for="jossaDate"><b>Date</b></label>
-                  <input class="form-control" id="jossaDate" placeholder="Date" type="date">
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <label for="nithAmount"><b>NIT Hamirpur</b></label>
-                <input class="form-control" type="text" id="nithAmount" placeholder="Enter Amount">
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                 <div class="form-group">
-                  <label for="nithDate"><b>Date</b></label>
-                  <input class="form-control" id="nithDate" placeholder="Date" type="date">
-                </div>
-              </div>
-            </div>
-            <br><br>
-
-            <div class="row">
-              <div class="col-lg-12">
-              <label><b>For Office Use Only</b></label> <br>
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <label for="entryNo"><b>Entry No</b></label>
-                <input class="form-control" type="text" id="entryNo" placeholder="Enter Entry No">
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                 <div class="form-group">
-                  <label for="section"><b>Section</b></label>
-                  <input class="form-control" id="section" placeholder="Enter Section" type="text">
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <label for="subSection"><b>Sub-Section</b></label>
-                <input class="form-control" type="text" id="subSection" placeholder="Enter Sub-Section">
-              </div>
-            </div>
-          </form>
-      </div>
-
-
-    </div>
-
-
-
-
-
-
-
-
-    <div id="docVerify" class="tabcontent">
-        <form action="#">
-        <br>
-        <div class="row">
-          <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <table class="table table-hover">
-              <thead>
-              <tr>
-                <th class="srno">Sr. No.</th>
-                <th>Name of the Document</th>
-                <th>Verified?</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td><strong>Provisional Admission Letter</strong> issued by JoSAA</td>
-                <td><input type="radio" value="yes" name="verify1">Yes <input type="radio" value="no" name="verify1">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>2</td>
-                <td><strong>Score Card</strong> issued by CBSE indicating rank in JEE-2019</td>
-                <td><input type="radio" class="yes" name="verify2">Yes <input type="radio" class="no" name="verify2">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>3</td>
-                <td><strong>Admit card</strong> of JEE-2019 (self attested)</td>
-                <td><input type="radio" class="yes" name="verify3">Yes <input type="radio" class="no" name="verify3">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>4</td>
-                <td><strong>Class 10th (High School) Board Certificate</strong> as a proof of date of birth</td>
-                <td><input type="radio" class="yes" name="verify4">Yes <input type="radio" class="no" name="verify4">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>5</td>
-                <td><strong>Class 12th Marksheet and Pass Certificate</strong> of qualifying Examination</td>
-                <td><input type="radio" class="yes" name="verify5">Yes <input type="radio" class="no" name="verify5">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>6</td>
-                <td><strong>Character Certificate</strong></td>
-                <td><input type="radio" class="yes" name="verify6">Yes <input type="radio" class="no" name="verify6">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>7</td>
-                <td><strong>* Migration/Transfer Certificate</strong></td>
-                <td><input type="radio" class="yes" name="verify7">Yes <input type="radio" class="no" name="verify7">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>8</td>
-                <td><strong>Medical Fitness Certificate</strong> issued by medical officer at NIT Hamirpur</td>
-                <td><input type="radio" class="yes" name="verify8">Yes <input type="radio" class="no" name="verify8">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>9</td>
-                <td><strong>Certificate of Person with Disability(PwD)</strong><em> (if applicable)</em></td>
-                <td><input type="radio" class="yes" name="verify9">Yes <input type="radio" class="no" name="verify9">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>10</td>
-                <td><strong>Certificate of category</strong> (SC/ST/OBC-NCL) <em>(if applicable)</em></td>
-                <td><input type="radio" class="yes" name="verify10">Yes <input type="radio" class="no" name="verify10">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>11</td>
-                <td><strong><u>Declaration/Undertaking</u></strong> <em>(for OBC Candidates only)</em></td>
-                <td><input type="radio" class="yes" name="verify11">Yes <input type="radio" class="no" name="verify11">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>12</td>
-                <td>An <strong>Undertaking</strong> by the student</td>
-                <td><input type="radio" class="yes" name="verify12">Yes <input type="radio" class="no" name="verify12">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td></td>
-                <td class="center"><strong>AFFIDAVITS</strong></td><td></td><td></td>
-              </tr>
-
-              <tr>
-                <td>13</td>
-                <td><strong>Affidavit</strong> for giving reason for study gap (if any)</td>
-                <td><input type="radio" class="yes" name="verify13">Yes <input type="radio" class="no" name="verify13">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>14</td>
-                <td>An <strong>Affidavit by the Student [Anti-Ragging measures] (Original) (Online generated)</strong></td>
-                <td><input type="radio" class="yes" name="verify14">Yes <input type="radio" class="no" name="verify14">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>15</td>
-                <td><strong>Affidavit by the Parent / Guardian [Anti-Ragging measures] (Original) (Online generated)</strong></td>
-                <td><input type="radio" class="yes" name="verify15">Yes <input type="radio" class="no" name="verify15">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>16</td>
-                <td><strong>The following documents are required if qualifying examination is from outside India or from National Open School</strong></td><td></td><td></td>
-
-              </tr>
-
-              <tr>
-                <td></td>
-                <td><strong>Passport</strong> of the candidates</td>
-                <td><input type="radio" class="yes" name="verify17">Yes <input type="radio" class="no" name="verify17">No</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td></td>
-                <td><strong>Proof of Place of Examination</strong> from the National Open School</td>
-                <td><input type="radio" class="yes" name="verify18">Yes <input type="radio" class="no" name="verify18">No</td>
-                <td></td>
-              </tr>
-
-
-            </tbody>
-      </form>
-            </table>
-          </div>
-        </div>
-
-
-            <hr>
-
-    </div>
-
-    <div id="medDetails" class="tabcontent">
-
-          <div class="row" >
-            <div class="col-md-12 ">
-              <h4 class="text-center font-weight-bold">PERSONAL HISTORY</h4><hr>
-            </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6 col-md-6">
-          <div class="form-group">
-                <label for="studentName"><b>Student's Name</b></label>
-                <input class="form-control" type="text" id="studentName" placeholder="Enter Name">
-            </div>
-        </div>
-
-        <div class="col-lg-6 col-md-6">
-          <div class="form-group">
-                <label for="email"><b>Email</b></label>
-                <input class="form-control" type="text" id="email" placeholder="Enter Email">
-            </div>
-        </div>
-
-        <div class="col-lg-12">
-          <div class="form-group">
-                <label for="name"><b>Father/Guardian's Name</b></label>
-                <input class="form-control" type="text" id="fname" placeholder="Enter Guardian's Name">
-            </div>
-        </div>
-        </div>
-
-
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="form-group">
-                    <label for="gender"><b>Gender</b></label>
-                    <select class="form-control" id="gender">
-                    <option value="" hidden>Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Others">Others</option>
-                    </select>
-                  </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="form-group">
-                  <label for="date"><b>Date of Birth</b></label>
-                  <input class="form-control" id="exampleInputDOB1" placeholder="Date of Birth" type="date">
-                </div>
-              </div>
-            </div>
-
-
-
-
-            <div class="form-group">
-              <label for="date">Age on 1<span class=" align-text-bottom">st</span> July 2018</label>
-
-            <div class="form-group row">
-
-              <div class="col-md-6">
-                <label for="year" class="text text-muted"><b>Years</b></label>
-                        <input class="form-control" type="text" name="year">
-                      </div>
-
-                      <div class="col-md-6">
-                          <label for="month" class="text text-muted"><b>Months</b></label>
-                                <input class="form-control" type="text" name="month">
-                              </div>
-          </div>
-
-            <div class="form-group">
-                <label for="message"><b>Identification Mark on the Body</b> <small class="form-text text-muted">(This can be a mole, scar or birthmark)</small></label>
-                <textarea class="form-control" id="message" rows="2"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="message"><b>Major illness/operation</b><small class="form-text text-muted">(specify nature of illness/operation)</small></label>
-                <textarea class="form-control" id="message" rows="3"></textarea>
-            </div>
-          </form>
-      </div>
-      <br>
-      <form action="#">
-      <a style="margin-top: 15px;" href="#" onclick="popup();" class="btn float-right btn-outline-success" type="button">Submit</a>
-    <!-- <button onclick="popup();" class="btn btn-block btn-outline-success" type="button">Submit</button> -->
-    </form>
-    </div>
-    <br>
-
-    {% endblock %}
-
+		Tabs Registrar
+	{% endblock %}
+
+	{% block meta %}
+	  <!-- metatags-->
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  <meta name="keywords" content="Sports Camp Registration Form a Flat Responsive Widget,Login form widgets, Sign up Web   forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+	{% endblock %}
+
+	{% block links %}
+		<!-- Online links will come here! -->
+	{% endblock %}
+
+	{% block staticfiles %}
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static "sorp_app/r_addstudent.css" %}" />
+		{% load static %}
+		<script type="text/javascript" src="{% static "sorp_app/r_addstudent.js" %}"></script>
+	{% endblock %}
+
+	{% block styles %}
+		 <!--Style part comes here!-->
+	{% endblock %}
+
+	{% block bodycontent %}
+	  <br>
+	  <div class="container">
+		<div class="tab">
+		  <button id="left" class="tablinks active" onclick="openTab(event, 'dataEntry')">Data Entry Form</button>
+		  <button id="mid" class="tablinks" onclick="openTab(event, 'docVerify')">Document Verification</button>
+		  <button id="right" class="tablinks" onclick="openTab(event, 'medDetails')">Medical Details</button>
+		</div>
+
+
+		<div id="dataEntry" class="tabcontent">
+		  <form class="mx-2">
+			<div class="text-center">
+			  <h4>Session: 2018-19</h4><hr>
+			</div>
+			<div style="margin-top: 10px;" class="form-group">
+			  <div class="row">
+				<div class="col-lg-4 col-md-6">
+				  <label for="jeeMainRollNo"><b>Jee (Main) Roll No</b></label>
+				<input class="form-control" type="text" id="jeeMainRollNo" placeholder="Enter Roll No">
+				</div>
+
+				<div class="col-lg-4 col-md-6">
+				  <label for="jeeAdvanceCRL"><b>Jee (Advance) All India Rank (CRL)</b></label>
+				<input class="form-control" type="text" id="jeeAdvanceCRL" placeholder="Enter Rank">
+				</div>
+
+				<div class="col-lg-4 col-md-6">
+				  <label for="jeeAdvanceCat"><b>Jee (Advance) Category Rank</b></label>
+				<input class="form-control" type="text" id="jeeAdvanceCat" placeholder="Enter Rank">
+				</div>
+			  </div>
+			  <br>
+			  <div class="row">
+				<div class="col-lg-6 col-md-6">
+				  <label for="engName"><b>Student's Name (In English)</b></label>
+				<input class="form-control" type="text" id="engName" placeholder="Enter Name">
+				</div>
+
+				<div class="col-lg-6 col-md-6">
+				  <label for="hinName"><b>Student's Name (In Hindi)</b></label>
+				<input class="form-control" type="text" id="hinName" placeholder="Enter Name">
+				</div>
+			  </div>
+			  <br>
+			  <div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6">
+				  <div class="form-group">
+					<label for="gender"><b>Gender</b></label>
+					<select class="form-control" id="gender">
+					  <option value="" hidden>Select Gender</option>
+					  <option value="Male">Male</option>
+					  <option value="Female">Female</option>
+					  <option value="Others">Others</option>
+					</select>
+				  </div>
+				</div>
+
+			  <div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="form-group">
+				  <label for="date"><b>Date of Birth</b></label>
+				  <input class="form-control" id="exampleInputDOB1" placeholder="Date of Birth" type="date">
+				</div>
+			  </div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-6 col-md-6">
+				  <label for="fatherName"><b>Father's Name</b></label>
+				  <input class="form-control" type="text" id="fatherName" placeholder="Enter Name">
+				</div>
+
+				<div class="col-lg-6 col-md-6">
+				  <label for="motherName"><b>Mother's Name</b></label>
+				  <input class="form-control" type="text" id="motherName" placeholder="Enter Name">
+				</div>
+			</div>
+			<br>
+
+			<div class="row">
+			  <div class="col-lg-6 col-md-6">
+				<label for="jeeAdvancePercentile"><b>All India Percentile Score in JEE 2018</b></label>
+				<input class="form-control" type="text" id="jeeAdvancePercentile" placeholder="Enter Percentile">
+			  </div>
+				<div class="col-lg-6 col-md-6">
+				  <label for="percentileScore"><b>Percentile Score in Qualifying Exam</b></label>
+				<input class="form-control" type="text" id="percentileScore" placeholder="Enter Percentile">
+				</div>
+			</div>
+			<br>
+
+			<div class="row">
+			  <div class="col-lg-6">
+				<label for="country"><b>Bonafide Country and State of Candidate</b></label>
+				<select class="form-control" id="country" name ="country"></select>
+			  </div>
+			  <div class="col-lg-6">
+				<select style="margin-top: 25px" class="form-control" name ="state" id ="state"></select>
+			  </div>
+			  <script language="javascript">
+				populateCountries("country", "state");
+			  </script>
+			</div>
+
+			<br>
+			<div class="row">
+			  <div class="col-lg-6">
+				<label for="country1"><b>Country and State from where +2 Examinations Passed</b></label>
+				<select class="form-control" id="country1" name ="country1"></select>
+			  </div>
+			  <div class="col-lg-6">
+				<select style="margin-top: 25px" class="form-control" name ="state1" id ="state1"></select>
+			  </div>
+			  <script language="javascript">
+				populateCountries("country1", "state1");
+			  </script>
+			</div>
+			<br>
+
+			<div class="row">
+			  <div class="col-lg-6 col-md-6">
+				<label for="plusTwoPercent"><b>10+2 Percentage</b></label>
+				<input class="form-control" type="text" id="plusTwoPercent" placeholder="Enter Percentile">
+			  </div>
+				<div class="col-lg-6 col-md-6">
+				  <label for="plusTwoYear"><b>Year of Passing +2 Exam</b></label>
+				<input class="form-control" type="text" id="plusTwoYear" placeholder="Enter Year">
+				</div>
+			</div>
+			 <br>
+
+			<div class="row">
+			  <div class="col-lg-6 col-md-6">
+				<label for="nameOfSchool"><b>Name of +2 Passing School</b></label>
+				<input class="form-control" type="text" id="nameOfSchool" placeholder="Enter School Name">
+			  </div>
+				<div class="col-lg-6 col-md-6">
+				  <label for="typeOfSchool"><b>Type of School ?</b></label>
+					<select class="form-control" id="typeOfSchool">
+					<option hidden>Select School Type</option>
+					<option value="government">Government School</option>
+					<option value="private">Private School</option>
+					</select>
+				</div>
+			</div>
+			<br><br>
+
+			<div class="row">
+			  <div class="col-lg-4 col-md-6">
+				<label for="schoolBoard"><b>Board </b>(CBSE / HPBSE / ICSE / any other)</label>
+				<input class="form-control" type="text" id="schoolBoard" placeholder="Enter Board">
+			  </div>
+
+			  <div class="col-lg-4 col-md-6">
+				  <label for="jeeMainScore"><b>Jee (Main) 2018 Score</b></label>
+				  <input class="form-control" type="text" id="jeeMainScore" placeholder="Enter Score">
+			  </div>
+
+			  <div class="col-lg-4 col-md-6">
+				<label for="normalizedScore"><b>Qualifying Examination Normalized Score</b></label>
+				<input class="form-control" type="text" id="normalizedScore" placeholder="Enter Rank">
+			  </div>
+			</div>
+			<br><br>
+
+			<div class="row">
+			  <div class="col-lg-6 col-md-6">
+				<label for="mainCategory"><b>Main Category</b></label>
+				<select class="form-control" id="mainCategory">
+				  <option value="" hidden>Select Category</option>
+				  <option value="OP">OP</option><option value="OPPwD">OPPwD</option><option value="OBC">OBC</option><option value="OBCPwD">OBCPwD</option>
+				  <option value="SC">SC</option><option value="SCPwD">SCPwD</option><option value="ST">ST</option><option value="STPwD">STPwD</option>
+				</select>
+			  </div>
+
+			  <div class="col-lg-6 col-md-6">
+				<label for="selectedCategory"><b>Admitted in Category</b></label>
+				<select class="form-control" id="selectedCategory">
+				  <option value="" hidden>Select Category</option>
+				  <option value="OP">OP</option><option value="OPPwD">OPPwD</option><option value="OBC">OBC</option><option value="OBCPwD">OBCPwD</option>
+				  <option value="SC">SC</option><option value="SCPwD">SCPwD</option><option value="ST">ST</option><option value="STPwD">STPwD</option>
+				</select>
+			  </div>
+			</div>
+			<br>
+
+			<div class="row">
+			  <div class="col-lg-6 col-md-6">
+				<label for="class"><b>Class </b>(B.Tech / B.Arch / Dual Degree</label>
+				<input class="form-control" type="text" id="jeeAdvancePercentile" placeholder="Enter Class">
+			  </div>
+
+			  <div class="col-lg-6 col-md-6">
+				<label for="branch"><b>Branch</b></label>
+				<select class="form-control" id="branch">
+				  <option value="" hidden>Select Branch</option>
+				  <option value="ECE">ECE</option><option value="ECE(Dual)">ECE(Dual)</option>
+				  <option value="CSE">CSE</option><option value="CSE(Dual)">CSE(Dual)</option>
+				  <option value="ME">ME</option><option value="EEE">EEE</option><option value="CE">CE</option><option value="ARCH">ARCH</option>
+				  <option value="Chemical">Chemical</option><option value="Material">Material</option>
+				</select>
+			  </div>
+			</div>
+			<br><br>
+
+			<div class="row">
+			  <div class="col-lg-4 col-md-6">
+				<label for="religion"><b>Religion</b></label>
+				<input class="form-control" type="text" id="religion" placeholder="Enter Religion">
+			  </div>
+
+			  <div class="col-lg-4 col-md-6">
+				<label for="accomodation"><b>Hostel Accomodation ?</b></label>
+				<select class="form-control" id="accomodation">
+				  <option value="" hidden>Select Accomodation</option>
+				  <option value="hostel">Hostel</option><option value="dayScholar">Day Scholar</option>
+				</select>
+			  </div>
+
+			  <div class="col-lg-4 col-md-6">
+				<label for="area"><b> Belongs to Urban / Rural Area ?</b></label>
+				<select class="form-control" id="area">
+				  <option value="" hidden>Select Area</option>
+				  <option value="urban">Urban</option><option value="rural">Rural</option>
+				</select>
+			  </div>
+			</div>
+			<br><br>
+
+			  <div class="form-group">
+				<label for="railwayStation"><b>Nearest Railway Station</b></label>
+				<input class="form-control" type="text" id="railwayStation" placeholder="Enter Station">
+			  </div>
+			<br>
+
+			<div class="row">
+			  <div class="col-lg-6 col-md-6">
+				<div class="form-group">
+				  <label for="correspondenceAddress"><b>Correspondence Address</b></label>
+				  <textarea class="form-control" id="correspondenceAddress" rows="3"></textarea>
+				</div>
+			  </div>
+
+			  <div class="col-lg-6 col-md-6">
+				<div class="form-group">
+				  <label for="permanentAddress"><b>Permanent Address</b></label>
+				  <textarea class="form-control" id="permanentAddress" rows="3"></textarea>
+				</div>
+			  </div>
+			</div>
+			<br><br>
+
+			<div class="row">
+			  <div class="col-lg-12">
+			  <label><b>Contact Details </b></label> <br>
+			  </div>
+
+			  <div class="col-lg-4 col-md-6">
+				<label for="fatherNumber"><b>Father's Number</b></label>
+				<input class="form-control" type="text" id="fatherNumber" placeholder="Enter Number">
+			  </div>
+
+			  <div class="col-lg-4 col-md-6">
+				<label for="motherNumber"><b>Mother's Number</b></label>
+				<input class="form-control" type="text" id="motherNumber" placeholder="Enter Number">
+			  </div>
+
+			  <div class="col-lg-4 col-md-6">
+				<label for="candidateNumber"><b>Candidate's Number</b></label>
+				<input class="form-control" type="text" id="candidateNumber" placeholder="Enter Number">
+			  </div>
+			  <br>
+
+			  <div style="margin-top: 10px" class="col-lg-6 col-md-6">
+				<label for="email"><b>Email</b></label>
+				<input class="form-control" type="email" id="email" placeholder="Enter Email">
+			  </div>
+
+			  <div style="margin-top: 10px" class="col-lg-6 col-md-6">
+				<label for="aadharNumber"><b>Aadhar Number</b></label>
+				<input class="form-control" type="text" id="aadharNumber" placeholder="Enter Number">
+			  </div>
+			</div>
+			<br><br>
+
+			<div class="row">
+			  <div class="col-lg-12">
+			  <label><b>Fees Status</b></label> <br>
+			  </div>
+
+			  <div class="col-lg-6 col-md-6">
+				<label for="jossaAmount"><b>JoSAA 2018 Amount</b></label>
+				<input class="form-control" type="text" id="jossaAmount" placeholder="Enter Amount">
+			  </div>
+
+			  <div class="col-lg-6 col-md-6">
+				 <div class="form-group">
+				  <label for="jossaDate"><b>Date</b></label>
+				  <input class="form-control" id="jossaDate" placeholder="Date" type="date">
+				</div>
+			  </div>
+
+			  <div class="col-lg-6 col-md-6">
+				<label for="nithAmount"><b>NIT Hamirpur</b></label>
+				<input class="form-control" type="text" id="nithAmount" placeholder="Enter Amount">
+			  </div>
+
+			  <div class="col-lg-6 col-md-6">
+				 <div class="form-group">
+				  <label for="nithDate"><b>Date</b></label>
+				  <input class="form-control" id="nithDate" placeholder="Date" type="date">
+				</div>
+			  </div>
+			</div>
+			<br><br>
+
+			<div class="row">
+			  <div class="col-lg-12">
+			  <label><b>For Office Use Only</b></label> <br>
+			  </div>
+
+			  <div class="col-lg-4 col-md-6">
+				<label for="entryNo"><b>Entry No</b></label>
+				<input class="form-control" type="text" id="entryNo" placeholder="Enter Entry No">
+			  </div>
+
+			  <div class="col-lg-4 col-md-6">
+				 <div class="form-group">
+				  <label for="section"><b>Section</b></label>
+				  <input class="form-control" id="section" placeholder="Enter Section" type="text">
+				</div>
+			  </div>
+
+			  <div class="col-lg-4 col-md-6">
+				<label for="subSection"><b>Sub-Section</b></label>
+				<input class="form-control" type="text" id="subSection" placeholder="Enter Sub-Section">
+			  </div>
+			</div>
+		  </form>
+	  </div>
+
+
+	</div>
+
+
+
+
+
+
+
+
+	<div id="docVerify" class="tabcontent">
+		<form action="#">
+		<br>
+		<div class="row">
+		  <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<table class="table table-hover">
+			  <thead>
+			  <tr>
+				<th class="srno">Sr. No.</th>
+				<th>Name of the Document</th>
+				<th>Verified?</th>
+			  </tr>
+			</thead>
+
+			<tbody>
+			  <tr>
+				<td>1</td>
+				<td><strong>Provisional Admission Letter</strong> issued by JoSAA</td>
+				<td><input type="radio" value="yes" name="verify1">Yes <input type="radio" value="no" name="verify1">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>2</td>
+				<td><strong>Score Card</strong> issued by CBSE indicating rank in JEE-2019</td>
+				<td><input type="radio" class="yes" name="verify2">Yes <input type="radio" class="no" name="verify2">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>3</td>
+				<td><strong>Admit card</strong> of JEE-2019 (self attested)</td>
+				<td><input type="radio" class="yes" name="verify3">Yes <input type="radio" class="no" name="verify3">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>4</td>
+				<td><strong>Class 10th (High School) Board Certificate</strong> as a proof of date of birth</td>
+				<td><input type="radio" class="yes" name="verify4">Yes <input type="radio" class="no" name="verify4">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>5</td>
+				<td><strong>Class 12th Marksheet and Pass Certificate</strong> of qualifying Examination</td>
+				<td><input type="radio" class="yes" name="verify5">Yes <input type="radio" class="no" name="verify5">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>6</td>
+				<td><strong>Character Certificate</strong></td>
+				<td><input type="radio" class="yes" name="verify6">Yes <input type="radio" class="no" name="verify6">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>7</td>
+				<td><strong>* Migration/Transfer Certificate</strong></td>
+				<td><input type="radio" class="yes" name="verify7">Yes <input type="radio" class="no" name="verify7">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>8</td>
+				<td><strong>Medical Fitness Certificate</strong> issued by medical officer at NIT Hamirpur</td>
+				<td><input type="radio" class="yes" name="verify8">Yes <input type="radio" class="no" name="verify8">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>9</td>
+				<td><strong>Certificate of Person with Disability(PwD)</strong><em> (if applicable)</em></td>
+				<td><input type="radio" class="yes" name="verify9">Yes <input type="radio" class="no" name="verify9">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>10</td>
+				<td><strong>Certificate of category</strong> (SC/ST/OBC-NCL) <em>(if applicable)</em></td>
+				<td><input type="radio" class="yes" name="verify10">Yes <input type="radio" class="no" name="verify10">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>11</td>
+				<td><strong><u>Declaration/Undertaking</u></strong> <em>(for OBC Candidates only)</em></td>
+				<td><input type="radio" class="yes" name="verify11">Yes <input type="radio" class="no" name="verify11">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>12</td>
+				<td>An <strong>Undertaking</strong> by the student</td>
+				<td><input type="radio" class="yes" name="verify12">Yes <input type="radio" class="no" name="verify12">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td></td>
+				<td class="center"><strong>AFFIDAVITS</strong></td><td></td><td></td>
+			  </tr>
+
+			  <tr>
+				<td>13</td>
+				<td><strong>Affidavit</strong> for giving reason for study gap (if any)</td>
+				<td><input type="radio" class="yes" name="verify13">Yes <input type="radio" class="no" name="verify13">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>14</td>
+				<td>An <strong>Affidavit by the Student [Anti-Ragging measures] (Original) (Online generated)</strong></td>
+				<td><input type="radio" class="yes" name="verify14">Yes <input type="radio" class="no" name="verify14">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>15</td>
+				<td><strong>Affidavit by the Parent / Guardian [Anti-Ragging measures] (Original) (Online generated)</strong></td>
+				<td><input type="radio" class="yes" name="verify15">Yes <input type="radio" class="no" name="verify15">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td>16</td>
+				<td><strong>The following documents are required if qualifying examination is from outside India or from National Open School</strong></td><td></td><td></td>
+
+			  </tr>
+
+			  <tr>
+				<td></td>
+				<td><strong>Passport</strong> of the candidates</td>
+				<td><input type="radio" class="yes" name="verify17">Yes <input type="radio" class="no" name="verify17">No</td>
+				<td></td>
+			  </tr>
+
+			  <tr>
+				<td></td>
+				<td><strong>Proof of Place of Examination</strong> from the National Open School</td>
+				<td><input type="radio" class="yes" name="verify18">Yes <input type="radio" class="no" name="verify18">No</td>
+				<td></td>
+			  </tr>
+
+
+			</tbody>
+	  </form>
+			</table>
+		  </div>
+		</div>
+
+
+			<hr>
+
+	</div>
+
+	<div id="medDetails" class="tabcontent">
+
+		  <div class="row" >
+			<div class="col-md-12 ">
+			  <h4 class="text-center font-weight-bold">PERSONAL HISTORY</h4><hr>
+			</div>
+		</div>
+
+		<div class="row">
+		  <div class="col-lg-6 col-md-6">
+		  <div class="form-group">
+				<label for="studentName"><b>Student's Name</b></label>
+				<input class="form-control" type="text" id="studentName" placeholder="Enter Name">
+			</div>
+		</div>
+
+		<div class="col-lg-6 col-md-6">
+		  <div class="form-group">
+				<label for="email"><b>Email</b></label>
+				<input class="form-control" type="text" id="email" placeholder="Enter Email">
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+		  <div class="form-group">
+				<label for="name"><b>Father/Guardian's Name</b></label>
+				<input class="form-control" type="text" id="fname" placeholder="Enter Guardian's Name">
+			</div>
+		</div>
+		</div>
+
+
+			<div class="row">
+			  <div class="col-lg-6 col-md-6 col-sm-6">
+				  <div class="form-group">
+					<label for="gender"><b>Gender</b></label>
+					<select class="form-control" id="gender">
+					<option value="" hidden>Select Gender</option>
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+					<option value="Others">Others</option>
+					</select>
+				  </div>
+			  </div>
+
+			  <div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="form-group">
+				  <label for="date"><b>Date of Birth</b></label>
+				  <input class="form-control" id="exampleInputDOB1" placeholder="Date of Birth" type="date">
+				</div>
+			  </div>
+			</div>
+
+
+
+
+			<div class="form-group">
+			  <label for="date">Age on 1<span class=" align-text-bottom">st</span> July 2018</label>
+
+			<div class="form-group row">
+
+			  <div class="col-md-6">
+				<label for="year" class="text text-muted"><b>Years</b></label>
+						<input class="form-control" type="text" name="year">
+					  </div>
+
+					  <div class="col-md-6">
+						  <label for="month" class="text text-muted"><b>Months</b></label>
+								<input class="form-control" type="text" name="month">
+							  </div>
+		  </div>
+
+			<div class="form-group">
+				<label for="message"><b>Identification Mark on the Body</b> <small class="form-text text-muted">(This can be a mole, scar or birthmark)</small></label>
+				<textarea class="form-control" id="message" rows="2"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="message"><b>Major illness/operation</b><small class="form-text text-muted">(specify nature of illness/operation)</small></label>
+				<textarea class="form-control" id="message" rows="3"></textarea>
+			</div>
+		  </form>
+	  </div>
+	  <br>
+	  <form action="#">
+	  <a style="margin-top: 15px;" href="#" onclick="popup();" class="btn float-right btn-outline-success" type="button">Submit</a>
+	<!-- <button onclick="popup();" class="btn btn-block btn-outline-success" type="button">Submit</button> -->
+	</form>
+	</div>
+	<br>
+
+	{% endblock %}
+
+	{% block bodyscripts %}
+	{% endblock %}
