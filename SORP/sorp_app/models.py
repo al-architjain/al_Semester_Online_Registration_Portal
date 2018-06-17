@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from decimal import Decimal
+
 import datetime
 
 current_date = datetime.datetime.now()
@@ -34,6 +35,9 @@ class Subjects(models.Model):
     subject_code = models.CharField(max_length=20)
     year = models.IntegerField()
 
+
+
+
 class StudentBasicInfo(models.Model):
     user_id = models.OneToOneField(
         User, on_delete=models.PROTECT, default=0
@@ -58,9 +62,12 @@ class StudentBasicInfo(models.Model):
         ('Rural', 'Rural'),
         ('Urban', 'Urban')
     )
+
     area = models.CharField(max_length=10, choices=area_choice)
     bonafide_country = models.CharField(max_length=30)
     bonafide_state = models.CharField(max_length=30)
+    region = models.CharField(max_length=25, choices=region_choice)
+    nearest_railway_st = models.CharField(max_length=70)
     correspondence_add = models.CharField(max_length=1000)
     permanent_add = models.CharField(max_length=1000)
     nearest_railway_st = models.CharField(max_length=70)
@@ -166,30 +173,3 @@ class DocumentInfo(models.Model):
     stud_id = models.ForeignKey(StudentBasicInfo, on_delete=models.CASCADE)
     doc_id = models.ForeignKey(Documents, on_delete=models.CASCADE)
     submitted = models.BooleanField(default=False)
-
-# class DocumentInfo(models.Model):
-#     jee_roll_no = models.BigIntegerField()
-#     year_of_admission = models.IntegerField()
-#     studnet_id = models.OneToOneField(
-#         StudentBasicInfo, on_delete=models.CASCADE, default=0
-#     )
-#     # documents
-#     provisional_admission_letter = models.BooleanField(default=False)
-#     jee_score_card = models.BooleanField(default=False)
-#     jee_admit_card = models.BooleanField(default=False)
-#     class_10_certificate = models.BooleanField(default=False)
-#     class_12_marksheet = models.BooleanField(default=False)
-#     character_certificate = models.BooleanField(default=False)
-#     migration_certificate = models.BooleanField(default=False)
-#     remaining_Institute_fee = models.BooleanField(default=False)
-#     hostel_fee = models.BooleanField(default=False)
-#     medical_fitness_certificate = models.BooleanField(default=False)
-#     certificate_of_disability = models.BooleanField(default=False)
-#     certificate_of_category = models.BooleanField(default=False)
-#     undertaking = models.BooleanField(default=False)
-#     affidavit_year_gap = models.BooleanField(default=False)
-#     affidavit_anti_ragging = models.BooleanField(default=False)
-#     parent_affidavit_anti_ragging = models.BooleanField(default=False)
-#     ##
-#     fee_status_josaa = models.BooleanField(default=False)
-#     fee_status_nit_Hamirpur = models.BooleanField(default=False)
