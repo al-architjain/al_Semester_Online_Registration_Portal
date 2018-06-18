@@ -53,4 +53,3 @@ def user_profile(request):
 	else:
 		return render(request, 'sorp_app/r_addstudent.html')
 
-
