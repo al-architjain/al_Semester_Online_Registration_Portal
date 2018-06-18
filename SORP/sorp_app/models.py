@@ -106,6 +106,7 @@ class StudentBasicInfo(models.Model):
     entry_no = models.IntegerField(default=None)
     reg_no = models.CharField(max_length=50)
     roll_no = models.CharField(unique=True, max_length=10)
+    active_status = models.BooleanField(default=True)
     #
     # Guardian Details
     father_name = models.CharField(max_length=60)
@@ -163,9 +164,17 @@ class Documents(models.Model):
     year = models.IntegerField(default=current_date.year)
     document = models.CharField(max_length=500)
     stud_doc = models.ManyToManyField(StudentBasicInfo, through='DocumentInfo')
+    mandatory = models.BooleanField(default=True)
 
 
 class DocumentInfo(models.Model):
     stud_id = models.ForeignKey(StudentBasicInfo, on_delete=models.CASCADE)
     doc_id = models.ForeignKey(Documents, on_delete=models.CASCADE)
     submitted = models.BooleanField(default=False)
+
+
+class Due(models.Model):
+    roll_num = models.ForeignKey(StudentBasicInfo,to_field='roll_no',on_delete=models.CASCADE)
+    library_due = models.DecimalField(max_digits=100,decimal_places=4,default=Decimal(0.00))
+    hostel_balance = models.DecimalField(max_digits=100,decimal_places=4,default=Decimal(0.00))
+    acdemic_due = models.DecimalField(max_digits=100,decimal_places=4,default=Decimal(0.00))
