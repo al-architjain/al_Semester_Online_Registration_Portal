@@ -36,8 +36,6 @@ class Subjects(models.Model):
     year = models.IntegerField()
 
 
-
-
 class StudentBasicInfo(models.Model):
     user_id = models.OneToOneField(
         User, on_delete=models.PROTECT, default=0
@@ -62,15 +60,12 @@ class StudentBasicInfo(models.Model):
         ('Rural', 'Rural'),
         ('Urban', 'Urban')
     )
-
     area = models.CharField(max_length=10, choices=area_choice)
     bonafide_country = models.CharField(max_length=30)
     bonafide_state = models.CharField(max_length=30)
-    region = models.CharField(max_length=25, choices=region_choice)
     nearest_railway_st = models.CharField(max_length=70)
     correspondence_add = models.CharField(max_length=1000)
     permanent_add = models.CharField(max_length=1000)
-    nearest_railway_st = models.CharField(max_length=70)
     #
     # Academics Details
     year_of_admission = models.IntegerField()
@@ -151,6 +146,7 @@ class StudentFirstFeeStatus(models.Model):
     fee_NITH_amount = models.IntegerField()
     fee_nith_date = models.DateField(auto_now=False, auto_now_add=False, default=None)
     fee_NIT_receipt_no = models.CharField(max_length=25)
+
 
 
 class Result(models.Model):

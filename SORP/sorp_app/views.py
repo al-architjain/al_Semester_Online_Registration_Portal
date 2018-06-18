@@ -48,7 +48,7 @@ def user_login(request) :
 def user_profile(request):
 	grp = get_user_group(request.user)
 
-	if grp == 'g_student':
+	if grp == 'Student':
 		return render(request, 'sorp_app/s_profile.html')
 	else:
 		return render(request, 'sorp_app/r_addstudent.html')
