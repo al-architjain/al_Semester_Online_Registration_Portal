@@ -9,7 +9,11 @@ def currYear():
     now = datetime.now()
     return now.year
 ##
-
+## For profile picture
+import os
+def get_image_path(instance, filename):
+    return os.path.join(str(instance.id), 'profile_pic.jpg')
+##
 
 class Board(models.Model):
     id = models.PositiveIntegerField(unique=True)
@@ -33,8 +37,8 @@ class UGBranch(models.Model):
     section = models.CharField(max_length=5)
 
 class Subjects(models.Model):
-    classname = models.ForeignKey(UGClass, on_delete=models.CASCADE)
-    branch = models.ForeignKey(UGBranch, on_delete=models.CASCADE)
+    classname = models.ForeignKey(UGClass, on_delete=models.CASCADE,db_column='class')
+    branch = models.ForeignKey(UGBranch, on_delete=models.CASCADE,db_column='branch')
     semester_choice = (
         (1,1),
         (2,2),
@@ -62,6 +66,9 @@ class StudentInfo(models.Model):
         User, on_delete=models.PROTECT, default=0
     )
     #
+    #Student Image
+    img = models.ImageField(upload_to = get_image_path, default = 'def_profile_pic.jpg')
+    #
     # Documents
     stud_doc = models.ManyToManyField(Documents, through='DocumentInfo')
     #
@@ -77,7 +84,7 @@ class StudentInfo(models.Model):
     gender = models.CharField(max_length=10, choices=gender_choices)
     dob = models.DateField()
     religion = models.CharField(max_length=20)
-    category_main = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='main')
+    category_main = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='main', db_column='Main Category')
     contact = models.CharField(max_length=20, null=True)
     aadhar_no = models.CharField(max_length=16, unique='True', null=True)
     area_choice = (
@@ -97,21 +104,21 @@ class StudentInfo(models.Model):
     jee_score = models.PositiveIntegerField()
     jee_AI_rank = models.PositiveIntegerField()
     jee_category_rank = models.PositiveIntegerField(null=True)
-    category_admission = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='admission')
+    category_admission = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='admission', db_column='Admitted Category')
     intermediate_country = models.CharField(max_length=30)
     intermediate_state = models.CharField(max_length=30)
-    intermediate_percentage = models.DecimalField(max_digits=5, decimal_places=3)
-    intermediate_pass_year = models.IntegerField(default=currYear)
+    intermediate_percentage = models.DecimalField(max_digits=5, decimal_places=3, db_column='12th Percentage')
+    intermediate_pass_year = models.IntegerField(default=currYear, db_column='10+2 Pass Year')
     school_type_choices = (
         ('Government', 'Government School'),
         ('Private', 'Private School')
     )
-    intermediate_school_type = models.CharField(max_length=20, choices=school_type_choices)
-    intermediate_school_area = models.CharField(max_length=10, choices=area_choice)
-    intermediate_school_name = models.CharField(max_length=60)
-    intermediate_school_board = models.ForeignKey(Board, on_delete=models.PROTECT)
-    ug_class = models.ForeignKey(UGClass, on_delete=models.PROTECT)
-    ug_branch = models.ForeignKey(UGBranch, on_delete=models.PROTECT)
+    intermediate_school_type = models.CharField(max_length=20, choices=school_type_choices, db_column='12th School type')
+    intermediate_school_area = models.CharField(max_length=10, choices=area_choice,db_column='12th School Area')
+    intermediate_school_name = models.CharField(max_length=60, db_column='12th School name')
+    intermediate_school_board = models.ForeignKey(Board, on_delete=models.PROTECT, db_column='12th Board')
+    ug_class = models.ForeignKey(UGClass, on_delete=models.PROTECT, db_column='UGClass')
+    ug_branch = models.ForeignKey(UGBranch, on_delete=models.PROTECT, db_column='UGBranch')
     semester_choice = (
         (1, 1),
         (2, 2),
@@ -158,7 +165,7 @@ class StudentInfo(models.Model):
     fee_waiver_claim = models.CharField(max_length=60)
 
 class StudentMedicalInfo(models.Model):
-    student_id = models.OneToOneField(
+    student = models.OneToOneField(
         StudentInfo, on_delete=models.CASCADE, default=0
     )
     age = models.IntegerField()
@@ -174,7 +181,7 @@ class StudentMedicalInfo(models.Model):
 
 
 class StudentFirstFeeStatus(models.Model):
-    student_id = models.OneToOneField(
+    student = models.OneToOneField(
         StudentInfo, on_delete=models.CASCADE
     )
     fee_josaa_amount = models.PositiveIntegerField()
@@ -186,13 +193,13 @@ class StudentFirstFeeStatus(models.Model):
 
 
 class DocumentInfo(models.Model):
-    stud_id = models.ForeignKey(StudentInfo, on_delete=models.CASCADE)
-    doc_id = models.ForeignKey(Documents, on_delete=models.CASCADE)
+    student = models.ForeignKey(StudentInfo, on_delete=models.CASCADE)
+    document = models.ForeignKey(Documents, on_delete=models.CASCADE)
     submitted = models.BooleanField(default=False)
 
 
 class Result(models.Model):
-    roll_no = models.OneToOneField(StudentInfo, to_field='roll_no', on_delete=models.CASCADE, unique=True)
+    roll_no = models.OneToOneField(StudentInfo, to_field='roll_no', on_delete=models.CASCADE, unique=True, db_column='roll_no')
     semester_choice = (
         (1, 1),
         (2, 2),
@@ -211,7 +218,7 @@ class Result(models.Model):
 
 
 class Due(models.Model):
-    roll_no = models.OneToOneField(StudentInfo,to_field='roll_no',on_delete=models.CASCADE, unique=True)
+    roll_no = models.OneToOneField(StudentInfo,to_field='roll_no',on_delete=models.CASCADE, unique=True, db_column='roll_no')
     library_due = models.DecimalField(max_digits=10,decimal_places=4,default=Decimal(0.00))
     hostel_due = models.DecimalField(max_digits=10,decimal_places=4,default=Decimal(0.00))
     academic_due = models.DecimalField(max_digits=10,decimal_places=4,default=Decimal(0.00))
