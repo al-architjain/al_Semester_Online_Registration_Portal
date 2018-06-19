@@ -4,9 +4,11 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.contrib.auth.models import User, Group
+from sorp_app import forms
 
 #imports form sorp_app
 from . import forms
+from . import models
 
 #for domain redirect
 def domain_redirect(request) :
@@ -47,9 +49,13 @@ def user_login(request) :
 @login_required
 def user_profile(request):
 	grp = get_user_group(request.user)
+	iform = forms.StudentInfoForm()
+	mform = forms.StudentMedicalForm()
+	dobj = models.Documents.objects.all()
+	print(dobj)
 
 	if grp == 'Student':
 		return render(request, 'sorp_app/s_profile.html')
 	else:
-		return render(request, 'sorp_app/r_addstudent.html')
+		return render( request, 'sorp_app/r_addstudent.html', {'iform': iform , 'mform': mform, 'dobj': dobj})
 

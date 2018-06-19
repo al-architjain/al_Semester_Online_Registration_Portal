@@ -1,0 +1,143 @@
+BEGIN;
+--
+-- Create model Board
+--
+CREATE TABLE "sorp_app_board" ("id" integer unsigned NOT NULL UNIQUE, "name" varchar(12) NOT NULL PRIMARY KEY, "full_name" varchar(100) NOT NULL);
+--
+-- Create model Category
+--
+CREATE TABLE "sorp_app_category" ("id" integer unsigned NOT NULL UNIQUE, "name" varchar(12) NOT NULL PRIMARY KEY, "full_name" varchar(60) NOT NULL);
+--
+-- Create model DocumentInfo
+--
+CREATE TABLE "sorp_app_documentinfo" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "submitted" bool NOT NULL);
+--
+-- Create model Documents
+--
+CREATE TABLE "sorp_app_documents" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "doc_name" varchar(500) NOT NULL, "doc_imp" varchar(2) NOT NULL);
+--
+-- Create model Due
+--
+CREATE TABLE "sorp_app_due" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "library_due" decimal NOT NULL, "hostel_due" decimal NOT NULL, "academic_due" decimal NOT NULL);
+--
+-- Create model Result
+--
+CREATE TABLE "sorp_app_result" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "semester" smallint NOT NULL, "sgpi" decimal NOT NULL, "cgpi" decimal NOT NULL);
+--
+-- Create model StudentFirstFeeStatus
+--
+CREATE TABLE "sorp_app_studentfirstfeestatus" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "fee_josaa_amount" integer unsigned NOT NULL, "fee_josaa_date" date NOT NULL, "fee_NITH_amount" integer unsigned NOT NULL, "fee_nith_date" date NOT NULL, "fee_NIT_receipt_no" varchar(25) NOT NULL, "fee_total" integer unsigned NOT NULL);
+--
+-- Create model StudentInfo
+--
+CREATE TABLE "sorp_app_studentinfo" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name_eng" varchar(60) NOT NULL, "name_hindi" varchar(60) NULL, "email" varchar(254) NOT NULL, "gender" varchar(10) NOT NULL, "dob" date NOT NULL, "religion" varchar(20) NOT NULL, "contact" varchar(20) NULL, "aadhar_no" varchar(16) NULL UNIQUE, "area" varchar(10) NOT NULL, "bonafide_country" varchar(30) NOT NULL, "bonafide_state" varchar(30) NOT NULL, "nearest_railway_st" varchar(70) NOT NULL, "correspondence_add" varchar(1000) NOT NULL, "permanent_add" varchar(1000) NOT NULL, "year_of_admission" integer NOT NULL, "jee_roll_no" bigint NOT NULL, "jee_score" integer unsigned NOT NULL, "jee_AI_rank" integer unsigned NOT NULL, "jee_category_rank" integer unsigned NULL, "intermediate_country" varchar(30) NOT NULL, "intermediate_state" varchar(30) NOT NULL, "intermediate_percentage" decimal NOT NULL, "intermediate_pass_year" integer NOT NULL, "intermediate_school_type" varchar(20) NOT NULL, "intermediate_school_area" varchar(10) NOT NULL, "intermediate_school_name" varchar(60) NOT NULL, "ug_sem" smallint NOT NULL, "hosteler" bool NOT NULL, "hostel_name" varchar(50) NULL, "entry_no" integer unsigned NOT NULL UNIQUE, "reg_no" varchar(50) NOT NULL UNIQUE, "roll_no" varchar(10) NOT NULL UNIQUE, "active_status" bool NOT NULL, "father_name" varchar(60) NOT NULL, "father_contact" varchar(20) NOT NULL, "father_email" varchar(254) NOT NULL, "mother_name" varchar(60) NOT NULL, "mother_contact" varchar(20) NOT NULL, "mother_email" varchar(254) NOT NULL, "guardian_name" varchar(60) NOT NULL, "guardian_contact" varchar(20) NOT NULL, "guardian_email" varchar(254) NOT NULL, "family_income" integer unsigned NOT NULL, "fee_waiver_claim" varchar(60) NOT NULL, "category_admission_id" varchar(12) NOT NULL REFERENCES "sorp_app_category" ("name"), "category_main_id" varchar(12) NOT NULL REFERENCES "sorp_app_category" ("name"), "intermediate_school_board_id" varchar(12) NOT NULL REFERENCES "sorp_app_board" ("name"));
+--
+-- Create model StudentMedicalInfo
+--
+CREATE TABLE "sorp_app_studentmedicalinfo" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "age" integer NOT NULL, "identification_mark" varchar(40) NOT NULL, "major_illness" varchar(40) NOT NULL, "blood_group" varchar(5) NOT NULL, "vision" varchar(3) NOT NULL, "height_in_cm" smallint NOT NULL, "past_mental_illness" varchar(30) NOT NULL, "clour_blindness" varchar(10) NOT NULL, "any_other_defect" varchar(30) NOT NULL, "student_id_id" integer NOT NULL UNIQUE REFERENCES "sorp_app_studentinfo" ("id"));
+--
+-- Create model Subjects
+--
+CREATE TABLE "sorp_app_subjects" ("semester" integer NOT NULL, "sub_code" varchar(20) NOT NULL PRIMARY KEY, "sub_name" varchar(200) NOT NULL);
+--
+-- Create model UGBranch
+--
+CREATE TABLE "sorp_app_ugbranch" ("name" varchar(30) NOT NULL PRIMARY KEY, "full_name" varchar(100) NOT NULL, "code" varchar(10) NOT NULL, "section" varchar(5) NOT NULL);
+--
+-- Create model UGClass
+--
+CREATE TABLE "sorp_app_ugclass" ("id" integer unsigned NOT NULL UNIQUE, "name" varchar(25) NOT NULL PRIMARY KEY, "full_name" varchar(60) NOT NULL);
+--
+-- Add field branch to subjects
+--
+ALTER TABLE "sorp_app_subjects" RENAME TO "sorp_app_subjects__old";
+CREATE TABLE "sorp_app_subjects" ("semester" integer NOT NULL, "sub_code" varchar(20) NOT NULL PRIMARY KEY, "sub_name" varchar(200) NOT NULL, "branch_id" varchar(30) NOT NULL REFERENCES "sorp_app_ugbranch" ("name"));
+INSERT INTO "sorp_app_subjects" ("sub_code", "sub_name", "semester", "branch_id") SELECT "sub_code", "sub_name", "semester", NULL FROM "sorp_app_subjects__old";
+DROP TABLE "sorp_app_subjects__old";
+CREATE INDEX "sorp_app_studentinfo_category_admission_id_caf13ed6" ON "sorp_app_studentinfo" ("category_admission_id");
+CREATE INDEX "sorp_app_studentinfo_category_main_id_5b474a1d" ON "sorp_app_studentinfo" ("category_main_id");
+CREATE INDEX "sorp_app_studentinfo_intermediate_school_board_id_9970010d" ON "sorp_app_studentinfo" ("intermediate_school_board_id");
+CREATE INDEX "sorp_app_subjects_branch_id_e5c4d41a" ON "sorp_app_subjects" ("branch_id");
+--
+-- Add field classname to subjects
+--
+ALTER TABLE "sorp_app_subjects" RENAME TO "sorp_app_subjects__old";
+CREATE TABLE "sorp_app_subjects" ("semester" integer NOT NULL, "sub_code" varchar(20) NOT NULL PRIMARY KEY, "sub_name" varchar(200) NOT NULL, "branch_id" varchar(30) NOT NULL REFERENCES "sorp_app_ugbranch" ("name"), "classname_id" varchar(25) NOT NULL REFERENCES "sorp_app_ugclass" ("name"));
+INSERT INTO "sorp_app_subjects" ("sub_code", "classname_id", "sub_name", "semester", "branch_id") SELECT "sub_code", NULL, "sub_name", "semester", "branch_id" FROM "sorp_app_subjects__old";
+DROP TABLE "sorp_app_subjects__old";
+CREATE INDEX "sorp_app_subjects_branch_id_e5c4d41a" ON "sorp_app_subjects" ("branch_id");
+CREATE INDEX "sorp_app_subjects_classname_id_4ebc2c30" ON "sorp_app_subjects" ("classname_id");
+--
+-- Add field ug_branch to studentinfo
+--
+ALTER TABLE "sorp_app_studentinfo" RENAME TO "sorp_app_studentinfo__old";
+CREATE TABLE "sorp_app_studentinfo" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name_eng" varchar(60) NOT NULL, "name_hindi" varchar(60) NULL, "email" varchar(254) NOT NULL, "gender" varchar(10) NOT NULL, "dob" date NOT NULL, "religion" varchar(20) NOT NULL, "contact" varchar(20) NULL, "aadhar_no" varchar(16) NULL UNIQUE, "area" varchar(10) NOT NULL, "bonafide_country" varchar(30) NOT NULL, "bonafide_state" varchar(30) NOT NULL, "nearest_railway_st" varchar(70) NOT NULL, "correspondence_add" varchar(1000) NOT NULL, "permanent_add" varchar(1000) NOT NULL, "year_of_admission" integer NOT NULL, "jee_roll_no" bigint NOT NULL, "jee_score" integer unsigned NOT NULL, "jee_AI_rank" integer unsigned NOT NULL, "jee_category_rank" integer unsigned NULL, "intermediate_country" varchar(30) NOT NULL, "intermediate_state" varchar(30) NOT NULL, "intermediate_percentage" decimal NOT NULL, "intermediate_pass_year" integer NOT NULL, "intermediate_school_type" varchar(20) NOT NULL, "intermediate_school_area" varchar(10) NOT NULL, "intermediate_school_name" varchar(60) NOT NULL, "ug_sem" smallint NOT NULL, "hosteler" bool NOT NULL, "hostel_name" varchar(50) NULL, "entry_no" integer unsigned NOT NULL UNIQUE, "reg_no" varchar(50) NOT NULL UNIQUE, "roll_no" varchar(10) NOT NULL UNIQUE, "active_status" bool NOT NULL, "father_name" varchar(60) NOT NULL, "father_contact" varchar(20) NOT NULL, "father_email" varchar(254) NOT NULL, "mother_name" varchar(60) NOT NULL, "mother_contact" varchar(20) NOT NULL, "mother_email" varchar(254) NOT NULL, "guardian_name" varchar(60) NOT NULL, "guardian_contact" varchar(20) NOT NULL, "guardian_email" varchar(254) NOT NULL, "family_income" integer unsigned NOT NULL, "fee_waiver_claim" varchar(60) NOT NULL, "category_admission_id" varchar(12) NOT NULL REFERENCES "sorp_app_category" ("name"), "category_main_id" varchar(12) NOT NULL REFERENCES "sorp_app_category" ("name"), "intermediate_school_board_id" varchar(12) NOT NULL REFERENCES "sorp_app_board" ("name"), "ug_branch_id" varchar(30) NOT NULL REFERENCES "sorp_app_ugbranch" ("name"));
+INSERT INTO "sorp_app_studentinfo" ("id", "aadhar_no", "ug_sem", "mother_contact", "intermediate_school_area", "intermediate_school_type", "roll_no", "nearest_railway_st", "intermediate_pass_year", "mother_name", "permanent_add", "ug_branch_id", "intermediate_state", "email", "religion", "category_admission_id", "category_main_id", "reg_no", "intermediate_country", "jee_AI_rank", "father_contact", "correspondence_add", "name_eng", "active_status", "jee_roll_no", "intermediate_school_board_id", "hostel_name", "contact", "father_name", "jee_score", "fee_waiver_claim", "hosteler", "area", "gender", "father_email", "jee_category_rank", "name_hindi", "dob", "entry_no", "intermediate_percentage", "guardian_contact", "year_of_admission", "bonafide_state", "guardian_email", "mother_email", "guardian_name", "intermediate_school_name", "bonafide_country", "family_income") SELECT "id", "aadhar_no", "ug_sem", "mother_contact", "intermediate_school_area", "intermediate_school_type", "roll_no", "nearest_railway_st", "intermediate_pass_year", "mother_name", "permanent_add", NULL, "intermediate_state", "email", "religion", "category_admission_id", "category_main_id", "reg_no", "intermediate_country", "jee_AI_rank", "father_contact", "correspondence_add", "name_eng", "active_status", "jee_roll_no", "intermediate_school_board_id", "hostel_name", "contact", "father_name", "jee_score", "fee_waiver_claim", "hosteler", "area", "gender", "father_email", "jee_category_rank", "name_hindi", "dob", "entry_no", "intermediate_percentage", "guardian_contact", "year_of_admission", "bonafide_state", "guardian_email", "mother_email", "guardian_name", "intermediate_school_name", "bonafide_country", "family_income" FROM "sorp_app_studentinfo__old";
+DROP TABLE "sorp_app_studentinfo__old";
+CREATE INDEX "sorp_app_studentinfo_category_admission_id_caf13ed6" ON "sorp_app_studentinfo" ("category_admission_id");
+CREATE INDEX "sorp_app_studentinfo_category_main_id_5b474a1d" ON "sorp_app_studentinfo" ("category_main_id");
+CREATE INDEX "sorp_app_studentinfo_intermediate_school_board_id_9970010d" ON "sorp_app_studentinfo" ("intermediate_school_board_id");
+CREATE INDEX "sorp_app_studentinfo_ug_branch_id_ab3087c3" ON "sorp_app_studentinfo" ("ug_branch_id");
+--
+-- Add field ug_class to studentinfo
+--
+ALTER TABLE "sorp_app_studentinfo" RENAME TO "sorp_app_studentinfo__old";
+CREATE TABLE "sorp_app_studentinfo" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name_eng" varchar(60) NOT NULL, "name_hindi" varchar(60) NULL, "email" varchar(254) NOT NULL, "gender" varchar(10) NOT NULL, "dob" date NOT NULL, "religion" varchar(20) NOT NULL, "contact" varchar(20) NULL, "aadhar_no" varchar(16) NULL UNIQUE, "area" varchar(10) NOT NULL, "bonafide_country" varchar(30) NOT NULL, "bonafide_state" varchar(30) NOT NULL, "nearest_railway_st" varchar(70) NOT NULL, "correspondence_add" varchar(1000) NOT NULL, "permanent_add" varchar(1000) NOT NULL, "year_of_admission" integer NOT NULL, "jee_roll_no" bigint NOT NULL, "jee_score" integer unsigned NOT NULL, "jee_AI_rank" integer unsigned NOT NULL, "jee_category_rank" integer unsigned NULL, "intermediate_country" varchar(30) NOT NULL, "intermediate_state" varchar(30) NOT NULL, "intermediate_percentage" decimal NOT NULL, "intermediate_pass_year" integer NOT NULL, "intermediate_school_type" varchar(20) NOT NULL, "intermediate_school_area" varchar(10) NOT NULL, "intermediate_school_name" varchar(60) NOT NULL, "ug_sem" smallint NOT NULL, "hosteler" bool NOT NULL, "hostel_name" varchar(50) NULL, "entry_no" integer unsigned NOT NULL UNIQUE, "reg_no" varchar(50) NOT NULL UNIQUE, "roll_no" varchar(10) NOT NULL UNIQUE, "active_status" bool NOT NULL, "father_name" varchar(60) NOT NULL, "father_contact" varchar(20) NOT NULL, "father_email" varchar(254) NOT NULL, "mother_name" varchar(60) NOT NULL, "mother_contact" varchar(20) NOT NULL, "mother_email" varchar(254) NOT NULL, "guardian_name" varchar(60) NOT NULL, "guardian_contact" varchar(20) NOT NULL, "guardian_email" varchar(254) NOT NULL, "family_income" integer unsigned NOT NULL, "fee_waiver_claim" varchar(60) NOT NULL, "category_admission_id" varchar(12) NOT NULL REFERENCES "sorp_app_category" ("name"), "category_main_id" varchar(12) NOT NULL REFERENCES "sorp_app_category" ("name"), "intermediate_school_board_id" varchar(12) NOT NULL REFERENCES "sorp_app_board" ("name"), "ug_branch_id" varchar(30) NOT NULL REFERENCES "sorp_app_ugbranch" ("name"), "ug_class_id" varchar(25) NOT NULL REFERENCES "sorp_app_ugclass" ("name"));
+INSERT INTO "sorp_app_studentinfo" ("id", "aadhar_no", "ug_sem", "mother_contact", "intermediate_school_area", "intermediate_school_type", "roll_no", "nearest_railway_st", "intermediate_pass_year", "mother_name", "permanent_add", "ug_branch_id", "intermediate_state", "email", "religion", "category_admission_id", "category_main_id", "reg_no", "intermediate_country", "jee_AI_rank", "father_contact", "correspondence_add", "name_eng", "active_status", "jee_roll_no", "intermediate_school_board_id", "hostel_name", "contact", "father_name", "jee_score", "fee_waiver_claim", "hosteler", "area", "gender", "father_email", "jee_category_rank", "name_hindi", "dob", "entry_no", "intermediate_percentage", "guardian_contact", "year_of_admission", "bonafide_state", "guardian_email", "ug_class_id", "mother_email", "guardian_name", "intermediate_school_name", "bonafide_country", "family_income") SELECT "id", "aadhar_no", "ug_sem", "mother_contact", "intermediate_school_area", "intermediate_school_type", "roll_no", "nearest_railway_st", "intermediate_pass_year", "mother_name", "permanent_add", "ug_branch_id", "intermediate_state", "email", "religion", "category_admission_id", "category_main_id", "reg_no", "intermediate_country", "jee_AI_rank", "father_contact", "correspondence_add", "name_eng", "active_status", "jee_roll_no", "intermediate_school_board_id", "hostel_name", "contact", "father_name", "jee_score", "fee_waiver_claim", "hosteler", "area", "gender", "father_email", "jee_category_rank", "name_hindi", "dob", "entry_no", "intermediate_percentage", "guardian_contact", "year_of_admission", "bonafide_state", "guardian_email", NULL, "mother_email", "guardian_name", "intermediate_school_name", "bonafide_country", "family_income" FROM "sorp_app_studentinfo__old";
+DROP TABLE "sorp_app_studentinfo__old";
+CREATE INDEX "sorp_app_studentinfo_category_admission_id_caf13ed6" ON "sorp_app_studentinfo" ("category_admission_id");
+CREATE INDEX "sorp_app_studentinfo_category_main_id_5b474a1d" ON "sorp_app_studentinfo" ("category_main_id");
+CREATE INDEX "sorp_app_studentinfo_intermediate_school_board_id_9970010d" ON "sorp_app_studentinfo" ("intermediate_school_board_id");
+CREATE INDEX "sorp_app_studentinfo_ug_branch_id_ab3087c3" ON "sorp_app_studentinfo" ("ug_branch_id");
+CREATE INDEX "sorp_app_studentinfo_ug_class_id_8f1f2500" ON "sorp_app_studentinfo" ("ug_class_id");
+--
+-- Add field user to studentinfo
+--
+ALTER TABLE "sorp_app_studentinfo" RENAME TO "sorp_app_studentinfo__old";
+CREATE TABLE "sorp_app_studentinfo" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name_eng" varchar(60) NOT NULL, "name_hindi" varchar(60) NULL, "email" varchar(254) NOT NULL, "gender" varchar(10) NOT NULL, "dob" date NOT NULL, "religion" varchar(20) NOT NULL, "contact" varchar(20) NULL, "aadhar_no" varchar(16) NULL UNIQUE, "area" varchar(10) NOT NULL, "bonafide_country" varchar(30) NOT NULL, "bonafide_state" varchar(30) NOT NULL, "nearest_railway_st" varchar(70) NOT NULL, "correspondence_add" varchar(1000) NOT NULL, "permanent_add" varchar(1000) NOT NULL, "year_of_admission" integer NOT NULL, "jee_roll_no" bigint NOT NULL, "jee_score" integer unsigned NOT NULL, "jee_AI_rank" integer unsigned NOT NULL, "jee_category_rank" integer unsigned NULL, "intermediate_country" varchar(30) NOT NULL, "intermediate_state" varchar(30) NOT NULL, "intermediate_percentage" decimal NOT NULL, "intermediate_pass_year" integer NOT NULL, "intermediate_school_type" varchar(20) NOT NULL, "intermediate_school_area" varchar(10) NOT NULL, "intermediate_school_name" varchar(60) NOT NULL, "ug_sem" smallint NOT NULL, "hosteler" bool NOT NULL, "hostel_name" varchar(50) NULL, "entry_no" integer unsigned NOT NULL UNIQUE, "reg_no" varchar(50) NOT NULL UNIQUE, "roll_no" varchar(10) NOT NULL UNIQUE, "active_status" bool NOT NULL, "father_name" varchar(60) NOT NULL, "father_contact" varchar(20) NOT NULL, "father_email" varchar(254) NOT NULL, "mother_name" varchar(60) NOT NULL, "mother_contact" varchar(20) NOT NULL, "mother_email" varchar(254) NOT NULL, "guardian_name" varchar(60) NOT NULL, "guardian_contact" varchar(20) NOT NULL, "guardian_email" varchar(254) NOT NULL, "family_income" integer unsigned NOT NULL, "fee_waiver_claim" varchar(60) NOT NULL, "category_admission_id" varchar(12) NOT NULL REFERENCES "sorp_app_category" ("name"), "category_main_id" varchar(12) NOT NULL REFERENCES "sorp_app_category" ("name"), "intermediate_school_board_id" varchar(12) NOT NULL REFERENCES "sorp_app_board" ("name"), "ug_branch_id" varchar(30) NOT NULL REFERENCES "sorp_app_ugbranch" ("name"), "ug_class_id" varchar(25) NOT NULL REFERENCES "sorp_app_ugclass" ("name"), "user_id" integer NOT NULL UNIQUE REFERENCES "auth_user" ("id"));
+INSERT INTO "sorp_app_studentinfo" ("id", "aadhar_no", "ug_sem", "mother_contact", "intermediate_school_area", "intermediate_school_type", "roll_no", "nearest_railway_st", "intermediate_pass_year", "mother_name", "permanent_add", "ug_branch_id", "intermediate_state", "email", "religion", "category_admission_id", "category_main_id", "reg_no", "intermediate_country", "jee_AI_rank", "father_contact", "correspondence_add", "name_eng", "active_status", "jee_roll_no", "intermediate_school_board_id", "hostel_name", "contact", "father_name", "jee_score", "fee_waiver_claim", "hosteler", "area", "gender", "father_email", "jee_category_rank", "name_hindi", "dob", "entry_no", "intermediate_percentage", "guardian_contact", "year_of_admission", "bonafide_state", "guardian_email", "ug_class_id", "user_id", "mother_email", "guardian_name", "intermediate_school_name", "bonafide_country", "family_income") SELECT "id", "aadhar_no", "ug_sem", "mother_contact", "intermediate_school_area", "intermediate_school_type", "roll_no", "nearest_railway_st", "intermediate_pass_year", "mother_name", "permanent_add", "ug_branch_id", "intermediate_state", "email", "religion", "category_admission_id", "category_main_id", "reg_no", "intermediate_country", "jee_AI_rank", "father_contact", "correspondence_add", "name_eng", "active_status", "jee_roll_no", "intermediate_school_board_id", "hostel_name", "contact", "father_name", "jee_score", "fee_waiver_claim", "hosteler", "area", "gender", "father_email", "jee_category_rank", "name_hindi", "dob", "entry_no", "intermediate_percentage", "guardian_contact", "year_of_admission", "bonafide_state", "guardian_email", "ug_class_id", 0, "mother_email", "guardian_name", "intermediate_school_name", "bonafide_country", "family_income" FROM "sorp_app_studentinfo__old";
+DROP TABLE "sorp_app_studentinfo__old";
+CREATE INDEX "sorp_app_studentinfo_category_admission_id_caf13ed6" ON "sorp_app_studentinfo" ("category_admission_id");
+CREATE INDEX "sorp_app_studentinfo_category_main_id_5b474a1d" ON "sorp_app_studentinfo" ("category_main_id");
+CREATE INDEX "sorp_app_studentinfo_intermediate_school_board_id_9970010d" ON "sorp_app_studentinfo" ("intermediate_school_board_id");
+CREATE INDEX "sorp_app_studentinfo_ug_branch_id_ab3087c3" ON "sorp_app_studentinfo" ("ug_branch_id");
+CREATE INDEX "sorp_app_studentinfo_ug_class_id_8f1f2500" ON "sorp_app_studentinfo" ("ug_class_id");
+--
+-- Add field student_id to studentfirstfeestatus
+--
+ALTER TABLE "sorp_app_studentfirstfeestatus" RENAME TO "sorp_app_studentfirstfeestatus__old";
+CREATE TABLE "sorp_app_studentfirstfeestatus" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "fee_josaa_amount" integer unsigned NOT NULL, "fee_josaa_date" date NOT NULL, "fee_NITH_amount" integer unsigned NOT NULL, "fee_nith_date" date NOT NULL, "fee_NIT_receipt_no" varchar(25) NOT NULL, "fee_total" integer unsigned NOT NULL, "student_id_id" integer NOT NULL UNIQUE REFERENCES "sorp_app_studentinfo" ("id"));
+INSERT INTO "sorp_app_studentfirstfeestatus" ("id", "fee_josaa_amount", "fee_josaa_date", "fee_NITH_amount", "fee_nith_date", "student_id_id", "fee_NIT_receipt_no", "fee_total") SELECT "id", "fee_josaa_amount", "fee_josaa_date", "fee_NITH_amount", "fee_nith_date", NULL, "fee_NIT_receipt_no", "fee_total" FROM "sorp_app_studentfirstfeestatus__old";
+DROP TABLE "sorp_app_studentfirstfeestatus__old";
+--
+-- Add field roll_no to result
+--
+ALTER TABLE "sorp_app_result" RENAME TO "sorp_app_result__old";
+CREATE TABLE "sorp_app_result" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "semester" smallint NOT NULL, "sgpi" decimal NOT NULL, "cgpi" decimal NOT NULL, "roll_no_id" varchar(10) NOT NULL UNIQUE REFERENCES "sorp_app_studentinfo" ("roll_no"));
+INSERT INTO "sorp_app_result" ("id", "sgpi", "roll_no_id", "semester", "cgpi") SELECT "id", "sgpi", NULL, "semester", "cgpi" FROM "sorp_app_result__old";
+DROP TABLE "sorp_app_result__old";
+--
+-- Add field roll_no to due
+--
+ALTER TABLE "sorp_app_due" RENAME TO "sorp_app_due__old";
+CREATE TABLE "sorp_app_due" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "library_due" decimal NOT NULL, "hostel_due" decimal NOT NULL, "academic_due" decimal NOT NULL, "roll_no_id" varchar(10) NOT NULL UNIQUE REFERENCES "sorp_app_studentinfo" ("roll_no"));
+INSERT INTO "sorp_app_due" ("id", "library_due", "roll_no_id", "academic_due", "hostel_due") SELECT "id", "library_due", NULL, "academic_due", "hostel_due" FROM "sorp_app_due__old";
+DROP TABLE "sorp_app_due__old";
+--
+-- Add field doc_id to documentinfo
+--
+ALTER TABLE "sorp_app_documentinfo" RENAME TO "sorp_app_documentinfo__old";
+CREATE TABLE "sorp_app_documentinfo" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "submitted" bool NOT NULL, "doc_id_id" integer NOT NULL REFERENCES "sorp_app_documents" ("id"));
+INSERT INTO "sorp_app_documentinfo" ("id", "doc_id_id", "submitted") SELECT "id", NULL, "submitted" FROM "sorp_app_documentinfo__old";
+DROP TABLE "sorp_app_documentinfo__old";
+CREATE INDEX "sorp_app_documentinfo_doc_id_id_1fcf56f8" ON "sorp_app_documentinfo" ("doc_id_id");
+--
+-- Add field stud_id to documentinfo
+--
+ALTER TABLE "sorp_app_documentinfo" RENAME TO "sorp_app_documentinfo__old";
+CREATE TABLE "sorp_app_documentinfo" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "submitted" bool NOT NULL, "doc_id_id" integer NOT NULL REFERENCES "sorp_app_documents" ("id"), "stud_id_id" integer NOT NULL REFERENCES "sorp_app_studentinfo" ("id"));
+INSERT INTO "sorp_app_documentinfo" ("id", "doc_id_id", "stud_id_id", "submitted") SELECT "id", "doc_id_id", NULL, "submitted" FROM "sorp_app_documentinfo__old";
+DROP TABLE "sorp_app_documentinfo__old";
+CREATE INDEX "sorp_app_documentinfo_doc_id_id_1fcf56f8" ON "sorp_app_documentinfo" ("doc_id_id");
+CREATE INDEX "sorp_app_documentinfo_stud_id_id_1886940a" ON "sorp_app_documentinfo" ("stud_id_id");
+COMMIT;
