@@ -20,21 +20,33 @@ class Board(models.Model):
     name = models.CharField(primary_key=True, max_length=12)
     full_name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 class Category(models.Model):
     id = models.PositiveIntegerField(unique=True)
     name = models.CharField(primary_key=True, max_length=12)
     full_name = models.CharField(max_length=60)
+
+    def __str__(self):
+        return self.name
 
 class UGClass(models.Model):
     id = models.PositiveIntegerField(unique=True)
     name = models.CharField(primary_key=True, max_length=25)
     full_name = models.CharField(max_length=60)
 
+    def __str__(self):
+        return self.name
+
 class UGBranch(models.Model):
     name = models.CharField(primary_key=True, max_length=30)
     full_name = models.CharField(max_length=100)
     code = models.CharField(max_length=10)
     section = models.CharField(max_length=5)
+
+    def __str__(self):
+        return self.name
 
 class Subjects(models.Model):
     classname = models.ForeignKey(UGClass, on_delete=models.CASCADE,db_column='class')
@@ -56,19 +68,30 @@ class Subjects(models.Model):
     sub_name = models.CharField(max_length=200)
 
 
+    def __str__(self):
+        return self.classname
+
+
 class Documents(models.Model):
     doc_name = models.CharField(max_length=500)
-    doc_imp = models.CharField(max_length=2, default = 'M', choices=(('M', 'Mandatory'), ('O', 'Optional'),('NA', 'Not Applicable')))
+    doc_imp_choice=(
+        ('M' , 'Mandatory'),
+        ('O' , 'Optional'),
+        ('NA', 'Not Applicable')
+    )
+    doc_imp = models.CharField(max_length=2, default = 'M', choices=doc_imp_choice)
 
 
 class StudentInfo(models.Model):
     user = models.OneToOneField(
-        User, on_delete=models.PROTECT, default=0
+        User, on_delete=models.PROTECT
     )
     #
     #Student Image
-    img = models.ImageField(upload_to = get_image_path, default = 'def_profile_pic.jpg')
-    #
+    img = models.ImageField(upload_to=get_image_path, default = 'def_profile_pic.jpg')
+    year_of_admission = models.IntegerField(default=currYear)
+    active_status = models.BooleanField(default=True)  # (1 is active) and (0 is inactive)
+    ug_sem = models.SmallIntegerField(default=1)
     # Documents
     stud_doc = models.ManyToManyField(Documents, through='DocumentInfo')
     #
@@ -92,46 +115,35 @@ class StudentInfo(models.Model):
         ('Urban', 'Urban'),
     )
     area = models.CharField(max_length=10, choices=area_choice)
-    bonafide_country = models.CharField(max_length=30)
-    bonafide_state = models.CharField(max_length=30)
-    nearest_railway_st = models.CharField(max_length=70)
-    correspondence_add = models.CharField(max_length=1000)
-    permanent_add = models.CharField(max_length=1000)
+    b_country = models.CharField(max_length=30)
+    b_state = models.CharField(max_length=30)
+    nearest_rs = models.CharField(max_length=70)
+    corr_addr = models.CharField(max_length=1000)
+    perm_addr = models.CharField(max_length=1000)
+    #
     #
     # Academics Details
-    year_of_admission = models.IntegerField(default=currYear)
+    #
+    #
     jee_roll_no = models.BigIntegerField()
     jee_score = models.PositiveIntegerField()
-    jee_AI_rank = models.PositiveIntegerField()
-    jee_category_rank = models.PositiveIntegerField(null=True)
+    jee_ai_rank = models.PositiveIntegerField()
+    jee_cat_rank = models.PositiveIntegerField(null=True)
     category_admission = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='admission', db_column='Admitted Category')
-    intermediate_country = models.CharField(max_length=30)
-    intermediate_state = models.CharField(max_length=30)
-    intermediate_percentage = models.DecimalField(max_digits=5, decimal_places=3, db_column='12th Percentage')
-    intermediate_pass_year = models.IntegerField(default=currYear, db_column='10+2 Pass Year')
+    int_country = models.CharField(max_length=30)
+    int_state = models.CharField(max_length=30)
+    int_percentage = models.DecimalField(max_digits=5, decimal_places=3, db_column='12th Percentage')
+    int_pass_year = models.IntegerField(default=currYear, db_column='10+2 Pass Year')
     school_type_choices = (
         ('Government', 'Government School'),
         ('Private', 'Private School')
     )
-    intermediate_school_type = models.CharField(max_length=20, choices=school_type_choices, db_column='12th School type')
-    intermediate_school_area = models.CharField(max_length=10, choices=area_choice,db_column='12th School Area')
-    intermediate_school_name = models.CharField(max_length=60, db_column='12th School name')
-    intermediate_school_board = models.ForeignKey(Board, on_delete=models.PROTECT, db_column='12th Board')
+    int_school_type = models.CharField(max_length=20, choices=school_type_choices, db_column='12th School type')
+    int_school_area = models.CharField(max_length=10, choices=area_choice,db_column='12th School Area')
+    int_school_name = models.CharField(max_length=60, db_column='12th School name')
+    int_school_board = models.ForeignKey(Board, on_delete=models.PROTECT, db_column='12th Board')
     ug_class = models.ForeignKey(UGClass, on_delete=models.PROTECT, db_column='UGClass')
     ug_branch = models.ForeignKey(UGBranch, on_delete=models.PROTECT, db_column='UGBranch')
-    semester_choice = (
-        (1, 1),
-        (2, 2),
-        (3, 3),
-        (4, 4),
-        (5, 5),
-        (6, 6),
-        (7, 7),
-        (8, 8),
-        (9, 9),
-        (10, 10),
-    )
-    ug_sem = models.SmallIntegerField(choices=semester_choice, default=1)
     hosteler = models.BooleanField()
     hostel_choices=(
         ('KBH', 'Kailash Boys Hostel'),
@@ -149,9 +161,11 @@ class StudentInfo(models.Model):
     entry_no = models.PositiveIntegerField(unique=True,default=None)
     reg_no = models.CharField(unique=True,max_length=50)
     roll_no = models.CharField(unique=True, max_length=10)
-    active_status = models.BooleanField(default=True)   # (1 is active) and (0 is inactive)
+    #
     #
     # Guardian Details
+    #
+    #
     father_name = models.CharField(max_length=60)
     father_contact = models.CharField(max_length=20)
     father_email = models.EmailField()
@@ -162,22 +176,23 @@ class StudentInfo(models.Model):
     guardian_contact = models.CharField(max_length=20)
     guardian_email = models.EmailField()
     family_income = models.PositiveIntegerField(default=0)
-    fee_waiver_claim = models.CharField(max_length=60)
+    fee_waiver = models.CharField(max_length=60)
+
 
 class StudentMedicalInfo(models.Model):
     student = models.OneToOneField(
         StudentInfo, on_delete=models.CASCADE, default=0
     )
-    age = models.IntegerField()
-    identification_mark = models.CharField(max_length=40)
-    major_illness = models.CharField(max_length=40)
-    blood_group = models.CharField(max_length=5)
-    vision = models.CharField(max_length=3)
-    height_in_cm = models.SmallIntegerField()
+    age = models.SmallIntegerField()
+    height = models.SmallIntegerField()     #(in cm)
     # weight_kg = models.IntegerField()
+    blood_group = models.CharField(max_length=5)
+    id_mark = models.CharField(max_length=30)
+    major_illness = models.CharField(max_length=40)
     past_mental_illness = models.CharField(max_length=30)
+    vision = models.CharField(max_length=3)
     clour_blindness = models.CharField(max_length=10)
-    any_other_defect = models.CharField(max_length=30)
+    other_defect = models.CharField(max_length=50)
 
 
 class StudentFirstFeeStatus(models.Model):
@@ -188,7 +203,7 @@ class StudentFirstFeeStatus(models.Model):
     fee_josaa_date = models.DateField(auto_now=False, auto_now_add=False, default=None)
     fee_NITH_amount = models.PositiveIntegerField()
     fee_nith_date = models.DateField(auto_now=False, auto_now_add=False, default=None)
-    fee_NIT_receipt_no = models.CharField(max_length=25)
+    fee_nith_receipt_no = models.CharField(max_length=25)
     fee_total = models.PositiveIntegerField()
 
 

@@ -6,7 +6,8 @@ from . import views
 urlpatterns=[
       url(r'^$',views.domain_redirect,name='domain_redirect'),
       url(r'^login/$',views.user_login,name='user_login_page'),
-      url(r'^profile/$', views.user_profile, name = 'user_profile_page')
+      url(r'^profile/$', views.user_profile, name = 'user_profile_page'),
+      url(r'^profile/reg_result/$',views.s_registered,name='user_reg_output'),
   ]
 
 

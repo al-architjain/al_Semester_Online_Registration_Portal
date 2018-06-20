@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.contrib.auth.models import User, Group
-from sorp_app import forms
 
 #imports form sorp_app
 from . import forms
@@ -49,13 +48,21 @@ def user_login(request) :
 @login_required
 def user_profile(request):
 	grp = get_user_group(request.user)
-	iform = forms.StudentInfoForm()
-	mform = forms.StudentMedicalForm()
-	dobj = models.Documents.objects.all()
-	print(dobj)
-
+	# print(dlist)
 	if grp == 'Student':
 		return render(request, 'sorp_app/s_profile.html')
 	else:
-		return render( request, 'sorp_app/r_addstudent.html', {'iform': iform , 'mform': mform, 'dobj': dobj})
+		iform = forms.StudentInfoForm()
+		mform = forms.StudentMedicalForm()
+		fform = forms.StudentFirstFeeForm()
+		dobj = models.Documents.objects.all()
+		dlist = ["NA"] * (dobj.count() + 1)
+		return render( request, 'sorp_app/r_addstudent.html', {'iform': iform , 'mform': mform, 'dobj': dobj,'fform': fform, 'dlist':dlist})
 
+def s_registered(request):
+	if request.method=='POST':
+		form = forms.StudentInfoForm(request.POST)
+		print(form.name_eng)
+		return HttpResponse("Suck sexl! ")
+	else:
+		return HttpResponse("Successfull! ")

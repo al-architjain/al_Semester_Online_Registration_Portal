@@ -15,8 +15,8 @@ class StudentMedicalForm(forms.ModelForm) :
     class Meta :
         model = models.StudentMedicalInfo
         fields = '__all__'
-#
-# class StudentDocumentForm(forms.ModelForm) :
-#     class Meta :
-#         model = models.Documents
-#         fields = '__all__'
+
+class StudentFirstFeeForm(forms.ModelForm) :
+    class Meta :
+        model = models.StudentFirstFeeStatus
+        fields = '__all__'

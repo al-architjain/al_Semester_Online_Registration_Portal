@@ -19,8 +19,8 @@ function popup() {
         if(confirm("Are you sure you want to continue? (Press cancel to check again)"))
         {
             var pos;
-            pos = document.getElementsByTagName("a");
-            pos[0].setAttribute("href","https://google.com");
+            pos = document.getElementsByTagName("form");
+            pos[0].setAttribute("action","reg_result/");
         }
         else
           { console.log("No Presses"); }
@@ -28,19 +28,22 @@ function popup() {
 }
 
 
-function yes(num) {
-  var tr = document.querySelectorAll("tr");
+function yes(num, dlist) {
+    var tr = document.querySelectorAll("tr");
     tr[num].querySelectorAll("td")[0].style.color = "green";
     tr[num].querySelectorAll("td")[1].style.color = "green";
+    dlist[num] = "YES"
+    console.log(dlist);
   }
 
 
-function no(num) {
+function no(num, dlist) {
   // alert();
-  var tr = document.querySelectorAll("tr");
-  tr[num].querySelectorAll("td")[0].style.color = "red";
-  tr[num].querySelectorAll("td")[1].style.color = "red";
-
+    var tr = document.querySelectorAll("tr");
+    tr[num].querySelectorAll("td")[0].style.color = "red";
+    tr[num].querySelectorAll("td")[1].style.color = "red";
+    dlist[num] = "NO"
+    console.log(dlist);
 }
 
 
