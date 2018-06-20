@@ -68,22 +68,22 @@
                     <br>
 
                     <div class="row">
-                        <div class="col-lg-3 col-md-4 col-sm-3">
-                            {{ iform.gender.errors }}
-                            <label for="{{ iform.gender.id_for_label }}"><b>Gender</b></label><br>
-                            {{ iform.gender }}
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
                             {{ iform.dob.errors }}
                             <label for="{{ iform.dob.id_for_label }}"><b>Date of Birth</b></label>
                             <input class="form-control" id="{{ iform.dob.id_for_label }}" placeholder="Date of Birth" type="date" name="{{ iform.dob.html_name }}">
                         </div>
-                        <div class="col-lg-3 col-md-3">
+                        <div class="col-lg-4 col-md-4">
                             {{ iform.religion.errors }}
                             <label for="{{ iform.religion.id_for_label }}"><b>Religion</b></label>
                             <input class="form-control" type="text" id="{{ iform.religion.id_for_label }}" placeholder="Enter Religion" name="{{ iform.religion.html_name }}">
                         </div>
-                        <div class="col-lg-3 col-md-3">
+                        <div class="col-lg-2 col-md-2 col-sm-3">
+                            {{ iform.gender.errors }}
+                            <label for="{{ iform.gender.id_for_label }}"><b>Gender</b></label><br>
+                            {{ iform.gender }}
+                        </div>
+                        <div class="col-lg-2 col-md-2">
                             {{ iform.category_main.errors }}
                             <label for="{{ iform.category_main.id_for_label }}"><b>Main Category</b></label><br>
                             {{ iform.category_main }}
@@ -313,6 +313,20 @@
                             <label for="{{ iform.entry_no.id_for_label }}"><b>Entry Number</b></label>
                             <input class="form-control" type="text" id="{{ iform.entry_no.id_for_label }}" placeholder="Enter Entry Number" name="{{ iform.entry_no.html_name }}">
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.hosteler.errors }}
+                            <label for="{{ iform.hosteler.id_for_label }}"><b>Hosteler??</b></label>
+                            {{ iform.hosteler }}
+                            <!--<input class="form-control" type="text" id="{{ iform.hosteler.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.hosteler.html_name }}">-->
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.hostel_name.errors }}
+                            <label for="{{ iform.hostel_name.id_for_label }}"><b>Hostel Name</b></label>
+                            <input class="form-control" type="text" id="{{ iform.hostel_name.id_for_label }}" placeholder="Enter Hostel Name" name="{{ iform.hostel_name.html_name }}">
+                        </div>
+
                     </div>
                     <hr>
 
