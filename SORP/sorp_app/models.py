@@ -167,14 +167,14 @@ class StudentInfo(models.Model):
     #
     #
     father_name = models.CharField(max_length=60)
-    father_contact = models.CharField(max_length=20)
-    father_email = models.EmailField()
+    father_contact = models.CharField(max_length=20,null=True,blank=True)
+    father_email = models.EmailField(null=True,blank=True)
     mother_name = models.CharField(max_length=60)
-    mother_contact = models.CharField(max_length=20)
-    mother_email = models.EmailField()
-    guardian_name = models.CharField(max_length=60)
-    guardian_contact = models.CharField(max_length=20)
-    guardian_email = models.EmailField()
+    mother_contact = models.CharField(max_length=20,null=True,blank=True)
+    mother_email = models.EmailField(null=True,blank=True)
+    guardian_name = models.CharField(max_length=60,null=True,blank=True)
+    guardian_contact = models.CharField(max_length=20,null=True,blank=True)
+    guardian_email = models.EmailField(null=True,blank=True)
     family_income = models.PositiveIntegerField(default=0)
     fee_waiver = models.CharField(max_length=60)
 
@@ -187,12 +187,12 @@ class StudentMedicalInfo(models.Model):
     height = models.SmallIntegerField()     #(in cm)
     # weight_kg = models.IntegerField()
     blood_group = models.CharField(max_length=5)
-    id_mark = models.CharField(max_length=30)
-    major_illness = models.CharField(max_length=40)
-    past_mental_illness = models.CharField(max_length=30)
-    vision = models.CharField(max_length=3)
-    clour_blindness = models.CharField(max_length=10)
-    other_defect = models.CharField(max_length=50)
+    id_mark = models.CharField(max_length=30, null=True)
+    major_illness = models.CharField(max_length=40,null=True)
+    past_mental_illness = models.CharField(max_length=30,null=True)
+    vision = models.CharField(max_length=3,null=True)
+    clour_blindness = models.CharField(max_length=10,null=True)
+    other_defect = models.CharField(max_length=50,null=True)
 
 
 class StudentFirstFeeStatus(models.Model):
