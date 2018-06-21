@@ -59,10 +59,37 @@ def user_profile(request):
 		dlist = ["NA"] * (dobj.count() + 1)
 		return render( request, 'sorp_app/r_addstudent.html', {'iform': iform , 'mform': mform, 'dobj': dobj,'fform': fform, 'dlist':dlist})
 
-def s_registered(request):
-	if request.method=='POST':
-		form = forms.StudentInfoForm(request.POST)
-		print(form.name_eng)
-		return HttpResponse("Suck sexl! ")
-	else:
-		return HttpResponse("Successfull! ")
+# def s_registered(request):
+# 	if request.method=='POST':
+# 		form = forms.StudentInfoForm(request.POST)
+# 		print(form.name_eng)
+# 		return HttpResponse("Suck sexl! ")
+# 	else:
+# 		return HttpResponse("Successfull! ")
+
+#create_student user
+@login_required
+def create_student(request) :
+    iform = forms.StudentInfoForm(request.POST)
+    mform = forms.StudentMedicalForm(request.POST)
+    fforms = forms.StudentFirstFeeForm(request.POST)
+    if request.method = "POST" :
+        if iform.is_valid() and mform.is_valid() and fforms.is_valid() :
+            f = iform.save(commit=False)
+            #create user
+            username = iform.cleaned_data['roll_no']
+            password = iform.cleaned_data['']
+            email = iform.cleaned_data['email']
+            user = User.objects.create_user(username = username, password = password, email = email)
+            #assgning OnetoOneField
+            f.user = user
+            #document information
+            dobj = request.POST['dobj']
+            temp = len(dobj)
+            for i in temp :
+                if(dobj[i] is 'YES') :
+
+
+    else :
+        return HttpResponse("Request is  not POST")
+
