@@ -13,7 +13,11 @@ def currYear():
 import os
 def get_image_path(instance, filename):
     return os.path.join(str(instance.id), 'profile_pic.jpg')
-##
+
+
+######################################################
+####################### TABLES #######################
+######################################################
 
 class Board(models.Model):
     id = models.SmallIntegerField(unique=True)
@@ -124,8 +128,8 @@ class StudentInfo(models.Model):
     b_country = models.CharField(max_length=32)
     b_state = models.CharField(max_length=32)
     nearest_rs = models.CharField(max_length=64)
-    corr_addr = models.CharField(max_length=1024)
-    perm_addr = models.CharField(max_length=1024)
+    corr_addr = models.CharField(max_length=256)
+    perm_addr = models.CharField(max_length=256)
     #
     #
     # Academics Details

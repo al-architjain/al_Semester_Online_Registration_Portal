@@ -28,22 +28,19 @@ function popup() {
 }
 
 
-function yes(num, dlist) {
+function yes(num) {
     var tr = document.querySelectorAll("tr");
     tr[num].querySelectorAll("td")[0].style.color = "green";
     tr[num].querySelectorAll("td")[1].style.color = "green";
-    dlist[num] = "YES"
-    console.log(dlist);
+
   }
 
 
-function no(num, dlist) {
-  // alert();
+function no(num) {
     var tr = document.querySelectorAll("tr");
     tr[num].querySelectorAll("td")[0].style.color = "red";
     tr[num].querySelectorAll("td")[1].style.color = "red";
-    dlist[num] = "NO"
-    console.log(dlist);
+
 }
 
 
