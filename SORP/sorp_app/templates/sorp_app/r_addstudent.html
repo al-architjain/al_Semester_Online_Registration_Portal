@@ -457,7 +457,9 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 form-group">
-                            <label id="totalFees"><b>Total Fees Paid: </b></label>
+                            {{ fform.fee_total.errors }}
+                            <label for="{{ fform.fee_total.id_for_label }}"><b>Total Fees Paid: </b></label>
+                            <input class="form-control" type="text" id="{{ fform.fee_total.id_for_label }}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_total.html_name }}">
                         </div>
                         <div class="col-lg-6 col-md-6">
                             {{ fform.fee_nith_receipt_no.errors }}
@@ -493,7 +495,7 @@
                                     <tr>
                                         <td>{{ doc.id }}</td>
                                         <td><strong>{{ doc.doc_name }}</strong> issued by JoSAA</td>
-                                        <td><input onclick="yes({{doc.id}})" type="radio" value="yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="no" name="doc{{doc.id}}">No</td>
+                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No</td>
                                         <td></td>
                                     </tr>
                                 {% endifequal %}
@@ -508,7 +510,7 @@
                                     <tr>
                                         <td>{{ doc.id }}</td>
                                         <td><strong>{{ doc.doc_name }}</strong> (if applicable) </td>
-                                        <td><input onclick="yes({{doc.id}})" type="radio" value="yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="no" name="doc{{doc.id}}">No</td>
+                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No</td>
                                         <td></td>
                                     </tr>
                                 {% endifequal %}

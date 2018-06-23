@@ -363,9 +363,10 @@ function populateCountries(countryElementId, stateElementId){
 
 
 function totalfees() {
-  var jossa = document.querySelector("#jossaAmount");
-  var nith = document.querySelector("#nithAmount");
-  var tot = document.querySelector("#totalFees");
+  var jossa = document.querySelector("#id_fee_josaa_amount");
+  var nith = document.querySelector("#id_fee_NITH_amount");
+  var tot = document.querySelector("#id_fee_total");
+//  tot.textContent = "Total Fees Paid: " + (Number(jossa.value) + Number(nith.value));
+    tot.value = (Number(jossa.value) + Number(nith.value));
 
-  tot.textContent = "Total Fees Paid: " + (Number(jossa.value) + Number(nith.value));
 }

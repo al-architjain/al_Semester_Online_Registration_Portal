@@ -14,9 +14,9 @@ class StudentInfoForm(forms.ModelForm) :
 class StudentMedicalForm(forms.ModelForm) :
     class Meta :
         model = models.StudentMedicalInfo
-        fields = '__all__'
+        exclude = ['student',]
 
 class StudentFirstFeeForm(forms.ModelForm) :
     class Meta :
         model = models.StudentFirstFeeStatus
-        fields = '__all__'
+        exclude = ['student', ]
