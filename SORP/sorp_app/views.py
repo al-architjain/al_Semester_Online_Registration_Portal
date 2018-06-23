@@ -73,37 +73,31 @@ def create_student(request) :
             print(iform.errors.as_data())
             return render(request, 'sorp_app/r_addstudent.html',
                           {'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
-        else:
-            return HttpResponse("PASSED")
-
-    else:
-        return render( request, 'sorp_app/r_addstudent.html', {'iform': iform , 'mform': mform, 'dobj': dobj,'fform': fform })
-    # if request.method == "POST" :
-    #     #if iform.is_valid() and mform.is_valid() and fforms.is_valid() :
-    #     f = iform.save(commit=False)
-    #     #create user
-    #     username = iform.cleaned_data['roll_no']
-    #     password = iform.cleaned_data['father_name']
-    #     email = iform.cleaned_data['email']
-    #     user = User.objects.create_user(username = username, password = password, email = email)
-    #     #assgning OnetoOneField
-    #     f.user = user
-    #     f.save()
-    #     #document information
-    #     temp = len(dlist)
-    #     for i in range(temp) :
-    #         if(dlist[i] is 'NA') :
-    #             continue
-    #         else:
-    #             obj = models.Documents.objects.get(id=i)
-    #             sub = True if (dlist[i] is 'YES') else False
-    #             dinfo = models.DocumentInfo(student=f, document=obj, submitted=sub )
-    #             dinfo.save()
-    #     iform.save_m2m()
-    #     return HttpResponse("Your request is POST")
-    #     # else :
-    #     #     return HttpResponse("FORM IS NOT VALID")
-    # return 1render(request, 'sorp_app/r_addstudent.html',{'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
+        elif iform.is_valid() and mform.is_valid() and fforms.is_valid() :
+            f = iform.save(commit=False)
+            #create user
+            username = iform.cleaned_data['roll_no']
+            password = iform.cleaned_data['father_name']
+            email = iform.cleaned_data['email']
+            user = User.objects.create_user(username = username, password = password, email = email)
+            #assgning OnetoOneField
+            f.user = user
+            f.save()
+            #document information
+            temp = len(dlist)
+            for i in range(temp) :
+                if(dlist[i] is 'NA') :
+                    continue
+                else:
+                    obj = models.Documents.objects.get(id=i)
+                    sub = True if (dlist[i] is 'YES') else False
+                    dinfo = models.DocumentInfo(student=f, document=obj, submitted=sub )
+                    dinfo.save()
+            iform.save_m2m()
+            return HttpResponse("Your request is POST")
+            # else :
+            #     return HttpResponse("FORM IS NOT VALID")
+        return render(request, 'sorp_app/r_addstudent.html',{'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
     #
 # for i in range(1,dobj.count() + 1):
 #     strr =  "doc"+ str(i)
