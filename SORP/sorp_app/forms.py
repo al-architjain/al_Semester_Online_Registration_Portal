@@ -9,14 +9,14 @@ class login_form(forms.Form):
 class StudentInfoForm(forms.ModelForm) :
     class Meta:
         model = models.StudentInfo
-        fields = '__all__'
+        exclude = ['user','img','year_of_admission','active_status','ug_sem', 'stud_doc']
 
 class StudentMedicalForm(forms.ModelForm) :
     class Meta :
         model = models.StudentMedicalInfo
-        fields = '__all__'
+        exclude = ['student',]
 
 class StudentFirstFeeForm(forms.ModelForm) :
     class Meta :
         model = models.StudentFirstFeeStatus
-        fields = '__all__'
+        exclude = ['student', ]

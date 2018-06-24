@@ -28,22 +28,19 @@ function popup() {
 }
 
 
-function yes(num, dlist) {
+function yes(num) {
     var tr = document.querySelectorAll("tr");
     tr[num].querySelectorAll("td")[0].style.color = "green";
     tr[num].querySelectorAll("td")[1].style.color = "green";
-    dlist[num] = "YES"
-    console.log(dlist);
+
   }
 
 
-function no(num, dlist) {
-  // alert();
+function no(num) {
     var tr = document.querySelectorAll("tr");
     tr[num].querySelectorAll("td")[0].style.color = "red";
     tr[num].querySelectorAll("td")[1].style.color = "red";
-    dlist[num] = "NO"
-    console.log(dlist);
+
 }
 
 
@@ -366,9 +363,10 @@ function populateCountries(countryElementId, stateElementId){
 
 
 function totalfees() {
-  var jossa = document.querySelector("#jossaAmount");
-  var nith = document.querySelector("#nithAmount");
-  var tot = document.querySelector("#totalFees");
+  var jossa = document.querySelector("#id_fee_josaa_amount");
+  var nith = document.querySelector("#id_fee_NITH_amount");
+  var tot = document.querySelector("#id_fee_total");
+//  tot.textContent = "Total Fees Paid: " + (Number(jossa.value) + Number(nith.value));
+    tot.value = (Number(jossa.value) + Number(nith.value));
 
-  tot.textContent = "Total Fees Paid: " + (Number(jossa.value) + Number(nith.value));
 }

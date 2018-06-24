@@ -30,7 +30,7 @@
             <button id="right" class="tablinks" onclick="openTab(event, 'medDetails')">Medical Details</button>
         </div>
 
-        <form action='reg_result/' method="POST">
+        <form action='/create_student/' method="POST">
         {% csrf_token %}
         <!--***********************************************************************************************************************************-->
                                                         <!--Data Entry Form Tab Started -->
@@ -157,7 +157,7 @@
                         <div class="col-lg-12">
                             {{ iform.nearest_rs.errors }}
                             <label for="{{ iform.nearest_rs.id_for_label }}"><b>Nearest Railway Station</b></label>
-                            <input class="form-control" type="text" id="{{ iform.nearest_rs.id_for_label }}" placeholder="Enter Station">
+                            <input class="form-control" type="text" id="{{ iform.nearest_rs.id_for_label }}" placeholder="Enter Station" name="{{iform.nearest_rs.html_name}}">
                         </div>
                     </div>
                     <hr>
@@ -273,17 +273,18 @@
 
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
-                            {{ iform.ud_class.errors }}
+                            {{ iform.ug_class.errors }}
                             <label for="{{ iform.ug_class.id_for_label }}"><b>U.G. Program </b>(B.Tech / B.Arch / Dual Degree)</label>
+                            <br>{{ iform.ug_class }}
                             <!--<input class="form-control" type="text" id="ugProgram" placeholder="Enter Program">-->
-                            <select class="form-control" id="{{ iform.ug_class.id_for_label }}" name="{{ iform.ug_class.html_name }}">
-                                <option hidden> Select School Type </option>
-                                {% for v in iform.ug_class %}
-                                    {% if v %}
-                                        <option value="{{v}}">{{v.name}}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
+                            <!--<select class="form-control" id="{{ iform.ug_class.id_for_label }}" name="{{ iform.ug_class.html_name }}">-->
+                                <!--<option hidden> Select School Type </option>-->
+                                <!--{% for v in iform.ug_class %}-->
+                                    <!--{% if v %}-->
+                                        <!--<option value="{{v}}">{{v.name}}</option>-->
+                                    <!--{% endif %}-->
+                                <!--{% endfor %}-->
+                            <!--</select>-->
                         </div>
 
 
@@ -324,7 +325,8 @@
                         <div class="col-lg-4 col-md-4">
                             {{ iform.hostel_name.errors }}
                             <label for="{{ iform.hostel_name.id_for_label }}"><b>Hostel Name</b></label>
-                            <input class="form-control" type="text" id="{{ iform.hostel_name.id_for_label }}" placeholder="Enter Hostel Name" name="{{ iform.hostel_name.html_name }}">
+                            {{ iform.hostel_name }}
+                            <!--<input class="form-control" type="text" id="{{ iform.hostel_name.id_for_label }}" placeholder="Enter Hostel Name" name="{{ iform.hostel_name.html_name }}">-->
                         </div>
 
                     </div>
@@ -455,7 +457,9 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 form-group">
-                            <label id="totalFees"><b>Total Fees Paid: </b></label>
+                            {{ fform.fee_total.errors }}
+                            <label for="{{ fform.fee_total.id_for_label }}"><b>Total Fees Paid: </b></label>
+                            <input class="form-control" type="text" id="{{ fform.fee_total.id_for_label }}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_total.html_name }}">
                         </div>
                         <div class="col-lg-6 col-md-6">
                             {{ fform.fee_nith_receipt_no.errors }}
@@ -483,7 +487,6 @@
                             </tr>
                         </thead>
                     </table>
-                    <script> var dlist = {{ dlist|safe }}; </script>
                     <h4><strong>Mandatory</strong></h4>
                     <table class="table table-hover">
                         <tbody>
@@ -492,7 +495,7 @@
                                     <tr>
                                         <td>{{ doc.id }}</td>
                                         <td><strong>{{ doc.doc_name }}</strong> issued by JoSAA</td>
-                                        <td><input onclick="yes({{doc.id}}, dlist)" type="radio" value="yes" name="{{ doc.id }}">Yes <input onclick="no({{doc.id}}, dlist)" type="radio" value="no" name="{{ doc.id }}">No</td>
+                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No</td>
                                         <td></td>
                                     </tr>
                                 {% endifequal %}
@@ -506,8 +509,8 @@
                                 {% ifequal doc.doc_imp 'O' %}
                                     <tr>
                                         <td>{{ doc.id }}</td>
-                                        <td><strong>{{ doc.doc_name }}</strong> (only if applicalbe)</td>
-                                        <td><input onclick="yes({{doc.id}}, dlist)" type="radio" value="yes" name="{{ doc.id }}"> Yes  <input onclick="no({{doc.id}}, dlist)" type="radio" value="no" name="{{ doc.id }}"> No </td>
+                                        <td><strong>{{ doc.doc_name }}</strong> (if applicable) </td>
+                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No</td>
                                         <td></td>
                                     </tr>
                                 {% endifequal %}
@@ -578,7 +581,7 @@
         <br>
         </div>
 
-        <button class="btn btn-primary pull-right" > REGISTER </button>
+        <button class="btn btn-primary pull-right"  > REGISTER </button>
         </form>
         </div>
 
