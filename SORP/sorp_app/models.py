@@ -198,12 +198,12 @@ class StudentMedicalInfo(models.Model):
     height = models.SmallIntegerField()     #(in cm)
     # weight_kg = models.IntegerField()
     blood_group = models.CharField(max_length=4)
-    id_mark = models.CharField(max_length=32, null=True)
-    major_illness = models.CharField(max_length=64,null=True)
-    past_mental_illness = models.CharField(max_length=64,null=True)
-    vision = models.CharField(max_length=8,null=True)
-    clour_blindness = models.CharField(max_length=32,null=True)
-    other_defect = models.CharField(max_length=64,null=True)
+    id_mark = models.CharField(max_length=32, null=True, blank=True)
+    major_illness = models.CharField(max_length=64,null=True, blank=True)
+    past_mental_illness = models.CharField(max_length=64,null=True, blank=True)
+    vision = models.CharField(max_length=8,null=True, blank=True)
+    clour_blindness = models.CharField(max_length=32,null=True, blank=True)
+    other_defect = models.CharField(max_length=64,null=True, blank=True)
 
 
 class StudentFirstFeeStatus(models.Model):
