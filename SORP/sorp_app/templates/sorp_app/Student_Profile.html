@@ -1,20 +1,16 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Student's Profile</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static "sorp_app/Student_Profile.css" %}">
+	<script type="text/javascript" src="{% static "sorp_app/Student_Profile.js" %}"></script>
+</head>
 
-    {% block title %}
-        Student's Profile
-    {% endblock %}
+<body>
 
-    {% block meta %}
-        <!-- All the meta files will come here! -->
-    {% endblock %}
-
-    {% block links %}
-        <!-- Online links will come here! -->
-    {% endblock %}
-
-
-    {% block bodycontent %}
-        <div class="container">
+	<div class="container">
 		<div class="row">
 			<div class="col-lg-3 col-md-3 col-sm-3 col-12 mygrid ">
 				{% load static %}
@@ -31,11 +27,11 @@
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 							<label for="rollNo"><b>Roll No:</b></label>
-							<label id="rollNo">15MI538</label><br>
+							<label id="rollNo">15MI538</label><br>		
 						</div>
 					</div>
-
-
+						
+					
 					<nav class="navbar navbar-expand-lg navbar-light bg-light">
   						<button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#collapseButton" aria-controls="collapseButton" aria-expanded="false" aria-label="Toggle navigation" style="outline: none; width: 100%; margin:auto;">
     						<span class="navbar-toggler-icon"></span>
@@ -54,8 +50,8 @@
 					</nav>
 				</div>
 			</div>
-
-
+				
+	
 			<div class="col-lg-9 col-md-9 col-sm-9 col-12 mygrid1">
 				<form for="register" action="https://google.com">
 					<div id="studentProfile" class="tabcontent">
@@ -145,9 +141,9 @@
 				  			</div>
 				  		</div>
 				  	</div>
-
-
-
+				
+				
+				
 					<div id="documents" class="tabcontent">
 	          			<h4 class="text-center font-weight-bold">DOCUMENTS</h4><br>
 
@@ -160,7 +156,7 @@
 					           					<th class="srno">Sr. No.</th>
 					           					<th id="mid">Name of the Document</th>
 					           					<th>Verification</th>
-					       					</tr>
+					       					</tr> 
 					       				</thead>
 
 					       				<tbody>
@@ -264,7 +260,7 @@
 					            				<td><strong>The following documents are required if qualifying examination is from outside India or from National Open School</strong></td><td></td><td></td>
 										    </tr>
 
-					          				<tr>
+					          				<tr>	
 					            				<td></td>
 					            				<td><strong>Passport</strong> of the candidates</td>
 					            				<td></td>
@@ -298,7 +294,7 @@
 										<th class="srno">T</th>
 										<th class="srno">P</th>
 										<th class="srno">D</th>
-									</tr>
+									</tr>	
 								</thead>
 
 								<tbody>
@@ -311,7 +307,7 @@
 										<td>fasldfjkas</td>
 										<td>laksdhfuh</td>
 									</tr>
-
+								
 									<tr>
 										<td>2</td>
 										<td></td>
@@ -419,7 +415,7 @@
 
 					<div id="medDetails" class="tabcontent">
 	          			<h4 class="text-center font-weight-bold">PERSONAL HISTORY</h4><br>
-
+		        		
 		        		<div class="row">
 		        			<div class="col-md-5 col-sm-5 col-5">
 		        				<div class="form-group">
@@ -463,7 +459,7 @@
 							</div>
 		        			<div class="col-md-5 col-sm-5 col-5">
 		        				<div class="form-group">
-	 								<label id="majorIllness">None</label>
+	 								<label id="majorIllness">None</label>		
 	 							</div>
 		        			</div>
 		        		</div>
@@ -483,7 +479,7 @@
 	 							</div>
 		        			</div>
 		        		</div>
-
+		        		
 		        		<div class="row">
 		        			<div class="col-md-5 col-sm-5 col-5">
 		        				<div class="form-group">
@@ -564,12 +560,12 @@
 		        			</div>
 		        		</div>
 			  		</div>
-
+					
 
 					<div id="dues" class="tabcontent">
-
+						
 	          			<h4 class="text-center font-weight-bold">PRIVIOUS DUES</h4><br>
-
+						
 						<div class="row">
 							<div class="col-lg-4">
 								<div class="card">
@@ -617,7 +613,7 @@
 					           					<th class="gpi">SGPI</th>
 					           					<th class="gpi">CGPI</th>
 					           					<th>Repeat (if any)</th>
-					       					</tr>
+					       					</tr> 
 					       				</thead>
 
 					       				<tbody>
@@ -689,7 +685,7 @@
 												<td></td>
 												<td></td>
 												<td></td>
-											</tr>
+											</tr>		       					
 			 				        	</tbody>
 			        				</table>
 			        			</div>
@@ -701,17 +697,12 @@
 			</div>
 		</div>
 	</div>
+	
 
-    {% endblock %}
 
-    {% block bodyscripts %}
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    {% endblock %}
 
-    {% block staticfiles %}
-		{% load static %}
-		<link rel="stylesheet" type="text/css" href="{% static "sorp_app/Student_Profile.css" %}">
-		<script type="text/javascript" src="{% static "sorp_app/Student_Profile.js" %}"></script>
-	{% endblock %}
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
