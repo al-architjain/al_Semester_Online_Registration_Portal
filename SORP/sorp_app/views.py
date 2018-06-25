@@ -52,7 +52,12 @@ def user_login(request) :
 def user_profile(request):
     grp = get_user_group(request.user)
     if grp == 'Student':
-        return render(request, 'sorp_app/s_profile.html')
+        username = request.POST['username']
+        user = User.objects.get(username = 'username')
+        iform = forms.StudentInfoForm(instanse = user.student)
+        mform = forms.StudentMedicalForm(instanse = user.student)
+        fform = forms.StudentFirstFeeForm(instanse = user.student)
+        return render(request, 'sorp_app/s_profile.html',{ifrom :'iform', mform :'mform', fform : 'fform'})
     else:
         iform = forms.StudentInfoForm()
         mform = forms.StudentMedicalForm()
@@ -139,21 +144,6 @@ def deactivate(request) :
         obj.roll_no = 'roll_no'+'D'
         obj.active_status = False
         return HttpResponse("STUDENT DEACTIVATED")
-
-
-#profile page for student
-@login_required
-def student_profile(request) :
-    username = request.POST['username']
-    user = User.objects.get(username = 'username')
-    iform = forms.StudentInfoForm(instanse=user.student)
-    mform = forms.StudentMedicalForm(instanse=user.student)
-    fform = forms.StudentFirstFeeForm(instanse=user.student)
-    render(request,'')
-
-
-
-
 
 
 
