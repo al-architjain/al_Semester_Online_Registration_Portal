@@ -52,12 +52,11 @@ def user_login(request) :
 def user_profile(request):
     grp = get_user_group(request.user)
     if grp == 'Student':
-        username = request.POST['username']
-        user = User.objects.get(username = 'username')
-        iform = forms.StudentInfoForm(instanse = user.student)
-        mform = forms.StudentMedicalForm(instanse = user.student)
-        fform = forms.StudentFirstFeeForm(instanse = user.student)
-        return render(request, 'sorp_app/s_profile.html',{ifrom :'iform', mform :'mform', fform : 'fform'})
+        user = request.user
+        # user = User.objects.get(username = 'username')
+        sobj = user.studentinfo
+
+        return render(request, 'sorp_app/s_profile.html',{'sobj': sobj })
     else:
         iform = forms.StudentInfoForm()
         mform = forms.StudentMedicalForm()
@@ -138,7 +137,7 @@ def update_student(request) :
 #deactiviting of student
 @login_required
 def deactivate(request) :
-    if request.method == 'GET' :
+    if request.method == 'POST' :
         roll_no = request.POST['roll']
         obj = models.StudentInfo.get(roll_no=roll_no)
         obj.roll_no = 'roll_no'+'D'
