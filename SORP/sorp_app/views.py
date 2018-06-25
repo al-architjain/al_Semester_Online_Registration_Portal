@@ -90,6 +90,8 @@ def create_student(request) :
             password = iform.cleaned_data['father_name']
             email = iform.cleaned_data['email']
             user = User.objects.create_user(username = username, password = password, email = email)
+            my_group = Group.objects.get(name='Student')
+            my_group.user_set.add(user)
             #assgning OnetoOneField
             iformm.user = user
             iformm.save()
