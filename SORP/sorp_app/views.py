@@ -52,8 +52,10 @@ def user_login(request) :
 def user_profile(request):
     grp = get_user_group(request.user)
     if grp == 'Student':
-
-        return render(request, 'sorp_app/s_profile.html', )
+        user = request.user
+        # user = User.objects.get(username = 'username')
+        sobj = user.studentinfo
+        return render(request, 'sorp_app/s_profile.html',{'sobj': sobj })
 
     elif grp == 'Registration Staff':
         iform = forms.StudentInfoForm()
@@ -118,4 +120,31 @@ def create_student(request) :
 
     else:
         return render(request, 'sorp_app/r_addstudent.html',{'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
-    #
+
+
+
+#editing of student info
+@login_required
+def update_student(request) :
+    if request.method == 'POST' :
+        roll_no = request.POST['roll']
+        obj = models.StudentInfo.get(roll_no=roll_no)
+        iform = forms.StudentInfoForm(instanse=obj)
+        mform = forms.StudentMedicalForm(instanse=obj)
+        fform = forms.StudentFirstFeeForm(instance=obj)
+        return render(request, 'sorp_app/r_addstudent.html',{'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
+
+
+#deactiviting of student
+@login_required
+def deactivate(request) :
+    if request.method == 'POST' :
+        roll_no = request.POST['roll']
+        obj = models.StudentInfo.get(roll_no=roll_no)
+        obj.roll_no = 'roll_no'+'D'
+        obj.active_status = False
+        return HttpResponse("STUDENT DEACTIVATED")
+
+
+
+
