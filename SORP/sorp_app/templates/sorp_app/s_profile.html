@@ -16,6 +16,7 @@
     {% block bodycontent %}
         <div class="container">
 		<div class="row">
+			<!-----------------------------------  LEFT COLUMN FOR OPTIONS  ------------------------------------------->
 			<div class="col-lg-3 col-md-3 col-sm-3 col-12 mygrid ">
 				{% load static %}
 				<img class="rounded mx-auto d-block" src="{% static "def_profile_pic.jpg" %}">
@@ -54,13 +55,12 @@
 					</nav>
 				</div>
 			</div>
+			<!---------------------------------------  LEFT COLUMN ENDS   --------------------------------------------->
 
-
+			<!-----------------------------------  RIGHT COLUMN FOR VIEWS  ------------------------------------------->
 			<div class="col-lg-9 col-md-9 col-sm-9 col-12 mygrid1">
-				<form for="register" action="https://google.com">
 					<div id="studentProfile" class="tabcontent">
 						<h4 class="text-center font-weight-bold">GENERAL INFORMATION</h4><br>
-
 						<div class="row">
 							<div class="col-md-5 col-sm-5 col-5">
 								<div class="form-group">
@@ -149,8 +149,7 @@
 
 
 					<div id="documents" class="tabcontent">
-	          			<h4 class="text-center font-weight-bold">DOCUMENTS</h4><br>
-
+	          			<h4 class="text-center font-weight-bold">DOCUMENTS NOT SUBMITTED</h4><br>
 				  		<div class="row">
 		      				<div class=" col-lg-12 col-md-12 col-sm-12 col-12">
 		      					<div style="overflow-x:auto;">
@@ -159,122 +158,129 @@
 			          						<tr>
 					           					<th class="srno">Sr. No.</th>
 					           					<th id="mid">Name of the Document</th>
-					           					<th>Verification</th>
+					           					<th></th>
 					       					</tr>
 					       				</thead>
 
 					       				<tbody>
-					       					<tr>
-					          					<td>1</td>
-					           					<td><strong>Provisional Admission Letter</strong> issued by JoSAA</td>
+										{% for doc in dobj %}
+											<tr>
+					          					<td>{{ forloop.counter }}</td>
+					           					<td><strong>{{ doc.document }}</strong> issued by JoSAA</td>
 					           					<td></td>
 					     					</tr>
+										{% endfor %}
+					       					<!--<tr>-->
+					          					<!--<td>1</td>-->
+					           					<!--<td><strong>{{ dobj.0.document }}</strong> issued by JoSAA</td>-->
+					           					<!--<td></td>-->
+					     					<!--</tr>-->
 
-					       					<tr>
-					           					<td>2</td>
-					           					<td><strong>Score Card</strong> issued by CBSE indicating rank in JEE-2019</td>
-					           					<td></td>
-					       					</tr>
+					       					<!--<tr>-->
+					           					<!--<td>2</td>-->
+					           					<!--<td><strong>Score Card</strong> issued by CBSE indicating rank in JEE-2019</td>-->
+					           					<!--<td></td>-->
+					       					<!--</tr>-->
 
-					       					<tr>
-					           					<td>3</td>
-					           					<td><strong>Admit card</strong> of JEE-2019 (self attested)</td>
-					           					<td></td>
-					          				</tr>
+					       					<!--<tr>-->
+					           					<!--<td>3</td>-->
+					           					<!--<td><strong>Admit card</strong> of JEE-2019 (self attested)</td>-->
+					           					<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>4</td>
-					            				<td><strong>Class 10th (High School) Board Certificate</strong> as a proof of date of birth</td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>4</td>-->
+					            				<!--<td><strong>Class 10th (High School) Board Certificate</strong> as a proof of date of birth</td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>5</td>
-					            				<td><strong>Class 12th Marksheet and Pass Certificate</strong> of qualifying Examination</td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>5</td>-->
+					            				<!--<td><strong>Class 12th Marksheet and Pass Certificate</strong> of qualifying Examination</td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>6</td>
-					            				<td><strong>Character Certificate</strong></td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>6</td>-->
+					            				<!--<td><strong>Character Certificate</strong></td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>7</td>
-					            				<td><strong> Migration/Transfer Certificate</strong></td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>7</td>-->
+					            				<!--<td><strong> Migration/Transfer Certificate</strong></td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>8</td>
-					            				<td><strong>Medical Fitness Certificate</strong> issued by medical officer at NIT Hamirpur</td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>8</td>-->
+					            				<!--<td><strong>Medical Fitness Certificate</strong> issued by medical officer at NIT Hamirpur</td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>9</td>
-					            				<td><strong>Certificate of Person with Disability(PwD)</strong><em> (if applicable)</em></td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>9</td>-->
+					            				<!--<td><strong>Certificate of Person with Disability(PwD)</strong><em> (if applicable)</em></td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>10</td>
-					            				<td><strong>Certificate of category</strong> (SC/ST/OBC-NCL) <em>(if applicable)</em></td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>10</td>-->
+					            				<!--<td><strong>Certificate of category</strong> (SC/ST/OBC-NCL) <em>(if applicable)</em></td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>11</td>
-					            				<td><strong><u>Declaration/Undertaking</u></strong> <em>(for OBC Candidates only)</em></td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>11</td>-->
+					            				<!--<td><strong><u>Declaration/Undertaking</u></strong> <em>(for OBC Candidates only)</em></td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>12</td>
-					            				<td>An <strong>Undertaking</strong> by the student</td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>12</td>-->
+					            				<!--<td>An <strong>Undertaking</strong> by the student</td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td></td>
-					            				<td class="center"><strong>AFFIDAVITS</strong></td><td></td><td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td></td>-->
+					            				<!--<td class="center"><strong>AFFIDAVITS</strong></td><td></td><td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>13</td>
-					            				<td><strong>Affidavit</strong> for giving reason for study gap (if any)</td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>13</td>-->
+					            				<!--<td><strong>Affidavit</strong> for giving reason for study gap (if any)</td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>14</td>
-					            				<td>An <strong>Affidavit by the Student [Anti-Ragging measures] (Original) (Online generated)</strong></td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>14</td>-->
+					            				<!--<td>An <strong>Affidavit by the Student [Anti-Ragging measures] (Original) (Online generated)</strong></td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>15</td>
-					            				<td><strong>Affidavit by the Parent / Guardian [Anti-Ragging measures] (Original) (Online generated)</strong></td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td>15</td>-->
+					            				<!--<td><strong>Affidavit by the Parent / Guardian [Anti-Ragging measures] (Original) (Online generated)</strong></td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td>16</td>
-					            				<td><strong>The following documents are required if qualifying examination is from outside India or from National Open School</strong></td><td></td><td></td>
-										    </tr>
+					          				<!--<tr>-->
+					            				<!--<td>16</td>-->
+					            				<!--<td><strong>The following documents are required if qualifying examination is from outside India or from National Open School</strong></td><td></td><td></td>-->
+										    <!--</tr>-->
 
-					          				<tr>
-					            				<td></td>
-					            				<td><strong>Passport</strong> of the candidates</td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td></td>-->
+					            				<!--<td><strong>Passport</strong> of the candidates</td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 
-					          				<tr>
-					            				<td></td>
-					            				<td><strong>Proof of Place of Examination</strong> from the National Open School</td>
-					            				<td></td>
-					          				</tr>
+					          				<!--<tr>-->
+					            				<!--<td></td>-->
+					            				<!--<td><strong>Proof of Place of Examination</strong> from the National Open School</td>-->
+					            				<!--<td></td>-->
+					          				<!--</tr>-->
 			 				        	</tbody>
 			        				</table>
 		        			</div>
@@ -294,124 +300,126 @@
 										<th class="srno">Sr. No.</th>
 										<th id="cno">Course No.</th>
 										<th class="center">Name of the Subject</th>
-										<th class="srno">L</th>
-										<th class="srno">T</th>
-										<th class="srno">P</th>
-										<th class="srno">D</th>
+										<th class="srno">Lectures</th>
+										<th class="srno">Tutorials</th>
+										<th class="srno">Practicals</th>
+										<th class="srno">Credits</th>
 									</tr>
 								</thead>
 
 								<tbody>
+								{% for sub in subobj %}
 									<tr>
-										<td>1</td>
-										<td>sadfkljjashdflkh</td>
-										<td>asdfkjsadflkj</td>
-										<td>3</td>
-										<td>3</td>
-										<td>fasldfjkas</td>
-										<td>laksdhfuh</td>
+										<td>{{ forloop.counter }}</td>
+										<td>{{sub.sub_code}}</td>
+										<td>{{sub.sub_name}}</td>
+										<td>{{sub.sub_L}}</td>
+										<td>{{sub.sub_T}}</td>
+										<td>{{sub.sub_P}}</td>
+										<td>{{sub.sub_C}}</td>
 									</tr>
+								{% endfor %}
 
-									<tr>
-										<td>2</td>
-										<td></td>
-										<td>Subject 2</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<!--<tr>-->
+										<!--<td>2</td>-->
+										<!--<td></td>-->
+										<!--<td>Subject 2</td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+									<!--</tr>-->
 
-									<tr>
-										<td>3</td>
-										<td></td>
-										<td>Subject 3</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<!--<tr>-->
+										<!--<td>3</td>-->
+										<!--<td></td>-->
+										<!--<td>Subject 3</td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+									<!--</tr>-->
 
-									<tr>
-										<td>4</td>
-										<td></td>
-										<td>Subject 4</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<!--<tr>-->
+										<!--<td>4</td>-->
+										<!--<td></td>-->
+										<!--<td>Subject 4</td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+									<!--</tr>-->
 
-									<tr>
-										<td>5</td>
-										<td></td>
-										<td>Subject 5</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<!--<tr>-->
+										<!--<td>5</td>-->
+										<!--<td></td>-->
+										<!--<td>Subject 5</td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+									<!--</tr>-->
 
-									<tr>
-										<td>6</td>
-										<td></td>
-										<td>Subject 6</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<!--<tr>-->
+										<!--<td>6</td>-->
+										<!--<td></td>-->
+										<!--<td>Subject 6</td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+									<!--</tr>-->
 
 
-									<tr>
-										<td>7</td>
-										<td></td>
-										<td>Subject 7</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<!--<tr>-->
+										<!--<td>7</td>-->
+										<!--<td></td>-->
+										<!--<td>Subject 7</td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+									<!--</tr>-->
 
-									<tr>
-										<td>8</td>
-										<td></td>
-										<td>Subject 8</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<!--<tr>-->
+										<!--<td>8</td>-->
+										<!--<td></td>-->
+										<!--<td>Subject 8</td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+									<!--</tr>-->
 
-									<tr>
-										<td>9</td>
-										<td></td>
-										<td>Subject 9</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<!--<tr>-->
+										<!--<td>9</td>-->
+										<!--<td></td>-->
+										<!--<td>Subject 9</td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+									<!--</tr>-->
 
-									<tr>
-										<td>10</td>
-										<td></td>
-										<td>Subject 10</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<!--<tr>-->
+										<!--<td>10</td>-->
+										<!--<td></td>-->
+										<!--<td>Subject 10</td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+									<!--</tr>-->
 
-									<tr>
-										<td></td>
-										<td></td>
-										<td style="text-align: right;"><strong>Total</strong></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<!--<tr>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td style="text-align: right;"><strong>Total</strong></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+										<!--<td></td>-->
+									<!--</tr>-->
 								</tbody>
 							</table>
 						</div>
@@ -697,7 +705,7 @@
 		      				</div>
 		    			</div>
 					</div>
-				</form>
+				<!--</form>-->
 			</div>
 		</div>
 	</div>

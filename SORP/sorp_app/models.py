@@ -54,7 +54,7 @@ class UGBranch(models.Model):
         return self.name
 
 class Subjects(models.Model):
-    id = models.SmallIntegerField(unique=True, null=True)
+    id = models.AutoField(primary_key=True)
     classname = models.ForeignKey(UGClass, on_delete=models.CASCADE,db_column='class')
     branch = models.ForeignKey(UGBranch, on_delete=models.CASCADE,db_column='branch')
     semester_choice = (
@@ -70,7 +70,7 @@ class Subjects(models.Model):
         (10,10),
     )
     semester = models.IntegerField(choices=semester_choice)
-    sub_code = models.CharField(primary_key=True,max_length=16)
+    sub_code = models.CharField(max_length=16)
     sub_name = models.CharField(max_length=256)
     sub_L = models.SmallIntegerField()
     sub_T = models.SmallIntegerField()

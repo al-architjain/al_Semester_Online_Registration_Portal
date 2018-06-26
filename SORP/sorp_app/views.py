@@ -53,9 +53,10 @@ def user_profile(request):
     grp = get_user_group(request.user)
     if grp == 'Student':
         user = request.user
-        # user = User.objects.get(username = 'username')
         sobj = user.studentinfo
-        return render(request, 'sorp_app/s_profile.html',{'sobj': sobj })
+        dobj = models.DocumentInfo.objects.filter(student=sobj, submitted=False)
+        subobj = models.Subjects.objects.filter(classname=sobj.ug_class, branch=sobj.ug_branch, semester=sobj.ug_sem)
+        return render(request, 'sorp_app/s_profile.html',{'sobj': sobj , 'dobj':dobj, 'subobj':subobj})
 
     elif grp == 'Registration Staff':
         iform = forms.StudentInfoForm()
