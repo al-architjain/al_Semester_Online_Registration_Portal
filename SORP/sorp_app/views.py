@@ -52,14 +52,17 @@ def user_login(request) :
 def user_profile(request):
     grp = get_user_group(request.user)
     if grp == 'Student':
-        return render(request, 'sorp_app/s_profile.html')
-    else:
+
+        return render(request, 'sorp_app/s_profile.html', )
+
+    elif grp == 'Registration Staff':
         iform = forms.StudentInfoForm()
         mform = forms.StudentMedicalForm()
         fform = forms.StudentFirstFeeForm()
         dobj = models.Documents.objects.all()
         return render( request, 'sorp_app/r_addstudent.html', {'iform': iform , 'mform': mform, 'dobj': dobj,'fform': fform })
-
+    else:
+        return HttpResponse("You are not student or a Registraion Staff")
 
 
 #create_student user

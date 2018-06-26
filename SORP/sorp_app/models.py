@@ -72,6 +72,10 @@ class Subjects(models.Model):
     semester = models.IntegerField(choices=semester_choice)
     sub_code = models.CharField(primary_key=True,max_length=16)
     sub_name = models.CharField(max_length=256)
+    sub_L = models.SmallIntegerField()
+    sub_T = models.SmallIntegerField()
+    sub_P = models.SmallIntegerField()
+    sub_C = models.SmallIntegerField()
     #
     def __str__(self):
         return self.sub_name
