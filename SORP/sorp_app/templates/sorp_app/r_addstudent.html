@@ -507,10 +507,10 @@
                         <tbody>
                             {% for doc in dobj %}
                                 {% ifequal doc.doc_imp 'O' %}
-                                    <tr>
+                                    <tr id="Odoc{{doc.id}}">
                                         <td>{{ doc.id }}</td>
                                         <td><strong>{{ doc.doc_name }}</strong> (if applicable) </td>
-                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No</td>
+                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No <button onclick="clearSelection('Odoc{{doc.id}}')" class="btn btn-default">Clear</button></td>
                                         <td></td>
                                     </tr>
                                 {% endifequal %}
