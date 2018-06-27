@@ -1,1 +1,154 @@
-
+-<!DOCTYPE html>
+-<html lang="en">
+-<head>
+-  <title>Library Staff</title>
+-  <meta charset="utf-8">
+-  <meta name="viewport" content="width=device-width, initial-scale=1">
+-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+ 
+ 
+-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+-</head>
+-
+-<body>
+-<br>
+-
+-<div class="container">
+-  <div class="row">
+-<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+-
+-  <img class="rounded mx-auto d-block" width="150" height="150" src="profile_empty.jpg" alt="Staff Image" style="border:2px solid black" />
+-  <div class="text-center font-weight-bold mt-2">
+-  <label id="StaffName">Staff Name</label>
+-  </div>
+-</div>
+-<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+-</div>
+-
+-<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+-
+-  <!-- Nav pills -->
+-  <ul class="nav nav-pills justify-content-around" role="tablist">
+-    <li class="nav-item">
+-      <a class="nav-link btn btn-outline-info active" data-toggle="pill" href="#LibrarianProfile"><i class="fa fa-user-circle-o"></i> Profile </a>
+-    </li>
+-    <li class="nav-item">
+-      <a class="nav-link btn btn-outline-info" data-toggle="pill" href="#CheckDue"><i class="fa fa-rupee"></i> Dues</a>
+-    </li>
+-
+-  </ul>
+-
+-  <!-- Tab panes -->
+-  <div class="tab-content">
+-    <div id="LibrarianProfile" class="container tab-pane active"><br>
+-
+-      <div class="card">
+-           <div class="card-body text-justify">
+-             <div class="row">
+-                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+-                         <label class="font-weight-bold">Name</label>
+-                       </div>
+-                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+-                         <label>Nitin Paliwal</label>
+-                       </div>
+-                   </div>
+-                   <hr />
+-
+-                   <div class="row">
+-                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+-                               <label class="font-weight-bold">Email</label>
+-                             </div>
+-                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+-                               <label>library@nith.ac.in</label>
+-                             </div>
+-                         </div>
+-                         <hr />
+-
+-
+-                         <div class="row">
+-                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+-                                     <label class="font-weight-bold">Phone</label>
+-                                   </div>
+-                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+-                                     <label>01972-254170</label>
+-                                   </div>
+-                               </div>
+-                               <hr />
+-
+-                               <div class="row">
+-                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+-                                           <label class="font-weight-bold">Address</label>
+-                                         </div>
+-                                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+-                                           <label>Central Library, NIT, Hamirpur, H.P.-177005 </label>
+-                                         </div>
+-                                     </div>
+-
+-         </div>
+-
+-       </div>
+-
+-
+-    </div>
+-    <div id="CheckDue" class="container tab-pane fade"><br>
+-      <div class="card">
+-
+-               <div class="card-header text-center">
+-                 <h4>Library Due</h4>
+-               </div>
+-			
+-			   
+-				
+-               <div class="card-body text-center">
+-                  <p class="card-text">If unpaid, visit Library before Registration</p>
+-                  <form action="http://library.nith.ac.in/library/contact_us.php">
+-                    <button class="btn btn-success">Check Now!</button>
+-                  </form>
+-                </div>
+-				</div>
+-				<br>
+-				
+-				<div class="card">
+-				<div class="card-header text-center">
+-                 <h4>Admin Due</h4>
+-               </div>
+-
+-				
+-               <div class="card-body text-center">
+-                  <p class="card-text text-capitalize">If unpaid, visit Administrative Block before Registration</p>
+-                  <form action="http://nith.ac.in/nith/?page_id=12037">
+-                    <button class="btn btn-success">Check Now!</button>
+-                  </form>
+-                </div>
+-				</div>
+-				<br>
+-							 
+-
+-				<div class="card">
+-				<div class="card-header text-center">
+-                 <h4>Hostel Due</h4>
+-               </div>
+-			  
+-               <div class="card-body text-center">
+-                  <p class="card-text text-capitalize">If unpaid, visit your respective MMCA office before Registration</p>
+-                  <form action="http://nith.ac.in/nith/?page_id=12037">
+-                    <button class="btn btn-success">Check Now!</button>
+-                  </form>
+-                </div>
+-			   </div>
+-			   <br>
+-
+-
+-			</div>
+-          </div>
+-		  
+-      </div>
+-	</div>
+-    
+-</div>
+-</div>
+-</body>
+-</html>
