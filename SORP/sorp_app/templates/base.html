@@ -11,10 +11,6 @@
 			<!-- Online links will come here! -->
 		{% endblock %}
 
-		{% block staticfiles %}
-			<!-- Static files come here! -->
-		{% endblock %}
-
 		{% block styles %}
 			<!-- Style part comes here! -->
 		{% endblock %}
@@ -27,6 +23,11 @@
 			{% load static %}
 			<link rel="stylesheet" type="text/css" href="{% static "bootstrap-4.1.1/css/bootstrap.min.css" %}" />
 			<link rel="stylesheet" type="text/css" href="{% static "bootstrap-3.3.7/css/bootstrap.min.css" %}" />
+
+		{% block staticfiles %}
+			<!-- Static files come here! -->
+		{% endblock %}
+
 		<!--------------------->
 		<!-- Permanent styles -->
 		<!--------------------->
