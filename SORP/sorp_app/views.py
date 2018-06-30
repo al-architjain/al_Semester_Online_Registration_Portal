@@ -135,6 +135,7 @@ def update_student(request) :
         return render(request, 'sorp_app/r_addstudent.html',{'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
 
 
+
 #deactiviting of student
 @login_required
 def deactivate(request) :
@@ -147,4 +148,4 @@ def deactivate(request) :
 
 
 
-
+#

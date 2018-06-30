@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+        {% block title %}
+            Registrar Staff
+        {% endblock %}
+
+        {% block links %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        {% endblock %}
+
+
+        {% block bodycontent %}
+			<br><br>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<br><br>
+					  <img class="rounded mx-auto d-block" width="150" height="150" src="profile_empty.jpg" alt="Staff Image" style="border:2px solid black" />
+					  <div class="text-center mt-2">
+						  <label class="font-weight-bold" id="StaffName">Name</label><br>
+						  <label id="StaffPhone"><span class="text-muted">Phone: </span>XXXXXXXXXX</label><br>
+						  <label id="StaffEmail"><span class="text-muted">Email: </span>xyz@nith.ac.in</label><br>
+					  </div>
+						<br><br>
+					</div>
+
+					<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+						<!-- Tabs list -->
+						<ul class="nav nav-pills justify-content-around" role="tablist">
+						<li class="nav-item"><a class="nav-link btn btn-outline-info active" data-toggle="pill" href="#CreateProfile"><i class="fa fa-user-plus"></i> Create </a></li>
+						<li class="nav-item"><a class="nav-link btn btn-outline-info" data-toggle="pill" href="#UpdateProfile"><i class="fa fa-refresh"></i> Update</a></li>
+						<li class="nav-item"><a class="nav-link btn btn-outline-info p-2" syle="font-size:20px" data-toggle="pill" href="#DeactivateProfile"><i class="fa fa-ban"></i> Deactivate</a></li>
+						</ul>
+						<!-- Tab list ends -->
+
+						<!-- Tab panels -->
+						<div class="tab-content">
+							<div id="CreateProfile" class="container tab-pane active"><br>
+								<div class="card">
+								   <div class="card-header text-center">
+									 <h4>Create Student Profile</h4>
+								   </div>
+									<div class="card-body text-center">
+										<br>
+										<a class="btn btn-success" href=""> Create Now </a><br>
+										<br>
+									</div>
+								</div>
+							</div>
+							<div id="UpdateProfile" class="container tab-pane fade"><br>
+								<div class="card">
+									<div class="card-header text-center">
+										<h4>Update Student Profile</h4>
+									</div>
+									<div class="card-body text-center">
+										<p class="card-text text-capitalize mt-2">Search Roll No. to Update </p>
+										 <form class="form-inline justify-content-center my-2 my-lg-0">
+											  <input class="form-control mr-sm-2" id="RollNoUpdate" type="search" placeholder="Enter Roll No" aria-label="Search">
+											  <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+										</form>
+										<br>
+									</div>
+								</div>
+							</div>
+							<div id="DeactivateProfile" class="container tab-pane fade"><br>
+								<div class="card">
+									<div class="card-header text-center">
+									 <h4>Deactivate Student Profile</h4>
+									</div>
+									<div class="card-body text-center">
+										 <p class="card-text text-capitalize">Search Roll No. to Deactivate </p>
+										<form class="form-inline justify-content-center my-2 my-lg-0">
+										  <input class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search">
+										  <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+										</form>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Tab panels end -->
+					</div>
+				</div>
+			</div>
+        {% endblock %}
+
