@@ -4,24 +4,24 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.contrib.auth.models import User, Group
-#imports form sorp_app
+# imports form sorp_app
 from . import forms
 from . import models
 
 
-#for domain redirect
-def domain_redirect(request) :
+# for domain redirect
+def domain_redirect(request):
     return redirect('login/')
 
-#function to find the group of user
+
+# function to find the group of user
 def get_user_group(user):
-    g_name = user.groups.values_list('name',flat=True)
+    g_name = user.groups.values_list('name', flat=True)
     return g_name[0]
 
 
-
-#render login page
-def user_login(request) :
+# render login page
+def user_login(request):
     form = forms.login_form()
 
     if request.method == "POST":
@@ -41,11 +41,10 @@ def user_login(request) :
             else:
                 return HttpResponseRedirect('/login/')
 
-    return render(request,'sorp_app/login.html', {'form':form})
+    return render(request, 'sorp_app/login.html', {'form': form})
 
 
-
-#user_profile
+# user_profile
 @login_required
 def user_profile(request):
     grp = get_user_group(request.user)
@@ -54,7 +53,7 @@ def user_profile(request):
         sobj = user.studentinfo
         dobj = models.DocumentInfo.objects.filter(student=sobj, submitted=False)
         subobj = models.Subjects.objects.filter(classname=sobj.ug_class, branch=sobj.ug_branch, semester=sobj.ug_sem)
-        return render(request, 'sorp_app/stu_profile.html',{'sobj': sobj , 'dobj':dobj, 'subobj':subobj})
+        return render(request, 'sorp_app/stu_profile.html', {'sobj': sobj, 'dobj': dobj, 'subobj': subobj})
 
     elif grp == 'Registration Staff':
         # iform = forms.StudentInfoForm()
@@ -64,14 +63,19 @@ def user_profile(request):
         # return render( request, 'sorp_app/reg_profile.html')
         uobj = request.user
         return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj})
+
+
+    elif grp == 'Librarian' or grp == 'Hostel Warden' or grp == 'Administration Block':
+        uobj = request.user
+        return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp})
+
     else:
         return HttpResponse("You are not student or a Registraion Staff")
 
 
-
-#create_student user
+# create_student user
 @login_required
-def create_student(request) :
+def create_student(request):
     iform = forms.StudentInfoForm()
     mform = forms.StudentMedicalForm()
     fform = forms.StudentFirstFeeForm()
@@ -81,7 +85,7 @@ def create_student(request) :
         mform = forms.StudentMedicalForm(request.POST)
         fform = forms.StudentFirstFeeForm(request.POST)
 
-        if ( iform.is_valid() and mform.is_valid() and fform.is_valid()) is False :
+        if (iform.is_valid() and mform.is_valid() and fform.is_valid()) is False:
             print(iform.errors.as_data())
             print(mform.errors.as_data())
             print(fform.errors.as_data())
@@ -91,14 +95,14 @@ def create_student(request) :
             iformm = iform.save(commit=False)
             mformm = mform.save(commit=False)
             fformm = fform.save(commit=False)
-            #create user
+            # create user
             username = iform.cleaned_data['roll_no']
             password = iform.cleaned_data['father_name']
             email = iform.cleaned_data['email']
-            user = User.objects.create_user(username = username, password = password, email = email)
+            user = User.objects.create_user(username=username, password=password, email=email)
             my_group = Group.objects.get(name='Student')
             my_group.user_set.add(user)
-            #assgning OnetoOneField
+            # assgning OnetoOneField
             iformm.user = user
             iformm.save()
             mformm.student = iformm
@@ -106,46 +110,70 @@ def create_student(request) :
             mformm.save()
             fformm.save()
 
-            #document assignment
-            for i in range(1,dobj.count() + 1):
-                strr =  "doc"+ str(i)
+            # document assignment
+            for i in range(1, dobj.count() + 1):
+                strr = "doc" + str(i)
                 sub = request.POST.get(strr)
-                if sub is not None :
+                if sub is not None:
                     ans = True if (sub == "Yes") else False
-                    dinfo = models.DocumentInfo(student=iformm, document=dobj[i-1], submitted=ans)
+                    dinfo = models.DocumentInfo(student=iformm, document=dobj[i - 1], submitted=ans)
                     dinfo.save()
             iform.save_m2m()
 
             return HttpResponse("Your request is POST")
 
     else:
-        return render(request, 'sorp_app/reg_addstudent.html',{'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
+        return render(request, 'sorp_app/reg_addstudent.html',
+                      {'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
 
 
-
-
-#editing of student info
+# editing of student info
 @login_required
-def update_student(request) :
-    if request.method == 'POST' :
+def update_student(request):
+    if request.method == 'POST':
         roll_no = request.POST['roll']
         obj = models.StudentInfo.get(roll_no=roll_no)
         iform = forms.StudentInfoForm(instanse=obj)
         mform = forms.StudentMedicalForm(instanse=obj)
         fform = forms.StudentFirstFeeForm(instance=obj)
-        return render(request, 'sorp_app/reg_addstudent.html',{'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
+        return render(request, 'sorp_app/reg_addstudent.html',
+                      {'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
 
 
-#deactiviting of student
+# deactiviting of student
 @login_required
-def deactivate(request) :
-    if request.method == 'POST' :
+def deactivate(request):
+    if request.method == 'POST':
         roll_no = request.POST['roll']
         obj = models.StudentInfo.get(roll_no=roll_no)
-        obj.roll_no = 'roll_no'+'D'
+        obj.roll_no = 'roll_no' + 'D'
         obj.active_status = False
         return HttpResponse("STUDENT DEACTIVATED")
 
 
+import openpyxl
 
 
+def uploaded(request):
+    if request.method == "POST":
+        grp = get_user_group(request.user)
+    wb_obj = openpyxl.load_workbook(path)
+    sheet_obj = wb_obj.active
+
+    rows = sheet_obj.max_row
+    column = sheet_obj.max_column
+
+    i = 2
+    while i <= rows:
+        roll_obj = sheet_obj.cell(row=i, column=1)
+        fee_obj = sheet_obj.cell(row=i, column=2)
+        obj1 = models.StudentInfo.objects.get(roll_no=roll_obj)
+        if grp == 'Librarian':
+            obj2 = models.Due(roll_no=obj1, library_due=fee_obj)
+        elif grp == 'Administration Block':
+            obj2 = models.Due(roll_no=obj1, academic_due=fee_obj)
+        else:
+            obj2 = models.Due(roll_no=obj1, hostel_due=fee_obj)
+        
+        obj2.save()
+    return render(request, 'sorp_app/staff_profile.html')

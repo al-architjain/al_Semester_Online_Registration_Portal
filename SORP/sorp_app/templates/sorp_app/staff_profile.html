@@ -93,23 +93,29 @@
 
     </div>
     <div id="CheckDue" class="container tab-pane fade"><br>
-      <div class="card">
 
+{%ifequal ugrp 'Librarian' %}
+             <div class="card">
                <div class="card-header text-center">
                  <h4>Library Due</h4>
                </div>
-			
+
 			   
 				
                <div class="card-body text-center">
-                  <p class="card-text">If unpaid, visit Library before Registration</p>
-                  <form action="http://library.nith.ac.in/library/contact_us.php">
-                    <button class="btn btn-success">Check Now!</button>
+                  <p class="card-text">Upload File</p>
+                  <form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">
+                      {% csrf_token %}
+
+                    <input type="file"   name="{{ ugrp}}">
+                    <button class="btn btn-success" type="submit">Upload</button>
                   </form>
                 </div>
 				</div>
 				<br>
-				
+        {% endifequal %}
+
+   {%ifequal ugrp  'Administration Block' %}
 				<div class="card">
 				<div class="card-header text-center">
                  <h4>Admin Due</h4>
@@ -117,29 +123,34 @@
 
 				
                <div class="card-body text-center">
-                  <p class="card-text text-capitalize">If unpaid, visit Administrative Block before Registration</p>
-                  <form action="http://nith.ac.in/nith/?page_id=12037">
-                    <button class="btn btn-success">Check Now!</button>
+                 <p class="card-text">Upload File</p>
+                  <form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">
+                      {% csrf_token %}
+                    <input type="file" name="{{ ugrp}}">
+                    <button class="btn btn-success" type="submit">Upload</button>
                   </form>
                 </div>
 				</div>
 				<br>
+        {% endifequal%}
 							 
-
+ {% ifequal ugrp 'Hostel Warden'%}
 				<div class="card">
 				<div class="card-header text-center">
                  <h4>Hostel Due</h4>
                </div>
 			  
                <div class="card-body text-center">
-                  <p class="card-text text-capitalize">If unpaid, visit your respective MMCA office before Registration</p>
-                  <form action="http://nith.ac.in/nith/?page_id=12037">
-                    <button class="btn btn-success">Check Now!</button>
+                   <p class="card-text">Upload File</p>
+                  <form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">
+                      {% csrf_token %}
+                    <input type="file"  name="{{ ugrp}}">
+                    <button class="btn btn-success" type="submit">Upload</button>
                   </form>
                 </div>
 			   </div>
 			   <br>
-
+ {% endifequal%}
 
 			</div>
           </div>
