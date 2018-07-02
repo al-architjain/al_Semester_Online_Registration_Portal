@@ -78,11 +78,12 @@
 				<div class="row">
 					<div class="col-lg-3 col-md-3 col-sm-3">
 						<br><br>
-					  <img class="rounded mx-auto d-block" src="https://quilllegal.com.au/wp-content/uploads/2016/09/empty-profile.jpg">
+						{% load static %}
+					  <img class="rounded mx-auto d-block" src="{% static "def_profile_pic.jpg" %}">
 					  <div class="text-center mt-2">
-						  <label class="font-weight-bold" id="StaffName">Name</label><br>
-						  <label id="StaffPhone"><span class="text-muted">Phone: </span>XXXXXXXXXX</label><br>
-						  <label id="StaffEmail"><span class="text-muted">Email: </span>xyz@nith.ac.in</label><br>
+						  <label class="font-weight-bold" id="StaffName">{{ uobj.first_name }} {{ uobj.last_name }}</label><br>
+						  <label id="StaffPhone"><span class="text-muted">Email: </span>{{ uobj.email }}</label><br>
+						  <!--<label id="StaffEmail"><span class="text-muted">Email: </span>xyz@nith.ac.in</label><br>-->
 					  </div>
 					</div>
 

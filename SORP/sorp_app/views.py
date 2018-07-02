@@ -57,13 +57,13 @@ def user_profile(request):
         return render(request, 'sorp_app/stu_profile.html',{'sobj': sobj , 'dobj':dobj, 'subobj':subobj})
 
     elif grp == 'Registration Staff':
-        # uobj = request.user
-        iform = forms.StudentInfoForm()
-        mform = forms.StudentMedicalForm()
-        fform = forms.StudentFirstFeeForm()
-        dobj = models.Documents.objects.all()
-        return render( request, 'sorp_app/reg_profile.html')
-        # return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj})
+        # iform = forms.StudentInfoForm()
+        # mform = forms.StudentMedicalForm()
+        # fform = forms.StudentFirstFeeForm()
+        # dobj = models.Documents.objects.all()
+        # return render( request, 'sorp_app/reg_profile.html')
+        uobj = request.user
+        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj})
     else:
         return HttpResponse("You are not student or a Registraion Staff")
 

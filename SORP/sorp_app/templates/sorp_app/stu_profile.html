@@ -48,7 +48,7 @@
 						    	<button class="tablinks active" onclick="openTab(event, 'studentProfile')"><i class="fas fa-user"></i> Profile</button>
 						      	<button class="tablinks" onclick="openTab(event, 'documents')"><i class="fas fa-file"></i> Documents</button>
 						      	<button class="tablinks" onclick="openTab(event, 'subjects')"><i class="fas fa-info"></i> Subject Details</button>
-						      	<button class="tablinks" onclick="openTab(event, 'medDetails')"><i class="fas fa-notes-medical"></i> Medical Details</button>
+						      	<!--<button class="tablinks" onclick="openTab(event, 'medDetails')"><i class="fas fa-notes-medical"></i> Medical Details</button>-->
 						      	<button class="tablinks" onclick="openTab(event, 'dues')"><i class="fas fa-rupee-sign"></i> Dues</button>
 						      	<button class="tablinks" onclick="openTab(event, 'result')"><i class="far fa-newspaper"></i> Result</button>
 						    </div>
@@ -63,7 +63,7 @@
 					<div id="studentProfile" class="tabcontent active">
 						<h4 class="text-center font-weight-bold">GENERAL INFORMATION</h4><br>
 						<div class="row">
-							<div class="col-md-5 col-sm-5 col-5">
+							<div class="col-md-3 col-sm-3 col-3">
 								<div class="form-group">
 									<label ><b>Class</b></label>
 						   		</div>
@@ -71,13 +71,13 @@
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-5 col-sm-5 col-5">
+				  			<div class="col-md-6 col-sm-6 col-6">
 				  				<label>{{sobj.ug_class}}</label>
 				  			</div>
 				  		</div>
 
 				  		<div class="row">
-				  			<div class="col-md-5 col-sm-5 col-5">
+				  			<div class="col-md-3 col-sm-3 col-3">
 								<div class="form-group">
 									<label ><b>Branch</b></label>
 						   		</div>
@@ -85,13 +85,13 @@
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-5 col-sm-5 col-5">
+				  			<div class="col-md-6 col-sm-6 col-6">
 				  				<label>{{ sobj.ug_branch }}</label>
 				  			</div>
 				  		</div>
 
 				  		<div class="row">
-				  			<div class="col-md-5 col-sm-5 col-5">
+				  			<div class="col-md-3 col-sm-3 col-3">
 								<div class="form-group">
 									<label ><b>Semester</b></label>
 						   		</div>
@@ -99,13 +99,13 @@
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-5 col-sm-5 col-5">
+				  			<div class="col-md-6 col-sm-6 col-6">
 				  				<label>{{ sobj.ug_sem }}</label>
 				  			</div>
 				  		</div>
 
 				  		<div class="row">
-				  			<div class="col-md-5 col-sm-5 col-5">
+				  			<div class="col-md-3 col-sm-3 col-3">
 								<div class="form-group">
 									<label for=><b>Hostler</b></label>
 						   		</div>
@@ -113,13 +113,13 @@
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-5 col-sm-5 col-5">
+				  			<div class="col-md-6 col-sm-6 col-6">
 				  				<label>{{ sobj.hostel_name }}</label>
 				  			</div>
 				  		</div>
 
 				  		<div class="row">
-				  			<div class="col-md-5 col-sm-5 col-5">
+				  			<div class="col-md-3 col-sm-3 col-3">
 								<div class="form-group">
 									<label ><b>Correspondence Address</b></label>
 						   		</div>
@@ -127,13 +127,13 @@
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-5 col-sm-5 col-5">
+				  			<div class="col-md-6 col-sm-6 col-6">
 				  				<label>{{ sobj.corr_addr }}</label>
 				  			</div>
 				  		</div>
 
 				  		<div class="row">
-				  			<div class="col-md-5 col-sm-5 col-5">
+				  			<div class="col-md-3 col-sm-3 col-3">
 								<div class="form-group">
 									<label ><b>Permanent Address</b></label>
 						   		</div>
@@ -141,7 +141,7 @@
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-5 col-sm-5 col-5">
+				  			<div class="col-md-6 col-sm-6 col-6">
 				  				<label>{{ sobj.perm_addr }}</label>
 				  			</div>
 				  		</div>
@@ -315,7 +315,7 @@
 						</div>
 					</div>
 
-					<div id="medDetails" class="tabcontent">
+					<!--div id="medDetails" class="tabcontent">
 	          			<h4 class="text-center font-weight-bold">PERSONAL HISTORY</h4><br>
 
 		        		<div class="row">
@@ -461,12 +461,12 @@
 	 							</div>
 		        			</div>
 		        		</div>
-			  		</div>
+			  		</div-->
 
 
 					<div id="dues" class="tabcontent">
 
-	          			<h4 class="text-center font-weight-bold">PRIVIOUS DUES</h4><br>
+	          			<h4 class="text-center font-weight-bold">DUES</h4><br>
 
 						<div class="row">
 							<div class="col-lg-4">
