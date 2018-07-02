@@ -6,83 +6,70 @@
 
         {% block links %}
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-		<style>
-
-		img {
-			width: 50%;
-		}
-			.tab {
-				overflow: hidden;
-			}
-
-			/* Style the buttons inside the tab */
-			.tab button {
-				border-radius: 5px;
-				text-align: center;
-				width: 23%;
-				margin: 0 5%;
-				float: left;
-				border: none;
-				outline: none;
-				cursor: pointer;
-				padding: 10px 0;
-				transition: 0.3s;
-				font-size: 17px;
-				white-space: wrap;
-				text-overflow: ellipsis;
-			}
-
-			/* Change background color of buttons on hover */
-			.tab button:hover {
-				background-color: lightblue;
-			}
-
-			/* Create an active/current tablink class */
-			.tab button.active {
-				color: white;
-				background-color: #5292f9;
-			}
-
-			/* Style the tab content */
-			.tabcontent {
-				display: none;
-				padding: 6px 12px;
-				-webkit-animation: fadeEffect 1s;
-				animation: fadeEffect 1s;
-			}
-
-			/* Fade in tabs */
-			@-webkit-keyframes fadeEffect {
-				from {opacity: 0;}
-				to {opacity: 1;}
-			}
-
-			@keyframes fadeEffect {
-				from {opacity: 0;}
-				to {opacity: 1;}
-			}
-
-			div#addStudent {
-				display: block;
-			}
-		</style>
-
-			<script>
-				function openCity(evt, cityName) {
-					var i, tabcontent, tablinks;
-					tabcontent = document.getElementsByClassName("tabcontent");
-					for (i = 0; i < tabcontent.length; i++) {
-						tabcontent[i].style.display = "none";
-					}
-					tablinks = document.getElementsByClassName("tablinks");
-					for (i = 0; i < tablinks.length; i++) {
-						tablinks[i].className = tablinks[i].className.replace(" active", "");
-					}
-					document.getElementById(cityName).style.display = "block";
-					evt.currentTarget.className += " active";
-				}
-			</script>
         {% endblock %}
+
+		{% block styles %}
+			<style>
+
+				img {
+					width: 50%;
+				}
+					.tab {
+						overflow: hidden;
+					}
+
+					/* Style the buttons inside the tab */
+					.tab button {
+						border-radius: 5px;
+						text-align: center;
+						width: 23%;
+						margin: 0 5%;
+						float: left;
+						border: none;
+						outline: none;
+						cursor: pointer;
+						padding: 10px 0;
+						transition: 0.3s;
+						font-size: 17px;
+						white-space: wrap;
+						text-overflow: ellipsis;
+					}
+
+					/* Change background color of buttons on hover */
+					.tab button:hover {
+						background-color: lightblue;
+					}
+
+					/* Create an active/current tablink class */
+					.tab button.active {
+						color: white;
+						background-color: #5292f9;
+					}
+
+					/* Style the tab content */
+					.tabcontent {
+						display: none;
+						padding: 6px 12px;
+						-webkit-animation: fadeEffect 1s;
+						animation: fadeEffect 1s;
+					}
+
+					/* Fade in tabs */
+					@-webkit-keyframes fadeEffect {
+						from {opacity: 0;}
+						to {opacity: 1;}
+					}
+
+					@keyframes fadeEffect {
+						from {opacity: 0;}
+						to {opacity: 1;}
+					}
+
+					div#addStudent {
+						display: block;
+					}
+			</style>
+		{% endblock %}
 
 
         {% block bodycontent %}
@@ -104,9 +91,9 @@
 						<div class="row">
 							<div style="margin-top: 10px" class="col-lg-12 col-md-12">
 								<div class="tab">
-								  <button class="tablinks active" onclick="openCity(event, 'addStudent')"><i class="fas fa-user-plus"></i> Add Student</button>
-								  <button class="tablinks" onclick="openCity(event, 'updateStudent')"><i class="fas fa-edit"></i> Update Student</button>
-								  <button class="tablinks" onclick="openCity(event, 'deactivateStudent')"><i class="fas fa-ban"></i> Deactivate Student</button>
+								  <button class="tablinks active" onclick="openTab(event, 'addStudent')"><i class="fas fa-user-plus"></i> Add Student</button>
+								  <button class="tablinks" onclick="openTab(event, 'updateStudent')"><i class="fas fa-edit"></i> Update Student</button>
+								  <button class="tablinks" onclick="openTab	(event, 'deactivateStudent')"><i class="fas fa-ban"></i> Deactivate Student</button>
 								</div>
 							</div>
 						</div>
@@ -121,7 +108,7 @@
 
 										<div class="card-body text-center">
 											<br>
-											<a class="btn btn-success" href=""> Create Now </a><br>
+											<a class="btn btn-success" href="/create_student"> Create Now </a><br>
 											<br>
 										</div>
 									</div>
@@ -167,4 +154,9 @@
 				</div>
 			</div>
         {% endblock %}
+
+		{% block staticfiles %}
+				{% load static %}
+				<script type="text/javascript" src="{% static "sorp_app/r_addstudent.js" %}"></script>
+		{% endblock %}
 
