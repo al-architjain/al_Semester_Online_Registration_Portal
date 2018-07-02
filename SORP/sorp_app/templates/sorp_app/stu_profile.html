@@ -9,6 +9,7 @@
     {% endblock %}
 
     {% block links %}
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
         <!-- Online links will come here! -->
     {% endblock %}
 
@@ -44,12 +45,12 @@
 
 						<div class="collapse navbar-collapse" id="collapseButton">
 							<div class="tab">
-						    	<button class="tablinks active" onclick="openTab(event, 'studentProfile')">Profile</button>
-						      	<button class="tablinks" onclick="openTab(event, 'documents')">Documents</button>
-						      	<button class="tablinks" onclick="openTab(event, 'subjects')">Subject Details</button>
-						      	<button class="tablinks" onclick="openTab(event, 'medDetails')">Medical Details</button>
-						      	<button class="tablinks" onclick="openTab(event, 'dues')">Dues</button>
-						      	<button class="tablinks" onclick="openTab(event, 'result')">Result</button>
+						    	<button class="tablinks active" onclick="openTab(event, 'studentProfile')"><i class="fas fa-user"></i> Profile</button>
+						      	<button class="tablinks" onclick="openTab(event, 'documents')"><i class="fas fa-file"></i> Documents</button>
+						      	<button class="tablinks" onclick="openTab(event, 'subjects')"><i class="fas fa-info"></i> Subject Details</button>
+						      	<button class="tablinks" onclick="openTab(event, 'medDetails')"><i class="fas fa-notes-medical"></i> Medical Details</button>
+						      	<button class="tablinks" onclick="openTab(event, 'dues')"><i class="fas fa-rupee-sign"></i> Dues</button>
+						      	<button class="tablinks" onclick="openTab(event, 'result')"><i class="far fa-newspaper"></i> Result</button>
 						    </div>
 						</div>
 					</nav>
@@ -59,7 +60,7 @@
 
 			<!-----------------------------------  RIGHT COLUMN FOR VIEWS  ------------------------------------------->
 			<div class="col-lg-9 col-md-9 col-sm-9 col-12 mygrid1">
-					<div id="studentProfile" class="tabcontent">
+					<div id="studentProfile" class="tabcontent active">
 						<h4 class="text-center font-weight-bold">GENERAL INFORMATION</h4><br>
 						<div class="row">
 							<div class="col-md-5 col-sm-5 col-5">
@@ -482,7 +483,7 @@
 								<div class="card">
 								  	<h4>Hostel Due</h4>
 								  	<div class="card-body">
-								    	<p class="card-text">If unpaid, visit your respective hostel</p>
+								    	<p class="card-text">If unpaid, visit MMCA Office of respective hostel</p>
 								    	<a href="#" class="btn btn-success">Check Now!</a>
 
 								  	</div>

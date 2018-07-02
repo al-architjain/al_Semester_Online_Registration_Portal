@@ -5,79 +5,163 @@
         {% endblock %}
 
         {% block links %}
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+		<style>
+
+		img {
+			width: 50%;
+		}
+			.tab {
+				overflow: hidden;
+			}
+
+			/* Style the buttons inside the tab */
+			.tab button {
+				border-radius: 5px;
+				text-align: center;
+				width: 23%;
+				margin: 0 5%;
+				float: left;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				padding: 10px 0;
+				transition: 0.3s;
+				font-size: 17px;
+				white-space: wrap;
+				text-overflow: ellipsis;
+			}
+
+			/* Change background color of buttons on hover */
+			.tab button:hover {
+				background-color: lightblue;
+			}
+
+			/* Create an active/current tablink class */
+			.tab button.active {
+				color: white;
+				background-color: #5292f9;
+			}
+
+			/* Style the tab content */
+			.tabcontent {
+				display: none;
+				padding: 6px 12px;
+				-webkit-animation: fadeEffect 1s;
+				animation: fadeEffect 1s;
+			}
+
+			/* Fade in tabs */
+			@-webkit-keyframes fadeEffect {
+				from {opacity: 0;}
+				to {opacity: 1;}
+			}
+
+			@keyframes fadeEffect {
+				from {opacity: 0;}
+				to {opacity: 1;}
+			}
+
+			div#addStudent {
+				display: block;
+			}
+		</style>
+
+			<script>
+				function openCity(evt, cityName) {
+					var i, tabcontent, tablinks;
+					tabcontent = document.getElementsByClassName("tabcontent");
+					for (i = 0; i < tabcontent.length; i++) {
+						tabcontent[i].style.display = "none";
+					}
+					tablinks = document.getElementsByClassName("tablinks");
+					for (i = 0; i < tablinks.length; i++) {
+						tablinks[i].className = tablinks[i].className.replace(" active", "");
+					}
+					document.getElementById(cityName).style.display = "block";
+					evt.currentTarget.className += " active";
+				}
+			</script>
         {% endblock %}
 
 
         {% block bodycontent %}
-			<br><br>
+			<br>
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					<div class="col-lg-3 col-md-3 col-sm-3">
 						<br><br>
-					  <img class="rounded mx-auto d-block" width="150" height="150" src="profile_empty.jpg" alt="Staff Image" style="border:2px solid black" />
+					  <img class="rounded mx-auto d-block" src="https://quilllegal.com.au/wp-content/uploads/2016/09/empty-profile.jpg">
 					  <div class="text-center mt-2">
 						  <label class="font-weight-bold" id="StaffName">Name</label><br>
 						  <label id="StaffPhone"><span class="text-muted">Phone: </span>XXXXXXXXXX</label><br>
 						  <label id="StaffEmail"><span class="text-muted">Email: </span>xyz@nith.ac.in</label><br>
 					  </div>
-						<br><br>
 					</div>
 
-					<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+					<div class="col-lg-9 col-md-9 col-sm-9">
 						<!-- Tabs list -->
-						<ul class="nav nav-pills justify-content-around" role="tablist">
-						<li class="nav-item"><a class="nav-link btn btn-outline-info active" data-toggle="pill" href="#CreateProfile"><i class="fa fa-user-plus"></i> Create </a></li>
-						<li class="nav-item"><a class="nav-link btn btn-outline-info" data-toggle="pill" href="#UpdateProfile"><i class="fa fa-refresh"></i> Update</a></li>
-						<li class="nav-item"><a class="nav-link btn btn-outline-info p-2" syle="font-size:20px" data-toggle="pill" href="#DeactivateProfile"><i class="fa fa-ban"></i> Deactivate</a></li>
-						</ul>
-						<!-- Tab list ends -->
+						<div class="row">
+							<div style="margin-top: 10px" class="col-lg-12 col-md-12">
+								<div class="tab">
+								  <button class="tablinks active" onclick="openCity(event, 'addStudent')"><i class="fas fa-user-plus"></i> Add Student</button>
+								  <button class="tablinks" onclick="openCity(event, 'updateStudent')"><i class="fas fa-edit"></i> Update Student</button>
+								  <button class="tablinks" onclick="openCity(event, 'deactivateStudent')"><i class="fas fa-ban"></i> Deactivate Student</button>
+								</div>
+							</div>
+						</div>
 
-						<!-- Tab panels -->
-						<div class="tab-content">
-							<div id="CreateProfile" class="container tab-pane active"><br>
-								<div class="card">
-								   <div class="card-header text-center">
-									 <h4>Create Student Profile</h4>
-								   </div>
-									<div class="card-body text-center">
-										<br>
-										<a class="btn btn-success" href=""> Create Now </a><br>
-										<br>
+						<div class="row">
+							<div style="margin-top: 10px" class="col-lg-12 col-md-12">
+								<div id="addStudent" class="tabcontent">
+									<div class="card">
+									   <div class="card-header text-center">
+										   <h4>Add Student Information</h4>
+									   </div>
+
+										<div class="card-body text-center">
+											<br>
+											<a class="btn btn-success" href=""> Create Now </a><br>
+											<br>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div id="UpdateProfile" class="container tab-pane fade"><br>
-								<div class="card">
-									<div class="card-header text-center">
-										<h4>Update Student Profile</h4>
+
+								<div id="updateStudent" class="tabcontent">
+									<div class="card">
+										<div class="card-header text-center">
+											<h4>Update Student Profile</h4>
+										</div>
+										<div class="card-body text-center">
+											<p class="card-text text-capitalize mt-2">Search Roll No. to Update </p>
+											 <form class="form-inline justify-content-center my-2 my-lg-0">
+												  <input class="form-control mr-sm-2" id="RollNoUpdate" type="search" placeholder="Enter Roll No" aria-label="Search">
+												  <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+											</form>
+											<br>
+										</div>
 									</div>
-									<div class="card-body text-center">
-										<p class="card-text text-capitalize mt-2">Search Roll No. to Update </p>
-										 <form class="form-inline justify-content-center my-2 my-lg-0">
-											  <input class="form-control mr-sm-2" id="RollNoUpdate" type="search" placeholder="Enter Roll No" aria-label="Search">
+								</div>
+
+								<div id="deactivateStudent" class="tabcontent">
+									<div class="card">
+										<div class="card-header text-center">
+										 <h4>Deactivate Student Profile</h4>
+										</div>
+										<div class="card-body text-center">
+											 <p class="card-text text-capitalize">Search Roll No. to Deactivate </p>
+											<form class="form-inline justify-content-center my-2 my-lg-0">
+											  <input class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search">
 											  <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-										</form>
-										<br>
-									</div>
-								</div>
-							</div>
-							<div id="DeactivateProfile" class="container tab-pane fade"><br>
-								<div class="card">
-									<div class="card-header text-center">
-									 <h4>Deactivate Student Profile</h4>
-									</div>
-									<div class="card-body text-center">
-										 <p class="card-text text-capitalize">Search Roll No. to Deactivate </p>
-										<form class="form-inline justify-content-center my-2 my-lg-0">
-										  <input class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search">
-										  <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-										</form>
-										<br>
+											</form>
+											<br>
 									</div>
 								</div>
 							</div>
 						</div>
+
+
+
 						<!-- Tab panels end -->
 					</div>
 				</div>

@@ -38,6 +38,7 @@ h4 {
 
 /* Create an active/current tablink class */
 .tab button.active {
+    color: white;
     background-color: lightblue;
 }
 
