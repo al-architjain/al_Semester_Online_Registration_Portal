@@ -75,12 +75,11 @@ def create_student(request) :
     iform = forms.StudentInfoForm()
     mform = forms.StudentMedicalForm()
     fform = forms.StudentFirstFeeForm()
-
+    dobj = models.Documents.objects.all()
     if request.method == "POST":
         iform = forms.StudentInfoForm(request.POST)
         mform = forms.StudentMedicalForm(request.POST)
         fform = forms.StudentFirstFeeForm(request.POST)
-        dobj = models.Documents.objects.all()
 
         if ( iform.is_valid() and mform.is_valid() and fform.is_valid()) is False :
             print(iform.errors.as_data())
@@ -111,7 +110,6 @@ def create_student(request) :
             for i in range(1,dobj.count() + 1):
                 strr =  "doc"+ str(i)
                 sub = request.POST.get(strr)
-                # print ("in i loop: ", i," strrr is ",sub,  type(sub), len(sub))
                 if sub is not None :
                     ans = True if (sub == "Yes") else False
                     dinfo = models.DocumentInfo(student=iformm, document=dobj[i-1], submitted=ans)
