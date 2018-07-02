@@ -18,7 +18,6 @@
 
     {% block bodycontent %}
         <div   class="container">
-        <h1 style="margin: 0;">1st Year Student Registration</h1>
         <!-- creating form for the whole registration process -->
 
         <!--****************************************************************************************************************************************-->
@@ -315,17 +314,18 @@
                             <input class="form-control" type="text" id="{{ iform.entry_no.id_for_label }}" placeholder="Enter Entry Number" name="{{ iform.entry_no.html_name }}">
                         </div>
                     </div>
+                    <br>
                     <div class="row">
                         <div class="col-lg-4 col-md-4">
                             {{ iform.hosteler.errors }}
                             <label for="{{ iform.hosteler.id_for_label }}"><b>Hosteler??</b></label>
-                            {{ iform.hosteler }}
+                            <br>{{ iform.hosteler }}
                             <!--<input class="form-control" type="text" id="{{ iform.hosteler.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.hosteler.html_name }}">-->
                         </div>
                         <div class="col-lg-4 col-md-4">
                             {{ iform.hostel_name.errors }}
                             <label for="{{ iform.hostel_name.id_for_label }}"><b>Hostel Name</b></label>
-                            {{ iform.hostel_name }}
+                            <br>{{ iform.hostel_name }}
                             <!--<input class="form-control" type="text" id="{{ iform.hostel_name.id_for_label }}" placeholder="Enter Hostel Name" name="{{ iform.hostel_name.html_name }}">-->
                         </div>
 
