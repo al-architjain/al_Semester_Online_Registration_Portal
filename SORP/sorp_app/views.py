@@ -62,7 +62,7 @@ def user_profile(request):
         mform = forms.StudentMedicalForm()
         fform = forms.StudentFirstFeeForm()
         dobj = models.Documents.objects.all()
-        return render( request, 'sorp_app/reg_addstudent.html', {'iform': iform , 'mform': mform, 'dobj': dobj,'fform': fform })
+        return render( request, 'sorp_app/reg_profile.html')
         # return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj})
     else:
         return HttpResponse("You are not student or a Registraion Staff")

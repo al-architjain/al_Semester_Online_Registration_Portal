@@ -55,6 +55,7 @@ h4 {
     padding: 10px 0;
     font-size: 17px;
     margin-bottom: 2px;
+    color: white;
 }
 
 /* Change background color of buttons on hover */
@@ -65,6 +66,7 @@ h4 {
 
 /* Create an active/current tablink class */
 .tab button.active {
+    color: black;
     background-color: lightgreen;
 }
 
