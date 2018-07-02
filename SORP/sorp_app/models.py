@@ -114,6 +114,7 @@ class StudentInfo(models.Model):
     name_hindi = models.CharField(max_length=64, null=True)
     email = models.EmailField()
     gender_choices = (
+        ('---------', '---------'),
         ('Male', 'Male'),
         ('Female', 'Female'),
         ('Other', 'Other')
@@ -125,6 +126,7 @@ class StudentInfo(models.Model):
     contact = models.CharField(max_length=16, null=True)
     aadhar_no = models.CharField(max_length=16, unique='True', null=True)
     area_choice = (
+        ('---------', '---------'),
         ('Rural', 'Rural'),
         ('Urban', 'Urban'),
     )
@@ -149,6 +151,7 @@ class StudentInfo(models.Model):
     int_percentage = models.DecimalField(max_digits=5, decimal_places=3, db_column='12th Percentage')
     int_pass_year = models.IntegerField(default=currYear, db_column='10+2 Pass Year')
     school_type_choices = (
+        ('---------', '---------'),
         ('Government', 'Government School'),
         ('Private', 'Private School')
     )

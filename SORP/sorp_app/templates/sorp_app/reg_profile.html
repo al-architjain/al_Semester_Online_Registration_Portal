@@ -73,7 +73,9 @@
 
 
         {% block bodycontent %}
-			<br>
+			<div style="background: #5292f9" class="text-center">
+				<p style="font-size: 40px; color: white">Online Registration Portal <span style="font-size: 50%; margin-top: 2%;" class="float-right"><a style=" color: white; margin-right:10px" href="">LogOut</a></span></p>
+			</div>
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-3 col-md-3 col-sm-3">
@@ -151,7 +153,14 @@
 
 						<!-- Tab panels end -->
 					</div>
+
+					<div class="row">
+						<div class="col-lg-12">
+							<button class="btn btn-primary float-right">LogOut</button>
+						</div>
+					</div>
 				</div>
+
 			</div>
         {% endblock %}
 
