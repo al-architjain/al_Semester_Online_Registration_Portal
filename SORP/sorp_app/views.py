@@ -1,18 +1,20 @@
 from django.shortcuts import render
 from django.http import *
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.contrib.auth.models import User, Group
 # imports form sorp_app
 from . import forms
 from . import models
+#for excel files.
+import openpyxl
 
+#-----------------------------------------------------------#
 
 # for domain redirect
 def domain_redirect(request):
     return redirect('login/')
-
 
 # function to find the group of user
 def get_user_group(user):
@@ -20,28 +22,29 @@ def get_user_group(user):
     return g_name[0]
 
 
-# render login page
+
+
+# User Login Authetication
 def user_login(request):
     form = forms.login_form()
+    logout(request)
 
     if request.method == "POST":
         form = forms.login_form(request.POST)
-
         username = password = ''
 
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
-
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect('/profile/')
             else:
-                return HttpResponseRedirect('/login/')
+                return render(request, 'sorp_app/login.html', {'form': form, 'invalid':True})
 
-    return render(request, 'sorp_app/login.html', {'form': form})
+    return render(request, 'sorp_app/login.html', {'form': form, 'invalid': False})
 
 
 # user_profile
@@ -149,9 +152,6 @@ def deactivate(request):
         obj.roll_no = 'roll_no' + 'D'
         obj.active_status = False
         return HttpResponse("STUDENT DEACTIVATED")
-
-
-import openpyxl
 
 
 def uploaded(request):
