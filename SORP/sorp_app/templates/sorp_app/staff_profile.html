@@ -1,164 +1,294 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Library Staff</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+{% extends "base.html" %}
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+    {% block title %}
+        Staff Profile
+    {% endblock %}
 
-<body>
-<br>
+    {% block links %}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    {% endblock %}
 
-<div class="container">
-  <div class="row">
-<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    {% block styles %}
+            <style>
 
-  <img class="rounded mx-auto d-block" width="150" height="150" src="profile_empty.jpg" alt="Staff Image" style="border:2px solid black" />
-  <div class="text-center font-weight-bold mt-2">
-  <label id="StaffName">Staff Name</label>
-  </div>
-</div>
-<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-</div>
+                img {
+                    width: 50%;
+                }
+                    .tab {
+                        overflow: hidden;
+                    }
 
-<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    /* Style the buttons inside the tab */
+                    .tab button {
+                        border-radius: 5px;
+                        text-align: center;
+                        width: 23%;
+                        margin: 0 5%;
+                        float: left;
+                        border: none;
+                        outline: none;
+                        cursor: pointer;
+                        padding: 10px 0;
+                        transition: 0.3s;
+                        font-size: 17px;
+                        white-space: wrap;
+                        text-overflow: ellipsis;
+                    }
 
-  <!-- Nav pills -->
-  <ul class="nav nav-pills justify-content-around" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link btn btn-outline-info active" data-toggle="pill" href="#LibrarianProfile"><i class="fa fa-user-circle-o"></i> Profile </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link btn btn-outline-info" data-toggle="pill" href="#CheckDue"><i class="fa fa-rupee"></i> Dues</a>
-    </li>
+                    /* Change background color of buttons on hover */
+                    .tab button:hover {
+                        background-color: lightblue;
+                    }
 
-  </ul>
+                    /* Create an active/current tablink class */
+                    .tab button.active {
+                        color: white;
+                        background-color: #5292f9;
+                    }
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div id="LibrarianProfile" class="container tab-pane active"><br>
+                    /* Style the tab content */
+                    .tabcontent {
+                        display: none;
+                        padding: 6px 12px;
+                        -webkit-animation: fadeEffect 1s;
+                        animation: fadeEffect 1s;
+                    }
 
-      <div class="card">
-           <div class="card-body text-justify">
-             <div class="row">
-                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                         <label class="font-weight-bold">Name</label>
-                       </div>
-                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                         <label>Nitin Paliwal</label>
-                       </div>
-                   </div>
-                   <hr />
+                    /* Fade in tabs */
+                    @-webkit-keyframes fadeEffect {
+                        from {opacity: 0;}
+                        to {opacity: 1;}
+                    }
 
-                   <div class="row">
-                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                               <label class="font-weight-bold">Email</label>
-                             </div>
-                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                               <label>library@nith.ac.in</label>
-                             </div>
-                         </div>
-                         <hr />
+                    @keyframes fadeEffect {
+                        from {opacity: 0;}
+                        to {opacity: 1;}
+                    }
+
+                    div#CheckDue{
+                        display: block;
+                    }
+            </style>
+    {% endblock %}
 
 
-                         <div class="row">
-                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                     <label class="font-weight-bold">Phone</label>
+    {% block bodycontent %}
+        <div style="background: #5292f9" class="text-center">
+            <p style="font-size: 40px; color: white">Online Registration Portal <span style="font-size: 50%; margin-top: 2%;" class="float-right"><a style=" color: white; margin-right:10px" href="">LogOut</a></span></p>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <br><br>
+                    {% load static %}
+                    <img class="rounded mx-auto d-block" src="{% static "def_profile_pic.jpg" %}">
+                        <div class="text-center mt-2">
+                            <label class="font-weight-bold" id="StaffName">{{ uobj.first_name }} {{ uobj.last_name }}</label><br>
+                            <label id="StaffPhone"><span class="text-muted">Email: </span>{{ uobj.email }}</label><br>
+                              <!--<label id="StaffEmail"><span class="text-muted">Email: </span>xyz@nith.ac.in</label><br>-->
+                        </div>
+                </div>
+
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                    <!-- Tabs list -->
+                    <div class="row">
+                        <div style="margin-top: 10px" class="col-lg-12 col-md-12">
+                            <div class="tab">
+                              <button class="tablinks active" onclick="openTab(event, 'CheckDue')"><i class="fas fa-user-plus"></i> Check Dues</button>
+                              <!--<button class="tablinks" onclick="openTab(event, 'updateStudent')"><i class="fas fa-edit"></i> Update Student</button>-->
+                              <!--<button class="tablinks" onclick="openTab	(event, 'deactivateStudent')"><i class="fas fa-ban"></i> Deactivate Student</button>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div style="margin-top: 10px" class="col-lg-12 col-md-12">
+                            <div id="CheckDue" class="tabcontent">
+                                {%ifequal ugrp 'Librarian' %}
+                                    <div class="card">
+                                       <div class="card-header text-center">
+                                         <h4>Library Due</h4>
+                                       </div>
+
+                                       <div class="card-body text-center">
+                                          <p class="card-text">Upload File</p>
+                                          <form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">
+                                              {% csrf_token %}
+
+                                            <input type="file"   name="file" required>
+                                            <button class="btn btn-success" type="submit">Upload</button>
+                                          </form>
+                                       </div>
+                                    </div>
+                                    <br>
+                                {% endifequal %}
+
+                                {%ifequal ugrp  'Administration Block' %}
+                                    <div class="card">
+                                        <div class="card-header text-center">
+                                           <h4>Admin Due</h4>
+                                        </div>
+
+                                        <div class="card-body text-center">
+                                            <p class="card-text">Upload File</p>
+                                            <form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <input type="file" name="file" required>
+                                                <button class="btn btn-success" type="submit">Upload</button>
+                                          </form>
+                                        </div>
+                                    </div>
+                                    <br>
+                                {% endifequal%}
+
+                                {% ifequal ugrp 'Hostel Warden'%}
+                                    <div class="card">
+                                    <div class="card-header text-center">
+                                     <h4>Hostel Due</h4>
                                    </div>
-                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                     <label>01972-254170</label>
+
+                                   <div class="card-body text-center">
+                                       <p class="card-text">Upload File</p>
+                                      <form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">
+                                          {% csrf_token %}
+                                        <input type="file"  name="file" required>
+                                        <button class="btn btn-success" type="submit">Upload</button>
+                                      </form>
+                                    </div>
                                    </div>
-                               </div>
-                               <hr />
-
-                               <div class="row">
-                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                           <label class="font-weight-bold">Address</label>
-                                         </div>
-                                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                           <label>Central Library, NIT, Hamirpur, H.P.-177005 </label>
-                                         </div>
-                                     </div>
-
-         </div>
-
-       </div>
-
-
-    </div>
-    <div id="CheckDue" class="container tab-pane fade"><br>
-
-{%ifequal ugrp 'Librarian' %}
-             <div class="card">
-               <div class="card-header text-center">
-                 <h4>Library Due</h4>
-               </div>
-
-			   
-				
-               <div class="card-body text-center">
-                  <p class="card-text">Upload File</p>
-                  <form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">
-                      {% csrf_token %}
-
-                    <input type="file"   name="file" required>
-                    <button class="btn btn-success" type="submit">Upload</button>
-                  </form>
+                                    <br>
+                                {% endifequal%}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-				</div>
-				<br>
-        {% endifequal %}
+            </div>
+        </div>
 
-   {%ifequal ugrp  'Administration Block' %}
-				<div class="card">
-				<div class="card-header text-center">
-                 <h4>Admin Due</h4>
-               </div>
 
-				
-               <div class="card-body text-center">
-                 <p class="card-text">Upload File</p>
-                  <form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">
-                      {% csrf_token %}
-                    <input type="file" name="file" required>
-                    <button class="btn btn-success" type="submit">Upload</button>
-                  </form>
-                </div>
-				</div>
-				<br>
-        {% endifequal%}
-							 
- {% ifequal ugrp 'Hostel Warden'%}
-				<div class="card">
-				<div class="card-header text-center">
-                 <h4>Hostel Due</h4>
-               </div>
-			  
-               <div class="card-body text-center">
-                   <p class="card-text">Upload File</p>
-                  <form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">
-                      {% csrf_token %}
-                    <input type="file"  name="file" required>
-                    <button class="btn btn-success" type="submit">Upload</button>
-                  </form>
-                </div>
-			   </div>
-			   <br>
- {% endifequal%}
+<!--<ul class="nav nav-pills justify-content-around" role="tablist">-->
+                    <!--<li class="nav-item">-->
+                      <!--<a class="nav-link btn btn-outline-info active" data-toggle="pill" href="#LibrarianProfile"><i class="fa fa-user-circle-o"></i> Profile </a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item">-->
+                      <!--<a class="nav-link btn btn-outline-info" data-toggle="pill" href="#CheckDue"><i class="fa fa-rupee"></i> Dues</a>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--<div class="tab-content">-->
+                        <!--<div id="LibrarianProfile" class="container tab-pane active"><br>-->
 
-			</div>
-          </div>
-		  
-      </div>
-	</div>
-    
-</div>
-</div>
-</body>
-</html>
+              <!--<div class="card">-->
+                   <!--<div class="card-body text-justify">-->
+                     <!--<div class="row">-->
+                             <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">-->
+                                 <!--<label class="font-weight-bold">Name</label>-->
+                               <!--</div>-->
+                                 <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">-->
+                                 <!--<label>Nitin Paliwal</label>-->
+                               <!--</div>-->
+                           <!--</div>-->
+                           <!--<hr />-->
+
+                           <!--<div class="row">-->
+                                   <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">-->
+                                       <!--<label class="font-weight-bold">Email</label>-->
+                                     <!--</div>-->
+                                       <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">-->
+                                       <!--<label>library@nith.ac.in</label>-->
+                                     <!--</div>-->
+                                 <!--</div>-->
+                                 <!--<hr />-->
+
+
+                                 <!--<div class="row">-->
+                                         <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">-->
+                                             <!--<label class="font-weight-bold">Phone</label>-->
+                                           <!--</div>-->
+                                             <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">-->
+                                             <!--<label>01972-254170</label>-->
+                                           <!--</div>-->
+                                       <!--</div>-->
+                                       <!--<hr />-->
+
+                                       <!--<div class="row">-->
+                                               <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">-->
+                                                   <!--<label class="font-weight-bold">Address</label>-->
+                                                 <!--</div>-->
+                                                   <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">-->
+                                                   <!--<label>Central Library, NIT, Hamirpur, H.P.-177005 </label>-->
+                                                 <!--</div>-->
+                                             <!--</div>-->
+
+                 <!--</div>-->
+
+               <!--</div>-->
+
+
+            <!--</div>-->
+            <!--<div id="CheckDue" class="container tab-pane fade"><br>-->
+
+                <!--{%ifequal ugrp 'Librarian' %}-->
+                    <!--<div class="card">-->
+                       <!--<div class="card-header text-center">-->
+                         <!--<h4>Library Due</h4>-->
+                       <!--</div>-->
+
+
+
+                       <!--<div class="card-body text-center">-->
+                          <!--<p class="card-text">Upload File</p>-->
+                          <!--<form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">-->
+                              <!--{% csrf_token %}-->
+
+                            <!--<input type="file"   name="file" required>-->
+                            <!--<button class="btn btn-success" type="submit">Upload</button>-->
+                          <!--</form>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    <!--<br>-->
+                <!--{% endifequal %}-->
+
+                <!--{%ifequal ugrp  'Administration Block' %}-->
+                    <!--<div class="card">-->
+                    <!--<div class="card-header text-center">-->
+                     <!--<h4>Admin Due</h4>-->
+                   <!--</div>-->
+
+
+                   <!--<div class="card-body text-center">-->
+                     <!--<p class="card-text">Upload File</p>-->
+                      <!--<form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">-->
+                          <!--{% csrf_token %}-->
+                        <!--<input type="file" name="file" required>-->
+                        <!--<button class="btn btn-success" type="submit">Upload</button>-->
+                      <!--</form>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<br>-->
+                <!--{% endifequal%}-->
+
+                <!--{% ifequal ugrp 'Hostel Warden'%}-->
+                    <!--<div class="card">-->
+                    <!--<div class="card-header text-center">-->
+                     <!--<h4>Hostel Due</h4>-->
+                   <!--</div>-->
+
+                   <!--<div class="card-body text-center">-->
+                       <!--<p class="card-text">Upload File</p>-->
+                      <!--<form method="post" action="{%url 'sorp_app:uploaded'%}"  enctype="multipart/form-data">-->
+                          <!--{% csrf_token %}-->
+                        <!--<input type="file"  name="file" required>-->
+                        <!--<button class="btn btn-success" type="submit">Upload</button>-->
+                      <!--</form>-->
+                    <!--</div>-->
+                   <!--</div>-->
+                    <!--<br>-->
+                <!--{% endifequal%}-->
+
+        {% endblock %}
+
+        {% block staticfiles %}
+            {% load static %}
+            <script type="text/javascript" src="{% static "sorp_app/r_addstudent.js" %}"></script>
+        {% endblock %}
