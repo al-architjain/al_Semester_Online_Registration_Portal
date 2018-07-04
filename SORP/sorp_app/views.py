@@ -157,23 +157,43 @@ def deactivate(request):
 def uploaded(request):
     if request.method == "POST":
         grp = get_user_group(request.user)
-    wb_obj = openpyxl.load_workbook(path)
-    sheet_obj = wb_obj.active
+        path=request.FILES['file']
 
-    rows = sheet_obj.max_row
-    column = sheet_obj.max_column
+        wb_obj = openpyxl.load_workbook(path)
+        sheet_obj = wb_obj.active
 
-    i = 2
-    while i <= rows:
-        roll_obj = sheet_obj.cell(row=i, column=1)
-        fee_obj = sheet_obj.cell(row=i, column=2)
-        obj1 = models.StudentInfo.objects.get(roll_no=roll_obj)
-        if grp == 'Librarian':
-            obj2 = models.Due(roll_no=obj1, library_due=fee_obj)
-        elif grp == 'Administration Block':
-            obj2 = models.Due(roll_no=obj1, academic_due=fee_obj)
-        else:
-            obj2 = models.Due(roll_no=obj1, hostel_due=fee_obj)
-        
-        obj2.save()
-    return render(request, 'sorp_app/staff_profile.html')
+        rows = sheet_obj.max_row
+        column = sheet_obj.max_column
+        i = 2
+        print(rows)
+        while i <= rows:
+            roll_obj = sheet_obj.cell(row=i, column=1).value
+            fee_obj = sheet_obj.cell(row=i, column=2).value
+
+            print("IT IS ROLL NO.")
+            print(roll_obj)
+            try:
+                obj1 = models.StudentInfo.objects.get(roll_no=roll_obj)
+                obj=models.Due.objects.get(roll_no=obj1)
+            # except models.StudentInfo.DoesNOTExist:
+            #     return redirect('/profile/')
+                # HttpResponse('some roll no. in file  does not exist')
+            except models.Due.DoesNotExist:
+                if grp == 'Librarian':
+                    obj2 = models.Due(roll_no=obj1, library_due=fee_obj)
+                elif grp == 'Administration Block':
+                    obj2 = models.Due(roll_no=obj1, academic_due=fee_obj)
+                else:
+                    obj2 = models.Due(roll_no=obj1, hostel_due=fee_obj)
+                obj2.save()
+            else:
+                if grp == 'Librarian':
+                    obj.library_due=fee_obj
+                elif grp == 'Administration Block':
+                    obj.academic_due=fee_obj
+                else:
+                    obj.hostel_due=fee_obj
+                obj.save()
+            i=i+1
+            print(i)
+    return redirect('/profile/')
