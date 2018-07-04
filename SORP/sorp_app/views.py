@@ -202,6 +202,3 @@ def uploaded(request):
 
 
 
-#logging out a user
-def logout_view(request) :
-    return render()
