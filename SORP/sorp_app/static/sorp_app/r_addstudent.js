@@ -44,7 +44,15 @@ function no(num) {
 }
 
 
-
+function clearSelection(idname) {
+  var tr = document.querySelector("#"+idname);
+  var td = tr.querySelectorAll("td");
+  var input = td[2].querySelectorAll("input");
+  input[0].checked = false;
+  input[1].checked = false;
+  td[0].style.color = "black";
+  td[1].style.color = "black";
+}
 
 
 

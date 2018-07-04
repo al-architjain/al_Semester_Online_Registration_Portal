@@ -1,7 +1,7 @@
 body { font-family: Arial; }
 
 h1 {
-    background: grey;
+    background: lightblue;
     text-align: center;
     padding-bottom: 10px;
 }
@@ -38,6 +38,7 @@ h4 {
 
 /* Create an active/current tablink class */
 .tab button.active {
+    color: white;
     background-color: lightblue;
 }
 

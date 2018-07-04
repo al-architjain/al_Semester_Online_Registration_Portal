@@ -4,32 +4,21 @@
 		<title>{% block title %}{% endblock %}</title>
 
 		{% block meta %}
-			<!-- All the meta files will come here! -->
 		{% endblock %}
 
 		{% block links %}
-			<!-- Online links will come here! -->
-		{% endblock %}
-
-		{% block staticfiles %}
-			<!-- Static files come here! -->
 		{% endblock %}
 
 		{% block styles %}
-			<!-- Style part comes here! -->
 		{% endblock %}
 
-		<!-- Permanent metafiles -->
-		<!--------------------->
-		<!-- Permanent Links -->
-		<!--------------------->
-		<!-- Permanent staticfiles -->
-			{% load static %}
-			<link rel="stylesheet" type="text/css" href="{% static "bootstrap-4.1.1/css/bootstrap.min.css" %}" />
-			<link rel="stylesheet" type="text/css" href="{% static "bootstrap-3.3.7/css/bootstrap.min.css" %}" />
-		<!--------------------->
-		<!-- Permanent styles -->
-		<!--------------------->
+		{% block staticfiles %}
+		{% endblock %}
+
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static "bootstrap-4.1.1/css/bootstrap.min.css" %}" />
+		<link rel="stylesheet" type="text/css" href="{% static "bootstrap-3.3.7/css/bootstrap.min.css" %}" />
+
 	</head>
 
 	<body>

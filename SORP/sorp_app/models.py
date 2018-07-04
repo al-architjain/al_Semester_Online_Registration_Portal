@@ -54,7 +54,7 @@ class UGBranch(models.Model):
         return self.name
 
 class Subjects(models.Model):
-    id = models.SmallIntegerField(unique=True, null=True)
+    id = models.AutoField(primary_key=True)
     classname = models.ForeignKey(UGClass, on_delete=models.CASCADE,db_column='class')
     branch = models.ForeignKey(UGBranch, on_delete=models.CASCADE,db_column='branch')
     semester_choice = (
@@ -70,7 +70,7 @@ class Subjects(models.Model):
         (10,10),
     )
     semester = models.IntegerField(choices=semester_choice)
-    sub_code = models.CharField(primary_key=True,max_length=16)
+    sub_code = models.CharField(max_length=16)
     sub_name = models.CharField(max_length=256)
     sub_L = models.SmallIntegerField()
     sub_T = models.SmallIntegerField()
@@ -114,6 +114,7 @@ class StudentInfo(models.Model):
     name_hindi = models.CharField(max_length=64, null=True)
     email = models.EmailField()
     gender_choices = (
+        ('---------', '---------'),
         ('Male', 'Male'),
         ('Female', 'Female'),
         ('Other', 'Other')
@@ -125,6 +126,7 @@ class StudentInfo(models.Model):
     contact = models.CharField(max_length=16, null=True)
     aadhar_no = models.CharField(max_length=16, unique='True', null=True)
     area_choice = (
+        ('---------', '---------'),
         ('Rural', 'Rural'),
         ('Urban', 'Urban'),
     )
@@ -149,6 +151,7 @@ class StudentInfo(models.Model):
     int_percentage = models.DecimalField(max_digits=5, decimal_places=3, db_column='12th Percentage')
     int_pass_year = models.IntegerField(default=currYear, db_column='10+2 Pass Year')
     school_type_choices = (
+        ('---------', '---------'),
         ('Government', 'Government School'),
         ('Private', 'Private School')
     )
