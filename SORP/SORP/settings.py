@@ -118,6 +118,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+# STATIC_URL = os.path.join(BASE_DIR,'sorp_app','static/')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'sorp_app','mediafils','sorp_app')
 
