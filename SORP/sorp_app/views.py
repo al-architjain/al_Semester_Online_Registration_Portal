@@ -143,7 +143,8 @@ def update_student(request):
                       {'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
 
 
-# deactiviting of student
+
+#deactiviting of student
 @login_required
 def deactivate(request):
     if request.method == 'POST':
@@ -152,6 +153,7 @@ def deactivate(request):
         obj.roll_no = 'roll_no' + 'D'
         obj.active_status = False
         return HttpResponse("STUDENT DEACTIVATED")
+
 
 
 def uploaded(request):
@@ -197,3 +199,6 @@ def uploaded(request):
             i=i+1
             print(i)
     return redirect('/profile/')
+
+
+

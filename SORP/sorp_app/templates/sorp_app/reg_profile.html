@@ -10,14 +10,12 @@
 
 	{% block styles %}
 		<style>
-
 			img {
 				width: 50%;
 			}
 				.tab {
 					overflow: hidden;
 				}
-
 				/* Style the buttons inside the tab */
 				.tab button {
 					border-radius: 5px;
@@ -34,18 +32,15 @@
 					white-space: wrap;
 					text-overflow: ellipsis;
 				}
-
 				/* Change background color of buttons on hover */
 				.tab button:hover {
 					background-color: lightblue;
 				}
-
 				/* Create an active/current tablink class */
 				.tab button.active {
 					color: white;
 					background-color: #5292f9;
 				}
-
 				/* Style the tab content */
 				.tabcontent {
 					display: none;
@@ -53,18 +48,15 @@
 					-webkit-animation: fadeEffect 1s;
 					animation: fadeEffect 1s;
 				}
-
 				/* Fade in tabs */
 				@-webkit-keyframes fadeEffect {
 					from {opacity: 0;}
 					to {opacity: 1;}
 				}
-
 				@keyframes fadeEffect {
 					from {opacity: 0;}
 					to {opacity: 1;}
 				}
-
 				div#addStudent {
 					display: block;
 				}
@@ -74,7 +66,7 @@
 
 	{% block bodycontent %}
 		<div style="background: #5292f9" class="text-center">
-			<p style="font-size: 40px; color: white">Online Registration Portal <span style="font-size: 50%; margin-top: 2%;" class="float-right"><a style=" color: white; margin-right:10px" href="">LogOut</a></span></p>
+			<p style="font-size: 40px; color: white">Online Registration Portal <span style="font-size: 50%; margin-top: 2%;" class="float-right"><a style=" color: white; margin-right:10px" href="/login/">LogOut</a></span></p>
 		</div>
 
 		<div class="container">
@@ -156,11 +148,6 @@
 					<!-- Tab panels end -->
 				</div>
 
-					<div class="row">
-						<div class="col-lg-12">
-							<button class="btn btn-primary float-right">LogOut</button>
-						</div>
-					</div>
 			</div>
 			</div>
 		</div>
@@ -170,5 +157,4 @@
 	{% block staticfiles %}
 			{% load static %}
 			<script type="text/javascript" src="{% static "sorp_app/r_addstudent.js" %}"></script>
-	{% endblock %}
-
+{% endblock %}
