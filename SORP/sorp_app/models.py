@@ -119,11 +119,11 @@ class StudentInfo(models.Model):
     stud_doc = models.ManyToManyField(Documents, through='DocumentInfo')
     #
     # Institute Info
-    insti_choices = (
-        ('NIT Hamirpur', 'NIT Hamirpur'),
-        ('IIIT Una', 'IIIT Una'),
-    )
-    institute = models.CharField(max_length=16, choices=insti_choices)
+    # insti_choices = (
+    #     ('NIT Hamirpur', 'NIT Hamirpur'),
+    #     ('IIIT Una', 'IIIT Una'),
+    # )
+    # institute = models.CharField(max_length=16, choices=insti_choices)
     #
     # Personal Details #
     #
@@ -271,9 +271,6 @@ class Due(models.Model):
     library_due = models.DecimalField(max_digits=10,decimal_places=4,default=Decimal(0.00))
     hostel_due = models.DecimalField(max_digits=10,decimal_places=4,default=Decimal(0.00))
     academic_due = models.DecimalField(max_digits=10,decimal_places=4,default=Decimal(0.00))
-
-
-
 
 
 

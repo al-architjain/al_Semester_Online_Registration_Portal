@@ -17,23 +17,24 @@
     {% endblock %}
 
     {% block bodycontent %}
-        <div class="text-center"><h1>Online Registration Portal</h1></div>
-            <div class="container">
-                <h2>Student Registration Successfull! <span>(Animated tick)</span></h2>
-                <div>
-                    <label>Student's Name: </label>
-                    <br>
-                    <label>Roll No: </label>
-                    <br>
-                    <label>Class: </label>
-                    <br>
-                    <label>Branch: </label>
-                    <br><br>
-                    <div class="text-center">
-                        <a class="btn btn-primary" href="">Add New Student</a>
+        <div class="text-center"><h1>Online Registration Portal</h1>
+        </div>
+
+        <div class="container">
+            <h2>Student Registration Successfull! <span>(Animated tick)</span></h2>
+            <div>
+                <h3> LOGIN DETAILS</h3>
+                <br>
+                <label>Username : {{ username }} </label>
+                <br>
+                <label>Password : {{ password }} </label>
+                <br><br>
+                <div class="text-center">
+                    <a class="btn btn-primary" href="/create_student/">Add New Student</a>
                 </div>
             </div>
         </div>
+
     {% endblock %}
 
     {% block bodyscripts %}
