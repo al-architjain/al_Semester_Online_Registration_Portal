@@ -59,11 +59,6 @@ def user_profile(request):
         return render(request, 'sorp_app/stu_profile.html', {'sobj': sobj, 'dobj': dobj, 'subobj': subobj})
 
     elif grp == 'Registration Staff':
-        # iform = forms.StudentInfoForm()
-        # mform = forms.StudentMedicalForm()
-        # fform = forms.StudentFirstFeeForm()
-        # dobj = models.Documents.objects.all()
-        # return render( request, 'sorp_app/reg_profile.html')
         uobj = request.user
         return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj})
 
@@ -73,19 +68,19 @@ def user_profile(request):
         return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp})
 
     else:
-        return HttpResponse("You are not student or a Registraion Staff")
+        return HttpResponse("You are not RegistrationStaff, Student, Librarian, Hostel Warden, Administration Block Staff.")
 
 
 # create_student user
 @login_required
 def create_student(request):
     iform = forms.StudentInfoForm()
-    mform = forms.StudentMedicalForm()
+    # mform = forms.StudentMedicalForm()
     fform = forms.StudentFirstFeeForm()
     dobj = models.Documents.objects.all()
     if request.method == "POST":
         iform = forms.StudentInfoForm(request.POST)
-        mform = forms.StudentMedicalForm(request.POST)
+        # mform = forms.StudentMedicalForm(request.POST)
         fform = forms.StudentFirstFeeForm(request.POST)
 
         if (iform.is_valid() and mform.is_valid() and fform.is_valid()) is False:
@@ -93,10 +88,10 @@ def create_student(request):
             print(mform.errors.as_data())
             print(fform.errors.as_data())
             return render(request, 'sorp_app/reg_addstudent.html',
-                          {'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
+                          {'iform': iform, 'dobj': dobj, 'fform': fform})
         else:
             iformm = iform.save(commit=False)
-            mformm = mform.save(commit=False)
+            # mformm = mform.save(commit=False)
             fformm = fform.save(commit=False)
             # create user
             username = iform.cleaned_data['roll_no']
@@ -108,9 +103,9 @@ def create_student(request):
             # assgning OnetoOneField
             iformm.user = user
             iformm.save()
-            mformm.student = iformm
+            # mformm.student = iformm
             fformm.student = iformm
-            mformm.save()
+            # mformm.save()
             fformm.save()
 
             # document assignment
@@ -127,7 +122,7 @@ def create_student(request):
 
     else:
         return render(request, 'sorp_app/reg_addstudent.html',
-                      {'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
+                      {'iform': iform, 'dobj': dobj, 'fform': fform})
 
 
 # editing of student info
@@ -137,14 +132,14 @@ def update_student(request):
         roll_no = request.POST['roll']
         obj = models.StudentInfo.get(roll_no=roll_no)
         iform = forms.StudentInfoForm(instanse=obj)
-        mform = forms.StudentMedicalForm(instanse=obj)
+        # mform = forms.StudentMedicalForm(instanse=obj)
         fform = forms.StudentFirstFeeForm(instance=obj)
         return render(request, 'sorp_app/reg_addstudent.html',
                       {'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
 
 
 
-#deactiviting of student
+# deactiviting of student
 @login_required
 def deactivate(request):
     if request.method == 'POST':
@@ -155,7 +150,7 @@ def deactivate(request):
         return HttpResponse("STUDENT DEACTIVATED")
 
 
-
+# uploaded
 def uploaded(request):
     if request.method == "POST":
         grp = get_user_group(request.user)
@@ -176,7 +171,7 @@ def uploaded(request):
             print(roll_obj)
             try:
                 obj1 = models.StudentInfo.objects.get(roll_no=roll_obj)
-                obj=models.Due.objects.get(roll_no=obj1)
+                obj  = models.Due.objects.get(roll_no=obj1)
             # except models.StudentInfo.DoesNOTExist:
             #     return redirect('/profile/')
                 # HttpResponse('some roll no. in file  does not exist')
