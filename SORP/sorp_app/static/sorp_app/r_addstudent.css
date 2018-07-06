@@ -21,7 +21,7 @@ h4 {
 /* Style the buttons inside the tab */
 .tab button {
     background-color: inherit;
-    width: 33.334%;
+    width: 50%;
     float: left;
     border: none;
     outline: none;
@@ -38,7 +38,6 @@ h4 {
 
 /* Create an active/current tablink class */
 .tab button.active {
-    color: white;
     background-color: lightblue;
 }
 
@@ -86,4 +85,9 @@ label {
 input.form-control {
     margin-bottom: 10px;
     height: 30px;
+}
+
+span {
+    color: red;
+    font-size: 17px;
 }
