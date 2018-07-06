@@ -26,7 +26,6 @@
         <div class="tab">
             <button id="left" class="tablinks active" onclick="openTab(event, 'dataEntry')">Data Entry Form</button>
             <button id="mid" class="tablinks" onclick="openTab(event, 'docVerify')">Document Verification</button>
-            <button id="right" class="tablinks" onclick="openTab(event, 'medDetails')">Medical Details</button>
         </div>
 
         <form action='/create_student/' method="POST">
@@ -39,91 +38,112 @@
                 <div class="text-center text-success">
                     <h3><b>Session: 2018-19</b></h3><hr>
                 </div>
+
                 <div class="row">
                     <h4 class="text-primary"><b>PERSONAL DETAILS</b></h4>
                 </div>
                 <hr>
                 <div style="margin-top: 10px;" class="form-group">
                     <div class="row">
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-md-3 col-sm-3">
                             {{ iform.name_eng.errors }}
-                            <label for="id_name_eng"><b>Student's Name (In English)</b></label>
-                            <input class="form-control" id="id_name_eng" placeholder="Enter Name" type="text" name="{{ iform.name_eng.html_name }}"  />
+                            <label for="id_name_eng"><b>Student's Name (In English) <span>*</span></b></label>
+                            <input required class="form-control" id="id_name_eng" placeholder="Enter Name" type="text" name="{{ iform.name_eng.html_name }}"  />
                         </div>
 
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-md-3 col-sm-3">
                             {{ iform.name_hindi.errors }}
                             <label for="id_name_hindi"><b>Student's Name (In Hindi)</b></label>
                             <input class="form-control" id="id_name_hindi" placeholder="Enter Name" type="text" name="{{ iform.name_hindi.html_name }}">
                         </div>
 
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-md-3 col-sm-3">
                             {{ iform.email.errors }}
-                            <label for="id_email"><b>Email</b></label>
+                            <label for="id_email"><b>Email</b> <span>*</span></label>
                             <!--{{ iform.email }}-->
-                            <input class="form-control" type="email" id="id_email" placeholder="Enter Email" name="{{ iform.email.html_name }}"  />
+                            <input required class="form-control" type="email" id="id_email" placeholder="Enter Email" name="{{ iform.email.html_name }}"  />
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.dob.errors }}
+                            <label for="{{ iform.dob.id_for_label }}"><b>Date of Birth <span>*</span></b></label>
+                            <input required class="form-control" id="{{ iform.dob.id_for_label }}" placeholder="Date of Birth" type="date" name="{{ iform.dob.html_name }}">
                         </div>
                     </div>
                     <br>
 
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4">
-                            {{ iform.dob.errors }}
-                            <label for="{{ iform.dob.id_for_label }}"><b>Date of Birth</b></label>
-                            <input class="form-control" id="{{ iform.dob.id_for_label }}" placeholder="Date of Birth" type="date" name="{{ iform.dob.html_name }}">
-                        </div>
-                        <div class="col-lg-4 col-md-4">
+
+                        <div class="col-md-2 col-sm-2">
                             {{ iform.religion.errors }}
-                            <label for="{{ iform.religion.id_for_label }}"><b>Religion</b></label>
-                            <input class="form-control" type="text" id="{{ iform.religion.id_for_label }}" placeholder="Enter Religion" name="{{ iform.religion.html_name }}">
+                            <label for="{{ iform.religion.id_for_label }}"><b>Religion <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.religion.id_for_label }}" placeholder="Enter Religion" name="{{ iform.religion.html_name }}">
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-3">
+                        <div class="col-md-2 col-sm-2">
                             {{ iform.gender.errors }}
-                            <label for="{{ iform.gender.id_for_label }}"><b>Gender</b></label><br>
+                            <label for="{{ iform.gender.id_for_label }}"><b>Gender <span>*</span></b></label><br>
                             {{ iform.gender }}
                         </div>
-                        <div class="col-lg-2 col-md-2">
+                        <div class="col-md-2 col-sm-2">
                             {{ iform.category_main.errors }}
-                            <label for="{{ iform.category_main.id_for_label }}"><b>Main Category</b></label><br>
+                            <label for="{{ iform.category_main.id_for_label }}"><b>Main Category <span>*</span></b></label><br>
                             {{ iform.category_main }}
                         </div>
-                    </div>
 
-                    <br>
-
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4">
+                        <div class="col-md-3 col-sm-3">
                             {{ iform.contact.errors }}
-                            <label for="{{ iform.contact.id_for_label }}"><b>Student's Mobile Number</b></label>
-                            <input class="form-control" type="text" id="{{ iform.contact.id_for_label }}" placeholder="Enter Number" name="{{ iform.contact.html_name }}">
+                            <label for="{{ iform.contact.id_for_label }}"><b>Student's Mobile Number <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.contact.id_for_label }}" placeholder="Enter Number" name="{{ iform.contact.html_name }}">
                         </div>
 
-                        <div class="col-lg-4 col-md-4">
+                        <div class="col-md-3 col-sm-3">
                             {{ iform.aadhar_no.errors }}
-                            <label for="{{ iform.aadhar_no.id_for_label }}"><b>Student's Aadhar Number</b></label>
+                            <label for="{{ iform.aadhar_no.id_for_label }}"><b>Student's Aadhar Number </b></label>
                             <input class="form-control" type="text" id="{{ iform.aadhar_no.id_for_label }}" placeholder="Enter Number" name="{{ iform.aadhar_no.html_name }}">
                         </div>
-
-                        <div class="col-lg-4 col-md-6">
-                            {{ iform.area.errors }}
-                            <label for="{{ iform.area.id_for_label }}"><b>Student Belongs to Urban/Rural Area?</b></label><br>
-                            <!--<select class="form-control" id="{{ iform.area.id_for_label }}" name="{{ iform.area.html_name }}">-->
-                                <!--<option value="" hidden>Select Area</option>-->
-                                <!--<option value="urban">Urban</option><option value="rural">Rural</option>-->
-                            <!--</select>-->
-                            {{ iform.area }}
-                        </div>
                     </div>
+
                     <br>
 
                     <div class="row">
-                        <div class="col-lg-6">
-                            {{ iform.b_country.errors }}
-                            <label for="{{ iform.b_country.id_for_label }}"><b>Bonafide Country and State of Candidate</b></label>
-                            <select class="form-control" id="{{ iform.b_country.id_for_label }}" name ="{{ iform.b_country.html_name}}"></select>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.nearest_rs.errors }}
+                            <label for="{{ iform.nearest_rs.id_for_label }}"><b>Nearest Railway Station</b></label>
+                            <input class="form-control" type="text" id="{{ iform.nearest_rs.id_for_label }}" placeholder="Enter Station" name="{{iform.nearest_rs.html_name}}">
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.area.errors }}
+                            <label for="{{ iform.area.id_for_label }}"><b>Student Area? <span>*</span></b></label><br>
+                            {{ iform.area }}
+                        </div>
+
+                        <div class="col-md-3">
+                            {{ iform.corr_addr.errors }}
+                            <label for="{{ iform.corr_addr.id_for_label }}">Correspondence Address <span>*</span></label>
+                            <div class="input-group">
+                            <textarea required class="form-control" id="{{ iform.corr_addr.id_for_label }}" aria-label="With textarea" placeholder="Enter Full Address" name="{{ iform.corr_addr.html_name }}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            {{ iform.perm_addr.errors }}
+                            <label for="{{ iform.perm_addr.id_for_label }}">Permanent Address <span>*</span></label>
+                            <div class="input-group">
+                            <textarea required class="form-control" id="{{ iform.perm_addr.id_for_label }}" aria-label="With textarea" placeholder="Enter Full Address" name="{{ iform.perm_addr.html_name }}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-5">
+                            {{ iform.b_country.errors }}
+                            <label for="{{ iform.b_country.id_for_label }}"><b>Bonafide Country and State of Candidate <span>*</span></b></label>
+                            <select required class="form-control" id="{{ iform.b_country.id_for_label }}" name ="{{ iform.b_country.html_name}}"></select>
+                        </div>
+
+                        <div class="col-lg-4">
                             {{ iform.b_state.errors }}
                             <select style="margin-top: 25px" class="form-control" id ="{{ iform.b_state.id_for_label }}" name ="{{ iform.b_state.html_name }}"></select>
                         </div>
@@ -131,34 +151,7 @@
                             populateCountries("{{ iform.b_country.id_for_label }}", "{{ iform.b_state.id_for_label }}");
                         </script>
                     </div>
-                    <br>
 
-                    <div class="row">
-                        <div class="col-lg-6">
-                            {{ iform.corr_addr.errors }}
-                            <label for="{{ iform.corr_addr.id_for_label }}">Correspondence Address</label>
-                            <div class="input-group">
-                            <textarea class="form-control" id="{{ iform.corr_addr.id_for_label }}" aria-label="With textarea" placeholder="Enter Full Address" name="{{ iform.corr_addr.html_name }}"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            {{ iform.perm_addr.errors }}
-                            <label for="{{ iform.perm_addr.id_for_label }}">Permanent Address</label>
-                            <div class="input-group">
-                            <textarea class="form-control" id="{{ iform.perm_addr.id_for_label }}" aria-label="With textarea" placeholder="Enter Full Address" name="{{ iform.perm_addr.html_name }}"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            {{ iform.nearest_rs.errors }}
-                            <label for="{{ iform.nearest_rs.id_for_label }}"><b>Nearest Railway Station</b></label>
-                            <input class="form-control" type="text" id="{{ iform.nearest_rs.id_for_label }}" placeholder="Enter Station" name="{{iform.nearest_rs.html_name}}">
-                        </div>
-                    </div>
                     <hr>
 
 
@@ -168,37 +161,61 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-4 col-md-3">
+                        <div class="col-md-3 col-sm-3">
                             {{ iform.jee_roll_no.errors }}
-                            <label for="{{ iform.jee_roll_no.id_for_label }}"><b>Jee (Main) Roll No</b></label>
-                            <input class="form-control" type="text" id="{{ iform.jee_roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.jee_roll_no.html_name }}">
+                            <label for="{{ iform.jee_roll_no.id_for_label }}"><b>Jee (Main) Roll No <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.jee_roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.jee_roll_no.html_name }}">
                         </div>
 
-                        <div class="col-lg-4 col-md-3">
+                        <div class="col-md-3 col-sm-3">
                             {{ iform.jee_score.errors }}
-                            <label for="{{ iform.jee_score.id_for_label }}"><b>Jee (Main) 2018 Score</b></label>
-                            <input class="form-control" type="text" id="{{ iform.jee_score.id_for_label }}" placeholder="Enter Score" name="{{ iform.jee_score.html_name }}">
+                            <label for="{{ iform.jee_score.id_for_label }}"><b>Jee (Main) 2018 Score <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.jee_score.id_for_label }}" placeholder="Enter Score" name="{{ iform.jee_score.html_name }}">
                         </div>
 
-                        <div class="col-lg-4 col-md-3">
+                        <div class="col-md-3 col-sm-3">
                             {{ iform.jee_AI_rank.errors }}
-                            <label for="{{ iform.jee_ai_rank.id_for_label }}"><b>Jee (Main) 2018 All India Rank</b></label>
-                            <input class="form-control" type="text" id="{{ iform.jee_ai_rank.id_for_label }}" placeholder="Enter Rank" name="{{ iform.jee_ai_rank.html_name }}">
+                            <label for="{{ iform.jee_ai_rank.id_for_label }}"><b>Jee (Main) 2018 All India Rank <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.jee_ai_rank.id_for_label }}" placeholder="Enter Rank" name="{{ iform.jee_ai_rank.html_name }}">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.jee_cat_rank.errors }}
+                            <label for="{{ iform.jee_cat_rank.id_for_label }}"><b>Jee (Main) 2018 Category Rank</b></label>
+                            <input class="form-control" type="text" id="{{ iform.jee_cat_rank.id_for_label }}" placeholder="Enter Rank" name="{{ iform.jee_cat_rank.html_name }}">
                         </div>
                     </div>
                     <br>
 
                     <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            {{ iform.jee_cat_rank.errors }}
-                            <label for="{{ iform.jee_cat_rank.id_for_label }}"><b>Jee (Main) 2018 Category Rank</b></label>
-                            <input class="form-control" type="text" id="{{ iform.jee_cat_rank.id_for_label }}" placeholder="Enter Rank" name="{{ iform.jee_cat_rank.html_name }}">
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.category_admission.errors }}
+                            <label for="{{ iform.category_admission.id_for_label }}"><b>Admitted Category <span>*</span></b></label><br>
+                            {{ iform.category_admission }}
                         </div>
 
-                        <div class="col-lg-6 col-md-6">
-                            {{ iform.category_admission.errors }}
-                            <label for="{{ iform.category_admission.id_for_label }}"><b>Admitted in Category</b></label><br>
-                            {{ iform.category_admission }}
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.int_percentage.errors }}
+                            <label for="{{ iform.int_percentage.id_for_label }}"><b>10+2 Percentage <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.int_percentage.id_for_label }}" placeholder="Enter Percent" name="{{ iform.int_percentage.html_name }}">
+                        </div>
+
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.int_pass_year.errors }}
+                            <label for="{{ iform.int_pass_year.id_for_label }}"><b>10+2 Passing Year <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.int_pass_year.id_for_label }}" placeholder="Enter Year" name="{{ iform.int_pass_year.html_name }}">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.int_school_type.errors }}
+                            <label for="{{ iform.int_school_type.id_for_label }}"><b>Type of School ? <span>*</span></b></label><br>
+                            {{ iform.int_school_type }}
+                        </div>
+
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.int_school_type.errors }}
+                            <label for="{{ iform.int_school_area.id_for_label }}"><b>School Area? <span>*</span></b></label><br>
+                            {{ iform.int_school_area }}
                         </div>
                     </div>
                     <br>
@@ -206,13 +223,13 @@
                     <div class="row">
                         <div class="col-lg-6">
                             {{ iform.int_country.errors }}
-                            <label for="{{ iform.int_country.id_for_label }}"><b>Country and State from where 10+2 Examinations Passed</b></label>
-                            <select class="form-control" id="{{ iform.int_country.id_for_label }}" name="{{ iform.int_country.html_name }}"></select>
+                            <label for="{{ iform.int_country.id_for_label }}"><b>Country and State from where 10+2 Examinations Passed <span>*</span></b></label>
+                            <select required class="form-control" id="{{ iform.int_country.id_for_label }}" name="{{ iform.int_country.html_name }}"></select>
                         </div>
 
                         <div class="col-lg-6">
                             {{ iform.int_state.errors }}
-                            <select style="margin-top: 25px" class="form-control" id="{{ iform.int_state.id_for_label }}" name="{{ iform.int_state.html_name }}"></select>
+                            <select required style="margin-top: 25px" class="form-control" id="{{ iform.int_state.id_for_label }}" name="{{ iform.int_state.html_name }}"></select>
                         </div>
                         <script language="javascript">
                             populateCountries("{{ iform.int_country.id_for_label }}", "{{ iform.int_state.id_for_label }}");
@@ -221,114 +238,69 @@
                     <br>
 
                     <div class="row">
-                        <div class="col-lg-3 col-md-2">
-                            {{ iform.int_percentage.errors }}
-                            <label for="{{ iform.int_percentage.id_for_label }}"><b>10+2 Percentage</b></label>
-                            <input class="form-control" type="text" id="{{ iform.int_percentage.id_for_label }}" placeholder="Enter Percentile" name="{{ iform.int_percentage.html_name }}">
-                        </div>
-
-                        <div class="col-lg-3 col-md-2">
-                            {{ iform.int_pass_year.errors }}
-                            <label for="{{ iform.int_pass_year.id_for_label }}"><b>10+2 Passing Year</b></label>
-                            <input class="form-control" type="text" id="{{ iform.int_pass_year.id_for_label }}" placeholder="Enter Year" name="{{ iform.int_pass_year.html_name }}">
-                        </div>
-
-                        <div class="col-lg-3 col-md-4">
-                            {{ iform.int_school_type.errors }}
-                            <label for="{{ iform.int_school_type.id_for_label }}"><b>Type of School ?</b></label><br>
-                            {{ iform.int_school_type }}
-                        </div>
-
-                        <div class="col-lg-3 col-md-4">
-                            {{ iform.int_school_type.errors }}
-                            <label for="{{ iform.int_school_area.id_for_label }}"><b>School Belongs to Urban/Rural Area?</b></label><br>
-                            {{ iform.int_school_area }}
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-md-4 col-sm-4">
                             {{ iform.int_school_name.errors }}
-                            <label for="{{ iform.int_school_name.id_for_label }}"><b>Name of 10+2 Passing School</b></label>
-                            <input class="form-control" type="text" id="{{ iform.int_school_name.id_for_label }}" placeholder="Enter School Name" name="{{ iform.int_school_name.html_name }}">
+                            <label for="{{ iform.int_school_name.id_for_label }}"><b>Name of 10+2 Passing School <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.int_school_name.id_for_label }}" placeholder="Enter School Name" name="{{ iform.int_school_name.html_name }}">
                         </div>
 
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-md-4 col-sm-4">
                             {{ iform.int_school_board.errors }}
-                            <label for="{{ iform.int_school_board.id_for_label }}"><b>Board </b>(CBSE / HPBSE / ICSE / any other)</label>
+                            <label for="{{ iform.int_school_board.id_for_label }}"><b>Board </b>(CBSE / HPBSE / ICSE / any other) <span>*</span></label>
                             <br>{{ iform.int_school_board }}
-                            <!--<select class="form-control" id="typeOfSchool" name="{{ iform.intermediate_school_board.html_name }}">-->
-                                <!--<option hidden>Select School Type</option>-->
-                                <!--{% for v in iform.intermediate_school_board %}-->
-                                    <!--{% if v %}-->
-                                        <!--<option value="{{v}}">{{v.field}}</option>-->
-                                    <!--{% endif %}-->
-                                <!--{% endfor %}-->
-                            <!--</select>-->
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.ug_class.errors }}
+                            <label for="{{ iform.ug_class.id_for_label }}"><b>U.G. Program </b>(B.Tech / B.Arch / Dual Degree) <span>*</span></label>
+                            <br>{{ iform.ug_class }}
                         </div>
                     </div>
                     <br>
 
                     <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            {{ iform.ug_class.errors }}
-                            <label for="{{ iform.ug_class.id_for_label }}"><b>U.G. Program </b>(B.Tech / B.Arch / Dual Degree)</label>
-                            <br>{{ iform.ug_class }}
-                            <!--<input class="form-control" type="text" id="ugProgram" placeholder="Enter Program">-->
-                            <!--<select class="form-control" id="{{ iform.ug_class.id_for_label }}" name="{{ iform.ug_class.html_name }}">-->
-                                <!--<option hidden> Select School Type </option>-->
-                                <!--{% for v in iform.ug_class %}-->
-                                    <!--{% if v %}-->
-                                        <!--<option value="{{v}}">{{v.name}}</option>-->
-                                    <!--{% endif %}-->
-                                <!--{% endfor %}-->
-                            <!--</select>-->
-                        </div>
 
 
-                        <div class="col-lg-6 col-md-6">
+
+                        <div class="col-md-2 col-sm-2">
                             {{ iform.ug_branch.errors }}
-                            <label for="{{ iform.ug_branch.id_for_label }}"><b>Alloted Branch</b></label>
+                            <label for="{{ iform.ug_branch.id_for_label }}"><b>Alloted Branch <span>*</span></b></label>
                             <br>{{ iform.ug_branch }}
                         </div>
-                    </div>
-                    <br>
 
-                    <div class="row">
-                        <div class="col-lg-4 col-md-3">
+                        <div class="col-md-3 col-sm-3">
                             {{ iform.roll_no.errors }}
-                            <label for="{{ iform.roll_no.id_for_label }}"><b>Alloted Roll No</b></label>
-                            <input class="form-control" type="text" id="{{ iform.roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.roll_no.html_name }}">
+                            <label for="{{ iform.roll_no.id_for_label }}"><b>Alloted Roll No <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.roll_no.html_name }}">
                         </div>
 
-                        <div class="col-lg-4 col-md-3">
+                        <div class="col-md-3 col-sm-3">
                             {{ iform.reg_no.errors }}
                             <label for="{{ iform.reg_no.id_for_label }}"><b>Registration Number</b></label>
                             <input class="form-control" type="text" id="{{ iform.reg_no.id_for_label }}" placeholder="Enter Reg Number" name="{{ iform.reg_no.html_name }}">
                         </div>
 
-                        <div class="col-lg-4 col-md-3">
+                        <div class="col-md-3 col-sm-3">
                             {{ iform.entry_no.errors }}
                             <label for="{{ iform.entry_no.id_for_label }}"><b>Entry Number</b></label>
                             <input class="form-control" type="text" id="{{ iform.entry_no.id_for_label }}" placeholder="Enter Entry Number" name="{{ iform.entry_no.html_name }}">
                         </div>
                     </div>
                     <br>
+
                     <div class="row">
                         <div class="col-lg-4 col-md-4">
                             {{ iform.hosteler.errors }}
                             <label for="{{ iform.hosteler.id_for_label }}"><b>Hosteler??</b></label>
                             <br>{{ iform.hosteler }}
-                            <!--<input class="form-control" type="text" id="{{ iform.hosteler.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.hosteler.html_name }}">-->
+
                         </div>
                         <div class="col-lg-4 col-md-4">
                             {{ iform.hostel_name.errors }}
                             <label for="{{ iform.hostel_name.id_for_label }}"><b>Hostel Name</b></label>
                             <br>{{ iform.hostel_name }}
-                            <!--<input class="form-control" type="text" id="{{ iform.hostel_name.id_for_label }}" placeholder="Enter Hostel Name" name="{{ iform.hostel_name.html_name }}">-->
-                        </div>
 
+                        </div>
                     </div>
                     <hr>
 
@@ -340,8 +312,8 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-4">
                             {{ iform.father_name.errors }}
-                            <label for="{{ iform.father_name.id_for_label }}"><b>Father's Name</b></label>
-                            <input class="form-control" type="text" id="{{ iform.father_name.id_for_label }}" placeholder="Enter Name" name="{{ iform.father_name.html_name }}">
+                            <label for="{{ iform.father_name.id_for_label }}"><b>Father's Name <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.father_name.id_for_label }}" placeholder="Enter Name" name="{{ iform.father_name.html_name }}">
                         </div>
 
                         <div class="col-lg-4 col-md-4">
@@ -362,8 +334,8 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-4">
                             {{ iform.mother_name.errors }}
-                            <label for="{{ iform.mother_name.id_for_label }}"><b>Mother's Name</b></label>
-                            <input class="form-control" type="text" id="{{ iform.mother_name.id_for_label }}" placeholder="Enter Name" name="{{ iform.mother_name.html_name }}">
+                            <label for="{{ iform.mother_name.id_for_label }}"><b>Mother's Name <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.mother_name.id_for_label }}" placeholder="Enter Name" name="{{ iform.mother_name.html_name }}">
                         </div>
 
                         <div class="col-lg-4 col-md-4">
@@ -404,15 +376,15 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             {{ iform.family_income.errors }}
-                            <label for="{{ iform.family_income.id_for_label }}"><b>Family's Total Income</b></label>
-                            <input class="form-control" type="text" id="{{ iform.family_income.id_for_label }}" placeholder="Enter Income" name="{{ iform.family_income.html_name }}">
+                            <label for="{{ iform.family_income.id_for_label }}"><b>Family's Total Income <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.family_income.id_for_label }}" placeholder="Enter Income" name="{{ iform.family_income.html_name }}">
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="form-group">
                                 {{ iform.fee_waiver.errors }}
-                                <label for="{{ iform.fee_waiver.id_for_label }}"><b>Fee Waiver Claimed?</b></label>
-                                <select class="form-control" id="{{ iform.fee_waiver.id_for_label }}" name="{{ iform.fee_waiver.html_name }}">
+                                <label for="{{ iform.fee_waiver.id_for_label }}"><b>Fee Waiver Claimed ? <span>*</span></b></label>
+                                <select required class="form-control" id="{{ iform.fee_waiver.id_for_label }}" name="{{ iform.fee_waiver.html_name }}">
                                     <option hidden>Select Option</option>
                                     <option value="below1Lac">Income Below 1 Lakh</option>
                                     <option value="between1and5">Income Between 1 and 5 Lakhs</option>
@@ -430,44 +402,49 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-md-4 col-sm-4">
                             {{ fform.fee_josaa_amount.errors }}
-                            <label for="{{ fform.fee_josaa_amount.id_for_label }}"><b>JoSAA 2018 Amount</b></label>
-                            <input class="form-control" type="text" id="{{ fform.fee_josaa_amount.id_for_label }}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_josaa_amount.html_name }}">
+                            <label for="{{ fform.fee_josaa_amount.id_for_label }}"><b>JoSAA 2018 Amount <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ fform.fee_josaa_amount.id_for_label }}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_josaa_amount.html_name }}">
                         </div>
 
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-md-4 col-sm-4">
                             {{ fform.fee_josaa_date.errors }}
                             <label for="{{ fform.fee_josaa_date.id_for_label }}"><b>Date</b></label>
                             <input class="form-control" id="{{ fform.fee_josaa_date.id_for_label }}" placeholder="Date" type="date" name="{{ fform.fee_josaa_date.html_name }}">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-md-4 col-sm-4">
                             {{ fform.fee_NITH_amount.errors }}
                             <label for="{{ fform.fee_NITH_amount.id_for_label }}"><b>NIT Hamirpur</b></label>
                             <input class="form-control" type="text" id="{{ fform.fee_NITH_amount.id_for_label }}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_NITH_amount.html_name }}">
                         </div>
 
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-md-4 col-sm-4">
                             {{ fform.fee_nith_date.errors }}
                             <label for="{{ fform.fee_nith_date.id_for_label }}"><b>Date</b></label>
                             <input class="form-control" id="{{ fform.fee_nith_date.id_for_label }}" placeholder="Date" type="date" name="{{ fform.fee_nith_date.html_name }}">
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 form-group">
-                            {{ fform.fee_total.errors }}
-                            <label for="{{ fform.fee_total.id_for_label }}"><b>Total Fees Paid: </b></label>
-                            <input class="form-control" type="text" id="{{ fform.fee_total.id_for_label }}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_total.html_name }}">
-                        </div>
-                        <div class="col-lg-6 col-md-6">
+
+                        <div class="col-md-4 col-sm-4">
                             {{ fform.fee_nith_receipt_no.errors }}
                             <label for="{{ fform.fee_nith_receipt_no.id_for_label }}"><b>Receipt Number</b></label>
                             <input class="form-control" id="{{ fform.fee_nith_receipt_no.id_for_label }}" placeholder="Enter Receipt Number" type="text" name="{{ fform.fee_nith_receipt_no.html_name }}">
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4form-group">
+                            {{ fform.fee_total.errors }}
+                            <label for="{{ fform.fee_total.id_for_label }}"><b>Total Fees Paid: </b></label>
+                            <input class="form-control" type="text" id="{{ fform.fee_total.id_for_label }}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_total.html_name }}">
+                        </div>
+                    </div>
                 </div>
+            <br>
+                <a id="nextButton" class="tablinks btn btn-primary" onclick="openTab(event, 'docVerify')">Next</a>
+
             </div>
 
         <!--****************************************************************************************************************************************-->
@@ -519,71 +496,15 @@
                     </table>
                 </div>
             </div>
+            <a id="prevButton" class="tablinks btn btn-primary" onclick="openTab(event, 'dataEntry')">Previous</a>
             <hr>
         </div>
-
-        <!--****************************************************************************************************************************************-->
-                                                        <!--Medical Details Tab Started -->
-        <!--****************************************************************************************************************************************-->
-
-        <div id="medDetails" class="tabcontent">
-
-            <div class="row" >
-                <div class="col-md-12 ">
-                    <hr><h4 class="text-center font-weight-bold">Medical Details</h4><hr>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    {{ mform.age.errors }}
-                    <label for="{{ mform.age.id_for_label }}"><b>Age: </b></label>
-                    <input class="form-control" type="text" id="{{ mform.age.id_for_label }}" placeholder="Enter Name" name="{{ mform.age.html_name }}">
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    {{ mform.height.errors }}
-                    <label for="{{ mform.height.id_for_label }}"><b>Height: </b></label>
-                    <input class="form-control" type="text" id="{{ mform.height.id_for_label }}" placeholder="Enter Name" name="{{ mform.height.html_name }}">
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    {{ mform.blood_group.errors }}
-                    <label for="{{ mform.blood_group.id_for_label }}"><b>Blood Group: </b></label>
-                    <input class="form-control" type="text" id="{{ mform.blood_group.id_for_label }}" placeholder="Enter Name" name="{{ mform.blood_group.html_name }}">
-                </div>
-            </div>
-
-            <div class="form-group">
-                {{ mform.id_mark.errors }}
-                <label for="{{ mform.id_mark.id_for_label}}"><b>Identification Mark on the Body</b> <small class="form-text text-muted">(This can be a mole, scar or birthmark)</small></label>
-                <textarea class="form-control" id="{{ mform.id_mark.id_for_label}}" rows="2" name="{{ mform.id_mark.html_name}}"></textarea>
-
-                {{ mform.major_illness.errors }}
-                <label for="{{ mform.major_illness.id_for_label}}"><b>Major Illness</b> <small class="form-text text-muted">(This can be a mole, scar or birthmark)</small></label>
-                <textarea class="form-control" id="{{ mform.major_illness.id_for_label}}" rows="2" name="{{ mform.major_illness.html_name}}"></textarea>
-
-                {{ mform.past_mental_illness.errors }}
-                <label for="{{ mform.past_mental_illness.id_for_label}}"><b>Any Past Major Illness</b> <small class="form-text text-muted">(This can be a mole, scar or birthmark)</small></label>
-                <textarea class="form-control" id="{{ mform.past_mental_illness.id_for_label}}" rows="2" name="{{ mform.past_mental_illness.html_name}}"></textarea>
-
-                {{ mform.vision.errors }}
-                <label for="{{ mform.vision.id_for_label}}"><b>vision</b> <small class="form-text text-muted">(This can be a mole, scar or birthmark)</small></label>
-                <textarea class="form-control" id="{{ mform.vision.id_for_label}}" rows="2" name="{{ mform.vision.html_name}}"></textarea>
-
-                {{ mform.clour_blindness.errors }}
-                <label for="{{ mform.clour_blindness.id_for_label}}"><b>clour_blindness</b> <small class="form-text text-muted">(This can be a mole, scar or birthmark)</small></label>
-                <textarea class="form-control" id="{{ mform.clour_blindness.id_for_label}}" rows="2" name="{{ mform.clour_blindness.html_name}}"></textarea>
-
-                {{ mform.other_defect.errors }}
-                <label for="{{ mform.other_defect.id_for_label}}"><b>other_defect</b> <small class="form-text text-muted">(This can be a mole, scar or birthmark)</small></label>
-                <textarea class="form-control" id="{{ mform.other_defect.id_for_label}}" rows="2" name="{{ mform.other_defect.html_name}}"></textarea>
-            </div>
             <br>
-        <br>
-        </div>
-
-        <button class="btn btn-primary pull-right"  > REGISTER </button>
+            <button style="display:none;" id="reg" class="btn btn-primary pull-right"  > REGISTER </button>
         </form>
+
         </div>
+<br>
 
     {% endblock %}
 

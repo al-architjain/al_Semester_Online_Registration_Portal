@@ -116,7 +116,8 @@ def create_student(request) :
                     dinfo.save()
             iform.save_m2m()
 
-            return HttpResponse("Your request is POST")
+            # return HttpResponse("Your request is POST")
+            return HttpResponseRedirect('/success/')
 
     else:
         return render(request, 'sorp_app/reg_addstudent.html',{'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
@@ -148,4 +149,5 @@ def deactivate(request) :
 
 
 
-
+def reg_success(request):
+    return render(request, 'sorp_app/reg_success.html')
