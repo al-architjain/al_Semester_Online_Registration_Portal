@@ -12,6 +12,8 @@ urlpatterns=[
       url(r'^deactivate/$',views.deactivate,name='user_reg_deactivate'),
       url(r'^success/$',views.reg_success,name='user_reg_success'),
       url(r'^uploaded/$',views.uploaded,name='uploaded'),
+      url(r'^change_password/',views.change_password,name='password_change'),
+
   ]
 
 
