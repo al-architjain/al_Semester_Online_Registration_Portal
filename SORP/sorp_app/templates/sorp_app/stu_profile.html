@@ -15,11 +15,8 @@
 
 
     {% block bodycontent %}
-
-		<div style="background: #00aa13" class="text-center">
-			<p style="font-size: 40px; color: white">Online Registration Portal <span style="font-size: 50%; margin-top: 1%; margin-right:10px" class="float-right"><a style=" color: white;" href="/login/">LogOut</a></span></p>
-		</div>
-
+		<a style="font-size: 120%; margin-right:20px;" class="pull-right" href="/login/">LogOut</a>
+		<br><br>
         <div class="container">
 		<div class="row">
 
@@ -67,7 +64,8 @@
 
 
 			<!-----------------------------------  RIGHT COLUMN FOR VIEWS  ------------------------------------------->
-			<div class="col-lg-9 col-md-9 col-sm-9 col-12 mygrid1">
+
+			<div class="col-lg-9 col-md-9 col-sm-9 col-12 mygrid">
 
 					<div id="studentProfile" class="tabcontent active">
 						<h4 class="text-center font-weight-bold">GENERAL INFORMATION</h4><br>
@@ -227,35 +225,31 @@
 	          			<h4 class="text-center font-weight-bold">DUES</h4><br>
 
 						<div class="row">
-							<div class="col-lg-4">
-								<div class="card">
+							<div class="col-lg-4 mycard">
+
 								  	<h4>Academic Due</h4>
 								  	<div class="card-body">
 								    	<p class="card-text">If unpaid, visit Administration Block (Account Section)</p>
 								    	<a href="#" class="btn btn-success">Check Now!</a>
-								  	</div>
+
 								</div>
 							</div>
 
-							<div class="col-lg-4">
-								<div class="card">
+							<div class="col-lg-4 mycard">
+
 								  	<h4>Hostel Due</h4>
 								  	<div class="card-body">
 								    	<p class="card-text">If unpaid, visit MMCA Office of respective hostel</p>
 								    	<a href="#" class="btn btn-success">Check Now!</a>
-
 								  	</div>
-								</div>
+
 							</div>
 
-							<div class="col-lg-4">
-								<div class="card">
-								  	<h4>Library Due</h4>
-								  	<div class="card-body">
-								    	<p class="card-text">If unpaid, visit Library before Registration</p>
-								   		<a href="#" class="btn btn-success">Check Now!</a>
-
-								  	</div>
+							<div class="col-lg-4 mycard">
+								<h4>Library Due</h4>
+								<div class="card-body">
+								   	<p class="card-text">If unpaid, visit Library before Registration</p>
+									<a href="#" class="btn btn-success">Check Now!</a>
 								</div>
 							</div>
 						</div>

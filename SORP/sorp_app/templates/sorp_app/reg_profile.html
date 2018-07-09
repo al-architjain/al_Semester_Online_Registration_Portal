@@ -65,9 +65,8 @@
 
 
     {% block bodycontent %}
-        <div style="background: #5292f9" class="text-center">
-            <p style="font-size: 40px; color: white">Online Registration Portal <span style="font-size: 50%; margin-top: 1%; margin-right: 10px" class="float-right"><a style=" color: white;" href="/login/">LogOut</a></span></p>
-        </div>
+        <a style="font-size: 120%; margin-right:20px;" class="pull-right" href="/login/">LogOut</a>
+        <br><br>
 
         <div class="container">
             <div class="row">
@@ -118,7 +117,7 @@
                                     <div class="card-body text-center">
                                         <p class="card-text text-capitalize mt-2">Search Roll No. to Update </p>
                                          <form class="form-inline justify-content-center my-2 my-lg-0">
-                                              <input class="form-control mr-sm-2" id="RollNoUpdate" type="search" placeholder="Enter Roll No" aria-label="Search">
+                                              <input required class="form-control mr-sm-2" id="RollNoUpdate" type="search" placeholder="Enter Roll No" aria-label="Search">
                                               <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                                         </form>
                                         <br>
@@ -132,59 +131,57 @@
                                      <h4>Deactivate Student Profile</h4>
                                     </div>
                                     <div class="card-body text-center">
-										<p class="card-text text-capitalize">Search Roll No. to Deactivate </p>
+                                        <p class="card-text text-capitalize">Search Roll No. to Deactivate </p>
                                         <form action="/profile/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
                                             {% csrf_token %}
-                                          <input class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search" name="d_roll_no">
+                                          <input required class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search" name="d_roll_no">
                                           <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                                         </form>
                                         <br>
-                                	</div>
-									{% if not exist %}
-									<div class="card-body text-center">
-										<h4>User does not exist!</h4>
-									</div>
-									{% endif %}
-                            	</div>
+                                    </div>
+                                    {% if not exist %}
+                                    <div class="card-body text-center">
+                                        <h4>User does not exist!</h4>
+                                    </div>
+                                    {% endif %}
+                                </div>
 
-								<div class="card">
-									<br>
+                                <div class="card">
+                                    <br>
                                         {% ifnotequal dobj None %}
-											<div class="card-header text-center">
-												<h4>Check Details:</h4>
-											</div>
-											<div style="overflow-x:auto;">
-												<table class="table table-bordered">
-													<thead>
-														<tr>
-															<th class="gpi">Roll No</th>
-															<th class="gpi">Name</th>
-															<th class="gpi">Father's Name</th>
-															<th class="gpi">Email</th>
-															<th class="gpi">Confirm</th>
-														</tr>
-													</thead>
+                                            <div class="card-header text-center">
+                                                <h4>Check Details:</h4>
+                                            </div>
+                                            <div style="overflow-x:auto;">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="gpi">Roll No</th>
+                                                            <th class="gpi">Name</th>
+                                                            <th class="gpi">Father's Name</th>
+                                                            <th class="gpi">Email</th>
+                                                            <th class="gpi">Confirm</th>
+                                                        </tr>
+                                                    </thead>
 
-													<tbody>
-														<tr>
-															<form action="/deactivate/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
-                                            				{% csrf_token %}
-															<td><input class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search" value="{{dobj.roll_no}}" name="droll_noo"></td>
-															<td>{{ dobj.name_eng }}</td>
-															<td>{{ dobj.father_name }}</td>
-															<td>{{ dobj.email }}</td>
-															<td><button class="btn btn-success my-2 my-sm-0" type="submit">DEACTIVATE</button></td>
-															</form>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										{% endifnotequal %}
-								</div>
+                                                    <tbody>
+                                                        <tr>
+                                                            <form action="/deactivate/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
+                                                            {% csrf_token %}
+                                                            <td><input class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search" value="{{dobj.roll_no}}" name="droll_noo"></td>
+                                                            <td>{{ dobj.name_eng }}</td>
+                                                            <td>{{ dobj.father_name }}</td>
+                                                            <td>{{ dobj.email }}</td>
+                                                            <td><button class="btn btn-success my-2 my-sm-0" type="submit">DEACTIVATE</button></td>
+                                                            </form>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        {% endifnotequal %}
+                                </div>
                         </div>
                     </div>
-
-
 
                     <!-- Tab panels end -->
                 </div>

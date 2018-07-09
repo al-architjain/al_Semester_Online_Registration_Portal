@@ -10,18 +10,9 @@ div#studentProfile.tabcontent {
 }
 
 .mygrid {
-    border: 0.5px solid black;
     padding: 10 px;
     margin: 0;
 }
-
-.mygrid1 {
-    border: 0.5px solid black;
-    border-left: none;
-    padding: 10px;
-    margin: 0;
-}
-
 
 th.srno {
     width: 85px;
@@ -153,3 +144,4 @@ input.form-control {
 .mynav {
     background-color: green;
 }
+

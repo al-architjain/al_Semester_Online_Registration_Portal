@@ -16,6 +16,7 @@
 		{% endblock %}
 
 		{% load static %}
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="{% static "bootstrap-4.1.1/css/bootstrap.min.css" %}" />
 		<link rel="stylesheet" type="text/css" href="{% static "bootstrap-3.3.7/css/bootstrap.min.css" %}" />
 
@@ -24,8 +25,14 @@
 	<body>
 		<!-- Permanent body_content -->
 		<!--------------------->
+		<div style="background: #11998e;
+			background: -webkit-linear-gradient(to right, #38ef7d, #11998e);
+			background: linear-gradient(to right, #38ef7d, #11998e);" class="text-center">
+			<p style="font-size: 40px; color: white">Online Registration Portal</p>
+		</div>
 
 		{% block bodycontent %}
+
 		{% endblock %}
 
 		{% block bodyscripts %}
