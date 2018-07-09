@@ -119,18 +119,18 @@ class StudentInfo(models.Model):
     stud_doc = models.ManyToManyField(Documents, through='DocumentInfo')
     #
     # Institute Info
-    insti_choices = (
-        ('NIT Hamirpur', 'NIT Hamirpur'),
-        ('IIIT Una', 'IIIT Una'),
-    )
-    institute = models.CharField(max_length=16, choices=insti_choices)
+    # insti_choices = (
+    #     ('NIT Hamirpur', 'NIT Hamirpur'),
+    #     ('IIIT Una', 'IIIT Una'),
+    # )
+    # institute = models.CharField(max_length=16, choices=insti_choices)
     #
     # Personal Details #
     #
     #
     name_eng = models.CharField(max_length=64)
     name_hindi = models.CharField(max_length=64, null=True, blank=True)
-    email = models.EmailField()
+    email = models.EmailField(unique=True,null=False)
     gender_choices = (
         ('---------', '---------'),
         ('Male', 'Male'),
@@ -218,6 +218,9 @@ class StudentInfo(models.Model):
         ('Income between 1 and 5 Lakhs', 'Income between 1 and 5 Lakhs'),
     )
     fee_waiver = models.CharField(max_length=64, choices=waiver_choices)
+    #
+    def __str__(self):
+        return self.roll_no
 
 
 class StudentFirstFeeStatus(models.Model):
@@ -231,6 +234,9 @@ class StudentFirstFeeStatus(models.Model):
     fee_nith_date = models.DateField(auto_now=False, auto_now_add=False, default=None)
     fee_nith_receipt_no = models.CharField(max_length=32)
     fee_total = models.PositiveIntegerField()
+    #
+    # def __str__(self):
+    #     return self.roll_no
 
 
 class DocumentInfo(models.Model):
@@ -238,14 +244,16 @@ class DocumentInfo(models.Model):
     student = models.ForeignKey(StudentInfo, on_delete=models.CASCADE)
     document = models.ForeignKey(Documents, on_delete=models.CASCADE)
     submitted = models.BooleanField(default=False)
-
+    #
+    # def __str__(self):
+    #     return self.roll_no
 
 
 
 
 class Result(models.Model):
     #default id is pk
-    roll_no = models.OneToOneField(StudentInfo, to_field='roll_no', on_delete=models.CASCADE, unique=True, db_column='roll_no')
+    roll_no = models.ForeignKey(StudentInfo, to_field='roll_no', on_delete=models.CASCADE, db_column='roll_no')
     semester_choice = (
         (1, 1),
         (2, 2),
@@ -261,7 +269,9 @@ class Result(models.Model):
     semester = models.SmallIntegerField(choices=semester_choice, default=1)
     sgpi = models.DecimalField(max_digits=4, decimal_places=2, default=Decimal(0.00))
     cgpi = models.DecimalField(max_digits=4, decimal_places=2, default=Decimal(0.00))
-
+    #
+    def __str__(self):
+        return self.roll_no.roll_no + ' ' + str(self.cgpi)
 
 
 
@@ -271,9 +281,6 @@ class Due(models.Model):
     library_due = models.DecimalField(max_digits=10,decimal_places=4,default=Decimal(0.00))
     hostel_due = models.DecimalField(max_digits=10,decimal_places=4,default=Decimal(0.00))
     academic_due = models.DecimalField(max_digits=10,decimal_places=4,default=Decimal(0.00))
-
-
-
 
 
 

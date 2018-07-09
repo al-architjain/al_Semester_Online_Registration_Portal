@@ -395,15 +395,17 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="form-group">
-                                {{ iform.fee_waiver.errors }}
+                                <!--{{ iform.fee_waiver.errors }}-->
                                 <label for="{{ iform.fee_waiver.id_for_label }}"><b>Fee Waiver Claimed ? <span>*</span></b></label>
-                                <select required class="form-control" id="{{ iform.fee_waiver.id_for_label }}" name="{{ iform.fee_waiver.html_name }}">
-                                    <option hidden>Select Option</option>
-                                    <option value="below1Lac">Income Below 1 Lakh</option>
-                                    <option value="between1and5">Income Between 1 and 5 Lakhs</option>
-                                    <option value="above5Lac">Income Above 5 Lakhs</option>
-                                    <option value="notClaimed">Not Claimed</option>
-                                </select>
+                                <br>
+                                {{ iform.fee_waiver }}
+                                <!--<select required class="form-control" id="{{ iform.fee_waiver.id_for_label }}" name="{{ iform.fee_waiver.html_name }}">-->
+                                    <!--<option hidden>Select Option</option>-->
+                                    <!--<option value="below1Lac">Income Below 1 Lakh</option>-->
+                                    <!--<option value="between1and5">Income Between 1 and 5 Lakhs</option>-->
+                                    <!--<option value="above5Lac">Income Above 5 Lakhs</option>-->
+                                    <!--<option value="notClaimed">Not Claimed</option>-->
+                                <!--</select>-->
                             </div>
                         </div>
                     </div>

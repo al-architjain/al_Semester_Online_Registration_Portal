@@ -40,6 +40,7 @@
 						</div>
 					</div>
 
+					<p><a href="/change_password">change password</a></p>
 
 					<nav class="navbar navbar-expand-lg navbar-light bg-light">
   						<button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#collapseButton" aria-controls="collapseButton" aria-expanded="false" aria-label="Toggle navigation" style="outline: none; width: 100%; margin:auto;">
@@ -63,7 +64,9 @@
 
 
 			<!-----------------------------------  RIGHT COLUMN FOR VIEWS  ------------------------------------------->
+
 			<div class="col-lg-9 col-md-9 col-sm-9 col-12 mygrid">
+
 					<div id="studentProfile" class="tabcontent active">
 						<h4 class="text-center font-weight-bold">GENERAL INFORMATION</h4><br>
 						<div class="row">
@@ -268,75 +271,14 @@
 					       				</thead>
 
 					       				<tbody>
+											{% for result in robj %}
 											<tr>
-												<td>1st</td>
-												<td></td>
-												<td></td>
+												<td>{{ result.semester }}</td>
+												<td>{{ result.sgpi }}</td>
+												<td>{{ result.cgpi }}</td>
 												<td></td>
 											</tr>
-
-											<tr>
-												<td>2nd</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>3rd</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>4th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>5th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>6th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>7th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>8th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>9th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>10th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
+											{% endfor %}
 			 				        	</tbody>
 			        				</table>
 			        			</div>
@@ -344,7 +286,7 @@
 		      				</div>
 		    			</div>
 					</div>
-				<!--</form>-->
+
 			</div>
 		</div>
 	</div>

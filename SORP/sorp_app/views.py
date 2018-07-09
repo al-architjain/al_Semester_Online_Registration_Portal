@@ -38,7 +38,7 @@ def user_login(request):
             password = request.POST['password']
             user = authenticate(request, username=username, password=password)
 
-            if user is not None:
+            if (user is not None) and (user.is_active) :
                 login(request, user)
                 return HttpResponseRedirect('/profile/')
             else:
@@ -56,11 +56,20 @@ def user_profile(request):
         sobj = user.studentinfo
         dobj = models.DocumentInfo.objects.filter(student=sobj, submitted=False)
         subobj = models.Subjects.objects.filter(classname=sobj.ug_class, branch=sobj.ug_branch, semester=sobj.ug_sem)
-        return render(request, 'sorp_app/stu_profile.html', {'sobj': sobj, 'dobj': dobj, 'subobj': subobj})
+        robj = models.Result.objects.filter(roll_no=sobj.roll_no).order_by('semester')
+        return render(request, 'sorp_app/stu_profile.html', {'sobj': sobj, 'dobj': dobj, 'subobj': subobj, 'robj':robj})
 
     elif grp == 'Registration Staff':
         uobj = request.user
-        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj})
+        dobj = None
+        if request.method == 'POST':
+            try:
+                dobj = models.StudentInfo.objects.get(roll_no=request.POST['d_roll_no'])
+            except models.StudentInfo.DoesNotExist:
+                dobj = None
+                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist':False})
+
+        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True})
 
 
     elif grp == 'Librarian' or grp == 'Hostel Warden' or grp == 'Administration Block':
@@ -83,43 +92,45 @@ def create_student(request):
         # mform = forms.StudentMedicalForm(request.POST)
         fform = forms.StudentFirstFeeForm(request.POST)
 
-        if (iform.is_valid() and mform.is_valid() and fform.is_valid()) is False:
+        if (iform.is_valid() and fform.is_valid()) is False:
             print(iform.errors.as_data())
-            print(mform.errors.as_data())
+            # print(mform.errors.as_data())
             print(fform.errors.as_data())
             return render(request, 'sorp_app/reg_addstudent.html',
                           {'iform': iform, 'dobj': dobj, 'fform': fform})
         else:
             iformm = iform.save(commit=False)
-            # mformm = mform.save(commit=False)
             fformm = fform.save(commit=False)
+
             # create user
             username = iform.cleaned_data['roll_no']
             password = iform.cleaned_data['father_name']
             email = iform.cleaned_data['email']
             user = User.objects.create_user(username=username, password=password, email=email)
+
+            # assigning group
             my_group = Group.objects.get(name='Student')
             my_group.user_set.add(user)
-            # assgning OnetoOneField
+
+            # assgning OnetoOneField and saving
             iformm.user = user
             iformm.save()
-            # mformm.student = iformm
             fformm.student = iformm
-            # mformm.save()
             fformm.save()
 
             # document assignment
             for i in range(1, dobj.count() + 1):
                 strr = "doc" + str(i)
-                sub = request.POST.get(strr)
-                if sub is not None:
-                    ans = True if (sub == "Yes") else False
+                submit = request.POST.get(strr)
+                if submit is not None:
+                    ans = True if (submit == "Yes") else False
                     dinfo = models.DocumentInfo(student=iformm, document=dobj[i - 1], submitted=ans)
                     dinfo.save()
+
+            # saving multiple field.
             iform.save_m2m()
 
-            # return HttpResponse("Your request is POST")
-            return HttpResponseRedirect('/success/')
+            return render(request, 'sorp_app/reg_success.html', {'username':username, 'password':password})
 
     else:
         return render(request, 'sorp_app/reg_addstudent.html',
@@ -143,11 +154,22 @@ def update_student(request):
 # deactiviting of student
 @login_required
 def deactivate(request):
+    if request.method == 'GET':
+        return redirect('/profile/')
     if request.method == 'POST':
-        roll_no = request.POST['roll']
-        obj = models.StudentInfo.get(roll_no=roll_no)
-        obj.roll_no = 'roll_no' + 'D'
-        obj.active_status = False
+        #to free the allotted roll_no in student_info table
+        roll_no = request.POST['droll_noo']
+        stu_info_obj = models.StudentInfo.objects.get(roll_no=roll_no)
+        stu_info_obj.roll_no = roll_no + 'D'
+        stu_info_obj.active_status = False
+        stu_info_obj.save()
+
+        # so the person cannot login() and allotted username(roll_no) is freed
+        user = User.objects.get(username=roll_no)
+        user.is_active = False
+        user.username  = roll_no + 'D'
+        user.save()
+
         return HttpResponse("STUDENT DEACTIVATED")
 
 
@@ -199,4 +221,26 @@ def uploaded(request):
             i=i+1
             print(i)
     return redirect('/profile/')
+
+
+
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+
+def change_password(request):
+    if request.method == 'POST':
+        pcform = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('sorp_app:user_login_page')
+
+        else:
+            messages.error(request, 'Please correct the error below.')
+
+    else:
+        pcform = PasswordChangeForm(request.user)
+        return render(request, 'sorp_app/change_password.html', {'pcform': pcform})
 

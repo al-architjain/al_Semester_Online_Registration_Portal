@@ -18,26 +18,27 @@
 
     {% block bodycontent %}
 
+        <div class="text-center"><h1>Online Registration Portal</h1>
+        </div>
 
-            <div class="container">
-                {% load static %}
+        <div class="container">
+            {% load static %}
                 <h2>Student Registration Successfull! <span><img style="width:5%" src="{% static 'checkmark.gif'%}" alt="checktick"></span></h2>
                 <br>
-                <div>
-                    <label>Student's Name: </label>
-                    <br>
-                    <label>Roll No: </label>
-                    <br>
-                    <label>Class: </label>
-                    <br>
-                    <label>Branch: </label>
-                    <br><br>
-                    <div class="text-center">
+            <div>
+                <h3> LOGIN DETAILS</h3>
+                <br>
+                <label>Username : {{ username }} </label>
+                <br>
+                <label>Password : {{ password }} </label>
+                <br><br>
+                <div class="text-center">
                         <a class="btn btn-primary" href="">Add New Student</a>
                         <a class="btn btn-primary" href="">Go to Profile</a>
-                    </div>
                 </div>
             </div>
+        </div>
+
     {% endblock %}
 
     {% block bodyscripts %}
