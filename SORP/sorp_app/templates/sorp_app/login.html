@@ -1,20 +1,29 @@
 {% extends "base.html" %}
+
     {% block title %}
         Login Page
     {% endblock %}
+
+
+
+
+
     {% block bodycontent %}
 
         <h2 style="text-align:center">Login Page</h2>
         <hr>
         <div class="container">
-            <form class="col-lg-6" method="POST">
-                {% csrf_token %}
-					{% if invalid %}
-						<p class="alert alert-danger">Your username/password combo doesn't exist.</p>
-					{% endif %}
-                {{ form.as_p }}
-				<input class="btn btn-primary pull-right" type="submit" value="Login" />
-				<a href="/pass_reset/password_reset">forget password</a>
-            </form>
+            <div class="col-lg-6">
+                <form method="POST">
+                    {% csrf_token %}
+                        {% if invalid %}
+                            <p class="alert alert-danger">Your Username-Password combination doesn't exist. </p>
+                        {% endif %}
+                    {{ form.as_p }}
+                    <a class="" href="/pass_reset/password_reset">forget password!</a>
+                    <input class="btn btn-primary pull-right" type="submit" value="Login" />
+
+                </form>
+            </div>
         </div>
     {% endblock %}

@@ -4,9 +4,17 @@
         Registrar Staff
     {% endblock %}
 
+
+
+
+
     {% block links %}
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     {% endblock %}
+
+
+
+
 
     {% block styles %}
         <style>
@@ -64,10 +72,12 @@
     {% endblock %}
 
 
+
+
+
     {% block bodycontent %}
         <a style="font-size: 120%; margin-right:20px;" class="pull-right" href="/login/">LogOut</a>
         <br><br>
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3">
@@ -168,7 +178,7 @@
                                                         <tr>
                                                             <form action="/deactivate/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
                                                             {% csrf_token %}
-                                                            <td><input class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search" value="{{dobj.roll_no}}" name="droll_noo"></td>
+                                                            <td><input disabled class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search" value="{{dobj.roll_no}}" name="droll_noo"></td>
                                                             <td>{{ dobj.name_eng }}</td>
                                                             <td>{{ dobj.father_name }}</td>
                                                             <td>{{ dobj.email }}</td>
@@ -188,10 +198,13 @@
             </div>
             </div>
         </div>
-
     {% endblock %}
+
+
+
+
 
     {% block staticfiles %}
             {% load static %}
             <script type="text/javascript" src="{% static "sorp_app/r_addstudent.js" %}"></script>
-{% endblock %}
+	{% endblock %}

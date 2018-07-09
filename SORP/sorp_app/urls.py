@@ -11,7 +11,7 @@ urlpatterns=[
       url(r'^create_student/$',views.create_student,name='user_reg_output'),
       url(r'^deactivate/$',views.deactivate,name='user_reg_deactivate'),
       url(r'^success/$',views.reg_success,name='user_reg_success'),
-      url(r'^uploaded/$',views.uploaded,name='uploaded'),
+      url(r'^upload_due/$',views.upload_due,name='upload_due'),
       url(r'^change_password/',views.change_password,name='password_change'),
 
   ]
