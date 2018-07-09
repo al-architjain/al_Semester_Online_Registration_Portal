@@ -65,9 +65,8 @@
 
 
 	{% block bodycontent %}
-		<div style="background: #5292f9" class="text-center">
-			<p style="font-size: 40px; color: white">Online Registration Portal <span style="font-size: 50%; margin-top: 1%; margin-right: 10px" class="float-right"><a style=" color: white;" href="/login/">LogOut</a></span></p>
-		</div>
+		<a style="font-size: 120%; margin-right:20px;" class="pull-right" href="/login/">LogOut</a>
+		<br><br>
 
 		<div class="container">
 			<div class="row">
@@ -116,9 +115,9 @@
 										<h4>Update Student Profile</h4>
 									</div>
 									<div class="card-body text-center">
-										<p class="card-text text-capitalize mt-2">Search Roll No. to Update </p>
-										 <form class="form-inline justify-content-center my-2 my-lg-0">
-											  <input class="form-control mr-sm-2" id="RollNoUpdate" type="search" placeholder="Enter Roll No" aria-label="Search">
+										<p class="card-text mt-2">Search Roll No. to Update </p>
+										 <form method="GET" class="form-inline justify-content-center my-2 my-lg-0">
+											  <input required class="form-control mr-sm-2" id="RollNoUpdate" type="search" placeholder="Enter Roll No" aria-label="Search">
 											  <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
 										</form>
 										<br>
@@ -132,9 +131,9 @@
 									 <h4>Deactivate Student Profile</h4>
 									</div>
 									<div class="card-body text-center">
-										 <p class="card-text text-capitalize">Search Roll No. to Deactivate </p>
+										 <p class="card-text">Search Roll No. to Deactivate </p>
 										<form class="form-inline justify-content-center my-2 my-lg-0">
-										  <input class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search">
+										  <input required class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search">
 										  <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
 										</form>
 										<br>

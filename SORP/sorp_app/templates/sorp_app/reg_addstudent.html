@@ -456,7 +456,12 @@
                     </div>
                 </div>
             <br>
-                <a id="nextButton" class="tablinks btn btn-primary" onclick="openTab(event, 'docVerify')">Next</a>
+            <div class="row">
+                <div class="col-md-12">
+                     <a id="nextButton" class="tablinks btn btn-primary float-right" onclick="openTab(event, 'docVerify')">Next <i class="fas fa-hand-point-right"></i></a>
+                </div>
+            </div>
+
 
             </div>
 
@@ -477,7 +482,7 @@
                             </tr>
                         </thead>
                     </table>
-                    <h4><strong>Mandatory</strong></h4>
+                    <h4 class="text-primary"><strong>Mandatory</strong></h4>
                     <table class="table table-hover">
                         <tbody>
                             {% for doc in dobj %}
@@ -492,7 +497,7 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                    <h4><strong>Optional</strong></h4>
+                    <h4 class="text-primary"><strong>Optional</strong></h4>
                     <table class="table table-hover">
                         <tbody>
                             {% for doc in dobj %}
@@ -509,8 +514,8 @@
                     </table>
                 </div>
             </div>
-            <a id="prevButton" class="tablinks btn btn-primary" onclick="openTab(event, 'dataEntry')">Previous</a>
-            <hr>
+            <a id="prevButton" class="tablinks btn btn-primary" onclick="openTab(event, 'dataEntry')"><i class="fas fa-hand-point-left"></i> Previous</a>
+
         </div>
             <br>
             <button style="display:none;" id="reg" class="btn btn-primary pull-right"  > REGISTER </button>
