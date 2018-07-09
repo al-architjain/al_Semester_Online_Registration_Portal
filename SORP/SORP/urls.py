@@ -20,11 +20,21 @@ from django.contrib import admin
 #imports from SORP
 from SORP import views
 
+from django.contrib.auth import views as auth_views
+
 
 
 urlpatterns = [
     url(r'^admin/',   admin.site.urls),
     url(r'^', include('sorp_app.urls')),
+
+
+    url(r'^pass_reset/', include('django.contrib.auth.urls')),
+    url(r'^pass_reset/password_reset/$', auth_views.password_reset),
+    url(r'^pass_reset/password_reset/done/$', auth_views.password_reset_done),
+    url(r'^pass_reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+                auth_views.password_reset_confirm),
+    url(r'^pass_reset/done/$', auth_views.password_reset_complete),
 ]
 
 admin.site.site_title = "Admin"

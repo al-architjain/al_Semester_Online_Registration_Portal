@@ -130,7 +130,7 @@ class StudentInfo(models.Model):
     #
     name_eng = models.CharField(max_length=64)
     name_hindi = models.CharField(max_length=64, null=True, blank=True)
-    email = models.EmailField()
+    email = models.EmailField(unique=True,null=False)
     gender_choices = (
         ('---------', '---------'),
         ('Male', 'Male'),
