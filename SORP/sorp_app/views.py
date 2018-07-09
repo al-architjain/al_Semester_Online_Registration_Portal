@@ -56,11 +56,20 @@ def user_profile(request):
         sobj = user.studentinfo
         dobj = models.DocumentInfo.objects.filter(student=sobj, submitted=False)
         subobj = models.Subjects.objects.filter(classname=sobj.ug_class, branch=sobj.ug_branch, semester=sobj.ug_sem)
-        return render(request, 'sorp_app/stu_profile.html', {'sobj': sobj, 'dobj': dobj, 'subobj': subobj})
+        robj = models.Result.objects.filter(roll_no=sobj.roll_no).order_by('semester')
+        return render(request, 'sorp_app/stu_profile.html', {'sobj': sobj, 'dobj': dobj, 'subobj': subobj, 'robj':robj})
 
     elif grp == 'Registration Staff':
         uobj = request.user
-        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj})
+        dobj = None
+        if request.method == 'POST':
+            try:
+                dobj = models.StudentInfo.objects.get(roll_no=request.POST['d_roll_no'])
+            except models.StudentInfo.DoesNotExist:
+                dobj = None
+                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist':False})
+
+        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True})
 
 
     elif grp == 'Librarian' or grp == 'Hostel Warden' or grp == 'Administration Block':
@@ -149,7 +158,7 @@ def deactivate(request):
         return redirect('/profile/')
     if request.method == 'POST':
         #to free the allotted roll_no in student_info table
-        roll_no = request.POST['d_roll_no']
+        roll_no = request.POST['droll_noo']
         stu_info_obj = models.StudentInfo.objects.get(roll_no=roll_no)
         stu_info_obj.roll_no = roll_no + 'D'
         stu_info_obj.active_status = False
@@ -221,7 +230,7 @@ from django.contrib.auth import update_session_auth_hash
 
 def change_password(request):
     if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
+        pcform = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
@@ -230,9 +239,8 @@ def change_password(request):
 
         else:
             messages.error(request, 'Please correct the error below.')
+
     else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'sorp_app/change_password.html', {
-        'form': form
-    })
+        pcform = PasswordChangeForm(request.user)
+        return render(request, 'sorp_app/change_password.html', {'pcform': pcform})
 
