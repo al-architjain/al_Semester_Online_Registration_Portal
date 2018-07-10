@@ -263,20 +263,22 @@ def upload_due(request):
 
 
 
-# To change password
+
+@login_required()
 def change_password(request):
     if request.method == 'POST':
         pcform = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
+        if pcform.is_valid():
+            user = pcform.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('sorp_app:user_login_page')
+            return redirect('sorp_app:user_profile_page')
 
         else:
             messages.error(request, 'Please correct the error below.')
+            return render(request, 'sorp_app/stu_password_change.html', {'pcform': pcform})
 
     else:
         pcform = PasswordChangeForm(request.user)
-        return render(request, 'sorp_app/change_password.html', {'pcform': pcform})
+        return render(request, 'sorp_app/stu_password_change.html', {'pcform': pcform})
 

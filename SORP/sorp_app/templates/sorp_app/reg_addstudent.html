@@ -29,7 +29,13 @@
 
 
     {% block bodycontent %}
-        <div   class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a style="margin-left: 10px" class="btn btn-primary" href="/profile/">Go to Profile</a>
+            </div>
+        </div>
+        <br>
+        <div class="container">
         <!-- creating form for the whole registration process -->
 
         <!--****************************************************************************************************************************************-->
@@ -519,10 +525,8 @@
 
         </div>
             <br>
-            <button style="display:none;" id="reg" class="btn btn-primary pull-right"  > REGISTER </button>
-
+            <button style="display:none;" id="reg" class="btn btn-primary pull-right"> REGISTER </button>
         </form>
-
         </div>
         <br>
     {% endblock %}

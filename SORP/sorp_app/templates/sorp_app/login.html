@@ -4,26 +4,47 @@
         Login Page
     {% endblock %}
 
+    {% block styles %}
+        <style>
+            div.container {
+                max-width: 300px;
+                margin: 5% auto;
+            }
 
-
-
-
+            header {
+                background: #337ab7;
+                font-size: 18px;
+                color: white;
+                width: 100%;
+                padding: 15px;
+                margin: auto;
+                border: 1px solid #337ab7;
+                border-bottom: none;
+                border-radius: 10px 10px 0 0;
+            }
+        </style>
+	{% endblock %}
     {% block bodycontent %}
-
-        <h2 style="text-align:center">Login Page</h2>
-        <hr>
         <div class="container">
-            <div class="col-lg-6">
-                <form method="POST">
-                    {% csrf_token %}
-                        {% if invalid %}
-                            <p class="alert alert-danger">Your Username-Password combination doesn't exist. </p>
-                        {% endif %}
-                    {{ form.as_p }}
-                    <a class="" href="/pass_reset/password_reset">forget password!</a>
-                    <input class="btn btn-primary pull-right" type="submit" value="Login" />
-
-                </form>
+            <div class="row">
+                    <header class="text-center"><b>Login User</b></header>
             </div>
+
+             <div style="border: 1px solid lightgray;" class="row">
+                    <div class="col-md-12 col-sm-12 col-12">
+                        <br>
+                        <form method="POST">
+                            {% csrf_token %}
+                                {% if invalid %}
+                                    <p class="alert alert-danger">Your username/password combo doesn't exist.</p>
+                                {% endif %}
+                            {{ form.as_p }}
+                            <a href="/pass_reset/password_reset">Forgot Password?</a>
+                            <br><br>
+                            <input class="btn btn-primary pull-right" type="submit" value="Login" />
+                        </form>
+                        <br><br>
+                    </div>
+             </div>
         </div>
     {% endblock %}
