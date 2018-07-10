@@ -1,3 +1,5 @@
+
+# Modules used
 from django.shortcuts import render
 from django.http import *
 from django.contrib.auth import authenticate, login, logout
@@ -9,17 +11,36 @@ from . import forms
 from . import models
 #for excel files.
 import openpyxl
+#for PasswordChange
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 
 #-----------------------------------------------------------#
 
-# for domain redirect
-def domain_redirect(request):
-    return redirect('login/')
+
+
+
+
+# Functions
 
 # function to find the group of user
 def get_user_group(user):
     g_name = user.groups.values_list('name', flat=True)
     return g_name[0]
+
+#------------------------------------------------------------#
+
+
+
+
+
+# VIEWS
+
+# for domain redirect
+def domain_redirect(request):
+    return redirect('login/')
+
 
 
 
@@ -47,6 +68,9 @@ def user_login(request):
     return render(request, 'sorp_app/login.html', {'form': form, 'invalid': False})
 
 
+
+
+
 # user_profile
 @login_required
 def user_profile(request):
@@ -72,29 +96,29 @@ def user_profile(request):
         return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True})
 
 
-    elif grp == 'Librarian' or grp == 'Hostel Warden' or grp == 'Administration Block':
+    elif grp == 'Librarian' or grp == 'Hostel Warden' or grp == 'Administration Block' or grp == 'Head of Department':
         uobj = request.user
         return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp})
 
     else:
-        return HttpResponse("You are not RegistrationStaff, Student, Librarian, Hostel Warden, Administration Block Staff.")
+        return HttpResponse("You are not suppossed to login from here! ;)")
+
+
+
 
 
 # create_student user
 @login_required
 def create_student(request):
     iform = forms.StudentInfoForm()
-    # mform = forms.StudentMedicalForm()
     fform = forms.StudentFirstFeeForm()
     dobj = models.Documents.objects.all()
     if request.method == "POST":
         iform = forms.StudentInfoForm(request.POST)
-        # mform = forms.StudentMedicalForm(request.POST)
         fform = forms.StudentFirstFeeForm(request.POST)
 
         if (iform.is_valid() and fform.is_valid()) is False:
             print(iform.errors.as_data())
-            # print(mform.errors.as_data())
             print(fform.errors.as_data())
             return render(request, 'sorp_app/reg_addstudent.html',
                           {'iform': iform, 'dobj': dobj, 'fform': fform})
@@ -102,6 +126,7 @@ def create_student(request):
             iformm = iform.save(commit=False)
             fformm = fform.save(commit=False)
 
+            stu_name = iform.cleaned_data['name_eng']
             # create user
             username = iform.cleaned_data['roll_no']
             password = iform.cleaned_data['father_name']
@@ -130,11 +155,14 @@ def create_student(request):
             # saving multiple field.
             iform.save_m2m()
 
-            return render(request, 'sorp_app/reg_success.html', {'username':username, 'password':password})
+            return render(request, 'sorp_app/reg_success.html', {'username':username, 'password':password, 'name':stu_name})
 
     else:
         return render(request, 'sorp_app/reg_addstudent.html',
                       {'iform': iform, 'dobj': dobj, 'fform': fform})
+
+
+
 
 
 # editing of student info
@@ -151,7 +179,9 @@ def update_student(request):
 
 
 
-# deactiviting of student
+
+
+# Deactivating a student
 @login_required
 def deactivate(request):
     if request.method == 'GET':
@@ -174,12 +204,20 @@ def deactivate(request):
 
 
 
+
+# Successfull Registration Page
 def reg_success(request):
     return render(request, 'sorp_app/reg_success.html')
 
+
+
+
+
 # uploaded
-def uploaded(request):
-    if request.method == "POST":
+def upload_due(request):
+    if request.method =="GET":
+        return redirect('/profile/')
+    if request.method =="POST":
         grp = get_user_group(request.user)
         path=request.FILES['file']
 
@@ -224,9 +262,7 @@ def uploaded(request):
 
 
 
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
+
 
 @login_required()
 def change_password(request):
