@@ -5,30 +5,29 @@
     {% endblock %}
 
 
-
-
-
     {% block meta %}
         <!-- All the meta files will come here! -->
     {% endblock %}
 
 
-
-
-
     {% block links %}
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
         <!-- Online links will come here! -->
-
     {% endblock %}
 
+
 	{% block styles %}
+
         <style>
             div#heading {
-			background: #00aa13;
-			font-size: 40px;
-			color: white;
-        }
+				background: #00aa13;
+				font-size: 40px;
+				color: white;
+        	}
+
+			div.row {
+				width: 100%;
+			}
         </style>
     {% endblock %}
 
@@ -36,7 +35,7 @@
     {% block bodycontent %}
 		<div class="row">
             <div class="col-md-12">
-                <a style="font-size: 120%; margin-right:20px;" class="btn btn-success pull-right" href="/login/">LogOut</a>
+                <a style="font-size: 120%;" class="btn btn-success pull-right" href="/login/">LogOut</a>
 				<a style="font-size: 120%; margin-right:10px;" class="btn btn-success pull-right" href="/change_password">Change Password</a>
 			</div>
         </div>
