@@ -18,11 +18,16 @@
 
     {% block styles %}
         <style>
+
             div#heading {
-			background: #337ab7;
-			font-size: 40px;
-			color: white;
-        }
+                background: #337ab7;
+                font-size: 40px;
+                color: white;
+            }
+
+            div.row {
+				width: 100%;
+			}
         </style>
     {% endblock %}
 
@@ -43,7 +48,7 @@
                 <a style="margin-left: 10px" class="btn btn-primary" href="/profile/">Go to Profile</a>
             </div>
         </div>
-        <br>
+
         <div class="container">
         <!-- creating form for the whole registration process -->
 
@@ -289,13 +294,13 @@
 
 
 
-                        <div class="col-md-2 col-sm-2">
+                        <div class="col-md-5 col-sm-5">
                             {{ iform.ug_branch.errors }}
                             <label for="{{ iform.ug_branch.id_for_label }}"><b>Alloted Branch <span>*</span></b></label>
                             <br>{{ iform.ug_branch }}
                         </div>
 
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-2 col-sm-2">
                             {{ iform.roll_no.errors }}
                             <label for="{{ iform.roll_no.id_for_label }}"><b>Alloted Roll No <span>*</span></b></label>
                             <input required class="form-control" type="text" id="{{ iform.roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.roll_no.html_name }}">
@@ -307,7 +312,7 @@
                             <input class="form-control" type="text" id="{{ iform.reg_no.id_for_label }}" placeholder="Enter Reg Number" name="{{ iform.reg_no.html_name }}">
                         </div>
 
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-2 col-sm-2">
                             {{ iform.entry_no.errors }}
                             <label for="{{ iform.entry_no.id_for_label }}"><b>Entry Number</b></label>
                             <input class="form-control" type="text" id="{{ iform.entry_no.id_for_label }}" placeholder="Enter Entry Number" name="{{ iform.entry_no.html_name }}">
@@ -474,7 +479,8 @@
             <br>
             <div class="row">
                 <div class="col-md-12">
-                     <a id="nextButton" class="tablinks btn btn-primary float-right" style="color:white;" onclick="openTab(event, 'docVerify')">Next <i class="fas fa-hand-point-right"></i></a>
+                    <a id="nextButton" class="tablinks btn btn-primary float-right" style="color:white;" onclick="openTab(event, 'docVerify')">Next <i class="fas fa-hand-point-right"></i></a>
+                    <a class="btn btn-primary" href="">Reset</a>
                 </div>
             </div>
 
