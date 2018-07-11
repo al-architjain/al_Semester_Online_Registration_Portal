@@ -25,7 +25,7 @@ SECRET_KEY = '9o0+rem1iqg12ler5ng)fzhk+2-5ay^4hd6s1#9=f*9%zeua3p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -128,8 +128,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'sorp_app','mediafils','sorp_app')
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_SSL = True
+EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'pkksbiw@gmail.com'
 EMAIL_HOST_PASSWORD = 'poiuyt121'
-EMAIL_PORT = 465
+EMAIL_PORT = 587
