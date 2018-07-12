@@ -24,9 +24,13 @@
 				font-size: 40px;
 				color: white;
         	}
+        	div.container {
+        		width: 100%;
+        	}
 
 			div.row {
 				width: 100%;
+				margin-left: 0;
 			}
         </style>
     {% endblock %}
@@ -36,16 +40,15 @@
 		<div class="row">
             <div class="col-md-12">
                 <a style="font-size: 120%;" class="btn btn-success pull-right" href="/login/">LogOut</a>
-				<a style="font-size: 120%; margin-right:10px;" class="btn btn-success pull-right" href="/change_password">Change Password</a>
+				<a style="font-size: 120%; margin: 0 5px;" class="btn btn-success pull-right" href="/change_password">Change Password</a>
 			</div>
         </div>
 
-		<br>
         <div class="container">
 		<div class="row">
 
 			<!-----------------------------------  LEFT COLUMN FOR OPTIONS  ------------------------------------------->
-			<div class="col-lg-3 col-md-3 col-sm-3 col-12 mygrid ">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-13 mygrid ">
 				{% load static %}
 				<img class="rounded mx-auto d-block" src="{% static "def_profile_pic.jpg" %}">
 				<br>
