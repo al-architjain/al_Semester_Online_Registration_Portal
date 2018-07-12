@@ -45,7 +45,7 @@
     {% block bodycontent %}
         <div class="row">
             <div class="col-md-12">
-                <a style="margin-left: 10px" class="btn btn-primary" href="/profile/">Go to Profile</a>
+                <a style="margin: 0 10px 10px 10px;" class="btn btn-primary" href="/profile/">Go to Profile</a>
             </div>
         </div>
 
@@ -130,8 +130,8 @@
 
                         <div class="col-md-3 col-sm-3">
                             {{ iform.aadhar_no.errors }}
-                            <label for="{{ iform.aadhar_no.id_for_label }}"><b>Student's Aadhar Number </b></label>
-                            <input class="form-control" type="text" id="{{ iform.aadhar_no.id_for_label }}" placeholder="Enter Number" name="{{ iform.aadhar_no.html_name }}">
+                            <label for="{{ iform.aadhar_no.id_for_label }}"><b>Student's Aadhar Number <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.aadhar_no.id_for_label }}" placeholder="Enter Number" name="{{ iform.aadhar_no.html_name }}">
                         </div>
                     </div>
 
@@ -444,7 +444,7 @@
 
                         <div class="col-md-4 col-sm-4">
                             {{ fform.fee_josaa_date.errors }}
-                            <label for="{{ fform.fee_josaa_date.id_for_label }}"><b>Date</b></label>
+                            <label for="{{ fform.fee_josaa_date.id_for_label }}"><b>Date <span>*</span></b></label>
                             <input class="form-control" id="{{ fform.fee_josaa_date.id_for_label }}" placeholder="Date" type="date" name="{{ fform.fee_josaa_date.html_name }}">
                         </div>
                     </div>
@@ -457,7 +457,7 @@
 
                         <div class="col-md-4 col-sm-4">
                             {{ fform.fee_nith_date.errors }}
-                            <label for="{{ fform.fee_nith_date.id_for_label }}"><b>Date</b></label>
+                            <label for="{{ fform.fee_nith_date.id_for_label }}"><b>Date <span>*</span></b></label>
                             <input class="form-control" id="{{ fform.fee_nith_date.id_for_label }}" placeholder="Date" type="date" name="{{ fform.fee_nith_date.html_name }}">
                         </div>
 
@@ -527,7 +527,7 @@
                                     <tr id="Odoc{{doc.id}}">
                                         <td>{{ doc.id }}</td>
                                         <td><strong>{{ doc.doc_name }}</strong> (if applicable) </td>
-                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No <button onclick="clearSelection('Odoc{{doc.id}}')" class="btn btn-default">Clear</button></td>
+                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No <a onclick="clearSelection('Odoc{{doc.id}}')" class="btn btn-default">Clear</a></td>
                                         <td></td>
                                     </tr>
                                 {% endifequal %}

@@ -4,6 +4,7 @@
 
 		<title>{% block title %}{% endblock %}</title>
 
+
 		{% block meta %}
 		{% endblock %}
 
@@ -11,6 +12,11 @@
 		{% endblock %}
 
 		{% block styles %}
+			<style>
+				body {
+				width: 100%;
+			}
+			</style>
 		{% endblock %}
 
 		{% block staticfiles %}
