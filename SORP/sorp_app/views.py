@@ -96,10 +96,11 @@ def user_profile(request):
 
         return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True, 'tabb':'1'})
 
-
-    elif grp == 'Librarian' or grp == 'Hostel Warden' or grp == 'Administration Block' or grp == 'Head of Department':
+    elif grp == 'Library Staff' or grp == 'Hostel Staff' or grp == 'Administration Staff' or grp == 'Department Staff':
         uobj = request.user
         return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp})
+    elif grp == 'Admin':
+        return redirect('/admin/')
 
     else:
         return HttpResponse("You are not suppossed to login from here! ;)")
@@ -190,9 +191,6 @@ def deactivate(request):
     if request.method == 'POST':
         #to free the allotted roll_no in student_info table
         roll_no = request.POST.get('droll_noo', None)
-        print(roll_no)
-        print(roll_no)
-        print(roll_no)
         stu_info_obj = models.StudentInfo.objects.get(roll_no=roll_no)
         new_roll_no = roll_no if roll_no[-1]=='D' else roll_no+'D'
         stu_info_obj.roll_no = new_roll_no
@@ -210,6 +208,7 @@ def deactivate(request):
 
 
 
+
 # Successfull Registration Page
 def reg_success(request):
     return render(request, 'sorp_app/reg_success.html')
@@ -218,7 +217,7 @@ def reg_success(request):
 
 
 
-# uploaded
+# upload_due
 def upload_due(request):
     if request.method =="GET":
         return redirect('/profile/')
@@ -246,17 +245,17 @@ def upload_due(request):
             #     return redirect('/profile/')
                 # HttpResponse('some roll no. in file  does not exist')
             except models.Due.DoesNotExist:
-                if grp == 'Librarian':
+                if grp == 'Library Staff':
                     obj2 = models.Due(roll_no=obj1, library_due=fee_obj)
-                elif grp == 'Administration Block':
+                elif grp == 'Administration Staff':
                     obj2 = models.Due(roll_no=obj1, academic_due=fee_obj)
                 else:
                     obj2 = models.Due(roll_no=obj1, hostel_due=fee_obj)
                 obj2.save()
             else:
-                if grp == 'Librarian':
+                if grp == 'Library Staff':
                     obj.library_due=fee_obj
-                elif grp == 'Administration Block':
+                elif grp == 'Administration Staff':
                     obj.academic_due=fee_obj
                 else:
                     obj.hostel_due=fee_obj
@@ -265,8 +264,51 @@ def upload_due(request):
             print(i)
     return redirect('/profile/')
 
+@login_required
+def upload_sub(request):
+    if request.method=="GET":
+        return redirect('/profile/')
+    if  request.method=="POST":
+        path = request.FILES['file']
 
+        wb_obj = openpyxl.load_workbook(path)
+        sheet_obj = wb_obj.active
 
+        rows = sheet_obj.max_row
+        column = sheet_obj.max_column
+        i = 2
+        print(rows)
+        while i <= rows:
+            sem=sheet_obj.cell(row=i,column=1).value
+            sub_code=sheet_obj.cell(row=i,column=2).value
+            sub_name=sheet_obj.cell(row=i,column=3).value
+            branch=sheet_obj.cell(row=i,column=4).value
+            class_ = sheet_obj.cell(row=i,column=5).value
+            sub_L = sheet_obj.cell(row=i, column=7).value
+            sub_T = sheet_obj.cell(row=i, column=9).value
+            sub_P = sheet_obj.cell(row=i, column=8).value
+            sub_C=sheet_obj.cell(row=i,column=6).value
+            year_onwards=sheet_obj.cell(row=i,column=10).value
+
+            print('initial values ',class_,' branch ',branch)
+
+                # obj1=models.Subjects.objects.filter(semester=sem,branch=branch,sub_code=sub_code)
+            obj_class=models.UGClass.objects.get(name=class_)
+            obj_branch=models.UGBranch.objects.get(name=branch)
+            obj1 = models.Subjects.objects.filter(semester=sem, branch=obj_branch, sub_code=sub_code)
+            print(' try ',obj1)
+            if models.Subjects.DoesNotExist:
+                obj=models.Subjects(semester=sem,branch=obj_branch,sub_code=sub_code,sub_name=sub_name,classname=obj_class,
+                                     sub_C=sub_C,sub_L=sub_L,sub_P=sub_P,sub_T=sub_T,year_onwards=year_onwards)
+                print('except ', obj)
+                obj.save()
+            else:
+                obj=obj1.update(semester=sem,branch=obj_branch,sub_code=sub_code,sub_name=sub_name,classname=obj_class,
+                                     sub_C=sub_C,sub_L=sub_L,sub_P=sub_P,sub_T=sub_T,year_onwards=year_onwards)
+                print('else ',obj)
+            #     obj.save()
+            i=i+1
+        return redirect('/profile/')
 
 
 @login_required()
