@@ -1,0 +1,13 @@
+<form role="form" class="form-horizontal" method="post">{% csrf_token %}
+    <div class="form-group">
+        {% for field in form %}
+            <div class="input-group">
+                <span class="input-group-addon" style="background-color:#b77b48; color:white"><span class="glyphicon glyphicon-user"></span></span>
+                <input class="form-control" id="{{ field.id_for_label }}" maxlength="30" name="{{ field.html_name }}" value="{{ field.value }}" type="text" />
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+        <input type="submit" class="btn btn-primary" value="login" />
+        <input type="hidden" name="next" value="{{ next }}" />
+    </div>
+</form>

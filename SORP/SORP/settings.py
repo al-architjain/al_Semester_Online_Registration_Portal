@@ -132,10 +132,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'sorp_app','mediafils','sorp_app')
 # SENDGRID_API_KEY = "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"
 # DEFAULT_FROM_EMAIL = "pkksbiw@gmail.com"
 
-# import smtplib
-# import socks
-# socks.setdefaultproxy(socks.HTTP,'172.16.12.2',3128)
-# socks.wrapmodule(smtplib)
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
