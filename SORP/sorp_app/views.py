@@ -97,7 +97,7 @@ def user_profile(request):
         return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True, 'tabb':'1'})
 
 
-    elif grp == 'Librarian' or grp == 'Hostel Warden' or grp == 'Administration Block' or grp == 'Head of Department':
+    elif grp == 'Library Staff' or grp == 'Hostel Staff' or grp == 'Administration Staff' or grp == 'Department Staff':
         uobj = request.user
         return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp})
 
@@ -247,17 +247,17 @@ def upload_due(request):
             #     return redirect('/profile/')
                 # HttpResponse('some roll no. in file  does not exist')
             except models.Due.DoesNotExist:
-                if grp == 'Librarian':
+                if grp == 'Library Staff':
                     obj2 = models.Due(roll_no=obj1, library_due=fee_obj)
-                elif grp == 'Administration Block':
+                elif grp == 'Administration Staff':
                     obj2 = models.Due(roll_no=obj1, academic_due=fee_obj)
                 else:
                     obj2 = models.Due(roll_no=obj1, hostel_due=fee_obj)
                 obj2.save()
             else:
-                if grp == 'Librarian':
+                if grp == 'Library Staff':
                     obj.library_due=fee_obj
-                elif grp == 'Administration Block':
+                elif grp == 'Administration Staff':
                     obj.academic_due=fee_obj
                 else:
                     obj.hostel_due=fee_obj
