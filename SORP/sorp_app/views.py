@@ -96,9 +96,13 @@ def user_profile(request):
 
         return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True, 'tabb':'1'})
 
+
     elif grp == 'Library Staff' or grp == 'Hostel Staff' or grp == 'Administration Staff' or grp == 'Department Staff':
         uobj = request.user
         return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp})
+    elif grp == 'Admin':
+        return redirect('/admin/')
+
     elif grp == 'Admin':
         return redirect('/admin/')
 
