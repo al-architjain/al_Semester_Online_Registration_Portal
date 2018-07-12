@@ -101,6 +101,9 @@ def user_profile(request):
         uobj = request.user
         return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp})
 
+    elif grp == 'Admin':
+        return redirect('/admin/')
+
     else:
         return HttpResponse("You are not suppossed to login from here! ;)")
 
@@ -190,9 +193,6 @@ def deactivate(request):
     if request.method == 'POST':
         #to free the allotted roll_no in student_info table
         roll_no = request.POST.get('droll_noo', None)
-        print(roll_no)
-        print(roll_no)
-        print(roll_no)
         stu_info_obj = models.StudentInfo.objects.get(roll_no=roll_no)
         new_roll_no = roll_no if roll_no[-1]=='D' else roll_no+'D'
         stu_info_obj.roll_no = new_roll_no
@@ -210,6 +210,7 @@ def deactivate(request):
 
 
 
+
 # Successfull Registration Page
 def reg_success(request):
     return render(request, 'sorp_app/reg_success.html')
@@ -218,7 +219,7 @@ def reg_success(request):
 
 
 
-# uploaded
+# upload_due
 def upload_due(request):
     if request.method =="GET":
         return redirect('/profile/')
