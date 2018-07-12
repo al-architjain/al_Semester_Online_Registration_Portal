@@ -89,16 +89,20 @@ def user_profile(request):
         if request.method == 'POST':
             try:
                 dobj = models.StudentInfo.objects.get(roll_no=request.POST['d_roll_no'])
+                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist': True, 'tabb': '3'})
             except models.StudentInfo.DoesNotExist:
                 dobj = None
-                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist':False})
+                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist':False, 'tabb':'3'})
 
-        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True})
+        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True, 'tabb':'1'})
 
 
     elif grp == 'Librarian' or grp == 'Hostel Warden' or grp == 'Administration Block' or grp == 'Head of Department':
         uobj = request.user
         return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp})
+
+    elif grp == 'Admin':
+        return redirect('/admin/')
 
     else:
         return HttpResponse("You are not suppossed to login from here! ;)")
@@ -188,19 +192,21 @@ def deactivate(request):
         return redirect('/profile/')
     if request.method == 'POST':
         #to free the allotted roll_no in student_info table
-        roll_no = request.POST['droll_noo']
+        roll_no = request.POST.get('droll_noo', None)
         stu_info_obj = models.StudentInfo.objects.get(roll_no=roll_no)
-        stu_info_obj.roll_no = roll_no + 'D'
+        new_roll_no = roll_no if roll_no[-1]=='D' else roll_no+'D'
+        stu_info_obj.roll_no = new_roll_no
         stu_info_obj.active_status = False
         stu_info_obj.save()
 
         # so the person cannot login() and allotted username(roll_no) is freed
         user = User.objects.get(username=roll_no)
         user.is_active = False
-        user.username  = roll_no + 'D'
+        user.username  = new_roll_no
         user.save()
 
         return HttpResponse("STUDENT DEACTIVATED")
+
 
 
 
@@ -213,7 +219,7 @@ def reg_success(request):
 
 
 
-# uploaded
+# upload_due
 def upload_due(request):
     if request.method =="GET":
         return redirect('/profile/')
