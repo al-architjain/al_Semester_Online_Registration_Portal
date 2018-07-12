@@ -19,11 +19,13 @@
 
     {% block styles %}
         <style>
+
             div#heading {
 			    background: #5292f9;
 			    font-size: 40px;
 			    color: white;
             }
+
             img {
                 width: 50%;
             }
@@ -84,7 +86,7 @@
 
 
     {% block bodycontent %}
-        <a style="font-size: 120%; margin-right:20px;" class="pull-right" href="/login/">LogOut</a>
+        <a style="font-size: 120%; margin-right:20px;" class="btn btn-primary pull-right" href="/login/">LogOut</a>
         <br><br>
         <div class="container">
             <div class="row">
@@ -105,13 +107,13 @@
                             <div class="tab">
 
                                 {% ifnotequal ugrp 'Head of Department' %}
-                                    <button class="tablinks active" onclick="openTab(event, 'UpdateDue')"><i class="fas fa-user-plus"></i> Update Dues</button>
+                                    <button class="tablinks active" onclick="openTab(event, 'UpdateDue')"><i class="fas fa-edit"></i> Update Dues</button>
                                 {% endifnotequal %}
 
 
                                 {% ifequal ugrp 'Head of Department' %}
-                                    <button class="tablinks active" onclick="openTab(event, 'UpdateSubjects')"><i class="fas fa-user-plus"></i> Update Subjects</button>
-                                    <button class="tablinks" onclick="openTab(event, 'UploadResult')"><i class="fas fa-edit"></i> Upload Result</button>
+                                    <button class="tablinks active" onclick="openTab(event, 'UpdateSubjects')"><i class="fas fa-edit"></i> Update Subjects</button>
+                                    <button class="tablinks" onclick="openTab(event, 'UploadResult')"><i class="fas fa-upload"></i> Upload Result</button>
                                 {% endifequal %}
 
                             </div>
@@ -190,7 +192,7 @@
 
                                         <div class="card-body text-center">
                                             <br>
-                                            <a class="btn btn-success" href=""> Create Now </a><br>
+                                            <a class="btn btn-success" href=""> Upload </a><br>
                                             <br>
                                         </div>
                                     </div>
@@ -203,7 +205,7 @@
 
                                         <div class="card-body text-center">
                                             <br>
-                                            <a class="btn btn-success" href=""> Create Now </a><br>
+                                            <a class="btn btn-success" href=""> Upload </a><br>
                                             <br>
                                         </div>
                                     </div>
