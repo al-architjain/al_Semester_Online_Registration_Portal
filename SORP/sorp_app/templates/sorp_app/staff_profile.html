@@ -189,27 +189,24 @@
                                 <div id="UpdateSubjects" class="tabcontent">
                                     <div class="card">
                                        <div class="card-header text-center">
-                                           <h4>Upload New Subject Scheme</h4>
-                                       </div>
-
-                                        <div class="card-body text-center">
-                                            <br>
-                                            <a class="btn btn-success" href=""> Upload </a><br>
-                                            <br>
+                                         <p class="card-text">Upload File</p>
+                                          <form method="post" action="{%url 'sorp_app:upload_sub'%}"  enctype="multipart/form-data">
+                                              {% csrf_token %}
+                                            <input type="file"   name="file" required>
+                                            <button class="btn btn-success" type="submit">Upload</button>
+                                          </form>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="UploadResult" class="tabcontent">
                                     <div class="card">
                                        <div class="card-header text-center">
-                                           <h4>Upload Result of your Department</h4>
-                                       </div>
-
-                                        <div class="card-body text-center">
-                                            <br>
-                                            <a class="btn btn-success" href=""> Upload </a><br>
-                                            <br>
-                                        </div>
+                                          <p class="card-text">Upload File</p>
+                                          <form method="post" action="{%url 'sorp_app:upload_due'%}"  enctype="multipart/form-data">
+                                              {% csrf_token %}
+                                            <input type="file"   name="file" required>
+                                            <button class="btn btn-success" type="submit">Upload</button>
+                                          </form>
                                     </div>
                                 </div>
                             {% endifequal %}

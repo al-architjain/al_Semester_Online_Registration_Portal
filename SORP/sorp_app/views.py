@@ -100,6 +100,7 @@ def user_profile(request):
     elif grp == 'Library Staff' or grp == 'Hostel Staff' or grp == 'Administration Staff' or grp == 'Department Staff':
         uobj = request.user
         return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp})
+   
 
     elif grp == 'Admin':
         return redirect('/admin/')
@@ -266,8 +267,51 @@ def upload_due(request):
             print(i)
     return redirect('/profile/')
 
+@login_required
+def upload_sub(request):
+    if request.method=="GET":
+        return redirect('/profile/')
+    if  request.method=="POST":
+        path = request.FILES['file']
 
+        wb_obj = openpyxl.load_workbook(path)
+        sheet_obj = wb_obj.active
 
+        rows = sheet_obj.max_row
+        column = sheet_obj.max_column
+        i = 2
+        print(rows)
+        while i <= rows:
+            sem=sheet_obj.cell(row=i,column=1).value
+            sub_code=sheet_obj.cell(row=i,column=2).value
+            sub_name=sheet_obj.cell(row=i,column=3).value
+            branch=sheet_obj.cell(row=i,column=4).value
+            class_ = sheet_obj.cell(row=i,column=5).value
+            sub_L = sheet_obj.cell(row=i, column=7).value
+            sub_T = sheet_obj.cell(row=i, column=9).value
+            sub_P = sheet_obj.cell(row=i, column=8).value
+            sub_C=sheet_obj.cell(row=i,column=6).value
+            year_onwards=sheet_obj.cell(row=i,column=10).value
+
+            print('initial values ',class_,' branch ',branch)
+
+                # obj1=models.Subjects.objects.filter(semester=sem,branch=branch,sub_code=sub_code)
+            obj_class=models.UGClass.objects.get(name=class_)
+            obj_branch=models.UGBranch.objects.get(name=branch)
+            obj1 = models.Subjects.objects.filter(semester=sem, branch=obj_branch, sub_code=sub_code)
+            print(' try ',obj1)
+            if models.Subjects.DoesNotExist:
+                obj=models.Subjects(semester=sem,branch=obj_branch,sub_code=sub_code,sub_name=sub_name,classname=obj_class,
+                                     sub_C=sub_C,sub_L=sub_L,sub_P=sub_P,sub_T=sub_T,year_onwards=year_onwards)
+                print('except ', obj)
+                obj.save()
+            else:
+                obj=obj1.update(semester=sem,branch=obj_branch,sub_code=sub_code,sub_name=sub_name,classname=obj_class,
+                                     sub_C=sub_C,sub_L=sub_L,sub_P=sub_P,sub_T=sub_T,year_onwards=year_onwards)
+                print('else ',obj)
+            #     obj.save()
+            i=i+1
+        return redirect('/profile/')
 
 
 @login_required()
