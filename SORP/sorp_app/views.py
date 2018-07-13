@@ -227,26 +227,24 @@ def upload_due(request):
     if request.method =="POST":
         grp = get_user_group(request.user)
         path=request.FILES['file']
-
         wb_obj = openpyxl.load_workbook(path)
         sheet_obj = wb_obj.active
 
         rows = sheet_obj.max_row
         column = sheet_obj.max_column
         i = 2
-        print(rows)
         while i <= rows:
             roll_obj = sheet_obj.cell(row=i, column=1).value
             fee_obj = sheet_obj.cell(row=i, column=2).value
-
-            print("IT IS ROLL NO.")
-            print(roll_obj)
             try:
                 obj1 = models.StudentInfo.objects.get(roll_no=roll_obj)
                 obj  = models.Due.objects.get(roll_no=obj1)
             # except models.StudentInfo.DoesNOTExist:
             #     return redirect('/profile/')
                 # HttpResponse('some roll no. in file  does not exist')
+            except models.StudentInfo.DoesNotExist:
+                print('error in excel file',roll_obj)
+                return redirect('/profile/')
             except models.Due.DoesNotExist:
                 if grp == 'Library Staff':
                     obj2 = models.Due(roll_no=obj1, library_due=fee_obj)
@@ -264,7 +262,6 @@ def upload_due(request):
                     obj.hostel_due=fee_obj
                 obj.save()
             i=i+1
-            print(i)
     return redirect('/profile/')
 
 @login_required
@@ -280,7 +277,6 @@ def upload_sub(request):
         rows = sheet_obj.max_row
         column = sheet_obj.max_column
         i = 2
-        print(rows)
         while i <= rows:
             sem=sheet_obj.cell(row=i,column=1).value
             sub_code=sheet_obj.cell(row=i,column=2).value
@@ -292,26 +288,63 @@ def upload_sub(request):
             sub_P = sheet_obj.cell(row=i, column=8).value
             sub_C=sheet_obj.cell(row=i,column=6).value
             year_onwards=sheet_obj.cell(row=i,column=10).value
-
-            print('initial values ',class_,' branch ',branch)
-
                 # obj1=models.Subjects.objects.filter(semester=sem,branch=branch,sub_code=sub_code)
-            obj_class=models.UGClass.objects.get(name=class_)
-            obj_branch=models.UGBranch.objects.get(name=branch)
-            obj1 = models.Subjects.objects.filter(semester=sem, branch=obj_branch, sub_code=sub_code)
-            print(' try ',obj1)
-            if models.Subjects.DoesNotExist:
+            try:
+                obj_class=models.UGClass.objects.get(name=class_)
+                obj_branch=models.UGBranch.objects.get(name=branch)
+                obj_sub = models.Subjects.objects.get(semester=sem, classname=class_, sub_code=sub_code)
+            except models.UGClass.DoesNotExist:
+                print('error in excel file',class_)
+                return redirect('/profile/')
+            except  models.UGBranch.DoesNotExist:
+                print('error in excel file', branch)
+                return redirect('/profile/')
+            except models.Subjects.DoesNotExist:
                 obj=models.Subjects(semester=sem,branch=obj_branch,sub_code=sub_code,sub_name=sub_name,classname=obj_class,
                                      sub_C=sub_C,sub_L=sub_L,sub_P=sub_P,sub_T=sub_T,year_onwards=year_onwards)
-                print('except ', obj)
                 obj.save()
             else:
-                obj=obj1.update(semester=sem,branch=obj_branch,sub_code=sub_code,sub_name=sub_name,classname=obj_class,
+                obj = models.Subjects.objects.filter(semester=sem, classname=class_, sub_code=sub_code)
+                obj=obj.update(semester=sem,branch=obj_branch,sub_code=sub_code,sub_name=sub_name,classname=obj_class,
                                      sub_C=sub_C,sub_L=sub_L,sub_P=sub_P,sub_T=sub_T,year_onwards=year_onwards)
-                print('else ',obj)
-            #     obj.save()
+                # obj.save()
             i=i+1
         return redirect('/profile/')
+
+@login_required
+def upload_result(request):
+    if request.method=='GET':
+        return redirect('/profile/')
+    if request.method=='POST':
+        path = request.FILES['file']
+        obj1=openpyxl.load_workbook(path)
+        sheet_obj=obj1.active
+        m_row=sheet_obj.max_row
+
+        i=2
+        while(i<=m_row):
+            sem=sheet_obj.cell(row=i,column=1).value
+            roll_no=sheet_obj.cell(row=i,column=2).value
+            sgpi=sheet_obj.cell(row=i,column=3).value
+            cgpi=sheet_obj.cell(row=i,column=3).value
+            # active_backlogs=sheet_obj.cell(row=i,column=4).value
+
+            obj=models.StudentInfo.objects.filter(roll_no=roll_no)
+            print('roll_no ',obj)
+            obj1=models.Result.objects.filter(roll_no=obj)
+            if(not obj):
+                print('error type1')
+                return redirect('/profile/')
+            # elif(not obj1):
+            #     print('error check2')
+            #     obj2=Result(roll_no=obj,semester=sem,sgpi=sgpi,cgpi=cgpi)
+            #     obj2.save()
+            else:
+                print('error check 3')
+                obj1.update(semester=sem,roll_no=obj,sgpi=sgpi,cgpi=cgpi)
+            i=i+1
+        return redirect('/profile/')
+
 
 
 @login_required()
