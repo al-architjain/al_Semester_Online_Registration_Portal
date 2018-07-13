@@ -108,12 +108,12 @@
                         <div style="margin-top: 10px" class="col-lg-12 col-md-12">
                             <div class="tab">
 
-                                {% ifnotequal ugrp 'Head of Department' %}
+                                {% ifnotequal ugrp 'Department Staff' %}
                                     <button class="tablinks active" onclick="openTab(event, 'UpdateDue')"><i class="fas fa-edit"></i> Update Dues</button>
                                 {% endifnotequal %}
 
 
-                                {% ifequal ugrp 'Head of Department' %}
+                                {% ifequal ugrp 'Department Staff' %}
                                     <button class="tablinks active" onclick="openTab(event, 'UpdateSubjects')"><i class="fas fa-edit"></i> Update Subjects</button>
                                     <button class="tablinks" onclick="openTab(event, 'UploadResult')"><i class="fas fa-upload"></i> Upload Result</button>
                                 {% endifequal %}
@@ -125,9 +125,9 @@
                     <div class="row">
                         <div style="margin-top: 10px" class="col-lg-12 col-md-12">
 
-                            {% ifnotequal ugrp 'Head of Department' %}
+                            {% ifnotequal ugrp 'Department Staff' %}
                             <div id="UpdateDue" class="tabcontent">
-                                {%ifequal ugrp 'Librarian' %}
+                                {%ifequal ugrp 'Library Staff' %}
                                     <div class="card">
                                        <div class="card-header text-center">
                                          <h4>Library Due</h4>
@@ -146,7 +146,7 @@
                                     <br>
                                 {% endifequal %}
 
-                                {%ifequal ugrp  'Administration Block' %}
+                                {%ifequal ugrp  'Administration Staff' %}
                                     <div class="card">
                                         <div class="card-header text-center">
                                            <h4>Admin Due</h4>
@@ -164,7 +164,7 @@
                                     <br>
                                 {% endifequal%}
 
-                                {% ifequal ugrp 'Hostel Warden'%}
+                                {% ifequal ugrp 'Hostel Staff'%}
                                     <div class="card">
                                     <div class="card-header text-center">
                                      <h4>Hostel Due</h4>
@@ -185,7 +185,7 @@
                             {% endifnotequal %}
 
 
-                            {% ifequal ugrp 'Head of Department' %}
+                            {% ifequal ugrp 'Department Staff' %}
                                 <div id="UpdateSubjects" class="tabcontent">
                                     <div class="card">
                                        <div class="card-header text-center">
