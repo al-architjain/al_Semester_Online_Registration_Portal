@@ -61,7 +61,7 @@ def user_login(request):
 
             if (user is not None) and (user.is_active) :
                 login(request, user)
-                return HttpResponseRedirect('/profile/')
+                return redirect('/profile/')
             else:
                 return render(request, 'sorp_app/login.html', {'form': form, 'invalid':True})
 
@@ -99,7 +99,7 @@ def user_profile(request):
 
     elif grp == 'Library Staff' or grp == 'Hostel Staff' or grp == 'Administration Staff' or grp == 'Department Staff':
         uobj = request.user
-        return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp})
+        return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp, 'msg':None})
    
 
     elif grp == 'Admin':
@@ -243,8 +243,8 @@ def upload_due(request):
             #     return redirect('/profile/')
                 # HttpResponse('some roll no. in file  does not exist')
             except models.StudentInfo.DoesNotExist:
-                print('error in excel file',roll_obj)
-                return redirect('/profile/')
+                msg='Error in excel File \n '+str(roll_obj)+' does not exist '
+                return redirect('/profile/',{'uobj':request.user,'ugrp':get_user_group(request.user),'msg':msg})
             except models.Due.DoesNotExist:
                 if grp == 'Library Staff':
                     obj2 = models.Due(roll_no=obj1, library_due=fee_obj)
@@ -294,8 +294,9 @@ def upload_sub(request):
                 obj_branch=models.UGBranch.objects.get(name=branch)
                 obj_sub = models.Subjects.objects.get(semester=sem, classname=class_, sub_code=sub_code)
             except models.UGClass.DoesNotExist:
-                print('error in excel file',class_)
-                return redirect('/profile/')
+                msg='error in excel file'+str(class_)
+                messages.error(request,messages)
+                return render(request,'sorp_app/staff_profile.html',{'uobj':request.user, 'ugrp': get_user_group(request.user) ,'msg': msg})
             except  models.UGBranch.DoesNotExist:
                 print('error in excel file', branch)
                 return redirect('/profile/')
