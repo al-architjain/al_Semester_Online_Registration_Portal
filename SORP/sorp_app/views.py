@@ -421,11 +421,8 @@ def update_student(request):
     if request.method == 'POST':
         roll_no = request.POST.get('rollno_to_update', None)
         stu_obj = models.StudentInfo.objects.get(roll_no=roll_no)
-        print(stu_obj.name_eng)
-        print(stu_obj.dob)
-        # iform = forms.StudentInfoForm(request.POST, instance=stu_obj)
-
-        data={
+        fee_obj = models.StudentFirstFeeStatus.objects.get(student=stu_obj)
+        si_data={
             'institute':stu_obj.institute,
             'name_eng':stu_obj.name_eng,
             'name_hindi':stu_obj.name_hindi,
@@ -446,7 +443,7 @@ def update_student(request):
             'jee_score':stu_obj.jee_score,
             'jee_ai_rank':stu_obj.jee_ai_rank,
             'jee_cat_rank':stu_obj.jee_cat_rank,
-            'cat_admission':stu_obj.cat_admission,
+            'category_admission':stu_obj.category_admission,
             'int_country':stu_obj.int_country,
             'int_state':stu_obj.int_state,
             'int_percentage':stu_obj.int_percentage,
@@ -476,12 +473,20 @@ def update_student(request):
 
         }
 
-        iform = forms.StudentInfoForm(initial=data)
-        fee_obj = models.StudentFirstFeeStatus.objects.get(student=stu_obj)
-        fform = forms.StudentFirstFeeForm(request.POST or None, instance=fee_obj)
+        sfi_data = {
+            'fee_josaa_amount': fee_obj.fee_josaa_amount,
+            'fee_josaa_date': fee_obj.fee_josaa_date,
+            'fee_NITH_amount': fee_obj.fee_NITH_amount,
+            'fee_nith_date': fee_obj.fee_nith_date,
+            'fee_nith_receipt_no': fee_obj.fee_nith_receipt_no,
+        }
+
+        iform = forms.StudentInfoForm(initial=si_data)
+        fform = forms.StudentFirstFeeForm(initial=sfi_data)
         dobj = models.Documents.objects.all()
+        print(stu_obj.id)
         return render(request, 'sorp_app/reg_updatestudent.html',
-                          {'iform': iform, 'dobj': dobj, 'fform': fform, 'uobj': request.user})
+                          {'iform': iform, 'dobj': dobj, 'fform': fform, 'uobj': request.user, 'stu_id':stu_obj.id})
 
     else:
         return HttpResponse('ERRoR!')
@@ -496,8 +501,14 @@ def update_student_info(request):
         return redirect('/profile/')
     if request.method == 'POST':
         iform = forms.StudentInfoForm(request.POST)
-        if iform.is_valid():
-            return HttpResponse('Valid form!')
-        else:
-            return HttpResponse(iform.errors)
+        print(request.POST.get('roll_no',None))
+        print(request.POST.get('stu_id',None))
+        stu_obj = models.StudentInfo.objects.get(id=request.POST.get('stu_id',None))
+
+
+
+        # if iform.is_valid():
+        #     return HttpResponse('Valid form!')
+        # else:
+        return HttpResponse(iform.errors.as_json())
 
