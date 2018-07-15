@@ -112,8 +112,6 @@ def user_profile(request):
 
 
 
-
-
 # create_student user
 @login_required
 def create_student(request):
@@ -410,6 +408,11 @@ def change_password(request):
         return render(request, 'sorp_app/stu_password_change.html', {'pcform': pcform})
 
 
+
+
+
+
+
 @login_required
 def update_student(request):
     if request.method == 'GET':
@@ -424,7 +427,7 @@ def update_student(request):
 
         data={
             'name_eng':stu_obj.name_eng,
-            'name_hindi':stud_obj.name_hindi,
+            'name_hindi':stu_obj.name_hindi,
             'email':stu_obj.email,
             'gender':stu_obj.gender,
             'dob':stu_obj.dob,
@@ -447,12 +450,24 @@ def update_student(request):
         fee_obj = models.StudentFirstFeeStatus.objects.get(student=stu_obj)
         fform = forms.StudentFirstFeeForm(request.POST or None, instance=fee_obj)
         dobj = models.Documents.objects.all()
-        # print(iform.errors)
-        # if iform.is_valid():
-        #     iform.save()
         return render(request, 'sorp_app/reg_updatestudent.html',
                           {'iform': iform, 'dobj': dobj, 'fform': fform, 'uobj': request.user})
 
     else:
-            return HttpResponse('fjsljl')
+        return HttpResponse('ERRoR!')
+
+
+
+
+
+@login_required
+def update_student_info(request):
+    if request.method == 'GET':
+        return redirect('/profile/')
+    if request.method == 'POST':
+        iform = forms.StudentInfoForm(request.POST)
+        if iform.is_valid():
+            return HttpResponse('Valid form!')
+        else:
+            return HttpResponse(iform.errors)
 
