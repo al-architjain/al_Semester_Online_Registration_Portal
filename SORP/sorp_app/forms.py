@@ -69,7 +69,7 @@ class StudentInfoForm(forms.ModelForm) :
 
     class Meta:
         model = models.StudentInfo
-        exclude = ['user','img','year_of_admission','active_status','ug_sem', 'stud_doc']
+        exclude = ['user','img','year_of_admission','date_of_admission','active_status','ug_sem', 'stud_doc']
 
 
 class StudentFirstFeeForm(forms.ModelForm) :

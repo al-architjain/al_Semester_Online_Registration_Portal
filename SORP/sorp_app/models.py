@@ -113,7 +113,7 @@ class StudentInfo(models.Model):
     year_of_admission = models.SmallIntegerField(default=currYear)
     active_status = models.BooleanField(default=True)  # (1 is active) and (0 is inactive)
     ug_sem = models.SmallIntegerField(default=1)
-    date_of_admission = models.DateField(default=currDate)
+    date_of_admission = models.DateField(auto_now=True)
 
     # Documents
     stud_doc = models.ManyToManyField(Documents, through='DocumentInfo')

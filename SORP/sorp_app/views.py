@@ -87,7 +87,7 @@ def user_profile(request):
         uobj = request.user
         dobj = None
         roll_list = models.StudentInfo.objects.filter(reg_staff=request.user)
-        print(roll_list)
+        # print(roll_list)
         if request.method == 'POST':
             try:
                 dobj = models.StudentInfo.objects.get(roll_no=request.POST['d_roll_no'])
@@ -172,61 +172,61 @@ def create_student(request):
 
 
 
-# editing of student info
-@login_required
-def update_student(request):
-    # from django.contrib.auth.forms import UserChangeForm
-    # from django.contrib.auth.models import Permission
-    # # permissions = Permission.objects.filter(user="15MI527")
-    # form = UserChangeForm()
-    # return render(request,'sorp_app/try.html',{'form':form})
-    if request.method == 'GET':
-        return redirect('/profile/')
-    if request.method == 'POST':
-        roll_no = request.POST.get('roll',None)
-        print(roll_no)
-        user=request.user
-        try:
-            check=models.StudentInfo.objects.get(roll_no=roll_no,reg_staff=user)
-            student_object = models.StudentInfo.objects.get(roll_no = roll_no)
-        except models.StudentInfo.DoesNotExist:
-            msg=str(roll_no)+" is not registered by you."
-            return render(request,'sorp_app/reg_profile.html',{'uobj':request.user,'ugrp':get_user_group(request.user),'msg':msg})
-        else :
-            print ("UTPAL")
-            iform = forms.StudentInfoForm(data=student_object)
-            fform = forms.StudentFirstFeeForm(data=student_object)
-            dobj = models.Documents.objects.all()
-            # obj = models.StudentInfo.objects.get(roll_no=roll_no)
-            return render(request,'sorp_app/utpal_profile.html',{'iform': iform, 'dobj': dobj, 'fform': fform})
-
-        #     iform = forms.StudentInfoForm(instanse=obj)
-        # # mform = forms.StudentMedicalForm(instanse=obj)
-        #     fform = forms.StudentFirstFeeForm(instance=obj)
-        #     return render(request, 'sorp_app/reg_addstudent.html',
-        #               {'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
-
-@login_required
-def updated(request):
-    if request.method == "POST":
-        iform = forms.StudentInfoForm(request.POST)
-        fform = forms.StudentFirstFeeForm(request.POST)
-        dobj = models.Documents.objects.all()
-        if (iform.is_valid() and fform.is_valid()) is False:
-            print(iform.errors.as_data())
-            print(fform.errors.as_data())
-            return render(request, 'sorp_app/update_student.html',
-                          {'iform': iform, 'dobj': dobj, 'fform': fform})
-        else:
-            iform.reg_staff=request.user
-            print('reg_staff',iform.reg_staff)
-            iformm = iform.save(commit=False)
-            fformm = fform.save(commit=False)
-            stu_name = iform.cleaned_data['name_eng']
-            print(stud_name)
-
-
-    return render(request,'sorp_app/profile.html')
+# # editing of student info
+# @login_required
+# def update_student(request):
+#     # from django.contrib.auth.forms import UserChangeForm
+#     # from django.contrib.auth.models import Permission
+#     # # permissions = Permission.objects.filter(user="15MI527")
+#     # form = UserChangeForm()
+#     # return render(request,'sorp_app/try.html',{'form':form})
+#     if request.method == 'GET':
+#         return redirect('/profile/')
+#     if request.method == 'POST':
+#         roll_no = request.POST.get('roll',None)
+#         print(roll_no)
+#         user=request.user
+#         try:
+#             check=models.StudentInfo.objects.get(roll_no=roll_no,reg_staff=user)
+#             student_object = models.StudentInfo.objects.get(roll_no = roll_no)
+#         except models.StudentInfo.DoesNotExist:
+#             msg=str(roll_no)+" is not registered by you."
+#             return render(request,'sorp_app/reg_profile.html',{'uobj':request.user,'ugrp':get_user_group(request.user),'msg':msg})
+#         else :
+#             print ("UTPAL")
+#             iform = forms.StudentInfoForm(data=student_object)
+#             fform = forms.StudentFirstFeeForm(data=student_object)
+#             dobj = models.Documents.objects.all()
+#             # obj = models.StudentInfo.objects.get(roll_no=roll_no)
+#             return render(request,'sorp_app/utpal_profile.html',{'iform': iform, 'dobj': dobj, 'fform': fform})
+#
+#         #     iform = forms.StudentInfoForm(instanse=obj)
+#         # # mform = forms.StudentMedicalForm(instanse=obj)
+#         #     fform = forms.StudentFirstFeeForm(instance=obj)
+#         #     return render(request, 'sorp_app/reg_addstudent.html',
+#         #               {'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
+#
+# @login_required
+# def updated(request):
+#     if request.method == "POST":
+#         iform = forms.StudentInfoForm(request.POST)
+#         fform = forms.StudentFirstFeeForm(request.POST)
+#         dobj = models.Documents.objects.all()
+#         if (iform.is_valid() and fform.is_valid()) is False:
+#             print(iform.errors.as_data())
+#             print(fform.errors.as_data())
+#             return render(request, 'sorp_app/update_student.html',
+#                           {'iform': iform, 'dobj': dobj, 'fform': fform})
+#         else:
+#             iform.reg_staff=request.user
+#             print('reg_staff',iform.reg_staff)
+#             iformm = iform.save(commit=False)
+#             fformm = fform.save(commit=False)
+#             stu_name = iform.cleaned_data['name_eng']
+#             print(stud_name)
+#
+#
+#     return render(request,'sorp_app/profile.html')
 
 
 # Deactivating a student
@@ -408,4 +408,29 @@ def change_password(request):
     else:
         pcform = PasswordChangeForm(request.user)
         return render(request, 'sorp_app/stu_password_change.html', {'pcform': pcform})
+
+
+@login_required
+def update_student(request):
+    if request.method == 'GET':
+        return redirect('/profile/')
+
+    if request.method == 'POST':
+        roll_no = request.POST.get('rollno_to_update', None)
+        stu_obj = models.StudentInfo.objects.get(roll_no=roll_no)
+        print(stu_obj.name_eng)
+        print(stu_obj.dob)
+        # iform = forms.StudentInfoForm(request.POST, instance=stu_obj)
+        iform = forms.StudentInfoForm(initial={'name_eng':stu_obj.name_eng, 'dob':stu_obj.dob , 'gender': stu_obj.gender, 'category_main':stu_obj.category_main, 'b_state':stu_obj.b_state})
+        fee_obj = models.StudentFirstFeeStatus.objects.get(student=stu_obj)
+        fform = forms.StudentFirstFeeForm(request.POST or None, instance=fee_obj)
+        dobj = models.Documents.objects.all()
+        # print(iform.errors)
+        # if iform.is_valid():
+        #     iform.save()
+        return render(request, 'sorp_app/reg_updatestudent.html',
+                          {'iform': iform, 'dobj': dobj, 'fform': fform, 'uobj': request.user})
+
+    else:
+            return HttpResponse('fjsljl')
 
