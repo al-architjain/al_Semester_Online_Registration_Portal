@@ -13,6 +13,12 @@ class StudentInfoForm(forms.ModelForm) :
         choices = models.StudentInfo.gender_choices,
     )
 
+    religion = forms.ChoiceField(
+        required = False,
+        widget = forms.Select(attrs = {'style': 'width: 100%'}),
+        choices = models.StudentInfo.religion_choices,
+    )
+
     area = forms.ChoiceField(
         required=False,
         widget=forms.Select(attrs={'style': 'width: 100%'}),

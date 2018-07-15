@@ -157,8 +157,7 @@ def create_student(request):
                 strr = "doc" + str(i)
                 submit = request.POST.get(strr)
                 if submit is not None:
-                    ans = True if (submit == "Yes") else False
-                    dinfo = models.DocumentInfo(student=iformm, document=dobj[i - 1], submitted=ans)
+                    dinfo = models.DocumentInfo(student=iformm, document=dobj[i - 1], submitted=submit)
                     dinfo.save()
 
             # saving multiple field.
