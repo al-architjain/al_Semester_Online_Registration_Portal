@@ -61,7 +61,7 @@ def user_login(request):
 
             if (user is not None) and (user.is_active) :
                 login(request, user)
-                return HttpResponseRedirect('/profile/')
+                return redirect('/profile/')
             else:
                 return render(request, 'sorp_app/login.html', {'form': form, 'invalid':True})
 
@@ -86,20 +86,22 @@ def user_profile(request):
     elif grp == 'Registration Staff':
         uobj = request.user
         dobj = None
+        roll_list = models.StudentInfo.objects.filter(reg_staff=request.user)
+        print(roll_list)
         if request.method == 'POST':
             try:
                 dobj = models.StudentInfo.objects.get(roll_no=request.POST['d_roll_no'])
-                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist': True, 'tabb': '3'})
+                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist': True, 'tabb': '3','roll_list':roll_list})
             except models.StudentInfo.DoesNotExist:
                 dobj = None
-                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist':False, 'tabb':'3'})
+                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist':False, 'tabb':'3','roll_list':roll_list})
 
-        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True, 'tabb':'1'})
+        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True, 'tabb':'1','roll_list':roll_list})
 
 
     elif grp == 'Library Staff' or grp == 'Hostel Staff' or grp == 'Administration Staff' or grp == 'Department Staff':
         uobj = request.user
-        return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp})
+        return render(request, 'sorp_app/staff_profile.html', {'uobj': uobj, 'ugrp': grp, 'msg':None})
    
 
     elif grp == 'Admin':
@@ -126,8 +128,10 @@ def create_student(request):
             print(iform.errors.as_data())
             print(fform.errors.as_data())
             return render(request, 'sorp_app/reg_addstudent.html',
-                          {'iform': iform, 'dobj': dobj, 'fform': fform})
+                          {'iform': iform, 'dobj': dobj, 'fform': fform,'uobj':request.user})
         else:
+            # iform.reg_staff=request.user
+            # print('reg_staff',iform.reg_staff)
             iformm = iform.save(commit=False)
             fformm = fform.save(commit=False)
 
@@ -163,8 +167,7 @@ def create_student(request):
 
     else:
         return render(request, 'sorp_app/reg_addstudent.html',
-                      {'iform': iform, 'dobj': dobj, 'fform': fform})
-
+                      {'iform': iform, 'dobj': dobj, 'fform': fform,'uobj':request.user})
 
 
 
@@ -172,17 +175,58 @@ def create_student(request):
 # editing of student info
 @login_required
 def update_student(request):
+    # from django.contrib.auth.forms import UserChangeForm
+    # from django.contrib.auth.models import Permission
+    # # permissions = Permission.objects.filter(user="15MI527")
+    # form = UserChangeForm()
+    # return render(request,'sorp_app/try.html',{'form':form})
+    if request.method == 'GET':
+        return redirect('/profile/')
     if request.method == 'POST':
-        roll_no = request.POST['roll']
-        obj = models.StudentInfo.get(roll_no=roll_no)
-        iform = forms.StudentInfoForm(instanse=obj)
-        # mform = forms.StudentMedicalForm(instanse=obj)
-        fform = forms.StudentFirstFeeForm(instance=obj)
-        return render(request, 'sorp_app/reg_addstudent.html',
-                      {'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
+        roll_no = request.POST.get('roll',None)
+        print(roll_no)
+        user=request.user
+        try:
+            check=models.StudentInfo.objects.get(roll_no=roll_no,reg_staff=user)
+            student_object = models.StudentInfo.objects.get(roll_no = roll_no)
+        except models.StudentInfo.DoesNotExist:
+            msg=str(roll_no)+" is not registered by you."
+            return render(request,'sorp_app/reg_profile.html',{'uobj':request.user,'ugrp':get_user_group(request.user),'msg':msg})
+        else :
+            print ("UTPAL")
+            iform = forms.StudentInfoForm(data=student_object)
+            fform = forms.StudentFirstFeeForm(data=student_object)
+            dobj = models.Documents.objects.all()
+            # obj = models.StudentInfo.objects.get(roll_no=roll_no)
+            return render(request,'sorp_app/utpal_profile.html',{'iform': iform, 'dobj': dobj, 'fform': fform})
+
+        #     iform = forms.StudentInfoForm(instanse=obj)
+        # # mform = forms.StudentMedicalForm(instanse=obj)
+        #     fform = forms.StudentFirstFeeForm(instance=obj)
+        #     return render(request, 'sorp_app/reg_addstudent.html',
+        #               {'iform': iform, 'mform': mform, 'dobj': dobj, 'fform': fform})
+
+@login_required
+def updated(request):
+    if request.method == "POST":
+        iform = forms.StudentInfoForm(request.POST)
+        fform = forms.StudentFirstFeeForm(request.POST)
+        dobj = models.Documents.objects.all()
+        if (iform.is_valid() and fform.is_valid()) is False:
+            print(iform.errors.as_data())
+            print(fform.errors.as_data())
+            return render(request, 'sorp_app/update_student.html',
+                          {'iform': iform, 'dobj': dobj, 'fform': fform})
+        else:
+            iform.reg_staff=request.user
+            print('reg_staff',iform.reg_staff)
+            iformm = iform.save(commit=False)
+            fformm = fform.save(commit=False)
+            stu_name = iform.cleaned_data['name_eng']
+            print(stud_name)
 
 
-
+    return render(request,'sorp_app/profile.html')
 
 
 # Deactivating a student
@@ -226,26 +270,24 @@ def upload_due(request):
     if request.method =="POST":
         grp = get_user_group(request.user)
         path=request.FILES['file']
-
         wb_obj = openpyxl.load_workbook(path)
         sheet_obj = wb_obj.active
 
         rows = sheet_obj.max_row
         column = sheet_obj.max_column
         i = 2
-        print(rows)
         while i <= rows:
             roll_obj = sheet_obj.cell(row=i, column=1).value
             fee_obj = sheet_obj.cell(row=i, column=2).value
-
-            print("IT IS ROLL NO.")
-            print(roll_obj)
             try:
                 obj1 = models.StudentInfo.objects.get(roll_no=roll_obj)
                 obj  = models.Due.objects.get(roll_no=obj1)
             # except models.StudentInfo.DoesNOTExist:
             #     return redirect('/profile/')
                 # HttpResponse('some roll no. in file  does not exist')
+            except models.StudentInfo.DoesNotExist:
+                msg='Error in excel File \n '+str(roll_obj)+' does not exist '
+                return redirect('/profile/',{'uobj':request.user,'ugrp':get_user_group(request.user),'msg':msg})
             except models.Due.DoesNotExist:
                 if grp == 'Library Staff':
                     obj2 = models.Due(roll_no=obj1, library_due=fee_obj)
@@ -263,7 +305,6 @@ def upload_due(request):
                     obj.hostel_due=fee_obj
                 obj.save()
             i=i+1
-            print(i)
     return redirect('/profile/')
 
 @login_required
@@ -279,7 +320,6 @@ def upload_sub(request):
         rows = sheet_obj.max_row
         column = sheet_obj.max_column
         i = 2
-        print(rows)
         while i <= rows:
             sem=sheet_obj.cell(row=i,column=1).value
             sub_code=sheet_obj.cell(row=i,column=2).value
@@ -291,26 +331,64 @@ def upload_sub(request):
             sub_P = sheet_obj.cell(row=i, column=8).value
             sub_C=sheet_obj.cell(row=i,column=6).value
             year_onwards=sheet_obj.cell(row=i,column=10).value
-
-            print('initial values ',class_,' branch ',branch)
-
                 # obj1=models.Subjects.objects.filter(semester=sem,branch=branch,sub_code=sub_code)
-            obj_class=models.UGClass.objects.get(name=class_)
-            obj_branch=models.UGBranch.objects.get(name=branch)
-            obj1 = models.Subjects.objects.filter(semester=sem, branch=obj_branch, sub_code=sub_code)
-            print(' try ',obj1)
-            if models.Subjects.DoesNotExist:
+            try:
+                obj_class=models.UGClass.objects.get(name=class_)
+                obj_branch=models.UGBranch.objects.get(name=branch)
+                obj_sub = models.Subjects.objects.get(semester=sem, classname=class_, sub_code=sub_code)
+            except models.UGClass.DoesNotExist:
+                msg='error in excel file'+str(class_)
+                messages.error(request,messages)
+                return render(request,'sorp_app/staff_profile.html',{'uobj':request.user, 'ugrp': get_user_group(request.user) ,'msg': msg})
+            except  models.UGBranch.DoesNotExist:
+                print('error in excel file', branch)
+                return redirect('/profile/')
+            except models.Subjects.DoesNotExist:
                 obj=models.Subjects(semester=sem,branch=obj_branch,sub_code=sub_code,sub_name=sub_name,classname=obj_class,
                                      sub_C=sub_C,sub_L=sub_L,sub_P=sub_P,sub_T=sub_T,year_onwards=year_onwards)
-                print('except ', obj)
                 obj.save()
             else:
-                obj=obj1.update(semester=sem,branch=obj_branch,sub_code=sub_code,sub_name=sub_name,classname=obj_class,
+                obj = models.Subjects.objects.filter(semester=sem, classname=class_, sub_code=sub_code)
+                obj=obj.update(semester=sem,branch=obj_branch,sub_code=sub_code,sub_name=sub_name,classname=obj_class,
                                      sub_C=sub_C,sub_L=sub_L,sub_P=sub_P,sub_T=sub_T,year_onwards=year_onwards)
-                print('else ',obj)
-            #     obj.save()
+                # obj.save()
             i=i+1
         return redirect('/profile/')
+
+@login_required
+def upload_result(request):
+    if request.method=='GET':
+        return redirect('/profile/')
+    if request.method=='POST':
+        path = request.FILES['file']
+        obj1=openpyxl.load_workbook(path)
+        sheet_obj=obj1.active
+        m_row=sheet_obj.max_row
+
+        i=2
+        while(i<=m_row):
+            sem=sheet_obj.cell(row=i,column=1).value
+            roll_no=sheet_obj.cell(row=i,column=2).value
+            sgpi=sheet_obj.cell(row=i,column=3).value
+            cgpi=sheet_obj.cell(row=i,column=3).value
+            # active_backlogs=sheet_obj.cell(row=i,column=4).value
+
+            obj=models.StudentInfo.objects.filter(roll_no=roll_no)
+            print('roll_no ',obj)
+            obj1=models.Result.objects.filter(roll_no=obj)
+            if(not obj):
+                print('error type1')
+                return redirect('/profile/')
+            # elif(not obj1):
+            #     print('error check2')
+            #     obj2=Result(roll_no=obj,semester=sem,sgpi=sgpi,cgpi=cgpi)
+            #     obj2.save()
+            else:
+                print('error check 3')
+                obj1.update(semester=sem,roll_no=obj,sgpi=sgpi,cgpi=cgpi)
+            i=i+1
+        return redirect('/profile/')
+
 
 
 @login_required()

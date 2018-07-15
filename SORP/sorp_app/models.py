@@ -103,6 +103,7 @@ class Documents(models.Model):
 
 class StudentInfo(models.Model):
     #defualt user is pk
+    reg_staff = models.CharField(max_length=50)
     user = models.OneToOneField(
         User, on_delete=models.PROTECT
     )

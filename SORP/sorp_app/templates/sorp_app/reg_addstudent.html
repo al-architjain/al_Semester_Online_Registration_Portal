@@ -60,7 +60,7 @@
             <button id="mid" class="tablinks" onclick="openTab(event, 'docVerify')">Document Verification</button>
         </div>
 
-        <form action='/create_student/' method="POST">
+        <form action='/create_student/' method="POST" >
         {% csrf_token %}
         <!--***********************************************************************************************************************************-->
                                                         <!--Data Entry Form Tab Started -->
@@ -70,6 +70,7 @@
                 <div class="row">
                     <h4 class="text-primary"><b>INSTITUTE</b></h4>
                 </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <label style="font-size: 15px; margin: 0 20%" for="nith">NIT Hamirpur
@@ -87,6 +88,9 @@
                 <hr>
                 <div style="margin-top: 10px;" class="form-group">
                     <div class="row">
+
+                        <input type="hidden" value="{{uobj}}" name="reg_staff" >
+
                         <div class="col-md-3 col-sm-3">
                             {{ iform.name_eng.errors }}
                             <label for="id_name_eng"><b>Student's Name (In English) <span>*</span></b></label>
@@ -425,7 +429,7 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="form-group">
-                                <!--{{ iform.fee_waiver.errors }}-->
+                                {{ iform.fee_waiver.errors }}
                                 <label for="{{ iform.fee_waiver.id_for_label }}"><b>Fee Waiver Claimed ? <span>*</span></b></label>
                                 <br>
                                 {{ iform.fee_waiver }}
@@ -524,8 +528,7 @@
 
         </div>
             <br>
-            <button style="display:none;" type="submit" id="reg" class="btn btn-primary pull-right"> REGISTER </button>
-            <!--<input type="button" style="display:none;" id="reg" class="btn btn-primary pull-right" value="REGISTER" />-->
+            <button onclick="validate()" style="display:none;" type="submit" id="reg" class="btn btn-primary pull-right"> REGISTER </button>
         </form>
         </div>
         <br>
