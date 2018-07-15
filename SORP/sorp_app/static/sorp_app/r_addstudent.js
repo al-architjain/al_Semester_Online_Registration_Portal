@@ -22,20 +22,6 @@ function openTab(evt, tabName) {
 
 
 
-function popup() {
-
-        if(confirm("Are you sure you want to continue? (Press cancel to check again)"))
-        {
-            var pos;
-            pos = document.getElementsByTagName("form");
-            pos[0].setAttribute("action","reg_result/");
-        }
-        else
-          { console.log("No Presses"); }
-
-}
-
-
 function yes(num) {
     var tr = document.querySelectorAll("tr");
     tr[num].querySelectorAll("td")[0].style.color = "green";
