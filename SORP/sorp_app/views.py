@@ -421,6 +421,7 @@ def update_student(request):
         print(stu_obj.name_eng)
         print(stu_obj.dob)
         # iform = forms.StudentInfoForm(request.POST, instance=stu_obj)
+
         iform = forms.StudentInfoForm(initial={'name_eng':stu_obj.name_eng, 'dob':stu_obj.dob , 'gender': stu_obj.gender, 'category_main':stu_obj.category_main, 'b_state':stu_obj.b_state})
         fee_obj = models.StudentFirstFeeStatus.objects.get(student=stu_obj)
         fform = forms.StudentFirstFeeForm(request.POST or None, instance=fee_obj)
