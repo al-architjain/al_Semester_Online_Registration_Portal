@@ -133,7 +133,18 @@ class StudentInfo(models.Model):
     )
     gender = models.CharField(max_length=8, choices=gender_choices)
     dob = models.DateField()
-    religion = models.CharField(max_length=16)
+    religion_choices = (
+        ('---------', '---------'),
+        ('Christian', 'Christian'),
+        ('Hinduism', 'Hinduism'),
+        ('Jainism', 'Jainism'),
+        ('Muslim','Muslim'),
+        ('Buddhism','Buddhism'),
+        ('Sikhism','Sikhism'),
+        ('Judaism','Judaism'),
+        ('Zoroastrianism','Zoroastrianism')
+    )
+    religion = models.CharField(max_length=16,choices=religion_choices)
     category_main = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='main', db_column='Main Category')
     contact = models.CharField(max_length=16)
     aadhar_no = models.CharField(max_length=16, unique=True, null=True)

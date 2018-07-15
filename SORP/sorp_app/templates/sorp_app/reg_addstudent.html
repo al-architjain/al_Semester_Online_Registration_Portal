@@ -67,9 +67,24 @@
         <!--****************************************************************************************************************************************-->
 
         <div id="dataEntry" class="tabcontent">
-                <!--<div class="text-center text-success">-->
-                    <!--<h3><b>Session: 2018-19</b></h3><hr>-->
-                <!--</div>-->
+                <div class="row">
+                    <h4 class="text-primary"><b>INSTITUTE</b></h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label style="font-size: 15px; margin: 0 20%" for="nith">NIT, Hamirpur
+                            <input checked="true" name="institute" type="radio">
+                        </label>
+                        <label style="font-size: 15px; margin: 0 10%" for="iiitu">IIITU, Una
+                            <input name="institute" type="radio">
+                        </label>
+                    </div>
+
+                    <!--<select name="" id="">-->
+                        <!--<option value="nith">National Institute of Technology, Hamirpur</option>-->
+                        <!--<option value="iiitu">Indian Institute of Information and Technology, UNA</option>-->
+                    <!--</select>-->
+                </div>
                 <hr>
                 <div class="row">
                     <h4 class="text-primary"><b>PERSONAL DETAILS</b></h4>
@@ -109,7 +124,8 @@
                         <div class="col-md-2 col-sm-2">
                             {{ iform.religion.errors }}
                             <label for="{{ iform.religion.id_for_label }}"><b>Religion <span>*</span></b></label>
-                            <input required class="form-control" type="text" id="{{ iform.religion.id_for_label }}" placeholder="Enter Religion" name="{{ iform.religion.html_name }}">
+                            <!--<input required class="form-control" type="text" id="{{ iform.religion.id_for_label }}" placeholder="Enter Religion" name="{{ iform.religion.html_name }}">-->
+                            {{ iform.religion }}
                         </div>
                         <div class="col-md-2 col-sm-2">
                             {{ iform.gender.errors }}
@@ -303,7 +319,7 @@
                         <div class="col-md-2 col-sm-2">
                             {{ iform.roll_no.errors }}
                             <label for="{{ iform.roll_no.id_for_label }}"><b>Alloted Roll No <span>*</span></b></label>
-                            <input required class="form-control" type="text" id="{{ iform.roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.roll_no.html_name }}">
+                            <input oninput="rollNo({{ iform.roll_no.id_for_label }})" required class="form-control" type="text" id="{{ iform.roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.roll_no.html_name }}">
                         </div>
 
                         <div class="col-md-3 col-sm-3">
