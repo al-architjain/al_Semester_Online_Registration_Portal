@@ -4,27 +4,51 @@
         Student's Profile
     {% endblock %}
 
+
     {% block meta %}
         <!-- All the meta files will come here! -->
     {% endblock %}
 
+
     {% block links %}
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
         <!-- Online links will come here! -->
     {% endblock %}
 
 
-    {% block bodycontent %}
+	{% block styles %}
 
-		<div style="background: #00aa13" class="text-center">
-			<p style="font-size: 40px; color: white">Online Registration Portal <span style="font-size: 50%; margin-top: 1%; margin-right:10px" class="float-right"><a style=" color: white;" href="/login/">LogOut</a></span></p>
-		</div>
+        <style>
+            div#heading {
+				background: #00aa13;
+				font-size: 40px;
+				color: white;
+        	}
+        	div.container {
+        		width: 100%;
+        	}
+
+			div.row {
+				width: 100%;
+				margin-left: 0;
+			}
+        </style>
+    {% endblock %}
+
+
+    {% block bodycontent %}
+		<div class="row">
+            <div class="col-md-12">
+                <a style="font-size: 120%;" class="btn btn-success pull-right" href="/login/">LogOut</a>
+				<a style="font-size: 120%; margin: 0 5px;" class="btn btn-success pull-right" href="/change_password">Change Password</a>
+			</div>
+        </div>
 
         <div class="container">
 		<div class="row">
 
 			<!-----------------------------------  LEFT COLUMN FOR OPTIONS  ------------------------------------------->
-			<div class="col-lg-3 col-md-3 col-sm-3 col-12 mygrid ">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-13 mygrid ">
 				{% load static %}
 				<img class="rounded mx-auto d-block" src="{% static "def_profile_pic.jpg" %}">
 				<br>
@@ -43,7 +67,6 @@
 						</div>
 					</div>
 
-
 					<nav class="navbar navbar-expand-lg navbar-light bg-light">
   						<button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#collapseButton" aria-controls="collapseButton" aria-expanded="false" aria-label="Toggle navigation" style="outline: none; width: 100%; margin:auto;">
     						<span class="navbar-toggler-icon"></span>
@@ -51,10 +74,10 @@
 
 						<div class="collapse navbar-collapse" id="collapseButton">
 							<div class="tab">
+								<br>
 						    	<button class="tablinks active" onclick="openTab(event, 'studentProfile')"><i class="fas fa-user"></i> Profile</button>
 						      	<button class="tablinks" onclick="openTab(event, 'documents')"><i class="fas fa-file"></i> Documents</button>
 						      	<button class="tablinks" onclick="openTab(event, 'subjects')"><i class="fas fa-info"></i> Subject Details</button>
-						      	<!--<button class="tablinks" onclick="openTab(event, 'medDetails')"><i class="fas fa-notes-medical"></i> Medical Details</button>-->
 						      	<button class="tablinks" onclick="openTab(event, 'dues')"><i class="fas fa-rupee-sign"></i> Dues</button>
 						      	<button class="tablinks" onclick="openTab(event, 'result')"><i class="far fa-newspaper"></i> Result</button>
 						    </div>
@@ -66,11 +89,13 @@
 
 
 			<!-----------------------------------  RIGHT COLUMN FOR VIEWS  ------------------------------------------->
-			<div class="col-lg-9 col-md-9 col-sm-9 col-12 mygrid1">
+
+			<div class="col-lg-9 col-md-9 col-sm-9 col-12 mygrid">
+
 					<div id="studentProfile" class="tabcontent active">
 						<h4 class="text-center font-weight-bold">GENERAL INFORMATION</h4><br>
 						<div class="row">
-							<div class="col-md-3 col-sm-3 col-3">
+							<div class="col-md-3 col-sm-3 col-5">
 								<div class="form-group">
 									<label ><b>Class</b></label>
 						   		</div>
@@ -78,13 +103,13 @@
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-6 col-sm-6 col-6">
+				  			<div class="col-md-6 col-sm-6 col-5">
 				  				<label>{{sobj.ug_class}}</label>
 				  			</div>
 				  		</div>
 
 				  		<div class="row">
-				  			<div class="col-md-3 col-sm-3 col-3">
+				  			<div class="col-md-3 col-sm-3 col-5">
 								<div class="form-group">
 									<label ><b>Branch</b></label>
 						   		</div>
@@ -92,13 +117,13 @@
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-6 col-sm-6 col-6">
+				  			<div class="col-md-6 col-sm-6 col-5">
 				  				<label>{{ sobj.ug_branch }}</label>
 				  			</div>
 				  		</div>
 
 				  		<div class="row">
-				  			<div class="col-md-3 col-sm-3 col-3">
+				  			<div class="col-md-3 col-sm-3 col-5">
 								<div class="form-group">
 									<label ><b>Semester</b></label>
 						   		</div>
@@ -106,13 +131,13 @@
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-6 col-sm-6 col-6">
+				  			<div class="col-md-6 col-sm-6 col-5">
 				  				<label>{{ sobj.ug_sem }}</label>
 				  			</div>
 				  		</div>
 
 				  		<div class="row">
-				  			<div class="col-md-3 col-sm-3 col-3">
+				  			<div class="col-md-3 col-sm-3 col-5">
 								<div class="form-group">
 									<label for=><b>Hostler</b></label>
 						   		</div>
@@ -120,35 +145,35 @@
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-6 col-sm-6 col-6">
+				  			<div class="col-md-6 col-sm-6 col-5">
 				  				<label>{{ sobj.hostel_name }}</label>
 				  			</div>
 				  		</div>
 
 				  		<div class="row">
-				  			<div class="col-md-3 col-sm-3 col-3">
+				  			<div class="col-md-3 col-sm-3 col-5">
 								<div class="form-group">
-									<label ><b>Correspondence Address</b></label>
+									<label><b>Correspondence Address</b></label>
 						   		</div>
 				  			</div>
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-6 col-sm-6 col-6">
+				  			<div class="col-md-6 col-sm-6 col-5">
 				  				<label>{{ sobj.corr_addr }}</label>
 				  			</div>
 				  		</div>
 
 				  		<div class="row">
-				  			<div class="col-md-3 col-sm-3 col-3">
+				  			<div class="col-md-3 col-sm-3 col-5">
 								<div class="form-group">
-									<label ><b>Permanent Address</b></label>
+									<label><b>Permanent Address</b></label>
 						   		</div>
 				  			</div>
 				  			<div class="col-md-1 col-sm-1 col-1">
 				  				<label>:</label>
 				  			</div>
-				  			<div class="col-md-6 col-sm-6 col-6">
+				  			<div class="col-md-6 col-sm-6 col-5">
 				  				<label>{{ sobj.perm_addr }}</label>
 				  			</div>
 				  		</div>
@@ -220,188 +245,36 @@
 						</div>
 					</div>
 
-					<!--div id="medDetails" class="tabcontent">
-	          			<h4 class="text-center font-weight-bold">PERSONAL HISTORY</h4><br>
-
-		        		<div class="row">
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-			          				<label for="date"><b>Age on 1<span class=" align-text-bottom">st</span> {{ sobj.age }}</b></label>
-			          			</div>
-		        			</div>
-		        			<div class="col-md-1 col-sm- col-1">
-		        				<label>:</label>
-							</div>
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-	 								<label id="date">21</label>
-	 							</div>
-		        			</div>
-		        		</div>
-
-		        		<div class="row">
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-			          				<label for="identification"><b>Identification Mark on the Body</b></label>
-			          			</div>
-		        			</div>
-		        			<div class="col-md-1 col-sm-1 col-1">
-		        				<label>:</label>
-							</div>
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-	 								<label id="identification">Mole on left hand little finger</label>
-	 							</div>
-		        			</div>
-		        		</div>
-
-		        		<div class="row">
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-			          				<label for="majorIllness"><b>Major illness/operation</b></label>
-			          			</div>
-		        			</div>
-		        			<div class="col-md-1 col-sm-1 col-1">
-		        				<label>:</label>
-							</div>
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-	 								<label id="majorIllness">None</label>
-	 							</div>
-		        			</div>
-		        		</div>
-
-		        		<div class="row">
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-			          				<label for="height"><b>Height (cm)</b></label>
-			          			</div>
-		        			</div>
-		        			<div class="col-md-1 col-sm-1 col-1">
-		        				<label>:</label>
-							</div>
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-	 								<label id="height">173</label>
-	 							</div>
-		        			</div>
-		        		</div>
-
-		        		<div class="row">
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-			          				<label for="weight"><b>Weight (Kg)</b></label>
-			          			</div>
-		        			</div>
-		        			<div class="col-md-1 col-sm-1 col-1">
-		        				<label>:</label>
-							</div>
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-	 								<label id="weight">65</label>
-	 							</div>
-		        			</div>
-		        		</div>
-
-		        		<div class="row">
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-			          				<label for="vision"><b>Vision</b></label>
-			          			</div>
-		        			</div>
-		        			<div class="col-md-1 col-sm-1 col-1">
-		        				<label>:</label>
-							</div>
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-	 								<label id="vision">6/6</label>
-	 							</div>
-		        			</div>
-		        		</div>
-
-		        		<div class="row">
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-			          				<label for="bloodGroup"><b>Blood Group</b></label>
-			          			</div>
-		        			</div>
-		        			<div class="col-md-1 col-sm-1 col-1">
-		        				<label>:</label>
-							</div>
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-	 								<label id="bloodGroup">B+ve</label>
-	 							</div>
-		        			</div>
-		        		</div>
-
-		        		<div class="row">
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-			          				<label for="colourBlindness"><b>Colour Blindness</b></label>
-			          			</div>
-		        			</div>
-		        			<div class="col-md-1 col-sm-1 col-1">
-		        				<label>:</label>
-							</div>
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-	 								<label id="colourBlindness">No</label>
-	 							</div>
-		        			</div>
-		        		</div>
-
-		        		<div class="row">
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-			          				<label for="otherDefect"><b>Any Other Defect</b></label>
-			          			</div>
-		        			</div>
-		        			<div class="col-md-1 col-sm-1 col-1">
-		        				<label>:</label>
-							</div>
-		        			<div class="col-md-5 col-sm-5 col-5">
-		        				<div class="form-group">
-	 								<label id="otherDefect">None</label>
-	 							</div>
-		        			</div>
-		        		</div>
-			  		</div-->
-
 					<div id="dues" class="tabcontent">
 
 	          			<h4 class="text-center font-weight-bold">DUES</h4><br>
 
 						<div class="row">
-							<div class="col-lg-4">
-								<div class="card">
+							<div class="col-lg-4 mycard">
+
 								  	<h4>Academic Due</h4>
 								  	<div class="card-body">
 								    	<p class="card-text">If unpaid, visit Administration Block (Account Section)</p>
 								    	<a href="#" class="btn btn-success">Check Now!</a>
-								  	</div>
+
 								</div>
 							</div>
 
-							<div class="col-lg-4">
-								<div class="card">
+							<div class="col-lg-4 mycard">
+
 								  	<h4>Hostel Due</h4>
 								  	<div class="card-body">
 								    	<p class="card-text">If unpaid, visit MMCA Office of respective hostel</p>
 								    	<a href="#" class="btn btn-success">Check Now!</a>
-
 								  	</div>
-								</div>
+
 							</div>
 
-							<div class="col-lg-4">
-								<div class="card">
-								  	<h4>Library Due</h4>
-								  	<div class="card-body">
-								    	<p class="card-text">If unpaid, visit Library before Registration</p>
-								   		<a href="#" class="btn btn-success">Check Now!</a>
-
-								  	</div>
+							<div class="col-lg-4 mycard">
+								<h4>Library Due</h4>
+								<div class="card-body">
+								   	<p class="card-text">If unpaid, visit Library before Registration</p>
+									<a href="#" class="btn btn-success">Check Now!</a>
 								</div>
 							</div>
 						</div>
@@ -423,75 +296,14 @@
 					       				</thead>
 
 					       				<tbody>
+											{% for result in robj %}
 											<tr>
-												<td>1st</td>
-												<td></td>
-												<td></td>
+												<td>{{ result.semester }}</td>
+												<td>{{ result.sgpi }}</td>
+												<td>{{ result.cgpi }}</td>
 												<td></td>
 											</tr>
-
-											<tr>
-												<td>2nd</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>3rd</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>4th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>5th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>6th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>7th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>8th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>9th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>10th</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
+											{% endfor %}
 			 				        	</tbody>
 			        				</table>
 			        			</div>
@@ -499,21 +311,30 @@
 		      				</div>
 		    			</div>
 					</div>
-				<!--</form>-->
+
 			</div>
 		</div>
 	</div>
 
+
     {% endblock %}
+
+
+
+
 
     {% block bodyscripts %}
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     {% endblock %}
 
+
+
+
+
     {% block staticfiles %}
-		{% load static %}
-		<link rel="stylesheet" type="text/css" href="{% static "sorp_app/Student_Profile.css" %}">
-		<script type="text/javascript" src="{% static "sorp_app/Student_Profile.js" %}"></script>
-	{% endblock %}
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "sorp_app/Student_Profile.css" %}">
+        <script type="text/javascript" src="{% static "sorp_app/Student_Profile.js" %}"></script>
+    {% endblock %}

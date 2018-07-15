@@ -1,160 +1,233 @@
 {% extends "base.html" %}
 
-	{% block title %}
-		Registrar Staff
+    {% block title %}
+        Registrar Staff
+    {% endblock %}
+
+
+
+
+
+    {% block links %}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    {% endblock %}
+
+
+
+
+
+    {% block styles %}
+        <style>
+            div#heading {
+			    background: #5292f9;
+			    font-size: 40px;
+			    color: white;
+            }
+
+            img {
+                width: 50%;
+            }
+                .tab {
+                    overflow: hidden;
+                }
+                /* Style the buttons inside the tab */
+                .tab button {
+                    border-radius: 5px;
+                    text-align: center;
+                    width: 23%;
+                    margin: 0 5%;
+                    float: left;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    padding: 10px 0;
+                    transition: 0.3s;
+                    font-size: 17px;
+                    white-space: wrap;
+                    text-overflow: ellipsis;
+                }
+                /* Change background color of buttons on hover */
+                .tab button:hover {
+                    background-color: lightblue;
+                }
+                /* Create an active/current tablink class */
+                .tab button.active {
+                    color: white;
+                    background-color: #5292f9;
+                }
+                /* Style the tab content */
+                .tabcontent {
+                    display: none;
+                    padding: 6px 12px;
+                    -webkit-animation: fadeEffect 1s;
+                    animation: fadeEffect 1s;
+                }
+                /* Fade in tabs */
+                @-webkit-keyframes fadeEffect {
+                    from {opacity: 0;}
+                    to {opacity: 1;}
+                }
+                @keyframes fadeEffect {
+                    from {opacity: 0;}
+                    to {opacity: 1;}
+                }
+
+
+                {% ifequal tabb '1' %}
+                    div#addStudent {
+                        display: block;
+                    }
+                {% endifequal %}
+                {% ifequal tabb '2' %}
+                    div#updateStudent {
+                        display: block;
+                    }
+                {% endifequal %}
+                {% ifequal tabb '3' %}
+                    div#deactivateStudent {
+                        display: block;
+                    }
+                {% endifequal %}
+
+        </style>
+    {% endblock %}
+
+
+
+
+
+    {% block bodycontent %}
+        <a style="font-size: 120%; margin-right:20px;" class="btn btn-primary pull-right" href="/login/">LogOut</a>
+        <a style="font-size: 120%; margin: 0 5px;" class="btn btn-primary pull-right" href="/change_password">Change Password</a>
+
+        <br><br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <br><br>
+                    {% load static %}
+                    <img class="rounded mx-auto d-block" src='{% static "def_profile_pic.jpg" %}'>
+                        <div class="text-center mt-2">
+                            <label class="font-weight-bold" id="StaffName">{{ uobj.first_name }} {{ uobj.last_name }}</label><br>
+                            <label id="StaffPhone"><span class="text-muted">Email: </span>{{ uobj.email }}</label><br>
+                          <!--<label id="StaffEmail"><span class="text-muted">Email: </span>xyz@nith.ac.in</label><br>-->
+                        </div>
+                </div>
+
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                    <!-- Tabs list -->
+                    <div class="row">
+                        <div style="margin-top: 10px" class="col-lg-12 col-md-12">
+                            <div class="tab">
+                              <button class="tablinks {% ifequal tabb '1' %} active {% endifequal %}" onclick="openTab(event, 'addStudent')"><i class="fas fa-user-plus"></i> Add Student</button>
+                              <button class="tablinks" onclick="openTab(event, 'updateStudent')"><i class="fas fa-edit"></i> Update Student</button>
+                              <button class="tablinks {% ifequal tabb '3' %} active {% endifequal %}" onclick="openTab	(event, 'deactivateStudent')"><i class="fas fa-ban"></i> Deactivate Student</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div style="margin-top: 10px" class="col-lg-12 col-md-12">
+                            <div id="addStudent" class="tabcontent">
+                                <div class="card">
+                                   <div class="card-header text-center">
+                                       <h4>Add Student Information</h4>
+                                   </div>
+
+                                    <div class="card-body text-center">
+                                        <br>
+                                        <a class="btn btn-success" href="/create_student"> Create Now </a><br>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="updateStudent" class="tabcontent">
+                                <div class="card">
+                                    <div class="card-header text-center">
+                                        <h4>Update Student Profile</h4>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <p class="card-text text-capitalize mt-2">Search Roll No. to Update </p>
+                                         <form class="form-inline justify-content-center my-2 my-lg-0">
+                                              <input required class="form-control mr-sm-2" id="RollNoUpdate" type="search" placeholder="Enter Roll No" aria-label="Search">
+                                              <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+                                        </form>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="deactivateStudent" class="tabcontent">
+                                <div class="card">
+                                    <div class="card-header text-center">
+                                     <h4>Deactivate Student Profile</h4>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <p class="card-text text-capitalize">Search Roll No. to Deactivate </p>
+                                        <form action="/profile/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
+                                            {% csrf_token %}
+                                          <input required class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search" name="d_roll_no">
+                                          <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+                                        </form>
+                                        <br>
+                                        {% if not exist %}
+                                            <h4 class="alert alert-danger">User does not exist!</h4>
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+
+                                <div class="card">
+                                    <br>
+                                        {% ifnotequal dobj None %}
+                                            <div class="card-header text-center">
+                                                <h4>Check Details:</h4>
+                                            </div>
+                                            <div style="overflow-x:auto;">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="gpi">Roll No</th>
+                                                            <th class="gpi">Name</th>
+                                                            <th class="gpi">Father's Name</th>
+                                                            <th class="gpi">Email</th>
+                                                            <th class="gpi">Confirm</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        <tr>
+                                                            <form action="/deactivate/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
+                                                            {% csrf_token %}
+                                                                <td><input class="form-control mr-sm-2" id="droll_noo" type="search" value="{{dobj.roll_no}}" name="droll_noo" /></td>
+                                                                <td>{{ dobj.name_eng }}</td>
+                                                                <td>{{ dobj.father_name }}</td>
+                                                                <td>{{ dobj.email }}</td>
+                                                                <td><button class="btn btn-success my-2 my-sm-0" type="submit">DEACTIVATE</button></td>
+                                                            </form>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        {% endifnotequal %}
+                                </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab panels end -->
+                </div>
+            </div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+
+
+
+    {% block staticfiles %}
+            {% load static %}
+            <script type="text/javascript" src="{% static "sorp_app/r_addstudent.js" %}"></script>
 	{% endblock %}
-
-	{% block links %}
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-	{% endblock %}
-
-	{% block styles %}
-		<style>
-			img {
-				width: 50%;
-			}
-				.tab {
-					overflow: hidden;
-				}
-				/* Style the buttons inside the tab */
-				.tab button {
-					border-radius: 5px;
-					text-align: center;
-					width: 23%;
-					margin: 0 5%;
-					float: left;
-					border: none;
-					outline: none;
-					cursor: pointer;
-					padding: 10px 0;
-					transition: 0.3s;
-					font-size: 17px;
-					white-space: wrap;
-					text-overflow: ellipsis;
-				}
-				/* Change background color of buttons on hover */
-				.tab button:hover {
-					background-color: lightblue;
-				}
-				/* Create an active/current tablink class */
-				.tab button.active {
-					color: white;
-					background-color: #5292f9;
-				}
-				/* Style the tab content */
-				.tabcontent {
-					display: none;
-					padding: 6px 12px;
-					-webkit-animation: fadeEffect 1s;
-					animation: fadeEffect 1s;
-				}
-				/* Fade in tabs */
-				@-webkit-keyframes fadeEffect {
-					from {opacity: 0;}
-					to {opacity: 1;}
-				}
-				@keyframes fadeEffect {
-					from {opacity: 0;}
-					to {opacity: 1;}
-				}
-				div#addStudent {
-					display: block;
-				}
-		</style>
-	{% endblock %}
-
-
-	{% block bodycontent %}
-		<div style="background: #5292f9" class="text-center">
-			<p style="font-size: 40px; color: white">Online Registration Portal <span style="font-size: 50%; margin-top: 1%; margin-right: 10px" class="float-right"><a style=" color: white;" href="/login/">LogOut</a></span></p>
-		</div>
-
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-3">
-					<br><br>
-					{% load static %}
-					<img class="rounded mx-auto d-block" src="{% static "def_profile_pic.jpg" %}">
-						<div class="text-center mt-2">
-							<label class="font-weight-bold" id="StaffName">{{ uobj.first_name }} {{ uobj.last_name }}</label><br>
-							<label id="StaffPhone"><span class="text-muted">Email: </span>{{ uobj.email }}</label><br>
-						  <!--<label id="StaffEmail"><span class="text-muted">Email: </span>xyz@nith.ac.in</label><br>-->
-						</div>
-				</div>
-
-				<div class="col-lg-9 col-md-9 col-sm-9">
-					<!-- Tabs list -->
-					<div class="row">
-						<div style="margin-top: 10px" class="col-lg-12 col-md-12">
-							<div class="tab">
-							  <button class="tablinks active" onclick="openTab(event, 'addStudent')"><i class="fas fa-user-plus"></i> Add Student</button>
-							  <button class="tablinks" onclick="openTab(event, 'updateStudent')"><i class="fas fa-edit"></i> Update Student</button>
-							  <button class="tablinks" onclick="openTab	(event, 'deactivateStudent')"><i class="fas fa-ban"></i> Deactivate Student</button>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div style="margin-top: 10px" class="col-lg-12 col-md-12">
-							<div id="addStudent" class="tabcontent">
-								<div class="card">
-								   <div class="card-header text-center">
-									   <h4>Add Student Information</h4>
-								   </div>
-
-									<div class="card-body text-center">
-										<br>
-										<a class="btn btn-success" href="/create_student"> Create Now </a><br>
-										<br>
-									</div>
-								</div>
-							</div>
-
-							<div id="updateStudent" class="tabcontent">
-								<div class="card">
-									<div class="card-header text-center">
-										<h4>Update Student Profile</h4>
-									</div>
-									<div class="card-body text-center">
-										<p class="card-text text-capitalize mt-2">Search Roll No. to Update </p>
-										 <form class="form-inline justify-content-center my-2 my-lg-0">
-											  <input class="form-control mr-sm-2" id="RollNoUpdate" type="search" placeholder="Enter Roll No" aria-label="Search">
-											  <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-										</form>
-										<br>
-									</div>
-								</div>
-							</div>
-
-							<div id="deactivateStudent" class="tabcontent">
-								<div class="card">
-									<div class="card-header text-center">
-									 <h4>Deactivate Student Profile</h4>
-									</div>
-									<div class="card-body text-center">
-										 <p class="card-text text-capitalize">Search Roll No. to Deactivate </p>
-										<form class="form-inline justify-content-center my-2 my-lg-0">
-										  <input class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search">
-										  <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-										</form>
-										<br>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-
-					<!-- Tab panels end -->
-				</div>
-
-			</div>
-			</div>
-		</div>
-
-	{% endblock %}
-
-	{% block staticfiles %}
-			{% load static %}
-			<script type="text/javascript" src="{% static "sorp_app/r_addstudent.js" %}"></script>
-{% endblock %}

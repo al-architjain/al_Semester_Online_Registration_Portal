@@ -1,4 +1,5 @@
 function openTab(evt, tabName) {
+    var reg = document.querySelector("#reg");
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -10,6 +11,13 @@ function openTab(evt, tabName) {
     }
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
+
+    if(tabName == "docVerify") {
+        reg.style.display = "block";
+    }
+    else {
+        reg.style.display = "none";
+    }
 }
 
 

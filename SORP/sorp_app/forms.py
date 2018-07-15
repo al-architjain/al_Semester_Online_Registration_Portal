@@ -65,12 +65,19 @@ class StudentInfoForm(forms.ModelForm) :
         model = models.StudentInfo
         exclude = ['user','img','year_of_admission','active_status','ug_sem', 'stud_doc']
 
-class StudentMedicalForm(forms.ModelForm) :
-    class Meta :
-        model = models.StudentMedicalInfo
-        exclude = ['student',]
 
 class StudentFirstFeeForm(forms.ModelForm) :
     class Meta :
         model = models.StudentFirstFeeStatus
         exclude = ['student', ]
+
+
+
+
+
+# Expired Classes:
+#
+# class StudentMedicalForm(forms.ModelForm) :
+#     class Meta :
+#         model = models.StudentMedicalInfo
+#         exclude = ['student',]

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+    {% block title %}
+        Success! :)
+    {% endblock %}
+
+
+
+
+
+    {% block meta %}
+        <!-- All the meta files will come here! -->
+    {% endblock %}
+
+
+
+
+
+    {% block links %}
+        <!-- Online links will come here! -->
+    {% endblock %}
+
+
+
+
+
+    {% block styles %}
+        <!-- Style part comes here! -->
+        <style>
+            div#heading {
+                background: #337ab7;
+                font-size: 40px;
+                color: white;
+            }
+        </style>
+    {% endblock %}
+
+
+
+
+
+    {% block bodycontent %}
+        <div class="container">
+            {% load static %}
+                <h2>Student Registration Successfull! <span><img style="width:5%" src="{% static 'checkmark.gif'%}" alt="checktick"></span></h2>
+                <br>
+            <div>
+                <h3> LOGIN DETAILS</h3>
+                <br>
+                <label>Name : {{ name }} </label>
+                <br>
+                <label>Username : {{ username }} </label>
+                <br>
+                <label>Password : {{ password }} </label>
+                <br><br>
+                <div class="text-center">
+                        <a class="btn btn-primary" href="/create_student/">Add Another Student</a>
+                        <a class="btn btn-primary" href="/profile/">Go to Profile</a>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+
+
+
+
+
+    {% block bodyscripts %}
+    {% endblock %}
+
+
+
+
+
+    {% block staticfiles %}
+        <!-- Static files come here! -->
+    {% endblock %}
+
