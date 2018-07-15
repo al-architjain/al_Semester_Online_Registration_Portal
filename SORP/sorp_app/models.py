@@ -92,12 +92,6 @@ class Subjects(models.Model):
 class Documents(models.Model):
     #default autofield id is pk
     doc_name = models.CharField(max_length=512)
-    doc_imp_choice=(
-        ('M' , 'Mandatory'),
-        ('O' , 'Optional'),
-        ('NA', 'Not Applicable')
-    )
-    doc_imp = models.CharField(max_length=2, default = 'M', choices=doc_imp_choice)
     #
     def __str__(self):
         return self.doc_name
@@ -118,19 +112,16 @@ class StudentInfo(models.Model):
     # Documents
     stud_doc = models.ManyToManyField(Documents, through='DocumentInfo')
     #
-    # Institute Info
-    # insti_choices = (
-    #     ('NIT Hamirpur', 'NIT Hamirpur'),
-    #     ('IIIT Una', 'IIIT Una'),
-    # )
-    # institute = models.CharField(max_length=16, choices=insti_choices)
+    # Institute Info #
+    #
+    institute = models.CharField(max_length=16)
     #
     # Personal Details #
     #
     #
     name_eng = models.CharField(max_length=64)
-    name_hindi = models.CharField(max_length=64, null=True, blank=True)
-    email = models.EmailField(unique=True,null=False)
+    name_hindi = models.CharField(max_length=64,  blank=True)
+    email = models.EmailField(unique=True)
     gender_choices = (
         ('---------', '---------'),
         ('Male', 'Male'),
@@ -139,10 +130,21 @@ class StudentInfo(models.Model):
     )
     gender = models.CharField(max_length=8, choices=gender_choices)
     dob = models.DateField()
-    religion = models.CharField(max_length=16)
+    religion_choices = (
+        ('---------', '---------'),
+        ('Christian', 'Christian'),
+        ('Hinduism', 'Hinduism'),
+        ('Jainism', 'Jainism'),
+        ('Muslim','Muslim'),
+        ('Buddhism','Buddhism'),
+        ('Sikhism','Sikhism'),
+        ('Judaism','Judaism'),
+        ('Zoroastrianism','Zoroastrianism')
+    )
+    religion = models.CharField(max_length=16,choices=religion_choices)
     category_main = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='main', db_column='Main Category')
     contact = models.CharField(max_length=16)
-    aadhar_no = models.CharField(max_length=16, unique=True, null=True)
+    aadhar_no = models.CharField(max_length=16, unique=True )
     area_choice = (
         ('---------', '---------'),
         ('Rural', 'Rural'),
@@ -151,7 +153,7 @@ class StudentInfo(models.Model):
     area = models.CharField(max_length=16, choices=area_choice)
     b_country = models.CharField(max_length=32)
     b_state = models.CharField(max_length=32)
-    nearest_rs = models.CharField(max_length=64, null=True, blank=True)
+    nearest_rs = models.CharField(max_length=64,  blank=True)
     corr_addr = models.CharField(max_length=256)
     perm_addr = models.CharField(max_length=256)
     #
@@ -162,7 +164,7 @@ class StudentInfo(models.Model):
     jee_roll_no = models.BigIntegerField()
     jee_score = models.PositiveIntegerField()
     jee_ai_rank = models.PositiveIntegerField()
-    jee_cat_rank = models.PositiveIntegerField(null=True, blank=True)
+    jee_cat_rank = models.PositiveIntegerField( blank=True)
     category_admission = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='admission', db_column='Admitted Category')
     int_country = models.CharField(max_length=32)
     int_state = models.CharField(max_length=32)
@@ -183,16 +185,10 @@ class StudentInfo(models.Model):
     hostel_choices=(
         ('KBH', 'Kailash Boys Hostel'),
         ('Satpura', 'Satpura Hostel'),
-        ('Himadri', 'Himadri Boys Hostel'),
-        ('Himgiri', 'Himgiri Boys Hostel'),
-        ('NBH', 'Neelkanth Boys Hostel'),
-        ('MMH', 'Manimahesh Boys Hostel'),
-        ('VBH', 'Vindhyanchal Boys Hostel'),
-        ('DBH', 'Dauladhar Boys Hostel'),
         ('AGH', 'Ambika Girls Hostel'),
         ('PGH', 'Parvati Girls Hostel'),
     )
-    hostel_name = models.CharField(max_length=16, choices=hostel_choices, null=True, blank=True)
+    hostel_name = models.CharField(max_length=16, choices=hostel_choices,  blank=True)
     entry_no = models.PositiveIntegerField(unique=True)
     reg_no = models.CharField(unique=True,max_length=64)
     roll_no = models.CharField(unique=True, max_length=16)
@@ -202,14 +198,14 @@ class StudentInfo(models.Model):
     #
     #
     father_name = models.CharField(max_length=64)
-    father_contact = models.CharField(max_length=16,null=True,blank=True)
-    father_email = models.EmailField(null=True,blank=True)
+    father_contact = models.CharField(max_length=16,blank=True)
+    father_email = models.EmailField(blank=True)
     mother_name = models.CharField(max_length=64)
-    mother_contact = models.CharField(max_length=16,null=True,blank=True)
-    mother_email = models.EmailField(null=True,blank=True)
-    guardian_name = models.CharField(max_length=64,null=True,blank=True)
-    guardian_contact = models.CharField(max_length=16,null=True,blank=True)
-    guardian_email = models.EmailField(null=True,blank=True)
+    mother_contact = models.CharField(max_length=16,blank=True)
+    mother_email = models.EmailField(blank=True)
+    guardian_name = models.CharField(max_length=64,blank=True)
+    guardian_contact = models.CharField(max_length=16,blank=True)
+    guardian_email = models.EmailField(blank=True)
     family_income = models.PositiveIntegerField(default=0)
     waiver_choices = (
         ('Not Claimed', 'Not Claimed'),
@@ -243,7 +239,7 @@ class DocumentInfo(models.Model):
     #default id is pk
     student = models.ForeignKey(StudentInfo, on_delete=models.CASCADE)
     document = models.ForeignKey(Documents, on_delete=models.CASCADE)
-    submitted = models.BooleanField(default=False)
+    submitted = models.CharField(max_length=3)
     #
     # def __str__(self):
     #     return self.roll_no
@@ -297,9 +293,9 @@ class Due(models.Model):
 #     height = models.SmallIntegerField()     #(in cm)
 #     # weight_kg = models.IntegerField()
 #     blood_group = models.CharField(max_length=4)
-#     id_mark = models.CharField(max_length=32, null=True, blank=True)
-#     major_illness = models.CharField(max_length=64,null=True, blank=True)
-#     past_mental_illness = models.CharField(max_length=64,null=True, blank=True)
-#     vision = models.CharField(max_length=8,null=True, blank=True)
-#     clour_blindness = models.CharField(max_length=32,null=True, blank=True)
-#     other_defect = models.CharField(max_length=64,null=True, blank=True)
+#     id_mark = models.CharField(max_length=32,  blank=True)
+#     major_illness = models.CharField(max_length=64, blank=True)
+#     past_mental_illness = models.CharField(max_length=64, blank=True)
+#     vision = models.CharField(max_length=8, blank=True)
+#     clour_blindness = models.CharField(max_length=32, blank=True)
+#     other_defect = models.CharField(max_length=64, blank=True)

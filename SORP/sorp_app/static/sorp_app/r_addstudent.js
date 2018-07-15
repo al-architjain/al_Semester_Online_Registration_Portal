@@ -26,17 +26,25 @@ function yes(num) {
     var tr = document.querySelectorAll("tr");
     tr[num].querySelectorAll("td")[0].style.color = "green";
     tr[num].querySelectorAll("td")[1].style.color = "green";
-
+    tr[num].querySelectorAll("td")[0].style.textDecoration = "none";
+    tr[num].querySelectorAll("td")[1].style.textDecoration = "none";
   }
-
 
 function no(num) {
     var tr = document.querySelectorAll("tr");
     tr[num].querySelectorAll("td")[0].style.color = "red";
     tr[num].querySelectorAll("td")[1].style.color = "red";
-
+    tr[num].querySelectorAll("td")[0].style.textDecoration = "none";
+    tr[num].querySelectorAll("td")[1].style.textDecoration = "none";
 }
 
+function na(num) {
+    var tr = document.querySelectorAll("tr");
+    tr[num].querySelectorAll("td")[0].style.color = "lightgray";
+    tr[num].querySelectorAll("td")[1].style.color = "lightgray";
+    tr[num].querySelectorAll("td")[0].style.textDecoration = "line-through";
+    tr[num].querySelectorAll("td")[1].style.textDecoration = "line-through";
+}
 
 function clearSelection(idname) {
   var tr = document.querySelector("#"+idname);
