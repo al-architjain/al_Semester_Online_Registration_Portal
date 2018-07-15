@@ -109,7 +109,8 @@
                         <div class="col-md-2 col-sm-2">
                             {{ iform.religion.errors }}
                             <label for="{{ iform.religion.id_for_label }}"><b>Religion <span>*</span></b></label>
-                            <input required class="form-control" type="text" id="{{ iform.religion.id_for_label }}" placeholder="Enter Religion" name="{{ iform.religion.html_name }}">
+                            <!--<input required class="form-control" type="text" id="{{ iform.religion.id_for_label }}" placeholder="Enter Religion" name="{{ iform.religion.html_name }}">-->
+                            {{ iform.religion }}
                         </div>
                         <div class="col-md-2 col-sm-2">
                             {{ iform.gender.errors }}

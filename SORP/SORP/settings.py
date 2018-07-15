@@ -25,7 +25,7 @@ SECRET_KEY = '9o0+rem1iqg12ler5ng)fzhk+2-5ay^4hd6s1#9=f*9%zeua3p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.43.52']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -75,18 +75,18 @@ WSGI_APPLICATION = 'SORP.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'sorp',
-        'USER' : 'root',
-        'PASSWORD' : '@rchit21',
-        'HOST' : '127.0.0.1',
-        'PORT' : '3306',
-    }
     # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME' : 'sorp',
+    #     'USER' : 'root',
+    #     'PASSWORD' : '@rchit21',
+    #     'HOST' : '127.0.0.1',
+    #     'PORT' : '3306',
     # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 
