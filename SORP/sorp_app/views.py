@@ -422,7 +422,28 @@ def update_student(request):
         print(stu_obj.dob)
         # iform = forms.StudentInfoForm(request.POST, instance=stu_obj)
 
-        iform = forms.StudentInfoForm(initial={'name_eng':stu_obj.name_eng, 'dob':stu_obj.dob , 'gender': stu_obj.gender, 'category_main':stu_obj.category_main, 'b_state':stu_obj.b_state})
+        data={
+            'name_eng':stu_obj.name_eng,
+            'name_hindi':stud_obj.name_hindi,
+            'email':stu_obj.email,
+            'gender':stu_obj.gender,
+            'dob':stu_obj.dob,
+            'religion':stu_obj.religion,
+            'contact':stu_obj.contact,
+            'aadhar_no':stu_obj.aadhar_no,
+            'area':stu_obj.area,
+            'b_country':stu_obj.b_country,
+            'b_state':stu_obj.b_state,
+            'nearest_rs':stu_obj.nearest_rs,
+            'corr_addr':stu_obj.corr_addr,
+            'perm_addr':stu_obj.perm_addr,
+            'jee_roll_no':stu_obj.jee_roll_no,
+            'jee_score':stu_obj.jee_score,
+            'jee_ai_rank':stu_obj.jee_ai_rank,
+            'jee_cat_rank':stu_obj.jee_cat_rank,
+        }
+
+        iform = forms.StudentInfoForm(initial=data)
         fee_obj = models.StudentFirstFeeStatus.objects.get(student=stu_obj)
         fform = forms.StudentFirstFeeForm(request.POST or None, instance=fee_obj)
         dobj = models.Documents.objects.all()
