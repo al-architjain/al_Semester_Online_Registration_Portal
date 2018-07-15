@@ -488,42 +488,22 @@
             <br>
             <div class="row">
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <table class="table table-hover">
+                    <table class="table table-hover float-left">
                         <thead>
-                            <tr>
+                            <tr class="text-primary">
                                 <th class="srno">Sr. No.</th>
-                                <th style="width: 500px;">Name of the Document</th>
+                                <th >Name of the Document</th>
                                 <th>Verified?</th>
                             </tr>
                         </thead>
-                    </table>
-                    <h4 class="text-primary"><strong>Mandatory</strong></h4>
-                    <table class="table table-hover">
                         <tbody>
                             {% for doc in dobj %}
-                                {% ifequal doc.doc_imp 'M' %}
-                                    <tr>
-                                        <td>{{ doc.id }}</td>
-                                        <td><strong>{{ doc.doc_name }}</strong> issued by JoSAA</td>
-                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No</td>
-                                        <td></td>
-                                    </tr>
-                                {% endifequal %}
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <h4 class="text-primary"><strong>Optional</strong></h4>
-                    <table class="table table-hover">
-                        <tbody>
-                            {% for doc in dobj %}
-                                {% ifequal doc.doc_imp 'O' %}
-                                    <tr id="Odoc{{doc.id}}">
-                                        <td>{{ doc.id }}</td>
-                                        <td><strong>{{ doc.doc_name }}</strong> (if applicable) </td>
-                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No <a onclick="clearSelection('Odoc{{doc.id}}')" class="btn btn-default">Clear</a></td>
-                                        <td></td>
-                                    </tr>
-                                {% endifequal %}
+                                <tr>
+                                    <td style="color:green">{{ doc.id }}</td>
+                                    <td style="color:green"><strong>{{ doc.doc_name }}</strong></td>
+                                    <td><input onclick="yes({{doc.id}})" checked="True" type="radio" value="YES" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="NO" name="doc{{doc.id}}">No <input onclick="na({{doc.id}})" type="radio" value="NA" name="doc{{doc.id}}">NA</td>
+
+                                </tr>
                             {% endfor %}
                         </tbody>
                     </table>

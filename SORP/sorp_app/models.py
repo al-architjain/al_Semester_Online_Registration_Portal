@@ -92,12 +92,6 @@ class Subjects(models.Model):
 class Documents(models.Model):
     #default autofield id is pk
     doc_name = models.CharField(max_length=512)
-    doc_imp_choice=(
-        ('M' , 'Mandatory'),
-        ('O' , 'Optional'),
-        ('NA', 'Not Applicable')
-    )
-    doc_imp = models.CharField(max_length=2, default = 'M', choices=doc_imp_choice)
     #
     def __str__(self):
         return self.doc_name
@@ -243,7 +237,7 @@ class DocumentInfo(models.Model):
     #default id is pk
     student = models.ForeignKey(StudentInfo, on_delete=models.CASCADE)
     document = models.ForeignKey(Documents, on_delete=models.CASCADE)
-    submitted = models.BooleanField(default=False)
+    submitted = models.CharField(max_length=2)
     #
     # def __str__(self):
     #     return self.roll_no
