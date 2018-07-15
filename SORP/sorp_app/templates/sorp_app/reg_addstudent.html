@@ -89,7 +89,7 @@
                 <div style="margin-top: 10px;" class="form-group">
                     <div class="row">
                         <div class="col-md-3 col-sm-3">
-
+                            {{ iform.name_eng.errors }}
                             <label for="id_name_eng"><b>Student's Name (In English) <span>*</span></b></label>
                             <input required class="form-control" id="id_name_eng" placeholder="Enter Name" type="text" name="{{ iform.name_eng.html_name }}"  />
                         </div>
@@ -315,7 +315,7 @@
                         <div class="col-md-2 col-sm-2">
                             {{ iform.roll_no.errors }}
                             <label for="{{ iform.roll_no.id_for_label }}"><b>Alloted Roll No <span>*</span></b></label>
-                            <input oninput="({{ iform.roll_no.id_for_label }})" required class="form-control" type="text" id="{{ iform.roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.roll_no.html_name }}">
+                            <input oninput="rollNo({{ iform.roll_no.id_for_label }})" required class="form-control" type="text" id="{{ iform.roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.roll_no.html_name }}">
                         </div>
 
                         <div class="col-md-3 col-sm-3">
