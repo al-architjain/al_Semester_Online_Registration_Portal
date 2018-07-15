@@ -104,7 +104,8 @@ class Documents(models.Model):
 
 
 class StudentInfo(models.Model):
-    #defualt user is pk
+    # #defualt user is pk
+    reg_staff=models.CharField(max_length=50)
     user = models.OneToOneField(
         User, on_delete=models.PROTECT
     )
@@ -123,16 +124,15 @@ class StudentInfo(models.Model):
     #     ('NIT Hamirpur', 'NIT Hamirpur'),
     #     ('IIIT Una', 'IIIT Una'),
     # )
-    # institute = models.CharField(max_length=16, choices=insti_choices)
+    # institute = models.CharField(max_length=16)
     #
     # Personal Details #
     #
     #
     name_eng = models.CharField(max_length=64)
-    name_hindi = models.CharField(max_length=64, null=True, blank=True)
-    email = models.EmailField(unique=True,null=False)
+    name_hindi = models.CharField(max_length=64, blank=True)
+    email = models.EmailField(unique=True)
     gender_choices = (
-        ('---------', '---------'),
         ('Male', 'Male'),
         ('Female', 'Female'),
         ('Other', 'Other')
@@ -142,16 +142,15 @@ class StudentInfo(models.Model):
     religion = models.CharField(max_length=16)
     category_main = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='main', db_column='Main Category')
     contact = models.CharField(max_length=16)
-    aadhar_no = models.CharField(max_length=16, unique=True, null=True)
+    aadhar_no = models.CharField(max_length=16, unique=True)
     area_choice = (
-        ('---------', '---------'),
         ('Rural', 'Rural'),
         ('Urban', 'Urban'),
     )
     area = models.CharField(max_length=16, choices=area_choice)
     b_country = models.CharField(max_length=32)
     b_state = models.CharField(max_length=32)
-    nearest_rs = models.CharField(max_length=64, null=True, blank=True)
+    nearest_rs = models.CharField(max_length=64, blank=True)
     corr_addr = models.CharField(max_length=256)
     perm_addr = models.CharField(max_length=256)
     #
@@ -162,14 +161,13 @@ class StudentInfo(models.Model):
     jee_roll_no = models.BigIntegerField()
     jee_score = models.PositiveIntegerField()
     jee_ai_rank = models.PositiveIntegerField()
-    jee_cat_rank = models.PositiveIntegerField(null=True, blank=True)
+    jee_cat_rank = models.PositiveIntegerField(blank=True)
     category_admission = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='admission', db_column='Admitted Category')
     int_country = models.CharField(max_length=32)
     int_state = models.CharField(max_length=32)
     int_percentage = models.DecimalField(max_digits=5, decimal_places=3, db_column='12th Percentage')
     int_pass_year = models.IntegerField(default=currYear, db_column='10+2 Pass Year')
     school_type_choices = (
-        ('---------', '---------'),
         ('Government', 'Government School'),
         ('Private', 'Private School')
     )
@@ -192,7 +190,7 @@ class StudentInfo(models.Model):
         ('AGH', 'Ambika Girls Hostel'),
         ('PGH', 'Parvati Girls Hostel'),
     )
-    hostel_name = models.CharField(max_length=16, choices=hostel_choices, null=True, blank=True)
+    hostel_name = models.CharField(max_length=16, choices=hostel_choices, blank=True)
     entry_no = models.PositiveIntegerField(unique=True)
     reg_no = models.CharField(unique=True,max_length=64)
     roll_no = models.CharField(unique=True, max_length=16)
@@ -202,14 +200,14 @@ class StudentInfo(models.Model):
     #
     #
     father_name = models.CharField(max_length=64)
-    father_contact = models.CharField(max_length=16,null=True,blank=True)
-    father_email = models.EmailField(null=True,blank=True)
+    father_contact = models.CharField(max_length=16,blank=True)
+    father_email = models.EmailField(blank=True)
     mother_name = models.CharField(max_length=64)
-    mother_contact = models.CharField(max_length=16,null=True,blank=True)
-    mother_email = models.EmailField(null=True,blank=True)
-    guardian_name = models.CharField(max_length=64,null=True,blank=True)
-    guardian_contact = models.CharField(max_length=16,null=True,blank=True)
-    guardian_email = models.EmailField(null=True,blank=True)
+    mother_contact = models.CharField(max_length=16,blank=True)
+    mother_email = models.EmailField(blank=True)
+    guardian_name = models.CharField(max_length=64,blank=True)
+    guardian_contact = models.CharField(max_length=16,blank=True)
+    guardian_email = models.EmailField(blank=True)
     family_income = models.PositiveIntegerField(default=0)
     waiver_choices = (
         ('Not Claimed', 'Not Claimed'),
