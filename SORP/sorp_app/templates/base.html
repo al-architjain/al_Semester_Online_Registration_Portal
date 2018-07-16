@@ -9,14 +9,27 @@
 		{% endblock %}
 
 		{% block links %}
+			<style>
+				html {
+					min-height: 100%;
+				}
+
+				body {
+				  min-height: 100vh;
+				}
+
+				footer {
+					background: black;
+					color: white;
+					margin-top: 12%;
+					height: 100%;
+					padding: 1%;
+					text-align: center;
+				}
+			</style>
 		{% endblock %}
 
 		{% block styles %}
-			<style>
-				body {
-				width: 100%;
-			}
-			</style>
 		{% endblock %}
 
 		{% block staticfiles %}
@@ -37,11 +50,12 @@
 		</div>
 
 		{% block bodycontent %}
-
 		{% endblock %}
 
 		{% block bodyscripts %}
 		{% endblock %}
+
+        <footer>Copyright &copy; <a style="color: white" href="/theBrahma/">About Us </a>| <a style="color: white" href="https://nith.ac.in">NIT Hamirpur</a></footer>
 
 		<!-- Permanent scripts -->
 			<!-- jQuery library -->
