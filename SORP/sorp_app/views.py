@@ -492,9 +492,10 @@ def update_student(request):
         iform = forms.StudentInfoForm(initial=si_data)
         fform = forms.StudentFirstFeeForm(initial=sfi_data)
         dobj = models.Documents.objects.all()
-        print(stu_obj.id)
+        stu_doc=models.DocumentInfo.objects.filter(student_id=stu_obj)
+        print(" check kar ",stu_doc[1].submitted)
         return render(request, 'sorp_app/reg_updatestudent.html',
-                          {'iform': iform, 'dobj': dobj, 'fform': fform, 'uobj': request.user, 'stu_id':stu_obj.id})
+                          {'iform': iform, 'dobj': dobj, 'fform': fform, 'uobj': request.user, 'stu_id':stu_obj.id,'stu_doc':stu_doc})
 
     else:
         return HttpResponse('ERRoR!')
@@ -574,7 +575,17 @@ def update_student_info(request):
         fee_obj.fee_nith_receipt_no=request.POST.get('fee_nith_receipt_no',None)
         fee_obj.save()
 
-
+        #
+        stu_doc=models.DocumentInfo.objects.filter(student=stu_obj)
+        d_obj = models.Documents.objects.all()
+        i=1
+        for doc in d_obj:
+            strr = 'docval' + str(i)
+            stu_doc=models.DocumentInfo.objects.get(student=stu_obj,document_id=doc.id)
+            stu_doc.submitted=request.POST.get(strr ,None)
+            print(request.POST.get(strr, None), " ",stu_doc.submitted)
+            stu_doc.save()
+            i=i+1
 
         # if iform.is_valid():
         #     return HttpResponse('Valid form!')
