@@ -91,12 +91,12 @@ def user_profile(request):
         if request.method == 'POST':
             try:
                 dobj = models.StudentInfo.objects.get(roll_no=request.POST['d_roll_no'])
-                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist': True, 'tabb': '3','roll_list':roll_list})
+                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist': True, 'tabb': '3','roll_list':roll_list,'msg':''})
             except models.StudentInfo.DoesNotExist:
                 dobj = None
-                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist':False, 'tabb':'3','roll_list':roll_list})
+                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist':False, 'tabb':'3','roll_list':roll_list,'msg':''})
 
-        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True, 'tabb':'1','roll_list':roll_list})
+        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True, 'tabb':'1','roll_list':roll_list,'msg':''})
 
 
     elif grp == 'Library Staff' or grp == 'Hostel Staff' or grp == 'Administration Staff' or grp == 'Department Staff':
@@ -420,10 +420,18 @@ def update_student(request):
 
     if request.method == 'POST':
         roll_no = request.POST.get('rollno_to_update', None)
-        stu_obj = models.StudentInfo.objects.get(roll_no=roll_no)
-        fee_obj = models.StudentFirstFeeStatus.objects.get(student=stu_obj)
-        si_data={
-            'institute':stu_obj.institute,
+        user = request.user
+        try:
+            check=models.StudentInfo.objects.get(roll_no=roll_no,reg_staff=user)
+        except models.StudentInfo.DoesNotExist:
+             msg="!!! "+str(roll_no)+" is not registered by you!!!"
+             roll_list=models.StudentInfo.objects.filter(reg_staff=user)
+             return render(request,'sorp_app/reg_profile.html',{'uobj':request.user,'ugrp':get_user_group(request.user),'roll_list':roll_list,'msg':msg, 'exist': True, 'tabb': '3'})
+        else :
+            stu_obj = models.StudentInfo.objects.get(roll_no=roll_no)
+            fee_obj = models.StudentFirstFeeStatus.objects.get(student=stu_obj)
+            si_data={
+                'institute':stu_obj.institute,
             'name_eng':stu_obj.name_eng,
             'name_hindi':stu_obj.name_hindi,
             'email':stu_obj.email,
@@ -503,6 +511,8 @@ def update_student_info(request):
         # iform = forms.StudentInfoForm(request.POST)
         stu_obj = models.StudentInfo.objects.get(id=request.POST.get('stu_id',None))
         user = stu_obj.user
+        if (request.POST.get('jee_cat_rank',None) == ''):
+            stu_obj.jee_cat_rank=None
 
         stu_obj.roll_no=request.POST.get('roll_no',None)
         stu_obj.institute=request.POST.get('institute',None)
@@ -524,7 +534,6 @@ def update_student_info(request):
         stu_obj.jee_roll_no=request.POST.get('jee_roll_no',None)
         stu_obj.jee_score=request.POST.get('jee_score',None)
         stu_obj.jee_ai_rank=request.POST.get('jee_ai_rank',None)
-        stu_obj.jee_cat_rank=request.POST.get('jee_cat_rank',None)
         stu_obj.category_admission=models.Category.objects.get(name=request.POST.get('category_admission',None))
         stu_obj.int_country=request.POST.get('int_country',None)
         stu_obj.int_state=request.POST.get('int_state',None)

@@ -170,7 +170,7 @@ class StudentInfo(models.Model):
     jee_roll_no = models.BigIntegerField()
     jee_score = models.PositiveIntegerField()
     jee_ai_rank = models.PositiveIntegerField()
-    jee_cat_rank = models.PositiveIntegerField( blank=True)
+    jee_cat_rank = models.PositiveIntegerField( blank=True,null=True)
     category_admission = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='admission', db_column='Admitted Category')
     int_country = models.CharField(max_length=32)
     int_state = models.CharField(max_length=32)

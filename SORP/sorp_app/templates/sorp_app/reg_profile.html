@@ -150,6 +150,7 @@
                                     </div>
                                     <div class="card-body text-center">
                                         <p class="card-text text-capitalize mt-2">Search Roll No. to Update </p>
+                                        <h4 class="text-danger">{{ msg }}</h4>
                                          <form action="/update_student/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
                                             {% csrf_token %}
                                           <input required class="form-control mr-sm-2" id="UpdateRollNo" type="search" placeholder="Enter Roll No" aria-label="Search" name="rollno_to_update">
