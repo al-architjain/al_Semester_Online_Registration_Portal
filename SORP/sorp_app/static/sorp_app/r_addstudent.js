@@ -22,35 +22,29 @@ function openTab(evt, tabName) {
 
 
 
-function popup() {
-
-        if(confirm("Are you sure you want to continue? (Press cancel to check again)"))
-        {
-            var pos;
-            pos = document.getElementsByTagName("form");
-            pos[0].setAttribute("action","reg_result/");
-        }
-        else
-          { console.log("No Presses"); }
-
-}
-
-
 function yes(num) {
     var tr = document.querySelectorAll("tr");
     tr[num].querySelectorAll("td")[0].style.color = "green";
     tr[num].querySelectorAll("td")[1].style.color = "green";
-
+    tr[num].querySelectorAll("td")[0].style.textDecoration = "none";
+    tr[num].querySelectorAll("td")[1].style.textDecoration = "none";
   }
-
 
 function no(num) {
     var tr = document.querySelectorAll("tr");
     tr[num].querySelectorAll("td")[0].style.color = "red";
     tr[num].querySelectorAll("td")[1].style.color = "red";
-
+    tr[num].querySelectorAll("td")[0].style.textDecoration = "none";
+    tr[num].querySelectorAll("td")[1].style.textDecoration = "none";
 }
 
+function na(num) {
+    var tr = document.querySelectorAll("tr");
+    tr[num].querySelectorAll("td")[0].style.color = "lightgray";
+    tr[num].querySelectorAll("td")[1].style.color = "lightgray";
+    tr[num].querySelectorAll("td")[0].style.textDecoration = "line-through";
+    tr[num].querySelectorAll("td")[1].style.textDecoration = "line-through";
+}
 
 function clearSelection(idname) {
   var tr = document.querySelector("#"+idname);
@@ -74,7 +68,7 @@ var country_arr = new Array("India", "Afghanistan", "Albania", "Algeria", "Ameri
 
 // States
 var s_a = new Array();
-s_a[0]="Andaman and Nicobar Islands|Andhra Pradesh|Arunachal Pradesh|Assam|Bihar|Chandigarh|Chhattisgarh|Dadra and Nagar Haveli|Daman and Diu|Delhi|Goa|Gujarat|Haryana|Himachal Pradesh|Jammu and Kashmir|Jharkhand|Karnataka|Kerala|Lakshadweep|Madhya Pradesh|Maharashtra|Manipur|Meghalaya|Mizoram|Nagaland|Orissa|Pondicherry|Punjab|Rajasthan|Sikkim|Tamil Nadu|Tripura|Uttar Pradesh|Uttaranchal|West Bengal";
+s_a[0]="Andaman and Nicobar Islands|Andhra Pradesh|Arunachal Pradesh|Assam|Bihar|Chandigarh|Chhattisgarh|Dadra and Nagar Haveli|Daman and Diu|Delhi|Goa|Gujarat|Haryana|Himachal Pradesh|Jammu and Kashmir|Jharkhand|Karnataka|Kerala|Lakshadweep|Madhya Pradesh|Maharashtra|Manipur|Meghalaya|Mizoram|Nagaland|Orissa|Puducherry|Punjab|Rajasthan|Sikkim|Tamil Nadu|Telangana|Tripura|Uttarakhand|Uttar Pradesh|West Bengal";
 s_a[1]="Badakhshan|Badghis|Baghlan|Balkh|Bamian|Farah|Faryab|Ghazni|Ghowr|Helmand|Herat|Jowzjan|Kabol|Kandahar|Kapisa|Konar|Kondoz|Laghman|Lowgar|Nangarhar|Nimruz|Oruzgan|Paktia|Paktika|Parvan|Samangan|Sar-e Pol|Takhar|Vardak|Zabol";
 s_a[2]="Berat|Bulqize|Delvine|Devoll (Bilisht)|Diber (Peshkopi)|Durres|Elbasan|Fier|Gjirokaster|Gramsh|Has (Krume)|Kavaje|Kolonje (Erseke)|Korce|Kruje|Kucove|Kukes|Kurbin|Lezhe|Librazhd|Lushnje|Malesi e Madhe (Koplik)|Mallakaster (Ballsh)|Mat (Burrel)|Mirdite (Rreshen)|Peqin|Permet|Pogradec|Puke|Sarande|Shkoder|Skrapar (Corovode)|Tepelene|Tirane (Tirana)|Tirane (Tirana)|Tropoje (Bajram Curri)|Vlore";
 s_a[3]="Adrar|Ain Defla|Ain Temouchent|Alger|Annaba|Batna|Bechar|Bejaia|Biskra|Blida|Bordj Bou Arreridj|Bouira|Boumerdes|Chlef|Constantine|Djelfa|El Bayadh|El Oued|El Tarf|Ghardaia|Guelma|Illizi|Jijel|Khenchela|Laghouat|M'Sila|Mascara|Medea|Mila|Mostaganem|Naama|Oran|Ouargla|Oum el Bouaghi|Relizane|Saida|Setif|Sidi Bel Abbes|Skikda|Souk Ahras|Tamanghasset|Tebessa|Tiaret|Tindouf|Tipaza|Tissemsilt|Tizi Ouzou|Tlemcen";
@@ -385,4 +379,10 @@ function totalfees() {
 //  tot.textContent = "Total Fees Paid: " + (Number(jossa.value) + Number(nith.value));
     tot.value = (Number(jossa.value) + Number(nith.value));
 
+}
+
+function rollNo(str) {
+    if(str.value === '15mi538') {
+        alert(str.value + " already exists");
+    }
 }

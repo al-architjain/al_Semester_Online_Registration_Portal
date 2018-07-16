@@ -60,16 +60,27 @@
             <button id="mid" class="tablinks" onclick="openTab(event, 'docVerify')">Document Verification</button>
         </div>
 
-        <form action='/create_student/' method="POST">
+        <form action='/create_student/' method="POST" >
         {% csrf_token %}
         <!--***********************************************************************************************************************************-->
                                                         <!--Data Entry Form Tab Started -->
         <!--****************************************************************************************************************************************-->
 
         <div id="dataEntry" class="tabcontent">
-                <!--<div class="text-center text-success">-->
-                    <!--<h3><b>Session: 2018-19</b></h3><hr>-->
-                <!--</div>-->
+                <div class="row">
+                    <h4 class="text-primary"><b>INSTITUTE</b></h4>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label style="font-size: 15px; margin: 0 20%" for="nith">NIT Hamirpur
+                            <input id="nith" checked="true" name="{{ iform.institute.html_name }}" type="radio" value="NIT Hamirpur">
+                        </label>
+                        <label style="font-size: 15px; margin: 0 10%" for="iiitu">IIITU Una
+                            <input id="iiitu" name="{{ iform.institute.html_name }}" type="radio" value="IIIT Una">
+                        </label>
+                    </div>
+                </div>
                 <hr>
                 <div class="row">
                     <h4 class="text-primary"><b>PERSONAL DETAILS</b></h4>
@@ -77,6 +88,9 @@
                 <hr>
                 <div style="margin-top: 10px;" class="form-group">
                     <div class="row">
+
+                        <input type="hidden" value="{{uobj}}" name="reg_staff" >
+
                         <div class="col-md-3 col-sm-3">
                             {{ iform.name_eng.errors }}
                             <label for="id_name_eng"><b>Student's Name (In English) <span>*</span></b></label>
@@ -142,7 +156,7 @@
 
                         <div class="col-md-3 col-sm-3">
                             {{ iform.nearest_rs.errors }}
-                            <label for="{{ iform.nearest_rs.id_for_label }}"><b>Nearest Railway Station</b></label>
+                            <label for="{{ iform.nearest_rs.id_for_label }}"><b>Nearest Railway Station <span>*</span></b></label>
                             <input class="form-control" type="text" id="{{ iform.nearest_rs.id_for_label }}" placeholder="Enter Station" name="{{iform.nearest_rs.html_name}}">
                         </div>
 
@@ -304,7 +318,7 @@
                         <div class="col-md-2 col-sm-2">
                             {{ iform.roll_no.errors }}
                             <label for="{{ iform.roll_no.id_for_label }}"><b>Alloted Roll No <span>*</span></b></label>
-                            <input required class="form-control" type="text" id="{{ iform.roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.roll_no.html_name }}">
+                            <input oninput="rollNo({{ iform.roll_no.id_for_label }})" required class="form-control" type="text" id="{{ iform.roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.roll_no.html_name }}">
                         </div>
 
                         <div class="col-md-3 col-sm-3">
@@ -415,7 +429,7 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="form-group">
-                                <!--{{ iform.fee_waiver.errors }}-->
+                                {{ iform.fee_waiver.errors }}
                                 <label for="{{ iform.fee_waiver.id_for_label }}"><b>Fee Waiver Claimed ? <span>*</span></b></label>
                                 <br>
                                 {{ iform.fee_waiver }}
@@ -489,42 +503,22 @@
             <br>
             <div class="row">
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <table class="table table-hover">
+                    <table class="table table-hover float-left">
                         <thead>
-                            <tr>
+                            <tr class="text-primary">
                                 <th class="srno">Sr. No.</th>
-                                <th style="width: 500px;">Name of the Document</th>
+                                <th >Name of the Document</th>
                                 <th>Verified?</th>
                             </tr>
                         </thead>
-                    </table>
-                    <h4 class="text-primary"><strong>Mandatory</strong></h4>
-                    <table class="table table-hover">
                         <tbody>
                             {% for doc in dobj %}
-                                {% ifequal doc.doc_imp 'M' %}
-                                    <tr>
-                                        <td>{{ doc.id }}</td>
-                                        <td><strong>{{ doc.doc_name }}</strong> issued by JoSAA</td>
-                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No</td>
-                                        <td></td>
-                                    </tr>
-                                {% endifequal %}
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <h4 class="text-primary"><strong>Optional</strong></h4>
-                    <table class="table table-hover">
-                        <tbody>
-                            {% for doc in dobj %}
-                                {% ifequal doc.doc_imp 'O' %}
-                                    <tr id="Odoc{{doc.id}}">
-                                        <td>{{ doc.id }}</td>
-                                        <td><strong>{{ doc.doc_name }}</strong> (if applicable) </td>
-                                        <td><input onclick="yes({{doc.id}})" type="radio" value="Yes" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="No" name="doc{{doc.id}}">No <a onclick="clearSelection('Odoc{{doc.id}}')" class="btn btn-default">Clear</a></td>
-                                        <td></td>
-                                    </tr>
-                                {% endifequal %}
+                                <tr>
+                                    <td style="color:green">{{ doc.id }}</td>
+                                    <td style="color:green"><strong>{{ doc.doc_name }}</strong></td>
+                                    <td><input onclick="yes({{doc.id}})" checked="True" type="radio" value="YES" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="NO" name="doc{{doc.id}}">No <input onclick="na({{doc.id}})" type="radio" value="NA" name="doc{{doc.id}}">NA</td>
+
+                                </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -534,8 +528,7 @@
 
         </div>
             <br>
-            <button style="display:none;" type="submit" id="reg" class="btn btn-primary pull-right"> REGISTER </button>
-            <!--<input type="button" style="display:none;" id="reg" class="btn btn-primary pull-right" value="REGISTER" />-->
+            <button onclick="validate()" style="display:none;" type="submit" id="reg" class="btn btn-primary pull-right"> REGISTER </button>
         </form>
         </div>
         <br>
