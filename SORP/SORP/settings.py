@@ -131,18 +131,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'sorp_app','mediafils','sorp_app')
 
+
+
 ##password resetting
 
 # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
-
-
 # EMAIL_BACKEND = "sgbackend.SendGridBackend"
 # SENDGRID_API_KEY = "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"
 # DEFAULT_FROM_EMAIL = "pkksbiw@gmail.com"
-
-
-
+#
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
