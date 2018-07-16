@@ -85,18 +85,8 @@ def user_profile(request):
 
     elif grp == 'Registration Staff':
         uobj = request.user
-        dobj = None
-        roll_list = models.StudentInfo.objects.filter(reg_staff=request.user)
-        # print(roll_list)
-        if request.method == 'POST':
-            try:
-                dobj = models.StudentInfo.objects.get(roll_no=request.POST['d_roll_no'])
-                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist': True, 'tabb': '3','roll_list':roll_list,'msg':''})
-            except models.StudentInfo.DoesNotExist:
-                dobj = None
-                return render(request, 'sorp_app/reg_profile.html', {'uobj': uobj, 'dobj': dobj, 'exist':False, 'tabb':'3','roll_list':roll_list,'msg':''})
-
-        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'dobj': dobj, 'exist':True, 'tabb':'1','roll_list':roll_list,'msg':''})
+        roll_list = models.StudentInfo.objects.filter(reg_staff=uobj).order_by('-active_status', 'roll_no')
+        return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'tabb':'1','roll_list':roll_list, 'msg':''})
 
 
     elif grp == 'Library Staff' or grp == 'Hostel Staff' or grp == 'Administration Staff' or grp == 'Department Staff':
@@ -108,104 +98,23 @@ def user_profile(request):
         return redirect('/admin/')
 
     else:
-        return HttpResponse("You are not suppossed to login from here! ;)")
-
-
-
-# create_student user
-@login_required
-def create_student(request):
-    iform = forms.StudentInfoForm()
-    fform = forms.StudentFirstFeeForm()
-    dobj = models.Documents.objects.all()
-    if request.method == "POST":
-        iform = forms.StudentInfoForm(request.POST)
-        fform = forms.StudentFirstFeeForm(request.POST)
-
-        if (iform.is_valid() and fform.is_valid()) is False:
-            print(iform.errors.as_data())
-            print(fform.errors.as_data())
-            return render(request, 'sorp_app/reg_addstudent.html',
-                          {'iform': iform, 'dobj': dobj, 'fform': fform,'uobj':request.user})
-        else:
-            # iform.reg_staff=request.user
-            # print('reg_staff',iform.reg_staff)
-            iformm = iform.save(commit=False)
-            fformm = fform.save(commit=False)
-
-            stu_name = iform.cleaned_data['name_eng']
-            # create user
-            username = iform.cleaned_data['roll_no']
-            password = iform.cleaned_data['father_name']
-            email = iform.cleaned_data['email']
-            user = User.objects.create_user(username=username, password=password, email=email)
-
-            # assigning group
-            my_group = Group.objects.get(name='Student')
-            my_group.user_set.add(user)
-
-            # assgning OnetoOneField and saving
-            iformm.user = user
-            iformm.save()
-            fformm.student = iformm
-            fformm.save()
-
-            # document assignment
-            for i in range(1, dobj.count() + 1):
-                strr = "doc" + str(i)
-                submit = request.POST.get(strr)
-                if submit is not None:
-                    dinfo = models.DocumentInfo(student=iformm, document=dobj[i - 1], submitted=submit)
-                    dinfo.save()
-
-            # saving multiple field.
-            iform.save_m2m()
-
-            return render(request, 'sorp_app/reg_success.html', {'username':username, 'password':password, 'name':stu_name})
-
-    else:
-        return render(request, 'sorp_app/reg_addstudent.html',
-                      {'iform': iform, 'dobj': dobj, 'fform': fform,'uobj':request.user})
+        return HttpResponse("You are not suppossed to login! ;)")
 
 
 
 
 
-# Deactivating a student
-@login_required
-def deactivate(request):
-    if request.method == 'GET':
-        return redirect('/profile/')
-    if request.method == 'POST':
-        #to free the allotted roll_no in student_info table
-        roll_no = request.POST.get('droll_noo', None)
-        stu_info_obj = models.StudentInfo.objects.get(roll_no=roll_no)
-        new_roll_no = roll_no if roll_no[-1]=='D' else roll_no+'D'
-        stu_info_obj.roll_no = new_roll_no
-        stu_info_obj.active_status = False
-        stu_info_obj.save()
-
-        # so the person cannot login() and allotted username(roll_no) is freed
-        user = User.objects.get(username=roll_no)
-        user.is_active = False
-        user.username  = new_roll_no
-        user.save()
-
-        return HttpResponse("STUDENT DEACTIVATED")
 
 
 
 
 
-# Successfull Registration Page
-def reg_success(request):
-    return render(request, 'sorp_app/reg_success.html')
 
 
 
-
-
-# upload_due
+# UPLOAD FILES
+# ------------------------------ #
+# UPLOAD DUES
 def upload_due(request):
     if request.method =="GET":
         return redirect('/profile/')
@@ -249,6 +158,9 @@ def upload_due(request):
             i=i+1
     return redirect('/profile/')
 
+
+
+# UPLOAD SUBJECTS
 @login_required
 def upload_sub(request):
     if request.method=="GET":
@@ -297,6 +209,9 @@ def upload_sub(request):
             i=i+1
         return redirect('/profile/')
 
+
+
+# UPLOAD RESULT
 @login_required
 def upload_result(request):
     if request.method=='GET':
@@ -333,6 +248,8 @@ def upload_result(request):
 
 
 
+# -------------------------------- #
+# CHANGE PASSWORD
 @login_required()
 def change_password(request):
     if request.method == 'POST':
@@ -352,11 +269,70 @@ def change_password(request):
         return render(request, 'sorp_app/stu_password_change.html', {'pcform': pcform})
 
 
+# -------------------------------- #
 
 
 
 
 
+# ADD STUDENT VIEWS
+@login_required
+def create_student(request):
+    iform = forms.StudentInfoForm()
+    fform = forms.StudentFirstFeeForm()
+    dobj = models.Documents.objects.all()
+    if request.method == "POST":
+        iform = forms.StudentInfoForm(request.POST)
+        fform = forms.StudentFirstFeeForm(request.POST)
+
+        if (iform.is_valid() and fform.is_valid()) is False:
+            print(iform.errors.as_data())
+            print(fform.errors.as_data())
+            return render(request, 'sorp_app/reg_addstudent.html',
+                          {'iform': iform, 'dobj': dobj, 'fform': fform,'uobj':request.user})
+        else:
+            # iform.reg_staff=request.user
+            # print('reg_staff',iform.reg_staff)
+            iformm = iform.save(commit=False)
+            fformm = fform.save(commit=False)
+
+            stu_name = iform.cleaned_data['name_eng']
+            # create user
+            username = iform.cleaned_data['roll_no']
+            password = iform.cleaned_data['father_name']
+            email = iform.cleaned_data['email']
+            user = User.objects.create_user(username=username, password=password, email=email)
+
+            # assigning group
+            my_group = Group.objects.get(name='Student')
+            my_group.user_set.add(user)
+
+            # assgning OnetoOneField and saving
+            iformm.user = user
+            iformm.save()
+            fformm.student = iformm
+            fformm.save()
+
+            # document assignment
+            for i in range(1, dobj.count() + 1):
+                strr = "doc" + str(i)
+                submit = request.POST.get(strr)
+                if submit is not None:
+                    dinfo = models.DocumentInfo(student=iformm, document=dobj[i - 1], submitted=submit)
+                    dinfo.save()
+
+            # saving multiple field.
+            iform.save_m2m()
+
+            return render(request, 'sorp_app/reg_success.html', {'username':username, 'password':password, 'name':stu_name, 'type':'1'})
+
+    else:
+        return render(request, 'sorp_app/reg_addstudent.html',
+                      {'iform': iform, 'dobj': dobj, 'fform': fform,'uobj':request.user})
+
+
+
+# UPDATE STUDENT VIEWS
 @login_required
 def update_student(request):
     if request.method == 'GET':
@@ -364,64 +340,64 @@ def update_student(request):
 
     if request.method == 'POST':
         roll_no = request.POST.get('rollno_to_update', None)
-        user = request.user
+        uobj = request.user
         try:
-            check=models.StudentInfo.objects.get(roll_no=roll_no,reg_staff=user)
+            check=models.StudentInfo.objects.get(roll_no=roll_no,reg_staff=uobj)
         except models.StudentInfo.DoesNotExist:
-             msg="!!! "+str(roll_no)+" is not registered by you!!!"
-             roll_list=models.StudentInfo.objects.filter(reg_staff=user)
-             return render(request,'sorp_app/reg_profile.html',{'uobj':request.user,'ugrp':get_user_group(request.user),'roll_list':roll_list,'msg':msg, 'exist': True, 'tabb': '3'})
+             msg="OOPS! " + str(roll_no) + " is not in your REGISTERED STUDENTS list !"
+             roll_list=models.StudentInfo.objects.filter(reg_staff=uobj).order_by('-active_status', 'roll_no')
+             return render(request,'sorp_app/reg_profile.html',{'uobj': uobj, 'tabb':'2','roll_list':roll_list, 'msg':msg})
         else :
             stu_obj = models.StudentInfo.objects.get(roll_no=roll_no)
             fee_obj = models.StudentFirstFeeStatus.objects.get(student=stu_obj)
             si_data={
                 'institute':stu_obj.institute,
-            'name_eng':stu_obj.name_eng,
-            'name_hindi':stu_obj.name_hindi,
-            'email':stu_obj.email,
-            'gender':stu_obj.gender,
-            'dob':stu_obj.dob,
-            'religion':stu_obj.religion,
-            'category_main':stu_obj.category_main,
-            'contact':stu_obj.contact,
-            'aadhar_no':stu_obj.aadhar_no,
-            'area':stu_obj.area,
-            'b_country':stu_obj.b_country,
-            'b_state':stu_obj.b_state,
-            'nearest_rs':stu_obj.nearest_rs,
-            'corr_addr':stu_obj.corr_addr,
-            'perm_addr':stu_obj.perm_addr,
-            'jee_roll_no':stu_obj.jee_roll_no,
-            'jee_score':stu_obj.jee_score,
-            'jee_ai_rank':stu_obj.jee_ai_rank,
-            'jee_cat_rank':stu_obj.jee_cat_rank,
-            'category_admission':stu_obj.category_admission,
-            'int_country':stu_obj.int_country,
-            'int_state':stu_obj.int_state,
-            'int_percentage':stu_obj.int_percentage,
-            'int_pass_year':stu_obj.int_pass_year,
-            'int_school_type':stu_obj.int_school_type,
-            'int_school_area':stu_obj.int_school_area,
-            'int_school_name':stu_obj.int_school_name,
-            'int_school_board':stu_obj.int_school_board,
-            'ug_class':stu_obj.ug_class,
-            'ug_branch':stu_obj.ug_branch,
-            'hosteler':stu_obj.hosteler,
-            'hostel_name':stu_obj.hostel_name,
-            'entry_no':stu_obj.entry_no,
-            'roll_no':stu_obj.roll_no,
-            'reg_no':stu_obj.reg_no,
-            'father_name':stu_obj.father_name,
-            'father_contact':stu_obj.father_contact,
-            'father_email':stu_obj.father_email,
-            'mother_name':stu_obj.mother_name,
-            'mother_contact':stu_obj.mother_contact,
-            'mother_email':stu_obj.mother_email,
-            'guardian_name':stu_obj.guardian_name,
-            'guardian_contact':stu_obj.guardian_contact,
-            'guardian_email':stu_obj.guardian_email,
-            'fee_waiver':stu_obj.fee_waiver,
-            'family_income':stu_obj.family_income,
+                'name_eng':stu_obj.name_eng,
+                'name_hindi':stu_obj.name_hindi,
+                'email':stu_obj.email,
+                'gender':stu_obj.gender,
+                'dob':stu_obj.dob,
+                'religion':stu_obj.religion,
+                'category_main':stu_obj.category_main,
+                'contact':stu_obj.contact,
+                'aadhar_no':stu_obj.aadhar_no,
+                'area':stu_obj.area,
+                'b_country':stu_obj.b_country,
+                'b_state':stu_obj.b_state,
+                'nearest_rs':stu_obj.nearest_rs,
+                'corr_addr':stu_obj.corr_addr,
+                'perm_addr':stu_obj.perm_addr,
+                'jee_roll_no':stu_obj.jee_roll_no,
+                'jee_score':stu_obj.jee_score,
+                'jee_ai_rank':stu_obj.jee_ai_rank,
+                'jee_cat_rank':stu_obj.jee_cat_rank,
+                'category_admission':stu_obj.category_admission,
+                'int_country':stu_obj.int_country,
+                'int_state':stu_obj.int_state,
+                'int_percentage':stu_obj.int_percentage,
+                'int_pass_year':stu_obj.int_pass_year,
+                'int_school_type':stu_obj.int_school_type,
+                'int_school_area':stu_obj.int_school_area,
+                'int_school_name':stu_obj.int_school_name,
+                'int_school_board':stu_obj.int_school_board,
+                'ug_class':stu_obj.ug_class,
+                'ug_branch':stu_obj.ug_branch,
+                'hosteler':stu_obj.hosteler,
+                'hostel_name':stu_obj.hostel_name,
+                'entry_no':stu_obj.entry_no,
+                'roll_no':stu_obj.roll_no,
+                'reg_no':stu_obj.reg_no,
+                'father_name':stu_obj.father_name,
+                'father_contact':stu_obj.father_contact,
+                'father_email':stu_obj.father_email,
+                'mother_name':stu_obj.mother_name,
+                'mother_contact':stu_obj.mother_contact,
+                'mother_email':stu_obj.mother_email,
+                'guardian_name':stu_obj.guardian_name,
+                'guardian_contact':stu_obj.guardian_contact,
+                'guardian_email':stu_obj.guardian_email,
+                'fee_waiver':stu_obj.fee_waiver,
+                'family_income':stu_obj.family_income,
 
         }
         sfi_data = {
@@ -436,15 +412,13 @@ def update_student(request):
         iform = forms.StudentInfoForm(initial=si_data)
         fform = forms.StudentFirstFeeForm(initial=sfi_data)
         dobj = models.Documents.objects.all()
-        print(stu_obj.id)
+        stu_doc=models.DocumentInfo.objects.filter(student_id=stu_obj)
+        # print(" check kar ",stu_doc[0].submitted)
         return render(request, 'sorp_app/reg_updatestudent.html',
-                          {'iform': iform, 'dobj': dobj, 'fform': fform, 'uobj': request.user, 'stu_id':stu_obj.id})
+                          {'iform': iform, 'dobj': dobj, 'fform': fform, 'uobj': request.user, 'stu_id':stu_obj.id,'stu_doc':stu_doc})
 
     else:
         return HttpResponse('ERRoR!')
-
-
-
 
 
 @login_required
@@ -504,10 +478,12 @@ def update_student_info(request):
         stu_obj.guardian_email=request.POST.get('guardian_email',None)
         stu_obj.fee_waiver=request.POST.get('fee_waiver',None)
         stu_obj.family_income=request.POST.get('family_income',None)
+        stu_obj.active_status=True
         # print(request.POST.get('hosteler',None))
         stu_obj.save()
         user.username = request.POST.get('roll_no', None)
         user.set_password(request.POST.get('father_name',None))
+        user.is_active=True
         user.save()
 
         fee_obj=models.StudentFirstFeeStatus.objects.get(student=stu_obj)
@@ -518,10 +494,52 @@ def update_student_info(request):
         fee_obj.fee_nith_receipt_no=request.POST.get('fee_nith_receipt_no',None)
         fee_obj.save()
 
+        #
+        stu_doc = models.DocumentInfo.objects.filter(student=stu_obj)
+        d_obj = models.Documents.objects.all()
+        i = stu_doc.order_by('id')[0].id
+        for doc in d_obj:
+            strr = 'docval' + str(i)
+            stu_doc = models.DocumentInfo.objects.get(student=stu_obj, document_id=doc.id)
+            stu_doc.submitted = request.POST.get(strr, None)
+            print(request.POST.get(strr, None), " ", stu_doc.submitted)
+            stu_doc.save()
+            i = i + 1
+
+        return render(request,'sorp_app/reg_success.html',{'name':stu_obj.name_eng, 'username': user.username, 'password':stu_obj.father_name, 'type':'2'})
 
 
-        # if iform.is_valid():
-        #     return HttpResponse('Valid form!')
-        # else:
-        return render(request,'sorp_app/reg_success.html',{'name':stu_obj.name_eng, 'username': user.username, 'password':stu_obj.father_name})
 
+# DEACTIVATE STUDENT VIEWS
+@login_required
+def deactivate_student(request):
+    if request.method == 'GET':
+        return redirect('/profile/')
+    if request.method == 'POST':
+        try:
+            uobj = request.user
+            roll_no = request.POST.get('rollno_to_deactivate', None)
+            stu_info_obj = models.StudentInfo.objects.get(roll_no=roll_no)
+        except models.StudentInfo.DoesNotExist:
+            msg = "OOPS! " + str(roll_no) + " is not in your REGISTERED STUDENTS list !"
+            roll_list = models.StudentInfo.objects.filter(reg_staff=uobj).order_by('-active_status', 'roll_no')
+            return render(request, 'sorp_app/reg_profile.html',{'uobj': uobj, 'tabb': '3', 'roll_list': roll_list, 'msg': msg})
+        else:
+            #TO add D to deactivate and free the allotted roll_no
+            new_roll_no = roll_no if roll_no[-1]=='D' else roll_no + 'D'
+            stu_info_obj.roll_no = new_roll_no
+            stu_info_obj.active_status = False
+            stu_info_obj.save()
+            # so the person cannot login() and allotted username(roll_no) is freed
+            user = User.objects.get(username=roll_no)
+            user.is_active = False
+            user.username = new_roll_no
+            user.save()
+
+        return render(request, 'sorp_app/reg_success.html', {'type':'3'})
+
+
+
+# Successfull Registration Page
+def reg_success(request):
+    return render(request, 'sorp_app/reg_success.html')

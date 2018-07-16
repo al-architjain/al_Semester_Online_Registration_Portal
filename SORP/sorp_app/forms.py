@@ -3,8 +3,8 @@ from sorp_app import models
 
 #form for login purpose
 class login_form(forms.Form):
-    username = forms.CharField(label="Username ", widget=forms.TextInput(attrs={'class':"form-control", 'placeholder':"username" }), max_length=10)
-    password = forms.CharField(label="Password ", widget=forms.PasswordInput(attrs={'class':"form-control", 'placeholder':"Password" }))
+    username = forms.CharField(label="Username ", widget=forms.TextInput(attrs={'class':"form-control", 'placeholder':"username" }), max_length=32)
+    password = forms.CharField(label="Password ", widget=forms.PasswordInput(attrs={'class':"form-control", 'placeholder':"Password" }),max_length=32)
 
 class StudentInfoForm(forms.ModelForm) :
     gender = forms.ChoiceField(
