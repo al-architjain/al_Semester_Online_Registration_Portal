@@ -42,9 +42,10 @@
     {% block bodycontent %}
         <div class="container">
             {% load static %}
-                <h2>Student Registration Successfull! <span><img style="width:5%" src="{% static 'checkmark.gif'%}" alt="checktick"></span></h2>
+                <h2>Student Successfully {%ifequal type '1'%} Registered {%endifequal%} {%ifequal type '2'%} Updated {%endifequal%}{%ifequal type '3'%} Deactivated {%endifequal%}! <span><img style="width:5%" src="{% static 'checkmark.gif'%}" alt="checktick"></span></h2>
                 <br>
             <div>
+                {%ifnotequal type '3'%}
                 <h3> LOGIN DETAILS</h3>
                 <br>
                 <label>Name : {{ name }} </label>
@@ -53,6 +54,7 @@
                 <br>
                 <label>Password : {{ password }} </label>
                 <br><br>
+                {% endifnotequal %}
                 <div class="text-center">
                         <a class="btn btn-primary" href="/create_student/">Add Another Student</a>
                         <a class="btn btn-primary" href="/profile/">Go to Profile</a>
