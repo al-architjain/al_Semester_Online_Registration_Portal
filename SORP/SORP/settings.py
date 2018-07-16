@@ -75,18 +75,18 @@ WSGI_APPLICATION = 'SORP.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME' : 'sorp',
-    #     'USER' : 'root',
-    #     'PASSWORD' : '@rchit21',
-    #     'HOST' : '127.0.0.1',
-    #     'PORT' : '3306',
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME' : 'sorp',
+        'USER' : 'root',
+        'PASSWORD' : '@rchit21',
+        'HOST' : '127.0.0.1',
+        'PORT' : '3306',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 
@@ -131,18 +131,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'sorp_app','mediafils','sorp_app')
 
+
+
 ##password resetting
 
 # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
-
-
 # EMAIL_BACKEND = "sgbackend.SendGridBackend"
 # SENDGRID_API_KEY = "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"
 # DEFAULT_FROM_EMAIL = "pkksbiw@gmail.com"
-
-
-
+#
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
