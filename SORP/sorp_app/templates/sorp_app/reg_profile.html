@@ -99,131 +99,139 @@
     {% block bodycontent %}
         <a style="font-size: 120%; margin-right:20px;" class="btn btn-primary pull-right" href="/login/">LogOut</a>
         <a style="font-size: 120%; margin: 0 5px;" class="btn btn-primary pull-right" href="/change_password">Change Password</a>
-
-        <br><br>
+        <br>
+        <br>
         <div class="container">
             <div class="row">
+                <!-- LEFT PROFILE COLUMN -->
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <br><br>
                     {% load static %}
                     <img class="rounded mx-auto d-block" src='{% static "def_profile_pic.jpg" %}'>
-                        <div class="text-center mt-2">
-                            <label class="font-weight-bold" id="StaffName">{{ uobj.first_name }} {{ uobj.last_name }}</label><br>
-                            <label id="StaffPhone"><span class="text-muted">Email: </span>{{ uobj.email }}</label><br>
-                          <!--<label id="StaffEmail"><span class="text-muted">Email: </span>xyz@nith.ac.in</label><br>-->
-                        </div>
+                    <div class="text-center mt-2">
+                        <label class="font-weight-bold" id="StaffName">{{ uobj.first_name }} {{ uobj.last_name }}</label><br>
+                        <label id="StaffPhone"><span class="text-muted">Email: </span>{{ uobj.email }}</label><br>
+                    </div>
                 </div>
 
+                <!-- RIGHT PROFILE COLUMN -->
                 <div class="col-lg-9 col-md-9 col-sm-9">
-                    <!-- Tabs list -->
+
+                    <!-- TOP TABS ROW -->
                     <div class="row">
                         <div style="margin-top: 10px" class="col-lg-12 col-md-12">
                             <div class="tab">
-                              <button class="tablinks {% ifequal tabb '1' %} active {% endifequal %}" onclick="openTab(event, 'addStudent')"><i class="fas fa-user-plus"></i> Add Student</button>
-                              <button class="tablinks" onclick="openTab(event, 'updateStudent')"><i class="fas fa-edit"></i> Update Student</button>
-                              <button class="tablinks {% ifequal tabb '3' %} active {% endifequal %}" onclick="openTab	(event, 'deactivateStudent')"><i class="fas fa-ban"></i> Deactivate Student</button>
+
+                                <button class="tablinks {% ifequal tabb '1' %} active {% endifequal %}" onclick="openTab(event, 'addStudent')"><i class="fas fa-user-plus"></i> Add Student</button>
+                                <button class="tablinks {% ifequal tabb '2' %} active {% endifequal %}" onclick="openTab(event, 'updateStudent')"><i class="fas fa-edit"></i> Update Student</button>
+                                <button class="tablinks {% ifequal tabb '3' %} active {% endifequal %}" onclick="openTab(event, 'deactivateStudent')"><i class="fas fa-ban"></i> Deactivate Student</button>
 
                             </div>
                         </div>
                     </div>
 
+                    <!-- MIDDLE TAB CONTENT ROW -->
                     <div class="row">
                         <div style="margin-top: 10px" class="col-lg-12 col-md-12">
+
+                            <!-- ADD STUDENT CARD -->
                             <div id="addStudent" class="tabcontent">
                                 <div class="card">
-                                   <div class="card-header text-center">
-                                       <h4>Add Student Information</h4>
+
+                                    <div class="card-header text-center">
+                                       <h4>ADD NEW STUDENT</h4>
                                    </div>
 
                                     <div class="card-body text-center">
                                         <br>
-                                        <a class="btn btn-success" href="/create_student"> Create Now </a><br>
+                                        <a class="btn btn-success" href="/create_student/"> Add Now </a><br>
                                         <br>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- UPDATE STUDENT CARD -->
                             <div id="updateStudent" class="tabcontent">
                                 <div class="card">
                                     <div class="card-header text-center">
-                                        <h4>Update Student Profile</h4>
+                                        <h4>Update Student Information</h4>
                                     </div>
                                     <div class="card-body text-center">
-                                        <p class="card-text text-capitalize mt-2">Search Roll No. to Update </p>
-                                        <h4 class="text-danger">{{ msg }}</h4>
-                                         <form action="/update_student/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
+                                        <p class="card-text text-capitalize mt-2">Enter Registered Roll No. </p>
+                                        <form action="/update_student/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
                                             {% csrf_token %}
-                                          <input required class="form-control mr-sm-2" id="UpdateRollNo" type="search" placeholder="Enter Roll No" aria-label="Search" name="rollno_to_update">
-                                          <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+                                            <input required class="form-control mr-sm-2" id="updateRollNo" type="search" placeholder="Enter Roll No" aria-label="Search" name="rollno_to_update">
+                                            <button class="btn btn-success my-2 my-sm-0" type="submit">Update</button>
                                         </form>
                                         <br>
-                                        {% for roll in roll_list %}
-                                            <p> {{ roll }} {{ roll.father_name }}</p>
-                                        {% endfor %}
+                                        {% ifequal tabb '2' %}
+                                            <h5 class="alert alert-warning">{{ msg }}</h5>
+                                        {% endifequal %}
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Deactivate STUDENT CARD -->
+                            <div id="deactivateStudent" class="tabcontent">
+                                <div class="card">
+                                    <div class="card-header text-center">
+                                        <h4>Deactivate Student Profile</h4>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <p class="card-text text-capitalize mt-2">Enter Registered Roll No. </p>
+                                        <form action="/deactivate_student/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
+                                            {% csrf_token %}
+                                            <input required class="form-control mr-sm-2" id="deactivateRollNo" type="search" placeholder="Enter Roll No" aria-label="Search" name="rollno_to_deactivate">
+                                            <button class="btn btn-success my-2 my-sm-0" type="submit">Deactivate</button>
+                                        </form>
+                                        <br>
+                                        {% ifequal tabb '3' %}
+                                            <h5 class="alert alert-warning">{{ msg }}</h5>
+                                        {% endifequal %}
                                     </div>
                                 </div>
                             </div>
 
-                            <div id="deactivateStudent" class="tabcontent">
-                                <div class="card">
-                                    <div class="card-header text-center">
-                                     <h4>Deactivate Student Profile</h4>
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <p class="card-text text-capitalize">Search Roll No. to Deactivate </p>
-                                        <form action="/profile/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
-                                            {% csrf_token %}
-                                          <input required class="form-control mr-sm-2" id="RollNoDactivate" type="search" placeholder="Enter Roll No" aria-label="Search" name="d_roll_no">
-                                          <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-                                        </form>
-                                        <br>
-                                        {% if not exist %}
-                                            <h4 class="alert alert-danger">User does not exist!</h4>
-                                        {% endif %}
-                                    </div>
-
-                                </div>
-
-                                <div class="card">
-                                    <br>
-                                        {% ifnotequal dobj None %}
-                                            <div class="card-header text-center">
-                                                <h4>Check Details:</h4>
-                                            </div>
-                                            <div style="overflow-x:auto;">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="gpi">Roll No</th>
-                                                            <th class="gpi">Name</th>
-                                                            <th class="gpi">Father's Name</th>
-                                                            <th class="gpi">Email</th>
-                                                            <th class="gpi">Confirm</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-                                                        <tr>
-                                                            <form action="/deactivate/" method="POST" class="form-inline justify-content-center my-2 my-lg-0">
-                                                            {% csrf_token %}
-                                                                <td><input class="form-control mr-sm-2" id="droll_noo" type="search" value="{{dobj.roll_no}}" name="droll_noo" /></td>
-                                                                <td>{{ dobj.name_eng }}</td>
-                                                                <td>{{ dobj.father_name }}</td>
-                                                                <td>{{ dobj.email }}</td>
-                                                                <td><button class="btn btn-success my-2 my-sm-0" type="submit">DEACTIVATE</button></td>
-                                                            </form>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        {% endifnotequal %}
-                                </div>
                         </div>
                     </div>
 
-                    <!-- Tab panels end -->
-                </div>
+                    <!-- BOTTOM ROLL_NO ROW -->
+                    <div class="row">
+                        <div style="margin-top: 10px" class="col-lg-12 col-md-12">
+                            <div id="RegisteredStudents" class="Roll_card" >
+                                <div class="card">
+                                    <div class="card-header text-center">
+                                        <h4>Students Registered by you:</h4>
+                                    </div>
+                                    <div style="overflow-x:auto;">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th >Roll No</th>
+                                                    <th >Name</th>
+                                                    <th >Father's Name</th>
+                                                    <th >Email</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for roll in roll_list %}
+                                                <tr {% if not roll.active_status %} style="color:red;" {% endif %} >
+                                                    <td>{{ roll }}</td>
+                                                    <td>{{ roll.name_eng }}</td>
+                                                    <td>{{ roll.father_name }}</td>
+                                                    <td>{{ roll.email }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
             </div>
+
+                </div>
             </div>
         </div>
     {% endblock %}
