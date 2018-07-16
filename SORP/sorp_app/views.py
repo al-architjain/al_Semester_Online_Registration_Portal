@@ -500,71 +500,75 @@ def update_student_info(request):
     if request.method == 'GET':
         return redirect('/profile/')
     if request.method == 'POST':
-        iform = forms.StudentInfoForm(request.POST)
-        stu_obj = models.StudentInfo.objects.filter(id=request.POST.get('stu_id',None))
-        stu_obj.update(
-        roll_no=request.POST.get('roll_no',None),
-        institute=request.POST.get('institute',None),
-        name_eng=request.POST.get('name_eng',None),
-        name_hindi=request.POST.get('name_hindi',None),
-        email=request.POST.get('email',None),
-        gender=request.POST.get('gender',None),
-        dob=request.POST.get('dob',None),
-        religion=request.POST.get('religion',None),
-        category_main=request.POST.get('category_main',None),
-        contact=request.POST.get('contact',None),
-        aadhar_no=request.POST.get('aadhar_no',None),
-        area=request.POST.get('area',None),
-        b_country=request.POST.get('b_country',None),
-        b_state=request.POST.get('b_state',None),
-        nearest_rs=request.POST.get('nearest_rs',None),
-        corr_addr=request.POST.get('corr_addr',None),
-        perm_addr=request.POST.get('perm_addr',None),
-        jee_roll_no=request.POST.get('jee_roll_no',None),
-        jee_score=request.POST.get('jee_score',None),
-        jee_ai_rank=request.POST.get('jee_ai_rank',None),
-        jee_cat_rank=request.POST.get('jee_cat_rank',None),
-        category_admission=request.POST.get('category_admission',None),
-        int_country=request.POST.get('int_country',None),
-        int_state=request.POST.get('int_state',None),
-        int_percentage=request.POST.get('int_percentage',None),
-        int_pass_year=request.POST.get('int_pass_year',None),
-        int_school_type=request.POST.get('int_school_type',None),
-        int_school_area=request.POST.get('int_school_area',None),
-        int_school_name=request.POST.get('int_school_name',None),
-        int_school_board=request.POST.get('int_school_board',None),
-        ug_class=request.POST.get('ug_class',None),
-        ug_branch=request.POST.get('ug_branch',None),
-        hosteler=request.POST.get('hosteler',None),
-        hostel_name=request.POST.get('hostel_name',None),
-        entry_no=request.POST.get('entry_no',None),
-        reg_no=request.POST.get('reg_no',None),
-        father_name=request.POST.get('father_name',None),
-        father_contact=request.POST.get('father_contact',None),
-        father_email=request.POST.get('father_email',None),
-        mother_name=request.POST.get('mother_name',None),
-        mother_contact=request.POST.get('mother_contact',None),
-        mother_email=request.POST.get('mother_email',None),
-        guardian_name=request.POST.get('guardian_name',None),
-        guardian_contact=request.POST.get('guardian_contact',None),
-        guardian_email=request.POST.get('guardian_email',None),
-        fee_waiver=request.POST.get('fee_waiver',None),
-        family_income=request.POST.get('family_income',None)
-    )
+        # iform = forms.StudentInfoForm(request.POST)
+        stu_obj = models.StudentInfo.objects.get(id=request.POST.get('stu_id',None))
+        user = stu_obj.user
 
-        fee_obj=models.StudentFirstFeeStatus.objects.filter(student=stu_obj)
-        fee_obj.Update(
-            fee_josaa_amount=request.POST.get('fee_obj.fee_josaa_amount',None),
-            fee_josaa_date=request.POST.get('fee_obj.fee_josaa_date',None),
-            fee_NITH_amount=request.POST.get('fee_obj.fee_NITH_amount',None),
-            fee_nith_date=request.POST.get('fee_obj.fee_nith_date',None),
-            fee_nith_receipt_no=request.POST.get('fee_obj.fee_nith_receipt_no',None),
-        )
+        stu_obj.roll_no=request.POST.get('roll_no',None)
+        stu_obj.institute=request.POST.get('institute',None)
+        stu_obj.name_eng=request.POST.get('name_eng',None)
+        stu_obj.name_hindi=request.POST.get('name_hindi',None)
+        stu_obj.email=request.POST.get('email',None)
+        stu_obj.gender=request.POST.get('gender',None)
+        stu_obj.dob=request.POST.get('dob',None)
+        stu_obj.religion=request.POST.get('religion',None)
+        stu_obj.category_main=models.Category.objects.get(name=request.POST.get('category_main',None))
+        stu_obj.contact=request.POST.get('contact',None)
+        stu_obj.aadhar_no=request.POST.get('aadhar_no',None)
+        stu_obj.area=request.POST.get('area',None)
+        stu_obj.b_country=request.POST.get('b_country',None)
+        stu_obj.b_state=request.POST.get('b_state',None)
+        stu_obj.nearest_rs=request.POST.get('nearest_rs',None)
+        stu_obj.corr_addr=request.POST.get('corr_addr',None)
+        stu_obj.perm_addr=request.POST.get('perm_addr',None)
+        stu_obj.jee_roll_no=request.POST.get('jee_roll_no',None)
+        stu_obj.jee_score=request.POST.get('jee_score',None)
+        stu_obj.jee_ai_rank=request.POST.get('jee_ai_rank',None)
+        stu_obj.jee_cat_rank=request.POST.get('jee_cat_rank',None)
+        stu_obj.category_admission=models.Category.objects.get(name=request.POST.get('category_admission',None))
+        stu_obj.int_country=request.POST.get('int_country',None)
+        stu_obj.int_state=request.POST.get('int_state',None)
+        stu_obj.int_percentage=request.POST.get('int_percentage',None)
+        stu_obj.int_pass_year=request.POST.get('int_pass_year',None)
+        stu_obj.int_school_type=request.POST.get('int_school_type',None)
+        stu_obj.int_school_area=request.POST.get('int_school_area',None)
+        stu_obj.int_school_name=request.POST.get('int_school_name',None)
+        stu_obj.int_school_board=models.Board.objects.get(name=request.POST.get('int_school_board',None))
+        stu_obj.ug_class=models.UGClass.objects.get(name=request.POST.get('ug_class',None))
+        stu_obj.ug_branch=models.UGBranch.objects.get(name=request.POST.get('ug_branch',None))
+        # stu_obj.hosteler=request.POST.get('hosteler',None)
+        stu_obj.hostel_name=request.POST.get('hostel_name',None)
+        stu_obj.entry_no=request.POST.get('entry_no',None)
+        stu_obj.reg_no=request.POST.get('reg_no',None)
+        stu_obj.father_name=request.POST.get('father_name',None)
+        stu_obj.father_contact=request.POST.get('father_contact',None)
+        stu_obj.father_email=request.POST.get('father_email',None)
+        stu_obj.mother_name=request.POST.get('mother_name',None)
+        stu_obj.mother_contact=request.POST.get('mother_contact',None)
+        stu_obj.mother_email=request.POST.get('mother_email',None)
+        stu_obj.guardian_name=request.POST.get('guardian_name',None)
+        stu_obj.guardian_contact=request.POST.get('guardian_contact',None)
+        stu_obj.guardian_email=request.POST.get('guardian_email',None)
+        stu_obj.fee_waiver=request.POST.get('fee_waiver',None)
+        stu_obj.family_income=request.POST.get('family_income',None)
+        # print(request.POST.get('hosteler',None))
+        stu_obj.save()
+        user.username = request.POST.get('roll_no', None)
+        user.set_password(request.POST.get('father_name',None))
+        user.save()
+
+        fee_obj=models.StudentFirstFeeStatus.objects.get(student=stu_obj)
+        fee_obj.fee_josaa_amount=request.POST.get('fee_josaa_amount',None)
+        fee_obj.fee_josaa_date=request.POST.get('fee_josaa_date',None)
+        fee_obj.fee_NITH_amount=request.POST.get('fee_NITH_amount',None)
+        fee_obj.fee_nith_date=request.POST.get('fee_nith_date',None)
+        fee_obj.fee_nith_receipt_no=request.POST.get('fee_nith_receipt_no',None)
+        fee_obj.save()
 
 
 
         # if iform.is_valid():
         #     return HttpResponse('Valid form!')
         # else:
-        return HttpResponse(iform.errors.as_json())
+        return render(request,'sorp_app/reg_success.html',{'name':stu_obj.name_eng, 'username': user.username, 'password':stu_obj.father_name})
 
