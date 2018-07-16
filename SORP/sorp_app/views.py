@@ -424,13 +424,13 @@ def update_student(request):
             'family_income':stu_obj.family_income,
 
         }
-
         sfi_data = {
             'fee_josaa_amount': fee_obj.fee_josaa_amount,
             'fee_josaa_date': fee_obj.fee_josaa_date,
             'fee_NITH_amount': fee_obj.fee_NITH_amount,
             'fee_nith_date': fee_obj.fee_nith_date,
             'fee_nith_receipt_no': fee_obj.fee_nith_receipt_no,
+            'fee_total':fee_obj.fee_total
         }
 
         iform = forms.StudentInfoForm(initial=si_data)

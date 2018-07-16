@@ -62,474 +62,473 @@
 
         <form action='/update_student_info/' method="POST" >
         {% csrf_token %}
-            <input type="hidden" value="{{ stu_id }}" name="stu_id" >
-            {{ iform.as_p }}
-            {{ fform.as_p }}
+            <!--<input type="hidden" value="{{ stu_id }}" name="stu_id" >-->
+            <!--{{ iform.as_p }}-->
+            <!--{{ fform.as_p }}-->
 
         <!--***********************************************************************************************************************************-->
                                                         <!--Data Entry Form Tab Started -->
         <!--****************************************************************************************************************************************-->
 
-        <!--<div id="dataEntry" class="tabcontent">-->
-                <!--<div class="row">-->
-                    <!--<h4 class="text-primary"><b>INSTITUTE</b></h4>-->
-                <!--</div>-->
-
-                <!--<div class="row">-->
-                    <!--<div class="col-md-12">-->
-                        <!--<label style="font-size: 15px; margin: 0 20%" for="nith">NIT Hamirpur-->
-                            <!--<input id="nith" checked="true" name="{{ iform.institute.html_name }}" type="radio" value="NIT Hamirpur">-->
-                        <!--</label>-->
-                        <!--<label style="font-size: 15px; margin: 0 10%" for="iiitu">IIITU Una-->
-                            <!--<input id="iiitu" name="{{ iform.institute.html_name }}" type="radio" value="IIIT Una">-->
-                        <!--</label>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<hr>-->
-                <!--<div class="row">-->
-                    <!--<h4 class="text-primary"><b>PERSONAL DETAILS</b></h4>-->
-                <!--</div>-->
-                <!--<hr>-->
-                <!--<div style="margin-top: 10px;" class="form-group">-->
-                    <!--<div class="row">-->
-
-                        <!--<input type="hidden" value="{{uobj}}" name="reg_staff" >-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.name_eng.errors }}-->
-                            <!--<label for="id_name_eng"><b>Student's Name (In English) <span>*</span></b></label>-->
-                            <!--<input required class="form-control" id="id_name_eng" value="{{iform.name_eng.value}}" type="text" name="{{ iform.name_eng.html_name }}"  />-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.name_hindi.errors }}-->
-                            <!--<label for="id_name_hindi"><b>Student's Name (In Hindi)</b></label>-->
-                            <!--<input class="form-control" id="id_name_hindi" placeholder="Enter Name" type="text" name="{{ iform.name_hindi.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.email.errors }}-->
-                            <!--<label for="id_email"><b>Email</b> <span>*</span></label>-->
-                            <!--<input required class="form-control" type="email" id="id_email" placeholder="Enter Email" name="{{ iform.email.html_name }}"  />-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.dob.errors }}-->
-                            <!--<label for="{{ iform.dob.id_for_label }}"><b>Date of Birth <span>*</span></b></label>-->
-                            <!--<input required class="form-control" id="{{ iform.dob.id_for_label }}" value="{{ iform.dob.value }}" name="{{ iform.dob.html_name }}">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<br>-->
-
-                    <!--<div class="row">-->
-
-                        <!--<div class="col-md-2 col-sm-2">-->
-                            <!--{{ iform.religion.errors }}-->
-                            <!--<label for="{{ iform.religion.id_for_label }}"><b>Religion <span>*</span></b></label>-->
-                            <!--&lt;!&ndash;<input required class="form-control" type="text" id="{{ iform.religion.id_for_label }}" placeholder="Enter Religion" name="{{ iform.religion.html_name }}">&ndash;&gt;-->
-                            <!--{{ iform.religion }}-->
-                        <!--</div>-->
-                        <!--<div class="col-md-2 col-sm-2">-->
-                            <!--{{ iform.gender.errors }}-->
-                            <!--<label for="{{ iform.gender.id_for_label }}"><b>Gender <span>*</span></b></label><br>-->
-                            <!--{{ iform.gender }}-->
-                        <!--</div>-->
-                        <!--<div class="col-md-2 col-sm-2">-->
-                            <!--{{ iform.category_main.errors }}-->
-                            <!--<label for="{{ iform.category_main.id_for_label }}"><b>Main Category <span>*</span></b></label><br>-->
-                            <!--{{ iform.category_main }}-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.contact.errors }}-->
-                            <!--<label for="{{ iform.contact.id_for_label }}"><b>Student's Mobile Number <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ iform.contact.id_for_label }}" placeholder="Enter Number" name="{{ iform.contact.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.aadhar_no.errors }}-->
-                            <!--<label for="{{ iform.aadhar_no.id_for_label }}"><b>Student's Aadhar Number <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ iform.aadhar_no.id_for_label }}" placeholder="Enter Number" name="{{ iform.aadhar_no.html_name }}">-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--<br>-->
-
-                    <!--<div class="row">-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.nearest_rs.errors }}-->
-                            <!--<label for="{{ iform.nearest_rs.id_for_label }}"><b>Nearest Railway Station</b></label>-->
-                            <!--<input class="form-control" type="text" id="{{ iform.nearest_rs.id_for_label }}" placeholder="Enter Station" name="{{iform.nearest_rs.html_name}}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.area.errors }}-->
-                            <!--<label for="{{ iform.area.id_for_label }}"><b>Student Area? <span>*</span></b></label><br>-->
-                            <!--{{ iform.area }}-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3">-->
-                            <!--{{ iform.corr_addr.errors }}-->
-                            <!--<label for="{{ iform.corr_addr.id_for_label }}">Correspondence Address <span>*</span></label>-->
-                            <!--<div class="input-group">-->
-                            <!--<textarea required class="form-control" id="{{ iform.corr_addr.id_for_label }}" aria-label="With textarea" placeholder="Enter Full Address" name="{{ iform.corr_addr.html_name }}"></textarea>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3">-->
-                            <!--{{ iform.perm_addr.errors }}-->
-                            <!--<label for="{{ iform.perm_addr.id_for_label }}">Permanent Address <span>*</span></label>-->
-                            <!--<div class="input-group">-->
-                            <!--<textarea required class="form-control" id="{{ iform.perm_addr.id_for_label }}" aria-label="With textarea" placeholder="Enter Full Address" name="{{ iform.perm_addr.html_name }}"></textarea>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-lg-5">-->
-                            <!--{{ iform.b_country.errors }}-->
-                            <!--<label for="{{ iform.b_country.id_for_label }}"><b>Bonafide Country and State of Candidate <span>*</span></b></label>-->
-                            <!--<select required class="form-control" id="{{ iform.b_country.id_for_label }}" name ="{{ iform.b_country.html_name}}"></select>-->
-                        <!--</div>-->
-
-                        <!--<div class="col-lg-4">-->
-                            <!--{{ iform.b_state.errors }}-->
-                            <!--<select style="margin-top: 25px" class="form-control" id ="{{ iform.b_state.id_for_label }}" name ="{{ iform.b_state.html_name }}"></select>-->
-                        <!--</div>-->
-                        <!--<script language="javascript">-->
-                            <!--populateCountries("{{ iform.b_country.id_for_label }}", "{{ iform.b_state.id_for_label }}");-->
-                        <!--</script>-->
-                    <!--</div>-->
-
-                    <!--<hr>-->
-
-
-                    <!--<div class="row">-->
-                        <!--<h4 class="text-primary"><b>Academic Details</b></h4>-->
-                    <!--</div>-->
-                    <!--<hr>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.jee_roll_no.errors }}-->
-                            <!--<label for="{{ iform.jee_roll_no.id_for_label }}"><b>Jee (Main) Roll No <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ iform.jee_roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.jee_roll_no.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.jee_score.errors }}-->
-                            <!--<label for="{{ iform.jee_score.id_for_label }}"><b>Jee (Main) 2018 Score <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ iform.jee_score.id_for_label }}" placeholder="Enter Score" name="{{ iform.jee_score.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.jee_AI_rank.errors }}-->
-                            <!--<label for="{{ iform.jee_ai_rank.id_for_label }}"><b>Jee (Main) 2018 All India Rank <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ iform.jee_ai_rank.id_for_label }}" placeholder="Enter Rank" name="{{ iform.jee_ai_rank.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.jee_cat_rank.errors }}-->
-                            <!--<label for="{{ iform.jee_cat_rank.id_for_label }}"><b>Jee (Main) 2018 Category Rank</b></label>-->
-                            <!--<input class="form-control" type="text" id="{{ iform.jee_cat_rank.id_for_label }}" placeholder="Enter Rank" name="{{ iform.jee_cat_rank.html_name }}">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<br>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-md-2 col-sm-2">-->
-                            <!--{{ iform.category_admission.errors }}-->
-                            <!--<label for="{{ iform.category_admission.id_for_label }}"><b>Admitted Category <span>*</span></b></label><br>-->
-                            <!--{{ iform.category_admission }}-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-2 col-sm-2">-->
-                            <!--{{ iform.int_percentage.errors }}-->
-                            <!--<label for="{{ iform.int_percentage.id_for_label }}"><b>10+2 Percentage <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ iform.int_percentage.id_for_label }}" placeholder="Enter Percent" name="{{ iform.int_percentage.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-2 col-sm-2">-->
-                            <!--{{ iform.int_pass_year.errors }}-->
-                            <!--<label for="{{ iform.int_pass_year.id_for_label }}"><b>10+2 Passing Year <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ iform.int_pass_year.id_for_label }}" placeholder="Enter Year" name="{{ iform.int_pass_year.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.int_school_type.errors }}-->
-                            <!--<label for="{{ iform.int_school_type.id_for_label }}"><b>Type of School ? <span>*</span></b></label><br>-->
-                            <!--{{ iform.int_school_type }}-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-2 col-sm-2">-->
-                            <!--{{ iform.int_school_type.errors }}-->
-                            <!--<label for="{{ iform.int_school_area.id_for_label }}"><b>School Area? <span>*</span></b></label><br>-->
-                            <!--{{ iform.int_school_area }}-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<br>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-lg-6">-->
-                            <!--{{ iform.int_country.errors }}-->
-                            <!--<label for="{{ iform.int_country.id_for_label }}"><b>Country and State from where 10+2 Examinations Passed <span>*</span></b></label>-->
-                            <!--<select required class="form-control" id="{{ iform.int_country.id_for_label }}" name="{{ iform.int_country.html_name }}"></select>-->
-                        <!--</div>-->
-
-                        <!--<div class="col-lg-6">-->
-                            <!--{{ iform.int_state.errors }}-->
-                            <!--<select required style="margin-top: 25px" class="form-control" id="{{ iform.int_state.id_for_label }}" name="{{ iform.int_state.html_name }}"></select>-->
-                        <!--</div>-->
-                        <!--<script language="javascript">-->
-                            <!--populateCountries("{{ iform.int_country.id_for_label }}", "{{ iform.int_state.id_for_label }}");-->
-                        <!--</script>-->
-                    <!--</div>-->
-                    <!--<br>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-md-4 col-sm-4">-->
-                            <!--{{ iform.int_school_name.errors }}-->
-                            <!--<label for="{{ iform.int_school_name.id_for_label }}"><b>Name of 10+2 Passing School <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ iform.int_school_name.id_for_label }}" placeholder="Enter School Name" name="{{ iform.int_school_name.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-4 col-sm-4">-->
-                            <!--{{ iform.int_school_board.errors }}-->
-                            <!--<label for="{{ iform.int_school_board.id_for_label }}"><b>Board </b>(CBSE / HPBSE / ICSE / any other) <span>*</span></label>-->
-                            <!--<br>{{ iform.int_school_board }}-->
-                        <!--</div>-->
-
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.ug_class.errors }}-->
-                            <!--<label for="{{ iform.ug_class.id_for_label }}"><b>U.G. Program </b>(B.Tech / B.Arch / Dual Degree) <span>*</span></label>-->
-                            <!--<br>{{ iform.ug_class }}-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<br>-->
-
-                    <!--<div class="row">-->
-
-
-
-                        <!--<div class="col-md-5 col-sm-5">-->
-                            <!--{{ iform.ug_branch.errors }}-->
-                            <!--<label for="{{ iform.ug_branch.id_for_label }}"><b>Alloted Branch <span>*</span></b></label>-->
-                            <!--<br>{{ iform.ug_branch }}-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-2 col-sm-2">-->
-                            <!--{{ iform.roll_no.errors }}-->
-                            <!--<label for="{{ iform.roll_no.id_for_label }}"><b>Alloted Roll No <span>*</span></b></label>-->
-                            <!--<input oninput="rollNo({{ iform.roll_no.id_for_label }})" required class="form-control" type="text" id="{{ iform.roll_no.id_for_label }}" placeholder="Enter Roll No" name="{{ iform.roll_no.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-3 col-sm-3">-->
-                            <!--{{ iform.reg_no.errors }}-->
-                            <!--<label for="{{ iform.reg_no.id_for_label }}"><b>Registration Number</b></label>-->
-                            <!--<input class="form-control" type="text" id="{{ iform.reg_no.id_for_label }}" placeholder="Enter Reg Number" name="{{ iform.reg_no.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-2 col-sm-2">-->
-                            <!--{{ iform.entry_no.errors }}-->
-                            <!--<label for="{{ iform.entry_no.id_for_label }}"><b>Entry Number</b></label>-->
-                            <!--<input class="form-control" type="text" id="{{ iform.entry_no.id_for_label }}" placeholder="Enter Entry Number" name="{{ iform.entry_no.html_name }}">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<br>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.hosteler.errors }}-->
-                            <!--<label for="{{ iform.hosteler.id_for_label }}"><b>Hosteler??</b></label>-->
-                            <!--<br>{{ iform.hosteler }}-->
-
-                        <!--</div>-->
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.hostel_name.errors }}-->
-                            <!--<label for="{{ iform.hostel_name.id_for_label }}"><b>Hostel Name</b></label>-->
-                            <!--<br>{{ iform.hostel_name }}-->
-
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<hr>-->
-
-                    <!--<div class="row">-->
-                        <!--<h4 class="text-primary"><b>Parent's / Gaurdian's Information</b></h4>-->
-                    <!--</div>-->
-                    <!--<hr>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.father_name.errors }}-->
-                            <!--<label for="{{ iform.father_name.id_for_label }}"><b>Father's Name <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ iform.father_name.id_for_label }}" placeholder="Enter Name" name="{{ iform.father_name.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.father_contact.errors }}-->
-                            <!--<label for="{{ iform.father_contact.id_for_label }}"><b>Father's Mobile Number</b></label>-->
-                            <!--<input class="form-control" type="text" id="{{ iform.father_contact.id_for_label }}" placeholder="Enter Number" name="{{ iform.father_contact.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.father_email.errors }}-->
-                            <!--<label for="{{ iform.father_email.id_for_label }}"><b>Father's Email</b></label>-->
-                            <!--<input class="form-control" type="email" id="{{ iform.father_email.id_for_label }}" placeholder="Enter Email" name="{{ iform.father_email.html_name }}">-->
-                        <!--</div>-->
-
-                    <!--</div>-->
-                    <!--<br>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.mother_name.errors }}-->
-                            <!--<label for="{{ iform.mother_name.id_for_label }}"><b>Mother's Name <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ iform.mother_name.id_for_label }}" placeholder="Enter Name" name="{{ iform.mother_name.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.mother_contact.errors }}-->
-                            <!--<label for="{{ iform.mother_contact.id_for_label }}"><b>Mother's Mobile Number</b></label>-->
-                            <!--<input class="form-control" type="text" id="{{ iform.mother_contact.id_for_label }}" placeholder="Enter Number" name="{{ iform.mother_contact.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.mother_email.errors }}-->
-                            <!--<label for="{{ iform.mother_name.id_for_label }}"><b>Mother's Email</b></label>-->
-                            <!--<input class="form-control" type="email" id="{{ iform.mother_name.id_for_label }}" placeholder="Enter Email" name="{{ iform.mother_email.html_name }}">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<br>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.guardian_name.errors }}-->
-                            <!--<label for="{{ iform.guardian_name.id_for_label }}"><b>Gaurdian's Name</b></label>-->
-                            <!--<input class="form-control" type="text" id="{{ iform.guardian_name.id_for_label }}" placeholder="Enter Name" name="{{ iform.guardian_name.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.guardian_contact.errors }}-->
-                            <!--<label for="{{ iform.guardian_contact.id_for_label }}"><b>Gaurdian's Mobile Number</b></label>-->
-                            <!--<input class="form-control" type="text" id="{{ iform.guardian_contact.id_for_label }}" placeholder="Enter Number" name="{{ iform.guardian_contact.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-lg-4 col-md-4">-->
-                            <!--{{ iform.guardian_email.errors }}-->
-                            <!--<label for="{{ iform.guardian_email.id_for_label }}"><b>Gaurdian's Email</b></label>-->
-                            <!--<input class="form-control" type="email" id="{{ iform.guardian_email.id_for_label }}" placeholder="Enter Email" name="{{ iform.guardian_email.html_name }}">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<br>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-lg-6 col-md-6">-->
-                            <!--{{ iform.family_income.errors }}-->
-                            <!--<label for="{{ iform.family_income.id_for_label }}"><b>Family's Total Income <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ iform.family_income.id_for_label }}" placeholder="Enter Income" name="{{ iform.family_income.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-lg-6 col-md-6 col-sm-6">-->
-                            <!--<div class="form-group">-->
-                                <!--{{ iform.fee_waiver.errors }}-->
-                                <!--<label for="{{ iform.fee_waiver.id_for_label }}"><b>Fee Waiver Claimed ? <span>*</span></b></label>-->
-                                <!--<br>-->
-                                <!--{{ iform.fee_waiver }}-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<hr>-->
-
-                    <!--<div class="row">-->
-                        <!--<h4 class="text-primary"><b>FEE STATUS</b></h4>-->
-                    <!--</div>-->
-                    <!--<hr>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-md-4 col-sm-4">-->
-                            <!--{{ fform.fee_josaa_amount.errors }}-->
-                            <!--<label for="{{ fform.fee_josaa_amount.id_for_label }}"><b>JoSAA 2018 Amount <span>*</span></b></label>-->
-                            <!--<input required class="form-control" type="text" id="{{ fform.fee_josaa_amount.id_for_label }}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_josaa_amount.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-4 col-sm-4">-->
-                            <!--{{ fform.fee_josaa_date.errors }}-->
-                            <!--<label for="{{ fform.fee_josaa_date.id_for_label }}"><b>Date <span>*</span></b></label>-->
-                            <!--<input class="form-control" id="{{ fform.fee_josaa_date.id_for_label }}" placeholder="Date" type="date" name="{{ fform.fee_josaa_date.html_name }}">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="row">-->
-                        <!--<div class="col-md-4 col-sm-4">-->
-                            <!--{{ fform.fee_NITH_amount.errors }}-->
-                            <!--<label for="{{ fform.fee_NITH_amount.id_for_label }}"><b>NIT Hamirpur</b></label>-->
-                            <!--<input class="form-control" type="text" id="{{ fform.fee_NITH_amount.id_for_label }}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_NITH_amount.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-4 col-sm-4">-->
-                            <!--{{ fform.fee_nith_date.errors }}-->
-                            <!--<label for="{{ fform.fee_nith_date.id_for_label }}"><b>Date <span>*</span></b></label>-->
-                            <!--<input class="form-control" id="{{ fform.fee_nith_date.id_for_label }}" placeholder="Date" type="date" name="{{ fform.fee_nith_date.html_name }}">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-md-4 col-sm-4">-->
-                            <!--{{ fform.fee_nith_receipt_no.errors }}-->
-                            <!--<label for="{{ fform.fee_nith_receipt_no.id_for_label }}"><b>Receipt Number</b></label>-->
-                            <!--<input class="form-control" id="{{ fform.fee_nith_receipt_no.id_for_label }}" placeholder="Enter Receipt Number" type="text" name="{{ fform.fee_nith_receipt_no.html_name }}">-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-md-4 col-sm-4form-group">-->
-                            <!--{{ fform.fee_total.errors }}-->
-                            <!--<label for="{{ fform.fee_total.id_for_label }}"><b>Total Fees Paid: </b></label>-->
-                            <!--<input class="form-control" type="text" id="{{ fform.fee_total.id_for_label }}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_total.html_name }}">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--<br>-->
-            <!--<div class="row">-->
-                <!--<div class="col-md-12">-->
-                    <!--<a id="nextButton" class="tablinks btn btn-primary float-right" style="color:white;" onclick="openTab(event, 'docVerify')">Next <i class="fas fa-hand-point-right"></i></a>-->
-                    <!--<a class="btn btn-primary" href="">Reset</a>-->
-                <!--</div>-->
-            <!--</div>-->
-
-
-            <!--</div>-->
-
-        <!--&lt;!&ndash;****************************************************************************************************************************************&ndash;&gt;-->
-                                                        <!--&lt;!&ndash;Document Verification Tab Started &ndash;&gt;-->
-        <!--&lt;!&ndash;****************************************************************************************************************************************&ndash;&gt;-->
-
-        <!--<div id="docVerify" class="tabcontent">-->
-            <!--<br>-->
-            <!--<div class="row">-->
-                <!--<div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
-                    <!--<table class="table table-hover float-left">-->
-                        <!--<thead>-->
-                            <!--<tr class="text-primary">-->
-                                <!--<th class="srno">Sr. No.</th>-->
-                                <!--<th >Name of the Document</th>-->
-                                <!--<th>Verified?</th>-->
-                            <!--</tr>-->
-                        <!--</thead>-->
-                        <!--<tbody>-->
-                            <!--{% for doc in dobj %}-->
-                                <!--<tr>-->
-                                    <!--<td style="color:green">{{ doc.id }}</td>-->
-                                    <!--<td style="color:green"><strong>{{ doc.doc_name }}</strong></td>-->
-                                    <!--<td><input onclick="yes({{doc.id}})" checked="True" type="radio" value="YES" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="NO" name="doc{{doc.id}}">No <input onclick="na({{doc.id}})" type="radio" value="NA" name="doc{{doc.id}}">NA</td>-->
-
-                                <!--</tr>-->
-                            <!--{% endfor %}-->
-                        <!--</tbody>-->
-                    <!--</table>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<a id="prevButton" class="tablinks btn btn-primary" style="color:white;" onclick="openTab(event, 'dataEntry')"><i class="fas fa-hand-point-left"></i> Previous</a>-->
-
-        <!--</div>-->
+        <div id="dataEntry" class="tabcontent">
+                <div class="row">
+                    <h4 class="text-primary"><b>INSTITUTE</b></h4>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label style="font-size: 15px; margin: 0 20%" for="nith">NIT Hamirpur
+                            <input id="nith" checked="true" name="{{ iform.institute.html_name }}" type="radio" value="NIT Hamirpur">
+                        </label>
+                        <label style="font-size: 15px; margin: 0 10%" for="iiitu">IIITU Una
+                            <input id="iiitu" name="{{ iform.institute.html_name }}" type="radio" value="IIIT Una">
+                        </label>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <h4 class="text-primary"><b>PERSONAL DETAILS</b></h4>
+                </div>
+                <hr>
+                <div style="margin-top: 10px;" class="form-group">
+                    <div class="row">
+
+                        <input type="hidden" value="{{uobj}}" name="reg_staff" >
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.name_eng.errors }}
+                            <label for="id_name_eng"><b>Student's Name (In English) <span>*</span></b></label>
+                            <input required class="form-control" id="id_name_eng" value="{{iform.name_eng.value}}" type="text" name="{{ iform.name_eng.html_name }}"  />
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.name_hindi.errors }}
+                            <label for="id_name_hindi"><b>Student's Name (In Hindi)</b></label>
+                            <input class="form-control" id="id_name_hindi" value="{{iform.name_hindi.value}}" placeholder="Enter Name" type="text" name="{{ iform.name_hindi.html_name }}">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.email.errors }}
+                            <label for="id_email"><b>Email</b> <span>*</span></label>
+                            <input required class="form-control" type="email" id="id_email" value="{{iform.email.value}}" placeholder="Enter Email" name="{{ iform.email.html_name }}"  >
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.dob.errors }}
+                            <label for="{{ iform.dob.id_for_label }}"><b>Date of Birth <span>*</span></b></label>
+                            <input required class="form-control" id="{{ iform.dob.id_for_label }}" value="{{ iform.dob.value }}" name="{{ iform.dob.html_name }}">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.religion.errors }}
+                            <label for="{{ iform.religion.id_for_label }}"><b>Religion <span>*</span></b></label>
+                            <!--<input required class="form-control" type="text" id="{{ iform.religion.id_for_label }}" placeholder="Enter Religion" name="{{ iform.religion.html_name }}">-->
+                            {{ iform.religion }}
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.gender.errors }}
+                            <label for="{{ iform.gender.id_for_label }}"><b>Gender <span>*</span></b></label><br>
+                            {{ iform.gender }}
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.category_main.errors }}
+                            <label for="{{ iform.category_main.id_for_label }}"><b>Main Category <span>*</span></b></label><br>
+                            {{ iform.category_main }}
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.contact.errors }}
+                            <label for="{{ iform.contact.id_for_label }}"><b>Student's Mobile Number <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.contact.id_for_label }}" value={{iform.contact.value}} placeholder="Enter Number" name="{{ iform.contact.html_name }}">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.aadhar_no.errors }}
+                            <label for="{{ iform.aadhar_no.id_for_label }}"><b>Student's Aadhar Number <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.aadhar_no.id_for_label }}" value={{iform.aadhar_no.value}} placeholder="Enter Number" name="{{ iform.aadhar_no.html_name }}">
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.nearest_rs.errors }}
+                            <label for="{{ iform.nearest_rs.id_for_label }}"><b>Nearest Railway Station</b></label>
+                            <input class="form-control" type="text" id="{{ iform.nearest_rs.id_for_label }}"  value={{iform.nearest_rs.value}} placeholder="Enter Station" name="{{iform.nearest_rs.html_name}}">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.area.errors }}
+                            <label for="{{ iform.area.id_for_label }}"><b>Student Area? <span>*</span></b></label><br>
+                            {{ iform.area }}
+                        </div>
+
+                        <div class="col-md-3">
+                            {{ iform.corr_addr.errors }}
+                            <label for="{{ iform.corr_addr.id_for_label }}">Correspondence Address <span>*</span></label>
+                            <div class="input-group">
+                            <textarea required class="form-control" id="{{ iform.corr_addr.id_for_label }}"   aria-label="With textarea" placeholder="Enter Full Address" name="{{ iform.corr_addr.html_name }}">{{iform.corr_addr.value}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            {{ iform.perm_addr.errors }}
+                            <label for="{{ iform.perm_addr.id_for_label }}">Permanent Address <span>*</span></label>
+                            <div class="input-group">
+                            <textarea required class="form-control" id="{{ iform.perm_addr.id_for_label }}"  aria-label="With textarea" placeholder="Enter Full Address" name="{{ iform.perm_addr.html_name }}">{{iform.perm_addr.value}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-5">
+                            {{ iform.b_country.errors }}
+                            <label for="{{ iform.b_country.id_for_label }}"><b>Bonafide Country and State of Candidate <span>*</span></b></label>
+                            <select required class="form-control" name ="{{ iform.b_country.html_name}}"><option value="{{iform.b_state.value}}" selected>{{iform.b_country.value}}</option></select>
+                        </div>
+
+                        <div class="col-lg-4">
+                            {{ iform.b_state.errors }}
+                            <select style="margin-top: 25px" class="form-control"  name ="{{ iform.b_state.html_name }}"> <option value="{{iform.b_state.value}}" selected>{{iform.b_state.value}}</option> </select>
+                        </div>
+                        <script language="javascript">
+                            populateCountries("{{ iform.b_country.id_for_label }}", "{{ iform.b_state.id_for_label }}");
+                        </script>
+                    </div>
+
+                    <hr>
+
+
+                    <div class="row">
+                        <h4 class="text-primary"><b>Academic Details</b></h4>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.jee_roll_no.errors }}
+                            <label for="{{ iform.jee_roll_no.id_for_label }}"><b>Jee (Main) Roll No <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.jee_roll_no.id_for_label }}" value={{iform.jee_roll_no.value}} placeholder="Enter Roll No" name="{{ iform.jee_roll_no.html_name }}">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.jee_score.errors }}
+                            <label for="{{ iform.jee_score.id_for_label }}"><b>Jee (Main) 2018 Score <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.jee_score.id_for_label }}" value="{{iform.jee_score.value}}" placeholder="Enter Score" name="{{ iform.jee_score.html_name }}">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.jee_AI_rank.errors }}
+                            <label for="{{ iform.jee_ai_rank.id_for_label }}"><b>Jee (Main) 2018 All India Rank <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.jee_ai_rank.id_for_label }}" value="{{iform.jee_ai_rank.value}}" placeholder="Enter Rank" name="{{ iform.jee_ai_rank.html_name }}">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.jee_cat_rank.errors }}
+                            <label for="{{ iform.jee_cat_rank.id_for_label }}"><b>Jee (Main) 2018 Category Rank</b></label>
+                            <input class="form-control" type="text" id="{{ iform.jee_cat_rank.id_for_label }}" value="{{iform.jee_cat_rank.value}}" placeholder="Enter Rank" name="{{ iform.jee_cat_rank.html_name }}">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.category_admission.errors }}
+                            <label for="{{ iform.category_admission.id_for_label }}"><b>Admitted Category <span>*</span></b></label><br>
+                            {{ iform.category_admission }}
+                        </div>
+
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.int_percentage.errors }}
+                            <label for="{{ iform.int_percentage.id_for_label }}"><b>10+2 Percentage <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.int_percentage.id_for_label }}" value="{{iform.int_percentage.value}}" placeholder="Enter Percent" name="{{ iform.int_percentage.html_name }}">
+                        </div>
+
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.int_pass_year.errors }}
+                            <label for="{{ iform.int_pass_year.id_for_label }}"><b>10+2 Passing Year <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.int_pass_year.id_for_label }}" value="{{iform.int_pass_year.value}}" placeholder="Enter Year" name="{{ iform.int_pass_year.html_name }}">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.int_school_type.errors }}
+                            <label for="{{ iform.int_school_type.id_for_label }}"><b>Type of School ? <span>*</span></b></label><br>
+                            {{ iform.int_school_type }}
+                        </div>
+
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.int_school_type.errors }}
+                            <label for="{{ iform.int_school_area.id_for_label }}"><b>School Area? <span>*</span></b></label><br>
+                            {{ iform.int_school_area }}
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ iform.int_country.errors }}
+                            <label for="{{ iform.int_country.id_for_label }}"><b>Country and State from where 10+2 Examinations Passed <span>*</span></b></label>
+                            <select required class="form-control"  name="{{ iform.int_country.html_name }}"><option value="{{iform.int_country.value}}" selected>{{iform.int_country.value}}</option></select>
+                        </div>
+
+                        <div class="col-lg-6">
+                            {{ iform.int_state.errors }}
+                            <select required style="margin-top: 25px" class="form-control" name="{{ iform.int_state.html_name }}"><option value="{{iform.int_state.value}}" selected>{{iform.int_state.value}}</option></select>
+                        </div>
+                        <script language="javascript">
+                            populateCountries("{{ iform.int_country.id_for_label }}", "{{ iform.int_state.id_for_label }}");
+                        </script>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            {{ iform.int_school_name.errors }}
+                            <label for="{{ iform.int_school_name.id_for_label }}"><b>Name of 10+2 Passing School <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.int_school_name.id_for_label }}" value="{{iform.int_school_name.value}}" placeholder="Enter School Name" name="{{ iform.int_school_name.html_name }}">
+                        </div>
+
+                        <div class="col-md-4 col-sm-4">
+                            {{ iform.int_school_board.errors }}
+                            <label for="{{ iform.int_school_board.id_for_label }}"><b>Board </b>(CBSE / HPBSE / ICSE / any other) <span>*</span></label>
+                            <br>{{ iform.int_school_board }}
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.ug_class.errors }}
+                            <label for="{{ iform.ug_class.id_for_label }}"><b>U.G. Program </b>(B.Tech / B.Arch / Dual Degree) <span>*</span></label>
+                            <br>{{ iform.ug_class }}
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+
+
+
+                        <div class="col-md-5 col-sm-5">
+                            {{ iform.ug_branch.errors }}
+                            <label for="{{ iform.ug_branch.id_for_label }}"><b>Alloted Branch <span>*</span></b></label>
+                            <br>{{ iform.ug_branch }}
+                        </div>
+
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.roll_no.errors }}
+                            <label for="{{ iform.roll_no.id_for_label }}"><b>Alloted Roll No <span>*</span></b></label>
+                            <input oninput="rollNo({{ iform.roll_no.id_for_label }})" required class="form-control" type="text" id="{{ iform.roll_no.id_for_label }}" value="{{iform.roll_no.value}}" placeholder="Enter Roll No" name="{{ iform.roll_no.html_name }}">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            {{ iform.reg_no.errors }}
+                            <label for="{{ iform.reg_no.id_for_label }}"><b>Registration Number</b></label>
+                            <input class="form-control" type="text" id="{{ iform.reg_no.id_for_label }}" value="{{iform.reg_no.value}}" placeholder="Enter Reg Number" name="{{ iform.reg_no.html_name }}">
+                        </div>
+
+                        <div class="col-md-2 col-sm-2">
+                            {{ iform.entry_no.errors }}
+                            <label for="{{ iform.entry_no.id_for_label }}"><b>Entry Number</b></label>
+                            <input class="form-control" type="text" id="{{ iform.entry_no.id_for_label }}" value="{{iform.entry_no.value}}" placeholder="Enter Entry Number" name="{{ iform.entry_no.html_name }}">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.hosteler.errors }}
+                            <label for="{{ iform.hosteler.id_for_label }}"><b>Hosteler??</b></label>
+                            <br>{{ iform.hosteler }}
+
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.hostel_name.errors }}
+                            <label for="{{ iform.hostel_name.id_for_label }}"><b>Hostel Name</b></label>
+                            <br>{{ iform.hostel_name }}
+
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <h4 class="text-primary"><b>Parent's / Gaurdian's Information</b></h4>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.father_name.errors }}
+                            <label for="{{ iform.father_name.id_for_label }}"><b>Father's Name <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.father_name.id_for_label }}" value="{{iform.father_name.value}}" placeholder="Enter Name" name="{{ iform.father_name.html_name }}">
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.father_contact.errors }}
+                            <label for="{{ iform.father_contact.id_for_label }}"><b>Father's Mobile Number</b></label>
+                            <input class="form-control" type="text" id="{{ iform.father_contact.id_for_label }}" value="{{iform.father_contact.value}}" placeholder="Enter Number" name="{{ iform.father_contact.html_name }}">
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.father_email.errors }}
+                            <label for="{{ iform.father_email.id_for_label }}"><b>Father's Email</b></label>
+                            <input class="form-control" type="email" id="{{ iform.father_email.id_for_label }}" value="{{iform.father_email.value}}" placeholder="Enter Email" name="{{ iform.father_email.html_name }}">
+                        </div>
+
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.mother_name.errors }}
+                            <label for="{{ iform.mother_name.id_for_label }}"><b>Mother's Name <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.mother_name.id_for_label }}" value="{{iform.mother_name.value}}" placeholder="Enter Name" name="{{ iform.mother_name.html_name }}">
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.mother_contact.errors }}
+                            <label for="{{ iform.mother_contact.id_for_label }}"><b>Mother's Mobile Number</b></label>
+                            <input class="form-control" type="text" id="{{ iform.mother_contact.id_for_label }}" value="{{iform.mother_contact.value}}" placeholder="Enter Number" name="{{ iform.mother_contact.html_name }}">
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.mother_email.errors }}
+                            <label for="{{ iform.mother_name.id_for_label }}"><b>Mother's Email</b></label>
+                            <input class="form-control" type="email" id="{{ iform.mother_name.id_for_label }}" value="{{iform.mother_email.value}}" placeholder="Enter Email" name="{{ iform.mother_email.html_name }}">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.guardian_name.errors }}
+                            <label for="{{ iform.guardian_name.id_for_label }}"><b>Gaurdian's Name</b></label>
+                            <input class="form-control" type="text" id="{{ iform.guardian_name.id_for_label }}" value="{{iform.guardian_name.value}}" placeholder="Enter Name" name="{{ iform.guardian_name.html_name }}">
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.guardian_contact.errors }}
+                            <label for="{{ iform.guardian_contact.id_for_label }}"><b>Gaurdian's Mobile Number</b></label>
+                            <input class="form-control" type="text" id="{{ iform.guardian_contact.id_for_label }}" value="{{iform.guardian_contact.value}}" placeholder="Enter Number" name="{{ iform.guardian_contact.html_name }}">
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            {{ iform.guardian_email.errors }}
+                            <label for="{{ iform.guardian_email.id_for_label }}"><b>Gaurdian's Email</b></label>
+                            <input class="form-control" type="email" id="{{ iform.guardian_email.id_for_label }}" value="{{iform.guardian_email.value}}" placeholder="Enter Email" name="{{ iform.guardian_email.html_name }}">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            {{ iform.family_income.errors }}
+                            <label for="{{ iform.family_income.id_for_label }}"><b>Family's Total Income <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ iform.family_income.id_for_label }}" value="{{iform.family_income.value}}" placeholder="Enter Income" name="{{ iform.family_income.html_name }}">
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="form-group">
+                                {{ iform.fee_waiver.errors }}
+                                <label for="{{ iform.fee_waiver.id_for_label }}"><b>Fee Waiver Claimed ? <span>*</span></b></label>
+                                <br>
+                                {{ iform.fee_waiver }}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <h4 class="text-primary"><b>FEE STATUS</b></h4>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            {{ fform.fee_josaa_amount.errors }}
+                            <label for="{{ fform.fee_josaa_amount.id_for_label }}"><b>JoSAA 2018 Amount <span>*</span></b></label>
+                            <input required class="form-control" type="text" id="{{ fform.fee_josaa_amount.id_for_label }}" value="{{fform.fee_josaa_amount.value}}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_josaa_amount.html_name }}">
+                        </div>
+
+                        <div class="col-md-4 col-sm-4">
+                            {{ fform.fee_josaa_date.errors }}
+                            <label for="{{ fform.fee_josaa_date.id_for_label }}"><b>Date <span>*</span></b></label>
+                            <input class="form-control" id="{{ fform.fee_josaa_date.id_for_label }}" value="{{fform.fee_josaa_date.value}}" name="{{ fform.fee_josaa_date.html_name }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            {{ fform.fee_NITH_amount.errors }}
+                            <label for="{{ fform.fee_NITH_amount.id_for_label }}"><b>NIT Hamirpur</b></label>
+                            <input class="form-control" type="text" id="{{ fform.fee_NITH_amount.id_for_label }}" value="{{fform.fee_NITH_amount.value}}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_NITH_amount.html_name }}">
+                        </div>
+
+                        <div class="col-md-4 col-sm-4">
+                            {{ fform.fee_nith_date.errors }}
+                            <label for="{{ fform.fee_nith_date.id_for_label }}"><b>Date <span>*</span></b></label>
+                            <input class="form-control" id="{{ fform.fee_nith_date.id_for_label }}" value="{{fform.fee_nith_date.value}}" name="{{ fform.fee_nith_date.html_name }}">
+                        </div>
+
+                        <div class="col-md-4 col-sm-4">
+                            {{ fform.fee_nith_receipt_no.errors }}
+                            <label for="{{ fform.fee_nith_receipt_no.id_for_label }}"><b>Receipt Number</b></label>
+                            <input class="form-control" id="{{ fform.fee_nith_receipt_no.id_for_label }}" value="{{fform.fee_nith_receipt_no.value}}"placeholder="Enter Receipt Number" type="text" name="{{ fform.fee_nith_receipt_no.html_name }}">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4form-group">
+                            {{ fform.fee_total.errors }}
+                            <label for="{{ fform.fee_total.id_for_label }}"><b>Total Fees Paid: </b></label>
+                            <input class="form-control" type="text" id="{{ fform.fee_total.id_for_label }}" value="{{fform.fee_total.value}}" oninput="totalfees()" placeholder="Enter Amount" name="{{ fform.fee_total.html_name }}">
+                        </div>
+                    </div>
+                </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <a id="nextButton" class="tablinks btn btn-primary float-right" style="color:white;" onclick="openTab(event, 'docVerify')">Next <i class="fas fa-hand-point-right"></i></a>
+                    <a class="btn btn-primary" href="">Reset</a>
+                </div>
+            </div>
+
+
+            </div>
+
+        <!--****************************************************************************************************************************************-->
+                                                        <!--Document Verification Tab Started -->
+        <!--****************************************************************************************************************************************-->
+
+        <div id="docVerify" class="tabcontent">
+            <br>
+            <div class="row">
+                <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <table class="table table-hover float-left">
+                        <thead>
+                            <tr class="text-primary">
+                                <th class="srno">Sr. No.</th>
+                                <th >Name of the Document</th>
+                                <th>Verified?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for doc in dobj %}
+                                <tr>
+                                    <td style="color:green">{{ doc.id }}</td>
+                                    <td style="color:green"><strong>{{ doc.doc_name }}</strong></td>
+                                    <td><input onclick="yes({{doc.id}})" checked="True" type="radio" value="YES" name="doc{{doc.id}}">Yes <input onclick="no({{doc.id}})" type="radio" value="NO" name="doc{{doc.id}}">No <input onclick="na({{doc.id}})" type="radio" value="NA" name="doc{{doc.id}}">NA</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <a id="prevButton" class="tablinks btn btn-primary" style="color:white;" onclick="openTab(event, 'dataEntry')"><i class="fas fa-hand-point-left"></i> Previous</a>
+
+        </div>
             <br>
             <button onclick="validate()" style="display:block;" type="submit" id="reg" class="btn btn-primary pull-right"> REGISTER </button>
         </form>
