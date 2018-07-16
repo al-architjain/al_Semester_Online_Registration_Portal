@@ -216,7 +216,7 @@
                                             </thead>
                                             <tbody>
                                             {% for roll in roll_list %}
-                                                <tr {% if not roll.active_status %} style="color:red;" {% endif %} >
+                                                <tr {% if not roll.active_status %} style="text-decoration:line-through;" class="alert alert-warning" {% endif %} >
                                                     <td>{{ roll }}</td>
                                                     <td>{{ roll.name_eng }}</td>
                                                     <td>{{ roll.father_name }}</td>
