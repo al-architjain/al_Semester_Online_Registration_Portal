@@ -6,6 +6,7 @@
 
     {% block styles %}
         <style>
+
 			div#heading {
 				background: #337ab7;
 				font-size: 40px;
@@ -24,7 +25,6 @@
                 width: 100%;
                 padding: 15px;
                 margin: auto;
-                border: 1px solid #337ab7;
                 border-bottom: none;
                 border-radius: 10px 10px 0 0;
             }
@@ -32,12 +32,13 @@
 	{% endblock %}
 
     {% block bodycontent %}
+
         <div class="container">
             <div class="row">
                     <header class="text-center"><b>Login User</b></header>
             </div>
 
-             <div style="border: 1px solid lightgray;" class="row">
+             <div style="border: 1px solid lightgray" class="row">
                     <div class="col-md-12 col-sm-12 col-12">
                         <br>
                         <form method="POST">
