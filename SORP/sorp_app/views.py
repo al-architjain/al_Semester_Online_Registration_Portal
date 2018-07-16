@@ -332,7 +332,6 @@ def create_student(request):
 
 
 
-
 # UPDATE STUDENT VIEWS
 @login_required
 def update_student(request):
@@ -414,7 +413,7 @@ def update_student(request):
         fform = forms.StudentFirstFeeForm(initial=sfi_data)
         dobj = models.Documents.objects.all()
         stu_doc=models.DocumentInfo.objects.filter(student_id=stu_obj)
-        print(" check kar ",stu_doc[1].submitted)
+        # print(" check kar ",stu_doc[0].submitted)
         return render(request, 'sorp_app/reg_updatestudent.html',
                           {'iform': iform, 'dobj': dobj, 'fform': fform, 'uobj': request.user, 'stu_id':stu_obj.id,'stu_doc':stu_doc})
 
@@ -498,7 +497,7 @@ def update_student_info(request):
         #
         stu_doc = models.DocumentInfo.objects.filter(student=stu_obj)
         d_obj = models.Documents.objects.all()
-        i = 1
+        i = stu_doc.order_by('id')[0].id
         for doc in d_obj:
             strr = 'docval' + str(i)
             stu_doc = models.DocumentInfo.objects.get(student=stu_obj, document_id=doc.id)
@@ -508,7 +507,6 @@ def update_student_info(request):
             i = i + 1
 
         return render(request,'sorp_app/reg_success.html',{'name':stu_obj.name_eng, 'username': user.username, 'password':stu_obj.father_name, 'type':'2'})
-
 
 
 
@@ -539,7 +537,6 @@ def deactivate_student(request):
             user.save()
 
         return render(request, 'sorp_app/reg_success.html', {'type':'3'})
-
 
 
 
