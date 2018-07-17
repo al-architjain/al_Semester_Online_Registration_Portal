@@ -129,7 +129,6 @@ class StudentInfo(models.Model):
     name_hindi = models.CharField(max_length=64,  blank=True)
     email = models.EmailField(unique=True)
     gender_choices = (
-        ('---------', '---------'),
         ('Male', 'Male'),
         ('Female', 'Female'),
         ('Other', 'Other')
@@ -137,7 +136,6 @@ class StudentInfo(models.Model):
     gender = models.CharField(max_length=8, choices=gender_choices)
     dob = models.DateField()
     religion_choices = (
-        ('---------', '---------'),
         ('Christian', 'Christian'),
         ('Hinduism', 'Hinduism'),
         ('Jainism', 'Jainism'),
@@ -152,7 +150,6 @@ class StudentInfo(models.Model):
     contact = models.CharField(max_length=16)
     aadhar_no = models.CharField(max_length=16, unique=True )
     area_choice = (
-        ('---------', '---------'),
         ('Rural', 'Rural'),
         ('Urban', 'Urban'),
     )
@@ -170,14 +167,13 @@ class StudentInfo(models.Model):
     jee_roll_no = models.BigIntegerField()
     jee_score = models.PositiveIntegerField()
     jee_ai_rank = models.PositiveIntegerField()
-    jee_cat_rank = models.PositiveIntegerField(blank=True)
+    jee_cat_rank = models.PositiveIntegerField(null=True, blank=True)
     category_admission = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='admission', db_column='Admitted Category')
     int_country = models.CharField(max_length=32)
     int_state = models.CharField(max_length=32)
     int_percentage = models.DecimalField(max_digits=5, decimal_places=3, db_column='12th Percentage')
     int_pass_year = models.IntegerField(default=currYear, db_column='10+2 Pass Year')
     school_type_choices = (
-        ('---------', '---------'),
         ('Government', 'Government School'),
         ('Private', 'Private School')
     )
@@ -194,7 +190,7 @@ class StudentInfo(models.Model):
         ('AGH', 'Ambika Girls Hostel'),
         ('PGH', 'Parvati Girls Hostel'),
     )
-    hostel_name = models.CharField(max_length=16, choices=hostel_choices,  blank=True)
+    hostel_name = models.CharField(max_length=16, choices=hostel_choices, null=True, blank=True)
     entry_no = models.PositiveIntegerField(unique=True)
     reg_no = models.CharField(unique=True,max_length=64)
     roll_no = models.CharField(unique=True, max_length=16)
