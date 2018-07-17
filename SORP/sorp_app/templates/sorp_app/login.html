@@ -31,7 +31,22 @@
         </style>
 	{% endblock %}
 
-    {% block bodycontent %}
+        {% block staticfiles %}
+            <style>
+                #footer {
+                    background: #337ab7;
+					color: white;
+   					position: absolute;
+   					padding: 10px;
+   					bottom: 0;
+				    width:100%;
+					text-align: center;
+			    }
+            </style>
+        {% endblock %}
+
+
+        {% block bodycontent %}
 
         <div class="container">
             <div class="row">

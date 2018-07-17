@@ -559,6 +559,18 @@
 
 
     {% block staticfiles %}
+        <style>
+                #footer {
+                    background: #337ab7;
+					color: white;
+   					position: relative;
+   					padding: 8px;
+   					bottom: 0;
+				    width:100%;
+					text-align: center;
+			    }
+            </style>
+
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static "sorp_app/r_addstudent.css" %}" />
         {% load static %}
