@@ -334,6 +334,18 @@
 
 
     {% block staticfiles %}
+		<style>
+                #footer {
+                    background: #00aa13;
+					color: white;
+   					position: relative;
+   					padding: 10px;
+   					bottom: 0;
+				    width:100%;
+					text-align: center;
+			    }
+            </style>
+
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static "sorp_app/Student_Profile.css" %}">
         <script type="text/javascript" src="{% static "sorp_app/Student_Profile.js" %}"></script>

@@ -94,8 +94,6 @@
 
 
 
-
-
     {% block bodycontent %}
         <a style="font-size: 120%; margin-right:20px;" class="btn btn-primary pull-right" href="/login/">LogOut</a>
         <a style="font-size: 120%; margin: 0 5px;" class="btn btn-primary pull-right" href="/change_password">Change Password</a>
@@ -241,6 +239,18 @@
 
 
     {% block staticfiles %}
+        <style>
+                #footer {
+                    background: #337ab7;
+					color: white;
+   					position: absolute;
+   					padding: 10px;
+   					bottom: 0;
+				    width:100%;
+					text-align: center;
+			    }
+            </style>
+
             {% load static %}
             <script type="text/javascript" src="{% static "sorp_app/r_addstudent.js" %}"></script>
 	{% endblock %}
