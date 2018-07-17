@@ -89,16 +89,14 @@
             </div>
             <hr>
 
-
             <!-- Personal Details -->
             <div class="row">
                 <h4 class="text-primary"><b>PERSONAL DETAILS</b></h4>
             </div>
             <hr>
+
             <div style="margin-top: 10px;" class="form-group">
-
                 <div class="row">
-
                     <input type="hidden" value="{{uobj}}" name="reg_staff" >
                     <div class="col-md-3 col-sm-3">
                         {{ iform.name_eng.errors }}
@@ -128,17 +126,24 @@
                 <br>
 
                 <div class="row">
+                    <div class="col-md-3 col-sm-3">
+                       {{ iform.contact.errors }}
+                       <label for="{{ iform.contact.id_for_label }}"><b>Student's Mobile Number <span>*</span></b></label>
+                       <input required class="hw-input" type="text" maxlength="10" id="{{ iform.contact.id_for_label }}" placeholder="Enter Number" name="{{ iform.contact.html_name }}">
+                   </div>
 
                     <div class="col-md-2 col-sm-2">
                         {{ iform.religion.errors }}
                         <label for="{{ iform.religion.id_for_label }}"><b>Religion <span>*</span></b></label>
                         {{ iform.religion }}
                     </div>
+
                     <div class="col-md-2 col-sm-2">
                         {{ iform.gender.errors }}
                         <label for="{{ iform.gender.id_for_label }}"><b>Gender <span>*</span></b></label><br>
                         {{ iform.gender }}
                     </div>
+
                     <div class="col-md-2 col-sm-2">
                         {{ iform.category_main.errors }}
                         <label for="{{ iform.category_main.id_for_label }}"><b>Main Category <span>*</span></b></label><br>
@@ -160,7 +165,6 @@
                 <br>
 
                 <div class="row">
-
                     <div class="col-md-3 col-sm-3">
                         {{ iform.nearest_rs.errors }}
                         <label for="{{ iform.nearest_rs.id_for_label }}"><b>Nearest Railway Station <span>*</span></b></label>
@@ -208,10 +212,7 @@
                     </script>
                 </div>
                 <hr>
-
             </div>
-
-
 
             <!-- Academic Details -->
             <div class="row">
@@ -352,6 +353,7 @@
                         <br>{{ iform.hosteler }}
 
                     </div>
+
                     <div class="col-lg-4 col-md-4">
                         {{ iform.hostel_name.errors }}
                         <label for="{{ iform.hostel_name.id_for_label }}"><b>Hostel Name</b></label>
@@ -363,12 +365,12 @@
             </div>
 
 
-
             <!-- Guardian Details -->
             <div class="row">
                 <h4 class="text-primary"><b>Parent's / Gaurdian's Information</b></h4>
             </div>
             <hr>
+
             <div style="margin-top: 10px;" class="form-group">
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
@@ -388,7 +390,6 @@
                         <label for="{{ iform.father_email.id_for_label }}"><b>Father's Email</b></label>
                         <input class="hw-input" type="email" id="{{ iform.father_email.id_for_label }}" placeholder="Enter Email" name="{{ iform.father_email.html_name }}">
                     </div>
-
                 </div>
                 <br>
 
@@ -451,7 +452,6 @@
                     </div>
                 </div>
                 <hr>
-
             </div>
 
 
@@ -460,6 +460,7 @@
                 <h4 class="text-primary"><b>FEE STATUS</b></h4>
             </div>
             <hr>
+
             <div style="margin-top: 10px;" class="form-group">
                 <div class="row">
                     <div class="col-md-4 col-sm-4">
@@ -475,6 +476,7 @@
                     </div>
                 </div>
                 <br>
+
                 <div class="row">
                     <div class="col-md-4 col-sm-4">
                         {{ fform.fee_NITH_amount.errors }}
@@ -495,6 +497,7 @@
                     </div>
                 </div>
                 <br>
+
                 <div class="row">
                     <div class="col-md-4 col-sm-4form-group">
                         {{ fform.fee_total.errors }}
@@ -512,9 +515,7 @@
                     <a class="btn btn-primary" href="">Reset</a>
                 </div>
             </div>
-
-
-            </div>
+        </div>
 
         <!--****************************************************************************************************************************************-->
                                                         <!--Document Verification Tab Started -->
