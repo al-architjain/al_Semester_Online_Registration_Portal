@@ -42,8 +42,6 @@ class Category(models.Model):
         return self.name
 
 
-
-
 class UGClass(models.Model):
     id = models.SmallIntegerField(unique=True)
     name = models.CharField(primary_key=True, max_length=16)
@@ -56,14 +54,15 @@ class UGBranch(models.Model):
     id = models.SmallIntegerField(unique=True)
     name = models.CharField(primary_key=True, max_length=32)
     full_name = models.CharField(max_length=128)
-    code = models.CharField(max_length=16, unique=True)
-    section = models.CharField(max_length=8, unique=True)
+    code = models.CharField(max_length=16)
+    section = models.CharField(max_length=8)
     #
     def __str__(self):
         return self.full_name
 
+
 class Subjects(models.Model):
-    id = models.AutoField(primary_key=True)
+    # default id is pk
     year_onwards = models.SmallIntegerField()
     classname = models.ForeignKey(UGClass, on_delete=models.CASCADE,db_column='class')
     branch = models.ForeignKey(UGBranch, on_delete=models.CASCADE,db_column='branch')
@@ -99,6 +98,7 @@ class Documents(models.Model):
     #
     def __str__(self):
         return self.doc_name
+
 
 
 class StudentInfo(models.Model):

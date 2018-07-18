@@ -6,6 +6,9 @@ class login_form(forms.Form):
     username = forms.CharField(label="Username ", widget=forms.TextInput(attrs={'class':"form-control", 'placeholder':"username" }), max_length=32)
     password = forms.CharField(label="Password ", widget=forms.PasswordInput(attrs={'class':"form-control", 'placeholder':"Password" }),max_length=32)
 
+
+
+
 class StudentInfoForm(forms.ModelForm) :
     # gender = forms.ChoiceField(
     #     widget = forms.Select(attrs = {'style': 'width: 100%'}),
